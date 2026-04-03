@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speakly Media — AI-SEO Overhaul</title>
+  <meta name="description" content="Speakly Media's AI-SEO Overhaul turns your website into the source AI recommends — a clear, answer-ready source of truth that powers visibility and future content creation." />
+  <style>
+    :root {
+      --bg: #071321;
+      --bg-2: #0b1b2d;
+      --panel: rgba(12, 27, 45, 0.72);
+      --panel-strong: rgba(10, 24, 40, 0.92);
+      --panel-soft: rgba(9, 22, 36, 0.56);
+      --ink: #dbe8f7;
+      --ink-muted: rgba(219, 232, 247, 0.76);
+      --ink-soft: rgba(219, 232, 247, 0.58);
+      --line: rgba(125, 176, 231, 0.18);
+      --line-strong: rgba(125, 176, 231, 0.34);
+      --blue: #78c7ff;
+      --teal: #6fe2cf;
+      --orange: #ff9d5c;
+      --gold: #f5c86f;
+      --pink: #d18cff;
+      --shadow: 0 24px 80px rgba(2, 7, 16, 0.45);
+      --radius-xl: 32px;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1200px;
+      --ease: 300ms ease;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(120, 199, 255, 0.15), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(209, 140, 255, 0.13), transparent 22%),
+        radial-gradient(circle at 50% 40%, rgba(111, 226, 207, 0.08), transparent 30%),
+        linear-gradient(180deg, #06111d 0%, #071321 42%, #081727 100%);
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      background-image:
+        radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        radial-gradient(rgba(111,226,207,0.1) 1px, transparent 1px),
+        radial-gradient(rgba(245,200,111,0.08) 1px, transparent 1px);
+      background-size: 180px 180px, 260px 260px, 320px 320px;
+      background-position: 0 0, 65px 105px, 120px 25px;
+      opacity: 0.45;
+    }
+
+    body::after {
+      background:
+        repeating-linear-gradient(90deg, transparent 0 78px, rgba(120, 199, 255, 0.04) 78px 79px),
+        repeating-linear-gradient(0deg, transparent 0 78px, rgba(120, 199, 255, 0.04) 78px 79px);
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.06) 25%, transparent 70%);
+      opacity: 0.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .shell {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(125, 176, 231, 0.26);
+      background: rgba(8, 22, 36, 0.48);
+      color: var(--ink-muted);
+      font-size: 0.84rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      box-shadow: 0 0 14px rgba(111, 226, 207, 0.6);
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(125, 176, 231, 0.14);
+      background: rgba(5, 16, 27, 0.72);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      position: relative;
+      background: linear-gradient(145deg, rgba(120,199,255,0.18), rgba(255,157,92,0.16));
+      border: 1px solid rgba(125,176,231,0.18);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 8px 30px rgba(0,0,0,0.22);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      inset: 10px;
+      border: 2px solid rgba(120,199,255,0.66);
+      transform: rotate(-16deg);
+    }
+
+    .brand-mark::after {
+      inset: 15px 10px 15px 16px;
+      border-color: rgba(255,157,92,0.75);
+      transform: rotate(25deg);
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.98rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: color var(--ease), border-color var(--ease), background var(--ease), transform var(--ease);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--ink);
+      background: rgba(120, 199, 255, 0.08);
+      border-color: rgba(120, 199, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease), background var(--ease);
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #04101c;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      box-shadow: 0 12px 30px rgba(70, 170, 214, 0.28);
+    }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(125, 176, 231, 0.22);
+    }
+
+    main section {
+      position: relative;
+      padding: 100px 0;
+      scroll-margin-top: 86px;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      margin-bottom: 44px;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.04;
+      margin: 0 0 18px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      max-width: 10ch;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.7rem);
+      max-width: 13ch;
+    }
+
+    h3 {
+      font-size: clamp(1.18rem, 2vw, 1.55rem);
+    }
+
+    .lead,
+    p,
+    li {
+      color: var(--ink-muted);
+      font-size: clamp(1rem, 1.5vw, 1.08rem);
+    }
+
+    .lead {
+      max-width: 62ch;
+      font-size: clamp(1.08rem, 1.8vw, 1.25rem);
+    }
+
+    .hero {
+      padding-top: 92px;
+      padding-bottom: 82px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy p {
+      max-width: 58ch;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .principles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .principles span,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(9, 22, 36, 0.56);
+      border: 1px solid rgba(125, 176, 231, 0.14);
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-stage {
+      position: relative;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(125,176,231,0.16);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(120, 199, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 75% 84%, rgba(255, 157, 92, 0.16), transparent 24%),
+        linear-gradient(180deg, rgba(13, 32, 52, 0.92), rgba(8, 19, 33, 0.92));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-height: 620px;
+    }
+
+    .hero-stage::before,
+    .hero-stage::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(16px);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-stage::before {
+      width: 280px;
+      height: 280px;
+      right: -40px;
+      top: -30px;
+      background: radial-gradient(circle, rgba(120,199,255,0.42), transparent 70%);
+    }
+
+    .hero-stage::after {
+      width: 260px;
+      height: 260px;
+      left: -60px;
+      bottom: -40px;
+      background: radial-gradient(circle, rgba(255,157,92,0.28), transparent 70%);
+    }
+
+    .hero-stage-inner {
+      position: relative;
+      height: 100%;
+      padding: 26px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card,
+    .glass,
+    .card,
+    .tree-card,
+    .proof-card,
+    .phase-card,
+    .hero-source-card,
+    .hero-output,
+    .outcome-card,
+    .flow-card {
+      background: var(--panel);
+      border: 1px solid rgba(125,176,231,0.14);
+      border-radius: var(--radius-md);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 10px 30px rgba(0,0,0,0.18);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .stat-card {
+      padding: 18px;
+      min-height: 128px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: clamp(1.44rem, 2.6vw, 2.25rem);
+      line-height: 1;
+      margin-bottom: 10px;
+      letter-spacing: -0.04em;
+    }
+
+    .stat-card small {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(120, 199, 255, 0.08);
+      border: 1px solid rgba(120, 199, 255, 0.14);
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 12px;
+      width: fit-content;
+    }
+
+    .hero-system {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .hero-source-card {
+      padding: 26px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(120,199,255,0.18), transparent 55%),
+        linear-gradient(180deg, rgba(11, 28, 46, 0.94), rgba(7, 18, 30, 0.94));
+      border: 1px solid rgba(120, 199, 255, 0.2);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-source-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -40% auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(120, 199, 255, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-source-card b {
+      display: block;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    .hero-source-card strong {
+      display: block;
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      line-height: 1.03;
+      margin-bottom: 14px;
+      max-width: 11ch;
+    }
+
+    .hero-source-card p {
+      margin: 0 0 16px;
+      max-width: 38ch;
+    }
+
+    .hero-fuel {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,157,92,0.18);
+      color: var(--ink-muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-output-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .hero-output {
+      padding: 18px;
+      min-height: 140px;
+      background: rgba(9, 23, 38, 0.84);
+    }
+
+    .hero-output strong {
+      display: block;
+      font-size: 0.94rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-output span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.83rem;
+      line-height: 1.5;
+    }
+
+    .hero-output.trust {
+      grid-column: span 2;
+      min-height: auto;
+      background: linear-gradient(90deg, rgba(120,199,255,0.08), rgba(111,226,207,0.06));
+      border-color: rgba(120,199,255,0.16);
+    }
+
+    .hero-note {
+      padding: 18px 20px;
+      display: grid;
+      gap: 10px;
+      border-radius: 20px;
+      background: rgba(7, 18, 30, 0.86);
+      border: 1px solid rgba(255, 157, 92, 0.2);
+    }
+
+    .hero-note strong {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--orange);
+    }
+
+    .grid-3,
+    .grid-4,
+    .proof-grid,
+    .feature-grid,
+    .outcome-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .outcome-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .proof-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card,
+    .phase-card,
+    .proof-card,
+    .tree-card {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before,
+    .phase-card::before,
+    .proof-card::before,
+    .tree-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% 100% auto;
+      width: 180px;
+      height: 180px;
+      transform: translateY(50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(120,199,255,0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .card-icon,
+    .outcome-icon,
+    .proof-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: inline-grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: rgba(120,199,255,0.08);
+      border: 1px solid rgba(120,199,255,0.15);
+      color: var(--blue);
+    }
+
+    .card p,
+    .phase-card p,
+    .proof-card p,
+    .tree-card p,
+    .comparison-list,
+    .bullet-list {
+      margin: 0;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .comparison-card {
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(10, 25, 42, 0.9), rgba(8, 19, 31, 0.92));
+      border: 1px solid rgba(125,176,231,0.14);
+      box-shadow: var(--shadow);
+    }
+
+    .comparison-card.highlight {
+      background: linear-gradient(180deg, rgba(8, 34, 42, 0.92), rgba(8, 23, 34, 0.96));
+      border-color: rgba(111,226,207,0.24);
+    }
+
+    .comparison-card small {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+    }
+
+    .comparison-card h3 { margin-bottom: 18px; }
+
+    .comparison-list,
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .comparison-list li,
+    .bullet-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--ink-muted);
+    }
+
+    .comparison-list li::before,
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      box-shadow: 0 0 0 4px rgba(120,199,255,0.08);
+    }
+
+    .comparison-card.highlight .comparison-list li::before {
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+    }
+
+    .comparison-note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(125,176,231,0.12);
+      color: var(--ink-muted);
+      font-size: 0.96rem;
+    }
+
+    .ssot-wrap {
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(0, 1.3fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .ssot-core {
+      padding: 32px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(120,199,255,0.18), transparent 40%),
+        linear-gradient(180deg, rgba(11,28,46,0.96), rgba(7,18,30,0.96));
+      border: 1px solid rgba(120,199,255,0.18);
+      box-shadow: var(--shadow);
+      display: grid;
+      align-content: start;
+      gap: 20px;
+      position: relative;
+    }
+
+    .ssot-core strong.big {
+      display: block;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .ssot-core .fuel {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,157,92,0.18);
+      color: var(--ink-muted);
+    }
+
+    .ssot-flow {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-content: start;
+    }
+
+    .flow-card {
+      padding: 22px;
+      border-radius: 22px;
+      position: relative;
+      background: rgba(10, 24, 40, 0.7);
+      border: 1px solid rgba(125,176,231,0.14);
+      min-height: 160px;
+    }
+
+    .flow-card::before {
+      content: "";
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      width: 15px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(120,199,255,0.55), rgba(120,199,255,0));
+    }
+
+    .flow-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.04rem;
+    }
+
+    .solution-band {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, rgba(120,199,255,0.08), rgba(111,226,207,0.06));
+      border: 1px solid rgba(120,199,255,0.12);
+      color: var(--ink-muted);
+    }
+
+    .tree {
+      margin-top: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .tree-root {
+      justify-self: center;
+      text-align: center;
+      max-width: 520px;
+      padding: 20px 28px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(111,226,207,0.16), rgba(120,199,255,0.18));
+      border: 1px solid rgba(120,199,255,0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .tree-root small,
+    .phase-top small,
+    .proof-card small {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-soft);
+      font-size: 0.76rem;
+      margin-bottom: 10px;
+    }
+
+    .tree-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+      padding-top: 24px;
+    }
+
+    .tree-grid::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(120,199,255,0.28), transparent);
+    }
+
+    .tree-grid::after {
+      content: "";
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      width: 1px;
+      height: 24px;
+      background: linear-gradient(180deg, rgba(120,199,255,0.48), rgba(120,199,255,0.04));
+    }
+
+    .tree-card {
+      min-height: 272px;
+    }
+
+    .tree-card strong { display: block; margin-bottom: 12px; }
+
+    .tree-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tree-card li {
+      padding-left: 18px;
+      position: relative;
+      color: var(--ink-muted);
+      font-size: 0.95rem;
+    }
+
+    .tree-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(111,226,207,0.08);
+    }
+
+    .outcome-card {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(10,24,40,0.7);
+      border: 1px solid rgba(125,176,231,0.14);
+      min-height: 180px;
+    }
+
+    .phase-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .phase-card {
+      padding-top: 28px;
+      min-height: 290px;
+    }
+
+    .phase-top {
+      margin-bottom: 20px;
+    }
+
+    .phase-number {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #08131f;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      box-shadow: 0 12px 24px rgba(255,157,92,0.2);
+      margin-bottom: 16px;
+    }
+
+    .proof-card {
+      min-height: 330px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .proof-metric {
+      display: inline-grid;
+      gap: 2px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(125,176,231,0.12);
+    }
+
+    .proof-metric strong {
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    .proof-metric span {
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+    }
+
+    .standards-band {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .standard {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(125,176,231,0.14);
+      text-align: center;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(120,199,255,0.18), transparent 26%),
+        radial-gradient(circle at 80% 80%, rgba(255,157,92,0.16), transparent 24%),
+        linear-gradient(180deg, rgba(10, 24, 40, 0.96), rgba(7, 18, 30, 0.98));
+      border: 1px solid rgba(120,199,255,0.18);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .cta-list {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .cta-list li {
+      padding-left: 22px;
+      position: relative;
+      color: var(--ink-muted);
+    }
+
+    .cta-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      box-shadow: 0 0 0 4px rgba(111,226,207,0.08);
+    }
+
+    .cta-card {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(125,176,231,0.14);
+    }
+
+    .sources {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(125,176,231,0.14);
+      display: grid;
+      gap: 8px;
+    }
+
+    .sources p,
+    .sources li,
+    footer p {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .sources ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    footer {
+      padding: 50px 0 70px;
+      color: var(--ink-soft);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(125,176,231,0.14);
+      padding-top: 20px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 720ms cubic-bezier(.2,.7,.1,1), transform 720ms cubic-bezier(.2,.7,.1,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    sup {
+      font-size: 0.66em;
+      line-height: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .nav-links { display: none; }
+      .hero-grid,
+      .ssot-wrap,
+      .cta-grid { grid-template-columns: 1fr; }
+      .hero-stage { min-height: auto; }
+      .feature-grid,
+      .outcome-grid,
+      .proof-grid,
+      .phase-wrap,
+      .grid-3,
+      .grid-4,
+      .tree-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tree-grid::before,
+      .tree-grid::after { display: none; }
+      .comparison { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(calc(100% - 28px), var(--max)); }
+      .nav { min-height: auto; padding: 12px 0; flex-wrap: wrap; }
+      .brand { width: 100%; }
+      .nav > .btn { width: 100%; }
+      main section { padding: 78px 0; }
+      .hero { padding-top: 74px; }
+      .hero-stage-inner { padding: 18px; }
+      .hero-stats,
+      .feature-grid,
+      .outcome-grid,
+      .proof-grid,
+      .phase-wrap,
+      .grid-3,
+      .grid-4,
+      .tree-grid,
+      .ssot-flow,
+      .hero-output-grid { grid-template-columns: 1fr; }
+      .hero-source-card strong { max-width: none; }
+      .hero-output.trust { grid-column: auto; }
+      .standards-band { grid-template-columns: 1fr; }
+      .flow-card::before { display: none; }
+      .cta-panel { padding: 26px; }
+      .btn { width: 100%; }
+      .hero-actions { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal,
+      .reveal.is-visible,
+      .btn,
+      .nav-links a {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <div class="shell nav">
+      <a href="#top" class="brand" aria-label="Speakly Media AI-SEO Overhaul">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-copy">
+          <strong>Speakly Media</strong>
+          <span>AI-SEO Overhaul web deck</span>
+        </div>
+      </a>
+      <nav class="nav-links" aria-label="Section navigation">
+        <a href="#market">Market</a>
+        <a href="#problem">Problem</a>
+        <a href="#ssot">Source of Truth</a>
+        <a href="#solution">Solution</a>
+        <a href="#system">System</a>
+        <a href="#proof">Proof</a>
+        <a href="#next-step">Next Step</a>
+      </nav>
+      <a class="btn btn-secondary" href="#next-step">Request assessment</a>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">AI-SEO Overhaul</span>
+          <h1>Turn your website into the source AI recommends.</h1>
+          <p class="lead">AI-generated answers are reshaping how customers discover brands. Speakly’s AI-SEO Overhaul turns your website into an answer-ready source of truth — the foundation that powers visibility now and future content creation later.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#solution">See the overhaul</a>
+            <a class="btn btn-secondary" href="#ssot">Why source of truth matters</a>
+          </div>
+          <div class="principles" aria-label="Speakly principles">
+            <span>Clarity over clever</span>
+            <span>Proof over promises</span>
+            <span>Systems over one-off posts</span>
+          </div>
+        </div>
+
+        <div class="hero-stage reveal" aria-label="AI-SEO core visual">
+          <div class="hero-stage-inner">
+            <div class="hero-stats">
+              <div class="stat-card">
+                <strong>80%</strong>
+                <small>of search users rely on AI summaries at least 40% of the time.<sup>1</sup></small>
+              </div>
+              <div class="stat-card">
+                <strong>60%</strong>
+                <small>of searches now end without the user progressing to another destination.<sup>1</sup></small>
+              </div>
+              <div class="stat-card">
+                <strong>8% vs 15%</strong>
+                <small>Traditional-result click rate when AI summaries appear vs. when they don’t.<sup>2</sup></small>
+              </div>
+            </div>
+
+            <div class="hero-system">
+              <div class="hero-source-card">
+                <b>Core idea</b>
+                <strong>Your website = your single source of truth</strong>
+                <p>When the source is clear, AI answers, future pages, campaigns, and sales assets all become more consistent, more discoverable, and easier to trust.</p>
+                <div class="hero-fuel">This is the fuel tank for the future content engine.</div>
+              </div>
+
+              <div class="hero-output-grid">
+                <div class="hero-output">
+                  <strong>AI answers</strong>
+                  <span>Google AI Overviews, AI Mode, ChatGPT, Perplexity, maps, assistants.</span>
+                </div>
+                <div class="hero-output">
+                  <strong>Core pages</strong>
+                  <span>Service pages, audience routes, location pages, and proof pages get sharper.</span>
+                </div>
+                <div class="hero-output">
+                  <strong>Content engine</strong>
+                  <span>FAQs, articles, supporting pages, and proof assets expand from a stronger base.</span>
+                </div>
+                <div class="hero-output">
+                  <strong>Campaigns</strong>
+                  <span>Ads, landing pages, email, and sales enablement pull from the same clarified story.</span>
+                </div>
+                <div class="hero-output trust">
+                  <strong>Brand trust</strong>
+                  <span>Consistency, proof, and conversion clarity improve because the business story is no longer fragmented.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-note">
+              <strong>Not more random content</strong>
+              <span>This is a website-first visibility system for the answer era — not a pile of disconnected SEO tasks.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="market">
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">The market</div>
+          <h2>Search is no longer just a list of links. It is an answer layer.</h2>
+          <p class="lead">The shift is not “Google versus AI.” AI is increasingly built into Google, while ChatGPT, Perplexity, commerce, video, and social all influence discovery. If your brand is hard to interpret, it becomes easy to ignore.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 19H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6 15L10 11L13 14L18 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>AI search is now built into Google’s main experience</h3>
+            <p>Google made Gemini 3 the default model for AI Overviews globally and now lets users continue directly into AI Mode conversations from the results page.<sup>4</sup></p>
+            <div class="source-pill">Google • Jan 2026</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 8C7 5.791 9.239 4 12 4C14.761 4 17 5.791 17 8C17 10.209 14.761 12 12 12C9.239 12 7 13.791 7 16C7 18.209 9.239 20 12 20C14.761 20 17 18.209 17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>AI answers are already changing click behavior</h3>
+            <p>Bain reports that about 60% of searches now end without the user moving to another destination, and Pew found that users click traditional results far less often when AI summaries appear.<sup>1,2</sup></p>
+            <div class="source-pill">Bain + Pew • 2025</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 4V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <h3>Search now happens everywhere</h3>
+            <p>SparkToro and Datos frame search as a behavior, not a single channel. Google still dominates, but discovery also happens on AI tools, commerce sites, video platforms, and social.<sup>3</sup></p>
+            <div class="source-pill">SparkToro / Datos • Mar 2026</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem">
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">The problem</div>
+          <h2>Most websites were built to be browsed. They were not built to be understood.</h2>
+          <p class="lead">That gap is why strong businesses disappear from AI answers. You can have a polished website and still be effectively invisible if the business story is fragmented, thin, or inconsistent.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 7H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5 17H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="14" y="5" width="5" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <h3>Fragmented business story</h3>
+            <p>Services, audiences, offers, proof, locations, and differentiators are often spread across disconnected pages with no clear hierarchy.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 12H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10 17H14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Thin answer-readiness</h3>
+            <p>Most sites do not answer the real questions people ask AI — which means the models have less confidence in recommending the business.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 19V7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 19V5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 19V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>No governed source model</h3>
+            <p>Future blog posts, landing pages, ad copy, and sales materials get created from scratch instead of from a single trusted foundation.</p>
+          </article>
+        </div>
+
+        <div class="solution-band reveal">If AI cannot clearly understand what you do, who you serve, why you are credible, and what makes you different, it cannot confidently recommend you.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">Old model vs. new reality</div>
+          <h2>Winning search used to mean ranking pages. Now it means owning the answer layer.</h2>
+          <p class="lead">Traffic still matters. But traffic alone is no longer the whole game. In the answer era, the stronger play is becoming easier to understand, easier to trust, and easier to reuse across channels.</p>
+        </div>
+
+        <div class="comparison">
+          <article class="comparison-card reveal">
+            <small>Old SEO playbook</small>
+            <h3>Page-by-page optimization</h3>
+            <ul class="comparison-list">
+              <li>Chase clicks as the primary KPI</li>
+              <li>Optimize isolated pages and keywords</li>
+              <li>Publish disconnected content to “stay active”</li>
+              <li>Measure volume before trust and clarity</li>
+              <li>Rebuild the same brand story repeatedly</li>
+            </ul>
+          </article>
+
+          <article class="comparison-card highlight reveal">
+            <small>Answer-era visibility</small>
+            <h3>Source-led visibility infrastructure</h3>
+            <ul class="comparison-list">
+              <li>Become recognizable and recommendable</li>
+              <li>Build from one governed website source</li>
+              <li>Create reusable, answer-ready assets</li>
+              <li>Measure visibility, relevance, and qualified actions</li>
+              <li>Compound authority across channels over time</li>
+            </ul>
+          </article>
+        </div>
+        <div class="comparison-note reveal">The opportunity is not just “more SEO.” The opportunity is becoming the clearest, most usable source in your category — for both humans and machines.</div>
+      </div>
+    </section>
+
+    <section id="ssot">
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">The core idea</div>
+          <h2>Your website becomes the single source of truth.</h2>
+          <p class="lead">Once your website is structured as the clearest version of your business, it starts fueling every other asset you create. Instead of reinventing your brand every time you need a new page or campaign, you build once from a trusted source and scale from there.</p>
+        </div>
+
+        <div class="ssot-wrap">
+          <article class="ssot-core reveal">
+            <div class="source-pill">Website-first strategy</div>
+            <strong class="big">Your site stops acting like a brochure and starts acting like infrastructure.</strong>
+            <p>It becomes the place where your business facts, audience routes, proof, offers, FAQs, differentiators, and positioning are aligned — so every downstream asset has a stronger starting point.</p>
+            <div class="fuel"><strong style="display:block; margin-bottom:8px; color: var(--gold);">This is the fuel tank for the future content engine.</strong>Future service pages, local pages, articles, campaigns, email sequences, and sales assets become faster to produce — and more consistent — because the source is already clear.</div>
+          </article>
+
+          <div class="ssot-flow">
+            <article class="flow-card reveal">
+              <strong>AI answers and recommendation flows</strong>
+              <p>Clearer source material makes you easier to interpret and easier to cite across AI-assisted discovery.</p>
+            </article>
+            <article class="flow-card reveal">
+              <strong>Core service and location pages</strong>
+              <p>The most important pages become more consistent, more discoverable, and more persuasive.</p>
+            </article>
+            <article class="flow-card reveal">
+              <strong>FAQs, supporting content, and proof assets</strong>
+              <p>Instead of “what should we publish next?”, you work from a structured expansion plan.</p>
+            </article>
+            <article class="flow-card reveal">
+              <strong>Ads, social, email, and sales enablement</strong>
+              <p>Campaign language becomes stronger because it pulls from the same clarified business story.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution">
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">The solution</div>
+          <h2>Speakly AI-SEO Overhaul</h2>
+          <p class="lead">A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 4L4 8L12 12L20 8L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 12L12 16L20 12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 16L12 20L20 16" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Source architecture</h3>
+            <p>Clarify services, audiences, proof, offers, and brand language in one system so your site communicates one clean story.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12H8L10.5 5L13.5 19L16 12H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>AI visibility framework</h3>
+            <p>Make the site easier for AI search and modern discovery platforms to interpret, cite, and recommend without relying on guesswork.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 18L18 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 6H18V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Content engine foundation</h3>
+            <p>Build source material that can fuel future pages, FAQs, articles, campaigns, and sales assets without starting from zero each time.</p>
+          </article>
+        </div>
+
+        <div class="solution-band reveal">Automated where speed matters. Human-reviewed where trust matters. Governed like a system — not treated like a black box.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">Features</div>
+          <h2>What the overhaul is designed to do</h2>
+          <p class="lead">This is a sales tool, not a technical teardown — so the focus here is on what the system creates for the business, not on proprietary implementation details.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M11 4H5V20H19V12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 15L19 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M14 5H19V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Market and query mapping</h3>
+            <p>Identify what people actually ask, compare, and need answered in your category — and where competitors are easier to recommend.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 9H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 13H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Website source-of-truth rebuild</h3>
+            <p>Organize business facts, audience paths, trust signals, and supporting answers into a clearer, reusable website foundation.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 7H17V17H7V7Z" stroke="currentColor" stroke-width="1.8"/><path d="M4 4H5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 4H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 20H5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 20H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Answer-ready core pages</h3>
+            <p>Strengthen the most important pages so they are easier to understand for both search systems and real buyers.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 12H14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 17H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>FAQ and objection architecture</h3>
+            <p>Turn real buyer questions into assets that support AI answers, conversion clarity, and future content expansion.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 19H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 15L10.5 11.5L13 14L17 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Visibility monitoring and refinement</h3>
+            <p>Track where the business is becoming easier to surface, where gaps remain, and what should be prioritized next.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5L14.2 9.8L19 12L14.2 14.2L12 19L9.8 14.2L5 12L9.8 9.8L12 5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Human review and governed growth</h3>
+            <p>Automation accelerates the process, but quality, judgment, and brand protection stay in human hands.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="system">
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">High-level system tree</div>
+          <h2>What the overhaul actually creates</h2>
+          <p class="lead">This is the non-technical system view. It shows how Speakly positions the website as the core asset and uses that core to support visibility, content creation, and long-term refinement.</p>
+        </div>
+
+        <div class="tree">
+          <div class="tree-root reveal">
+            <small>Root system</small>
+            <h3 style="margin-bottom: 0;">Speakly AI-SEO Overhaul</h3>
+            <p style="margin-top: 10px;">A website-first visibility system built to make the business easier to understand, easier to trust, and easier to expand.</p>
+          </div>
+
+          <div class="tree-grid">
+            <article class="tree-card reveal">
+              <small>01</small>
+              <strong>Market intelligence layer</strong>
+              <ul>
+                <li>Search behavior map</li>
+                <li>Competitor visibility snapshot</li>
+                <li>Opportunity prioritization</li>
+              </ul>
+            </article>
+
+            <article class="tree-card reveal">
+              <small>02</small>
+              <strong>Website truth layer</strong>
+              <ul>
+                <li>Services and offers</li>
+                <li>Audiences and routes</li>
+                <li>Proof, trust, and FAQs</li>
+                <li>Location or niche clarity</li>
+              </ul>
+            </article>
+
+            <article class="tree-card reveal">
+              <small>03</small>
+              <strong>AI visibility layer</strong>
+              <ul>
+                <li>Answer-ready structure</li>
+                <li>Consistency and clarity</li>
+                <li>Discoverability support</li>
+              </ul>
+            </article>
+
+            <article class="tree-card reveal">
+              <small>04</small>
+              <strong>Content engine layer</strong>
+              <ul>
+                <li>Service page expansion</li>
+                <li>Local or supporting pages</li>
+                <li>FAQs and articles</li>
+                <li>Campaign-ready language</li>
+              </ul>
+            </article>
+
+            <article class="tree-card reveal">
+              <small>05</small>
+              <strong>Governance and growth layer</strong>
+              <ul>
+                <li>Reporting and review</li>
+                <li>Human oversight</li>
+                <li>Iteration roadmap</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">Benefits and outcomes</div>
+          <h2>What clients are really buying</h2>
+          <p class="lead">Not more noise. Not more disconnected pages. The real value is a cleaner operating system for visibility and growth.</p>
+        </div>
+
+        <div class="outcome-grid">
+          <article class="outcome-card reveal">
+            <div class="outcome-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3L20 7V12C20 16.5 16.9 20.7 12 22C7.1 20.7 4 16.5 4 12V7L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Stronger eligibility for AI answers</h3>
+            <p>A clearer business story increases the chances that AI systems can recognize, compare, and recommend you.</p>
+          </article>
+
+          <article class="outcome-card reveal">
+            <div class="outcome-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 4V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>More consistent brand messaging</h3>
+            <p>Your site, campaigns, email, sales materials, and future content start pulling from the same clarified source.</p>
+          </article>
+
+          <article class="outcome-card reveal">
+            <div class="outcome-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 6L16 12L8 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Faster future content production</h3>
+            <p>Once the source is organized, new pages and campaigns can be produced with more speed, less waste, and less confusion.</p>
+          </article>
+
+          <article class="outcome-card reveal">
+            <div class="outcome-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10 19V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 19V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Less wasted content spend</h3>
+            <p>Instead of publishing randomly, the business expands from the highest-value opportunities first.</p>
+          </article>
+
+          <article class="outcome-card reveal">
+            <div class="outcome-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Clearer trust and conversion paths</h3>
+            <p>The same work that improves machine understanding also improves the human experience after the click.</p>
+          </article>
+
+          <article class="outcome-card reveal">
+            <div class="outcome-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 4V12L17 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <h3>A system that compounds</h3>
+            <p>The website becomes an asset that gets smarter and more useful over time instead of being rebuilt every quarter.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">How it works</div>
+          <h2>A three-phase engagement built for momentum</h2>
+          <p class="lead">Speakly’s customer-facing process mirrors the operator system without exposing proprietary mechanics. The structure is simple: diagnose, align, then compound.</p>
+        </div>
+
+        <div class="phase-wrap">
+          <article class="phase-card reveal">
+            <div class="phase-top">
+              <div class="phase-number">0</div>
+              <small>Phase 0</small>
+              <h3>Diagnose and map</h3>
+            </div>
+            <ul class="bullet-list">
+              <li>Current-site visibility review</li>
+              <li>Competitor and market snapshot</li>
+              <li>AI-readiness gap identification</li>
+              <li>Priority opportunity roadmap</li>
+            </ul>
+          </article>
+
+          <article class="phase-card reveal">
+            <div class="phase-top">
+              <div class="phase-number">1</div>
+              <small>Phase 1</small>
+              <h3>Build and align</h3>
+            </div>
+            <ul class="bullet-list">
+              <li>Website source-of-truth alignment</li>
+              <li>Core page enhancement</li>
+              <li>Answer-ready visibility improvements</li>
+              <li>Measurement and reporting setup</li>
+            </ul>
+          </article>
+
+          <article class="phase-card reveal">
+            <div class="phase-top">
+              <div class="phase-number">2</div>
+              <small>Phase 2</small>
+              <h3>Expand and compound</h3>
+            </div>
+            <ul class="bullet-list">
+              <li>Supporting content expansion</li>
+              <li>Visibility refinement cycles</li>
+              <li>Performance review and iteration</li>
+              <li>Growth roadmap updates</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof">
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">Selected proof</div>
+          <h2>Real work. Real visibility movement.</h2>
+          <p class="lead">These are customer-facing proof points drawn from the existing Speakly sales deck. They show the kind of visibility and clarity gains this work is built to create.</p>
+        </div>
+
+        <div class="proof-grid">
+          <article class="proof-card reveal">
+            <small>Wolf Moon Wellness</small>
+            <h3>From weak AI visibility to stronger answer-layer presence</h3>
+            <div class="proof-metric"><strong>12% → 78%</strong><span>AI-indexed visibility probability</span></div>
+            <div class="proof-metric"><strong>+43%</strong><span>Organic traffic growth within 3 months</span></div>
+            <p>Appeared in Google, Bing Copilot, ChatGPT, and Perplexity after the visibility overhaul work described in the original deck.</p>
+          </article>
+
+          <article class="proof-card reveal">
+            <small>Tula Kitchen</small>
+            <h3>Better discoverability for the searches that actually matter</h3>
+            <ul class="bullet-list">
+              <li>Improved local visibility and rankings</li>
+              <li>Stronger alignment between site content and AI-driven queries</li>
+              <li>Better positioning for seasonal and intent-rich discovery</li>
+            </ul>
+          </article>
+
+          <article class="proof-card reveal">
+            <small>Beaudette Beverage / BEValuator</small>
+            <h3>Stronger positioning inside an AI-driven market</h3>
+            <ul class="bullet-list">
+              <li>Clearer story for a changing search environment</li>
+              <li>More structured visibility and automation roadmap</li>
+              <li>Higher-confidence competitive positioning</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-intro reveal">
+          <div class="section-kicker">Why Speakly</div>
+          <h2>The positioning advantage</h2>
+          <p class="lead">Most agencies treat AI search like a bolt-on. Speakly can position it as a website system, a visibility system, and a content system at the same time.</p>
+        </div>
+
+        <div class="grid-4">
+          <article class="card reveal">
+            <h3>Website-first systems thinking</h3>
+            <p>Speakly starts with the source, because every downstream asset gets stronger when the foundation is aligned first.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Proof-led sales story</h3>
+            <p>The offer is framed around measurable visibility, strategic clarity, and reusable business assets — not buzzwords.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Human-reviewed execution</h3>
+            <p>Automation increases speed. Human review protects trust, judgment, and brand voice.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Built for compounding value</h3>
+            <p>The website becomes a living business asset that powers future content, campaigns, and discovery instead of being rewritten from scratch.</p>
+          </article>
+        </div>
+
+        <div class="standards-band reveal" aria-label="Speakly standards">
+          <div class="standard">Clarity over clever</div>
+          <div class="standard">Proof over promises</div>
+          <div class="standard">Systems over one-off posts</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="next-step">
+      <div class="shell">
+        <div class="cta-panel reveal">
+          <div class="cta-grid">
+            <div>
+              <div class="section-kicker" style="margin-bottom:14px;">Next step</div>
+              <h2 style="max-width: 12ch;">Start with a free AI-search readiness assessment.</h2>
+              <p class="lead">We’ll show you where AI can see you today, where competitors are easier to recommend, and what a Phase 0 → Phase 2 overhaul could look like for your business.</p>
+              <ul class="cta-list">
+                <li>AI visibility snapshot</li>
+                <li>Competitor comparison</li>
+                <li>Source-of-truth gap review</li>
+                <li>Recommended roadmap tailored to your business</li>
+              </ul>
+              <div class="hero-actions" style="margin-top: 26px; margin-bottom: 0;">
+                <a class="btn btn-primary" href="mailto:mark@speaklymedia.com?subject=AI-Search%20Readiness%20Assessment">Request assessment</a>
+                <a class="btn btn-secondary" href="#market">Review market shift</a>
+              </div>
+            </div>
+
+            <aside class="cta-card">
+              <h3>Best-fit prospects</h3>
+              <ul class="bullet-list">
+                <li>Businesses with strong real-world value but weak AI-era visibility</li>
+                <li>Teams that have outgrown a brochure-style website</li>
+                <li>Brands that want future content to be easier, faster, and more consistent</li>
+                <li>Owners who want a system, not a random pile of SEO activity</li>
+              </ul>
+              <div class="sources">
+                <p><strong>Sources used in this deck</strong></p>
+                <ul>
+                  <li><a href="https://www.bain.com/about/media-center/press-releases/20252/consumer-reliance-on-ai-search-results-signals-new-era-of-marketing--bain--company-about-80-of-search-users-rely-on-ai-summaries-at-least-40-of-the-time-on-traditional-search-engines-about-60-of-searches-now-end-without-the-user-progressing-to-a/" target="_blank" rel="noreferrer">1. Bain &amp; Company — consumer reliance on AI search results (Feb 2025)</a></li>
+                  <li><a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/" target="_blank" rel="noreferrer">2. Pew Research Center — AI summaries reduce clicks (Jul 2025)</a></li>
+                  <li><a href="https://sparktoro.com/blog/new-research-search-happens-everywhere-an-analysis-of-41-websites-with-significant-search-activity/" target="_blank" rel="noreferrer">3. SparkToro / Datos — search happens everywhere (Mar 2026)</a></li>
+                  <li><a href="https://blog.google/products-and-platforms/products/search/ai-mode-ai-overviews-updates/" target="_blank" rel="noreferrer">4. Google — AI Overviews and AI Mode updates (Jan 2026)</a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <p>Speakly Media — AI-SEO Overhaul</p>
+      <p>Website-first visibility systems for the answer era.</p>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach((el) => observer.observe(el));
+
+    const sectionIds = ['market', 'problem', 'ssot', 'solution', 'system', 'proof', 'next-step'];
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach((link) => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+        });
+      });
+    }, { threshold: 0.45, rootMargin: '-15% 0px -35% 0px' });
+
+    sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+      .forEach((section) => sectionObserver.observe(section));
+  </script>
+</body>
+</html>

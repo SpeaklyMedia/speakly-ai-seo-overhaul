@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/ai-seo-overhaul/"
+title = "Speakly AI-SEO Overhaul"
+version = "1.0.0"
+id = "artifacts/ai-seo-overhaul"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/ai-seo-overhaul/" ]
+localPort = 22475
+
+[services.development]
+run = "pnpm --filter @workspace/ai-seo-overhaul run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ai-seo-overhaul", "run", "build" ]
+publicDir = "artifacts/ai-seo-overhaul/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22475"
+BASE_PATH = "/ai-seo-overhaul/"
