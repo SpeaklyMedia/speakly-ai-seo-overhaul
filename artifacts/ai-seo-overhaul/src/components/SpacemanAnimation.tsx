@@ -394,14 +394,14 @@ export function SpacemanAnimation() {
           }
         }
 
-        /* 768–1023px: show phone at tablet size, tucked upper-right */
+        /* 768–1023px: show phone at tablet size, centred vertically on the right */
         @media (min-width: 768px) and (max-width: 1023px) {
           .spaceman-phone {
             width: 242px !important;
             right: 18px !important;
-            top: 78px !important;
-            transform: scale(0.67) !important;
-            transform-origin: top right !important;
+            top: 50vh !important;
+            transform: translateY(-50%) scale(0.67) !important;
+            transform-origin: right center !important;
           }
         }
 
