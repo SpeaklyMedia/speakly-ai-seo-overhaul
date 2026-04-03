@@ -289,7 +289,7 @@ function ResultCard() {
           marginBottom: 8,
         }}
       >
-        Reserve your seat on the next lunar mission. Applications open now.
+        Reserve your seat on the next lunar mission.
       </div>
       {/* CTA */}
       <div
@@ -328,7 +328,7 @@ export function SpacemanAnimation() {
   /* Show result card 600 ms after bot reply arrives */
   useEffect(() => {
     if (phase === "bot-replied") {
-      const id = setTimeout(() => setShowCard(true), 600);
+      const id = setTimeout(() => setShowCard(true), 500);
       return () => clearTimeout(id);
     }
     setShowCard(false);
@@ -412,8 +412,8 @@ export function SpacemanAnimation() {
       {/* ── Keyframes ── */}
       <style>{`
         @keyframes starTwinkle {
-          0%,100% { opacity: 0.85; transform: scale(1); }
-          50%      { opacity: 0.12; transform: scale(0.72); }
+          0%,100% { opacity: 1.0; transform: scale(1.2); }
+          50%      { opacity: 0.15; transform: scale(0.8); }
         }
         @keyframes blinkCaret {
           0%,100% { opacity: 1; }
