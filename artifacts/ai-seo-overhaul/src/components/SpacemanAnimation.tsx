@@ -79,8 +79,8 @@ function AstronautSVG() {
   return (
     <svg
       viewBox="0 0 160 272"
-      width="200"
-      height="340"
+      width="160"
+      height="272"
       style={{
         overflow: "visible",
         filter:
@@ -105,7 +105,7 @@ function AstronautSVG() {
       {/* ── Body group — gentle sway ── */}
       <g
         style={{
-          animation: "astBody 2.8s ease-in-out infinite",
+          animation: "astronautBody 2.8s ease-in-out infinite",
           transformBox: "fill-box" as const,
           transformOrigin: "50% 95%",
           willChange: "transform",
@@ -154,7 +154,7 @@ function AstronautSVG() {
         {/* ── Thumbs group — fast typing rhythm ── */}
         <g
           style={{
-            animation: "astThumb 0.52s ease-in-out infinite",
+            animation: "astronautThumb 0.52s ease-in-out infinite",
             transformBox: "fill-box" as const,
             transformOrigin: "50% 50%",
             willChange: "transform",
@@ -183,7 +183,7 @@ function AstronautSVG() {
         {/* ── Helmet group — head bob ── */}
         <g
           style={{
-            animation: "astHead 2.4s ease-in-out infinite",
+            animation: "astronautHead 2.4s ease-in-out infinite",
             transformBox: "fill-box" as const,
             transformOrigin: "50% 100%",
             willChange: "transform",
@@ -427,19 +427,19 @@ export function SpacemanAnimation() {
           0%,100% { box-shadow: 0 0 18px 5px rgba(255,157,92,0.48), 0 0 70px 22px rgba(255,157,92,0.14), inset 0 1px 0 rgba(255,255,255,0.06); }
           50%      { box-shadow: 0 0 26px 8px rgba(255,157,92,0.62), 0 0 90px 28px rgba(255,157,92,0.20), inset 0 1px 0 rgba(255,255,255,0.06); }
         }
-        @keyframes astFloat {
+        @keyframes astronautFloat {
           0%,100% { transform: translateY(0px); }
           50%      { transform: translateY(-14px); }
         }
-        @keyframes astBody {
+        @keyframes astronautBody {
           0%,100% { transform: rotate(-0.4deg); }
           50%      { transform: rotate(0.4deg); }
         }
-        @keyframes astHead {
+        @keyframes astronautHead {
           0%,100% { transform: translateY(0px); }
           50%      { transform: translateY(-2.5px); }
         }
-        @keyframes astThumb {
+        @keyframes astronautThumb {
           0%,100% { transform: translateY(0px); }
           50%      { transform: translateY(-2px); }
         }
@@ -468,7 +468,7 @@ export function SpacemanAnimation() {
               background: o
                 ? "rgba(255,157,92,0.72)"
                 : "rgba(255,255,255,0.82)",
-              animation: `starTwinkle ${1.85 + d * 0.68}s ease-in-out ${d * 0.9}s infinite`,
+              animation: `starTwinkle ${Math.min(1.8 + d * 0.6, 3.9).toFixed(2)}s ease-in-out ${(d * 0.9).toFixed(2)}s infinite`,
               willChange: "opacity",
             }}
           />
@@ -800,11 +800,11 @@ export function SpacemanAnimation() {
         style={{
           position: "absolute",
           right: -28,
-          top: 295,
-          width: 200,
-          height: 340,
+          top: 310,
+          width: 160,
+          height: 272,
           zIndex: 3,
-          animation: "astFloat 3.6s ease-in-out infinite",
+          animation: "astronautFloat 3.6s ease-in-out infinite",
           willChange: "transform",
         }}
       >
