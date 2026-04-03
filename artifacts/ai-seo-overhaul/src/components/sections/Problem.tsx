@@ -69,7 +69,7 @@ export function Problem() {
       <div className="shell">
 
         <div className="relative mb-[44px]">
-          {/* Mobile: fixed-position background watermark */}
+          {/* Mobile: background watermark — absolute so it stays within this section */}
           <div className="md:hidden absolute right-0 bottom-0 pointer-events-none z-0" aria-hidden="true" style={{ opacity: 0.06 }}>
             <ProblemIllustration size={260} />
           </div>
