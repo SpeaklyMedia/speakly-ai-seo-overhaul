@@ -3,108 +3,93 @@ import { useInView } from "@/hooks/use-in-view";
 function MarketIllustration() {
   return (
     <svg
-      viewBox="0 0 130 150"
-      width="220"
+      viewBox="0 0 160 180"
+      width="240"
       aria-hidden="true"
       focusable="false"
       style={{ display: "block", animation: "astronautFloat 5s ease-in-out infinite" }}
     >
       <defs>
-        <radialGradient id="mkt-brain-glow" cx="50%" cy="50%" r="50%">
+        <radialGradient id="mkt-head-grad" cx="35%" cy="30%" r="70%">
+          <stop offset="0%" stopColor="#ffb87d" />
+          <stop offset="100%" stopColor="#ff9d5c" />
+        </radialGradient>
+        <radialGradient id="mkt-brain-soft" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.9" />
           <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="mkt-halo-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.3" />
+        <radialGradient id="mkt-halo-soft" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.18" />
           <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
         </radialGradient>
-        <filter id="mkt-blur">
-          <feGaussianBlur stdDeviation="4" result="b" />
-          <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+        <filter id="mkt-brain-filter">
+          <feGaussianBlur stdDeviation="6" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <filter id="mkt-node-glow">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
 
-      {/* Halo glow behind head */}
-      <ellipse cx="52" cy="68" rx="42" ry="42" fill="url(#mkt-halo-glow)" />
+      {/* Atmospheric halo behind head */}
+      <circle cx="68" cy="85" r="62" fill="url(#mkt-halo-soft)" />
 
-      {/* Outer arc (partial ring, ~300°) */}
+      {/* Bold partial arc halo — 270° */}
+      <path d="M 16 108 A 62 62 0 1 1 92 24" stroke="#ff9d5c" strokeWidth="4.5" fill="none" strokeLinecap="round" strokeOpacity="0.65" />
+
+      {/* Head — filled orange silhouette */}
       <path
-        d="M 18 85 A 42 42 0 1 1 65 27"
-        stroke="#ff9d5c"
-        strokeWidth="1.8"
-        fill="none"
-        strokeOpacity="0.55"
-        strokeLinecap="round"
+        d="M 58 24 C 82 18 114 32 120 62 C 126 88 116 118 98 130 L 88 138 L 62 138 L 54 130 C 32 116 20 92 24 66 C 28 40 42 26 58 24 Z"
+        fill="url(#mkt-head-grad)"
       />
-
-      {/* Head profile silhouette */}
+      {/* Face shading — darker right side gives profile feel */}
       <path
-        d="M 52 26
-           C 72 26 86 40 86 58
-           C 86 74 76 88 62 93
-           L 58 100 L 44 100 L 44 93
-           C 30 88 20 74 20 58
-           C 20 40 34 26 52 26 Z"
-        stroke="#ff9d5c"
-        strokeWidth="2.2"
-        fill="none"
-        strokeLinejoin="round"
+        d="M 98 130 C 116 118 126 88 120 62 C 114 32 82 18 58 24 L 66 26 C 88 32 112 48 116 70 C 120 94 112 120 100 132 Z"
+        fill="#c46d28"
+        fillOpacity="0.30"
       />
 
-      {/* Brain teal glow */}
-      <circle cx="56" cy="60" r="14" fill="url(#mkt-brain-glow)" />
-      <circle cx="56" cy="60" r="6" fill="#6fe2cf" fillOpacity="0.85" filter="url(#mkt-blur)" />
-      <circle cx="56" cy="60" r="3.5" fill="#6fe2cf" />
-
-      {/* Circuit traces from right side of head */}
-      <polyline
-        points="86,50 105,44 118,44"
-        stroke="#6fe2cf"
-        strokeWidth="1.6"
-        fill="none"
-        strokeOpacity="0.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+      {/* Brain blob — filled teal inside head */}
+      <ellipse cx="74" cy="78" rx="30" ry="25" fill="url(#mkt-brain-soft)" filter="url(#mkt-brain-filter)" />
+      <path
+        d="M 52 78 C 52 62 60 52 74 50 C 88 50 98 60 98 74 C 98 86 90 96 78 98 C 66 100 52 92 52 78 Z"
+        fill="#6fe2cf"
+        fillOpacity="0.88"
       />
-      <circle cx="118" cy="44" r="3" fill="#6fe2cf" fillOpacity="0.8" />
+      {/* Brain lobe fold detail */}
+      <path d="M 60 72 C 64 66 74 66 78 72" stroke="#04101c" strokeWidth="2" fill="none" strokeOpacity="0.35" strokeLinecap="round" />
+      <path d="M 68 84 C 74 80 84 82 86 88" stroke="#04101c" strokeWidth="2" fill="none" strokeOpacity="0.35" strokeLinecap="round" />
 
-      <polyline
-        points="86,62 108,62 108,72 120,72"
-        stroke="#6fe2cf"
-        strokeWidth="1.4"
-        fill="none"
-        strokeOpacity="0.55"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="120" cy="72" r="2.5" fill="#6fe2cf" fillOpacity="0.7" />
+      {/* Eye — filled teal dot on face */}
+      <circle cx="102" cy="72" r="6" fill="#6fe2cf" filter="url(#mkt-node-glow)" />
+      <circle cx="102" cy="72" r="3" fill="#04101c" fillOpacity="0.5" />
 
-      <polyline
-        points="80,80 100,92 118,92"
-        stroke="#ff9d5c"
-        strokeWidth="1.2"
-        fill="none"
-        strokeOpacity="0.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="118" cy="92" r="2" fill="#ff9d5c" fillOpacity="0.65" />
+      {/* Circuit traces — Manhattan routing (right angles only) */}
+      {/* Trace 1 — top right */}
+      <polyline points="120,56 136,56 136,40 154,40" stroke="#6fe2cf" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="154" cy="40" r="5.5" fill="#6fe2cf" filter="url(#mkt-node-glow)" />
+      <circle cx="154" cy="40" r="2.5" fill="#04101c" fillOpacity="0.5" />
+
+      {/* Trace 2 — mid right */}
+      <polyline points="122,74 140,74 140,90 156,90" stroke="#6fe2cf" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="156" cy="90" r="4.5" fill="#6fe2cf" fillOpacity="0.85" />
+
+      {/* Trace 3 — lower right */}
+      <polyline points="118,96 134,96 134,112 154,112" stroke="#78c7ff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="154" cy="112" r="4" fill="#78c7ff" fillOpacity="0.85" />
+
+      {/* Trace 4 — chin right */}
+      <polyline points="102,130 118,130 118,148 140,148" stroke="#ff9d5c" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.65" />
+      <circle cx="140" cy="148" r="3.5" fill="#ff9d5c" fillOpacity="0.7" />
 
       {/* Left side trace */}
-      <polyline
-        points="20,52 8,48"
-        stroke="#78c7ff"
-        strokeWidth="1.2"
-        fill="none"
-        strokeOpacity="0.45"
-        strokeLinecap="round"
-      />
-      <circle cx="8" cy="48" r="2" fill="#78c7ff" fillOpacity="0.55" />
+      <polyline points="26,80 8,80 8,60" stroke="#78c7ff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.55" />
+      <circle cx="8" cy="60" r="3.5" fill="#78c7ff" fillOpacity="0.65" />
 
-      {/* Accent dots */}
-      <circle cx="14" cy="30" r="1.5" fill="#78c7ff" fillOpacity="0.5" />
-      <circle cx="8" cy="100" r="1.2" fill="#78c7ff" fillOpacity="0.35" />
-      <circle cx="126" cy="55" r="1.5" fill="#78c7ff" fillOpacity="0.4" />
+      {/* Accent stars */}
+      <circle cx="10" cy="32" r="2.5" fill="#f5c86f" fillOpacity="0.55" />
+      <circle cx="148" cy="162" r="1.8" fill="#78c7ff" fillOpacity="0.4" />
     </svg>
   );
 }

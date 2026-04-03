@@ -1,74 +1,91 @@
 import { useInView } from "@/hooks/use-in-view";
 
 function SecureChipIllustration() {
-  const pins = (side: "top" | "bottom" | "left" | "right") => {
-    const pinCount = 3;
-    const spacing = 22;
-    const start = 60 - spacing;
-    return Array.from({ length: pinCount }, (_, i) => {
-      const pos = start + i * spacing;
-      const isBlue = side === "top" && i === 1;
-      const color = isBlue ? "#78c7ff" : "#ff9d5c";
-      if (side === "top")    return <g key={i}><line x1={pos} y1={26} x2={pos} y2={10} stroke={color} strokeWidth={2.5} strokeLinecap="round"/><circle cx={pos} cy={8} r={3} fill={color}/></g>;
-      if (side === "bottom") return <g key={i}><line x1={pos} y1={114} x2={pos} y2={130} stroke={color} strokeWidth={2.5} strokeLinecap="round"/><circle cx={pos} cy={132} r={3} fill={color}/></g>;
-      if (side === "left")   return <g key={i}><line x1={26} y1={pos} x2={10} y2={pos} stroke={color} strokeWidth={2.5} strokeLinecap="round"/><circle cx={8} cy={pos} r={3} fill={color}/></g>;
-      if (side === "right")  return <g key={i}><line x1={114} y1={pos} x2={130} y2={pos} stroke={color} strokeWidth={2.5} strokeLinecap="round"/><circle cx={132} cy={pos} r={3} fill={color}/></g>;
-      return null;
-    });
+  const Pin = ({ x1, y1, x2, y2, cx, cy, teal }: { x1: number; y1: number; x2: number; y2: number; cx: number; cy: number; teal?: boolean }) => {
+    const color = teal ? "#6fe2cf" : "#ff9d5c";
+    return (
+      <g>
+        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={3} strokeLinecap="round" />
+        <circle cx={cx} cy={cy} r={4} fill={color} />
+      </g>
+    );
   };
 
   return (
     <svg
-      viewBox="0 0 140 140"
-      width="180"
+      viewBox="0 0 160 160"
+      width="200"
       aria-hidden="true"
       focusable="false"
       style={{ display: "block" }}
     >
       <defs>
-        <linearGradient id="chip-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="chip-body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#ff9d5c" />
+          <stop offset="50%" stopColor="#f5a53a" />
           <stop offset="100%" stopColor="#f5c86f" />
         </linearGradient>
         <radialGradient id="chip-inner-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.15" />
+          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.18" />
           <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
         </radialGradient>
+        <filter id="chip-check-glow">
+          <feGaussianBlur stdDeviation="2.5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
       </defs>
 
-      {/* Pins */}
-      {pins("top")}
-      {pins("bottom")}
-      {pins("left")}
-      {pins("right")}
+      {/* ── 4 pins per side (16 total) ── */}
+      {/* Top */}
+      <Pin x1={56} y1={30} x2={56} y2={14} cx={56} cy={12} />
+      <Pin x1={70} y1={30} x2={70} y2={14} cx={70} cy={12} teal />
+      <Pin x1={84} y1={30} x2={84} y2={14} cx={84} cy={12} />
+      <Pin x1={98} y1={30} x2={98} y2={14} cx={98} cy={12} teal />
+      {/* Bottom */}
+      <Pin x1={56} y1={130} x2={56} y2={146} cx={56} cy={148} teal />
+      <Pin x1={70} y1={130} x2={70} y2={146} cx={70} cy={148} />
+      <Pin x1={84} y1={130} x2={84} y2={146} cx={84} cy={148} teal />
+      <Pin x1={98} y1={130} x2={98} y2={146} cx={98} cy={148} />
+      {/* Left */}
+      <Pin x1={30} y1={56} x2={14} y2={56} cx={12} cy={56} teal />
+      <Pin x1={30} y1={70} x2={14} y2={70} cx={12} cy={70} />
+      <Pin x1={30} y1={84} x2={14} y2={84} cx={12} cy={84} teal />
+      <Pin x1={30} y1={98} x2={14} y2={98} cx={12} cy={98} />
+      {/* Right */}
+      <Pin x1={130} y1={56} x2={146} y2={56} cx={148} cy={56} />
+      <Pin x1={130} y1={70} x2={146} y2={70} cx={148} cy={70} teal />
+      <Pin x1={130} y1={84} x2={146} y2={84} cx={148} cy={84} />
+      <Pin x1={130} y1={98} x2={146} y2={98} cx={148} cy={98} teal />
 
-      {/* Chip body */}
-      <rect x={26} y={26} width={88} height={88} rx={10} fill="none" stroke="url(#chip-grad)" strokeWidth={3} />
-      {/* Inner glow fill */}
-      <rect x={28} y={28} width={84} height={84} rx={8} fill="url(#chip-inner-glow)" />
+      {/* ── Chip body — FILLED gradient ── */}
+      <rect x={30} y={30} width={100} height={100} rx={12} fill="url(#chip-body-grad)" />
+      {/* Inner inset panel */}
+      <rect x={36} y={36} width={88} height={88} rx={8} fill="#0d1e2e" fillOpacity={0.75} />
+      {/* Inner glow */}
+      <rect x={38} y={38} width={84} height={84} rx={7} fill="url(#chip-inner-glow)" />
 
-      {/* Inner circuit details */}
-      <line x1={45} y1={40} x2={45} y2={55} stroke="#ff9d5c" strokeWidth={1.2} strokeOpacity={0.4} />
-      <line x1={45} y1={55} x2={60} y2={55} stroke="#ff9d5c" strokeWidth={1.2} strokeOpacity={0.4} />
-      <line x1={95} y1={85} x2={95} y2={100} stroke="#ff9d5c" strokeWidth={1.2} strokeOpacity={0.4} />
-      <line x1={80} y1={85} x2={95} y2={85} stroke="#ff9d5c" strokeWidth={1.2} strokeOpacity={0.4} />
+      {/* Circuit trace details inside chip */}
+      <polyline points="44,48 44,60 58,60" stroke="#ff9d5c" strokeWidth={1.5} fill="none" strokeOpacity={0.5} strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="116,112 116,100 102,100" stroke="#6fe2cf" strokeWidth={1.5} fill="none" strokeOpacity={0.5} strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="44,110 44,102 54,102" stroke="#78c7ff" strokeWidth={1.2} fill="none" strokeOpacity={0.4} strokeLinecap="round" strokeLinejoin="round" />
 
-      {/* Central shield */}
+      {/* ── Central shield — FILLED ── */}
       <path
-        d="M 70 46 C 70 46 52 52 52 64 C 52 76 61 86 70 90 C 79 86 88 76 88 64 C 88 52 70 46 70 46 Z"
+        d="M 80 48 C 80 48 58 56 58 70 C 58 84 68 96 80 102 C 92 96 102 84 102 70 C 102 56 80 48 80 48 Z"
+        fill="#ff9d5c"
+        fillOpacity={0.22}
+      />
+      <path
+        d="M 80 48 C 80 48 58 56 58 70 C 58 84 68 96 80 102 C 92 96 102 84 102 70 C 102 56 80 48 80 48 Z"
         stroke="#ff9d5c"
         strokeWidth={2}
-        fill="rgba(255,157,92,0.1)"
-      />
-      {/* Teal checkmark */}
-      <polyline
-        points="61,68 68,76 81,58"
-        stroke="#6fe2cf"
-        strokeWidth={2.8}
         fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeOpacity={0.6}
       />
+
+      {/* Teal checkmark with glow */}
+      <polyline points="68,74 77,84 96,62" stroke="#6fe2cf" strokeWidth={5} fill="none" strokeLinecap="round" strokeLinejoin="round" filter="url(#chip-check-glow)" />
+      <polyline points="68,74 77,84 96,62" stroke="#6fe2cf" strokeWidth={4} fill="none" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

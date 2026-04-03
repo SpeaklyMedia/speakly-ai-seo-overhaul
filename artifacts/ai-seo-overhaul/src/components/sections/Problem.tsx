@@ -1,34 +1,48 @@
 import { useInView } from "@/hooks/use-in-view";
 
-function RobotShape({ x, y, scale = 1, delay = 0 }: { x: number; y: number; scale?: number; delay?: number }) {
-  const w = 32 * scale;
-  const h = 48 * scale;
-  const cx = x + w / 2;
+function Robot({ cx, topY, s = 1, floatDelay = 0 }: { cx: number; topY: number; s?: number; floatDelay?: number }) {
   return (
-    <g style={{ animation: `astronautFloat ${3.8 + delay}s ease-in-out infinite`, animationDelay: `${delay}s` }}>
-      {/* Antenna */}
-      <line x1={cx} y1={y - 2} x2={cx} y2={y - 10 * scale} stroke="#ff9d5c" strokeWidth={1.4 * scale} strokeLinecap="round" />
-      <circle cx={cx} cy={y - 12 * scale} r={2.5 * scale} fill="#ff9d5c" />
-      {/* Head */}
-      <rect x={x + 4 * scale} y={y} width={24 * scale} height={18 * scale} rx={9 * scale} fill="#ff9d5c" />
-      {/* Eyes */}
-      <ellipse cx={cx - 6 * scale} cy={y + 9 * scale} rx={4 * scale} ry={3.5 * scale} fill="#6fe2cf" />
-      <ellipse cx={cx + 6 * scale} cy={y + 9 * scale} rx={4 * scale} ry={3.5 * scale} fill="#6fe2cf" />
-      {/* Eye shine */}
-      <ellipse cx={cx - 7 * scale} cy={y + 8 * scale} rx={1.2 * scale} ry={1 * scale} fill="rgba(255,255,255,0.5)" />
-      <ellipse cx={cx + 5 * scale} cy={y + 8 * scale} rx={1.2 * scale} ry={1 * scale} fill="rgba(255,255,255,0.5)" />
-      {/* Neck */}
-      <rect x={cx - 5 * scale} y={y + 18 * scale} width={10 * scale} height={4 * scale} rx={2 * scale} fill="#e8884a" />
+    <g style={{ animation: `astronautFloat ${4.2 + floatDelay}s ease-in-out ${floatDelay}s infinite` }}>
+      {/* Cast shadow */}
+      <ellipse cx={cx} cy={topY + 96 * s} rx={22 * s} ry={7 * s} fill="#6fe2cf" fillOpacity={0.18} />
+
       {/* Body */}
-      <rect x={x} y={y + 22 * scale} width={w} height={h * 0.45} rx={5 * scale} fill="#ff9d5c" />
-      {/* Chest circle */}
-      <circle cx={cx} cy={y + 32 * scale} r={4 * scale} fill="rgba(4,16,28,0.35)" />
+      <rect x={cx - 20 * s} y={topY + 34 * s} width={40 * s} height={30 * s} rx={7 * s} fill="#c46d28" />
+      {/* Chest panel */}
+      <rect x={cx - 11 * s} y={topY + 40 * s} width={22 * s} height={14 * s} rx={3 * s} fill="#04101c" fillOpacity={0.55} />
+      <circle cx={cx - 4 * s} cy={topY + 47 * s} r={3 * s} fill="#6fe2cf" />
+      <circle cx={cx + 5 * s} cy={topY + 47 * s} r={3 * s} fill="#78c7ff" />
+
       {/* Arms */}
-      <rect x={x - 8 * scale} y={y + 24 * scale} width={8 * scale} height={12 * scale} rx={4 * scale} fill="#e8884a" />
-      <rect x={x + w} y={y + 24 * scale} width={8 * scale} height={12 * scale} rx={4 * scale} fill="#e8884a" />
+      <rect x={cx - 28 * s} y={topY + 37 * s} width={8 * s} height={16 * s} rx={4 * s} fill="#e8884a" />
+      <rect x={cx + 20 * s} y={topY + 37 * s} width={8 * s} height={16 * s} rx={4 * s} fill="#e8884a" />
+
       {/* Legs */}
-      <rect x={x + 4 * scale} y={y + 43 * scale} width={10 * scale} height={14 * scale} rx={4 * scale} fill="#e8884a" />
-      <rect x={x + 18 * scale} y={y + 43 * scale} width={10 * scale} height={14 * scale} rx={4 * scale} fill="#e8884a" />
+      <rect x={cx - 16 * s} y={topY + 62 * s} width={12 * s} height={18 * s} rx={5 * s} fill="#e8884a" />
+      <rect x={cx + 4 * s} y={topY + 62 * s} width={12 * s} height={18 * s} rx={5 * s} fill="#e8884a" />
+      {/* Feet */}
+      <rect x={cx - 18 * s} y={topY + 76 * s} width={16 * s} height={8 * s} rx={4 * s} fill="#c46d28" />
+      <rect x={cx + 2 * s} y={topY + 76 * s} width={16 * s} height={8 * s} rx={4 * s} fill="#c46d28" />
+
+      {/* Neck */}
+      <rect x={cx - 7 * s} y={topY + 28 * s} width={14 * s} height={6 * s} rx={3 * s} fill="#e8884a" />
+
+      {/* Head */}
+      <rect x={cx - 20 * s} y={topY + 8 * s} width={40 * s} height={24 * s} rx={10 * s} fill="#ff9d5c" />
+      {/* Eyes — big dominant teal ovals */}
+      <ellipse cx={cx - 8 * s} cy={topY + 21 * s} rx={7 * s} ry={6 * s} fill="#6fe2cf" />
+      <ellipse cx={cx + 8 * s} cy={topY + 21 * s} rx={7 * s} ry={6 * s} fill="#6fe2cf" />
+      {/* Pupils */}
+      <circle cx={cx - 8 * s} cy={topY + 21 * s} r={3 * s} fill="#04101c" fillOpacity={0.55} />
+      <circle cx={cx + 8 * s} cy={topY + 21 * s} r={3 * s} fill="#04101c" fillOpacity={0.55} />
+      {/* Eye glint */}
+      <circle cx={cx - 11 * s} cy={topY + 18 * s} r={1.8 * s} fill="rgba(255,255,255,0.55)" />
+      <circle cx={cx + 5 * s} cy={topY + 18 * s} r={1.8 * s} fill="rgba(255,255,255,0.55)" />
+
+      {/* Antenna */}
+      <line x1={cx} y1={topY + 8 * s} x2={cx} y2={topY - 2 * s} stroke="#ff9d5c" strokeWidth={2 * s} strokeLinecap="round" />
+      <circle cx={cx} cy={topY - 4 * s} r={3.5 * s} fill="#6fe2cf" />
+      <circle cx={cx} cy={topY - 4 * s} r={1.8 * s} fill="#04101c" fillOpacity={0.4} />
     </g>
   );
 }
@@ -36,44 +50,43 @@ function RobotShape({ x, y, scale = 1, delay = 0 }: { x: number; y: number; scal
 function ProblemIllustration() {
   return (
     <svg
-      viewBox="0 0 220 170"
-      width="290"
+      viewBox="0 0 240 180"
+      width="320"
       aria-hidden="true"
       focusable="false"
       style={{ display: "block" }}
     >
       <defs>
-        <radialGradient id="prob-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.18" />
+        <radialGradient id="prob-bg-glow" cx="50%" cy="80%" r="50%">
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.12" />
           <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
         </radialGradient>
+        <filter id="prob-glow-filter">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
       </defs>
 
-      {/* Ambient glow */}
-      <ellipse cx="110" cy="110" rx="100" ry="60" fill="url(#prob-glow)" />
+      {/* Ambient floor glow */}
+      <ellipse cx="120" cy="162" rx="110" ry="22" fill="url(#prob-bg-glow)" />
 
-      {/* Small robot left */}
-      <RobotShape x={10} y={60} scale={0.75} delay={0.4} />
+      {/* Left small robot */}
+      <Robot cx={42} topY={60} s={0.72} floatDelay={0.4} />
 
-      {/* Center robot — tallest */}
-      <RobotShape x={82} y={35} scale={1.0} delay={0} />
+      {/* Center robot — hero size */}
+      <Robot cx={120} topY={30} s={1.0} floatDelay={0} />
 
-      {/* Small robot right */}
-      <RobotShape x={162} y={60} scale={0.75} delay={0.7} />
+      {/* Right small robot */}
+      <Robot cx={198} topY={60} s={0.72} floatDelay={0.7} />
 
-      {/* Phone held by left robot arm */}
-      <rect x={3} y={77} width={10} height={15} rx={2} fill="#04101c" stroke="#6fe2cf" strokeWidth={1.2} />
-      <rect x={5} y={79} width={6} height={9} rx={1} fill="#6fe2cf" fillOpacity={0.3} />
+      {/* Ground shadow arcs */}
+      <ellipse cx={120} cy={164} rx={70} ry={8} fill="#04101c" fillOpacity={0.25} />
 
-      {/* Thruster flame under right robot */}
-      <ellipse cx={186} cy={163} rx={6} ry={4} fill="#f5c86f" fillOpacity={0.7} />
-      <ellipse cx={186} cy={167} rx={4} ry={3} fill="#ff9d5c" fillOpacity={0.5} />
-
-      {/* Tiny stars */}
-      <circle cx={8} cy={25} r={1.5} fill="#78c7ff" fillOpacity={0.55} />
-      <circle cx={210} cy={40} r={1.2} fill="#78c7ff" fillOpacity={0.45} />
-      <circle cx={58} cy={15} r={1} fill="#6fe2cf" fillOpacity={0.5} />
-      <circle cx={155} cy={20} r={1.5} fill="#78c7ff" fillOpacity={0.4} />
+      {/* Accent stars */}
+      <circle cx={10} cy={20} r={2} fill="#78c7ff" fillOpacity={0.5} filter="url(#prob-glow-filter)" />
+      <circle cx={228} cy={30} r={1.5} fill="#6fe2cf" fillOpacity={0.45} />
+      <circle cx={66} cy={14} r={1.2} fill="#f5c86f" fillOpacity={0.5} />
+      <circle cx={175} cy={18} r={1.8} fill="#78c7ff" fillOpacity={0.4} />
     </svg>
   );
 }

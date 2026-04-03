@@ -3,77 +3,96 @@ import { useInView } from "@/hooks/use-in-view";
 function WavingAstronautIllustration() {
   return (
     <svg
-      viewBox="0 0 100 170"
-      width="160"
+      viewBox="0 0 120 200"
+      width="190"
       aria-hidden="true"
       focusable="false"
       style={{ display: "block", animation: "astronautFloat 3.8s ease-in-out infinite" }}
     >
       <defs>
-        <radialGradient id="sol-glow" cx="50%" cy="60%" r="50%">
-          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.4" />
+        <radialGradient id="sol-body-glow" cx="50%" cy="65%" r="55%">
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.30" />
           <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="sol-visor" cx="35%" cy="35%" r="60%">
-          <stop offset="0%" stopColor="#78c7ff" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#04101c" stopOpacity="0.8" />
+        <radialGradient id="sol-helmet-grad" cx="30%" cy="30%" r="65%">
+          <stop offset="0%" stopColor="#ffb87d" />
+          <stop offset="100%" stopColor="#e8884a" />
         </radialGradient>
+        <radialGradient id="sol-visor-grad" cx="30%" cy="25%" r="65%">
+          <stop offset="0%" stopColor="#1a3a5c" />
+          <stop offset="100%" stopColor="#04101c" />
+        </radialGradient>
+        <filter id="sol-visor-glow">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
       </defs>
 
-      {/* Body glow */}
-      <ellipse cx="50" cy="110" rx="38" ry="50" fill="url(#sol-glow)" />
+      {/* Body atmospheric glow */}
+      <ellipse cx="58" cy="130" rx="44" ry="55" fill="url(#sol-body-glow)" />
 
-      {/* Helmet */}
-      <circle cx="50" cy="38" r="26" fill="#ff9d5c" />
-      <circle cx="50" cy="38" r="22" fill="#e8884a" />
-      {/* Visor — outline only, no fill */}
-      <ellipse cx="50" cy="38" rx="14" ry="15" stroke="#78c7ff" strokeWidth="1.5" fill="none" strokeOpacity="0.55" />
-      {/* Helmet ring */}
-      <circle cx="50" cy="38" r="26" stroke="#c46d28" strokeWidth="1.5" fill="none" />
-      {/* Helmet side details */}
-      <rect x="22" y="34" width="6" height="8" rx="3" fill="#c46d28" />
-      <rect x="72" y="34" width="6" height="8" rx="3" fill="#c46d28" />
+      {/* ── Shoulder pads (behind torso) ── */}
+      <ellipse cx="30" cy="96" rx="17" ry="12" fill="#e8884a" />
+      <ellipse cx="86" cy="96" rx="17" ry="12" fill="#e8884a" />
 
-      {/* Neck ring */}
-      <rect x="40" y="62" width="20" height="6" rx="3" fill="#c46d28" />
-
-      {/* Torso */}
-      <rect x="28" y="68" width="44" height="48" rx="10" fill="#ff9d5c" />
-      {/* Chest plate */}
-      <rect x="36" y="76" width="28" height="20" rx="4" fill="#c46d28" />
-      {/* Chest square detail */}
-      <rect x="40" y="80" width="20" height="12" rx="2" fill="rgba(4,16,28,0.4)" />
+      {/* ── Torso ── */}
+      <rect x="28" y="84" width="60" height="56" rx="14" fill="#ff9d5c" />
+      {/* Chest panel */}
+      <rect x="38" y="94" width="40" height="28" rx="5" fill="#04101c" fillOpacity="0.5" />
+      <circle cx="46" cy="105" r="4" fill="#6fe2cf" />
+      <circle cx="58" cy="105" r="4" fill="#ff9d5c" />
+      <circle cx="70" cy="105" r="4" fill="#78c7ff" />
+      <rect x="40" y="114" width="36" height="3" rx="1.5" fill="#78c7ff" fillOpacity="0.3" />
       {/* Belt */}
-      <rect x="28" y="108" width="44" height="8" rx="4" fill="#c46d28" />
+      <rect x="28" y="132" width="60" height="8" rx="4" fill="#c46d28" />
 
-      {/* LEFT arm — relaxed at side */}
-      <rect x="14" y="72" width="14" height="36" rx="7" fill="#ff9d5c" />
-      <ellipse cx="21" cy="112" rx="7" ry="6" fill="#e8884a" />
+      {/* ── Left arm — down at side ── */}
+      <rect x="12" y="88" width="16" height="40" rx="8" fill="#ff9d5c" />
+      <ellipse cx="20" cy="132" rx="9" ry="7" fill="#c46d28" />
 
-      {/* RIGHT arm — raised in a wave */}
-      <path
-        d="M 72 76 C 82 72 92 58 88 44 C 86 38 80 36 74 40 C 78 52 76 64 72 76 Z"
-        fill="#ff9d5c"
-      />
-      {/* Waving hand */}
-      <ellipse cx="86" cy="40" rx="10" ry="8" fill="#ff9d5c" transform="rotate(30, 86, 40)" />
-      {/* Fingers */}
-      <line x1="93" y1="36" x2="96" y2="28" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
-      <line x1="88" y1="33" x2="90" y2="25" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
-      <line x1="83" y1="33" x2="84" y2="25" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
-      <line x1="79" y1="35" x2="78" y2="27" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
+      {/* ── Right arm — raised, elbow bent, waving ── */}
+      {/* Upper arm going up-right */}
+      <path d="M 88 92 C 96 86 106 74 102 60 C 100 54 94 53 90 57 C 93 66 92 78 88 92 Z" fill="#ff9d5c" />
+      {/* Mitten/glove — raised */}
+      <ellipse cx="100" cy="56" rx="12" ry="9" fill="#ff9d5c" transform="rotate(-20,100,56)" />
+      <ellipse cx="100" cy="56" rx="10" ry="7" fill="#c46d28" transform="rotate(-20,100,56)" />
+      {/* Thumb sticking up */}
+      <ellipse cx="92" cy="50" rx="4" ry="6" fill="#c46d28" transform="rotate(20,92,50)" />
+      {/* Knuckle line */}
+      <path d="M 94 61 C 100 57 108 58 110 62" stroke="#ff9d5c" strokeWidth="2.5" fill="none" strokeLinecap="round" />
 
-      {/* Legs */}
-      <rect x="34" y="114" width="14" height="36" rx="7" fill="#ff9d5c" />
-      <rect x="52" y="114" width="14" height="36" rx="7" fill="#ff9d5c" />
+      {/* ── Legs ── */}
+      <rect x="34" y="138" width="20" height="40" rx="10" fill="#e8884a" />
+      <rect x="62" y="138" width="20" height="40" rx="10" fill="#e8884a" />
       {/* Boots */}
-      <rect x="32" y="144" width="18" height="12" rx="6" fill="#c46d28" />
-      <rect x="50" y="144" width="18" height="12" rx="6" fill="#c46d28" />
+      <rect x="30" y="170" width="28" height="14" rx="7" fill="#c46d28" />
+      <rect x="58" y="170" width="28" height="14" rx="7" fill="#c46d28" />
 
-      {/* Small stars */}
-      <circle cx="88" cy="18" r="2" fill="#78c7ff" fillOpacity="0.6" />
-      <circle cx="94" cy="50" r="1.5" fill="#6fe2cf" fillOpacity="0.5" />
-      <circle cx="4" cy="80" r="1.5" fill="#78c7ff" fillOpacity="0.4" />
+      {/* ── Neck ring ── */}
+      <rect x="46" y="78" width="24" height="8" rx="4" fill="#c46d28" />
+
+      {/* ── Helmet ── */}
+      <circle cx="58" cy="52" r="32" fill="url(#sol-helmet-grad)" />
+      {/* Helmet ring highlight */}
+      <circle cx="58" cy="52" r="32" fill="none" stroke="#ffb87d" strokeWidth="1.8" strokeOpacity="0.4" />
+      {/* Side ear units */}
+      <rect x="24" y="48" width="8" height="10" rx="4" fill="#c46d28" />
+      <rect x="84" y="48" width="8" height="10" rx="4" fill="#c46d28" />
+      {/* Visor — bold filled dark D shape */}
+      <path d="M 40 48 C 40 36 48 30 58 30 C 68 30 76 36 76 48 C 76 60 68 66 58 66 C 48 66 40 60 40 48 Z" fill="url(#sol-visor-grad)" />
+      {/* Teal crescent highlight inside visor */}
+      <path d="M 42 46 C 42 38 48 34 58 34 C 62 34 65 35 68 38" stroke="#6fe2cf" strokeWidth="3.5" fill="none" strokeLinecap="round" filter="url(#sol-visor-glow)" />
+      {/* Visor glint dot */}
+      <circle cx="46" cy="40" r="3" fill="#78c7ff" fillOpacity="0.5" />
+
+      {/* Antenna atop helmet */}
+      <line x1="58" y1="20" x2="58" y2="32" stroke="#c46d28" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="58" cy="17" r="4" fill="#6fe2cf" filter="url(#sol-visor-glow)" />
+
+      {/* Accent stars */}
+      <circle cx="108" cy="20" r="2.5" fill="#78c7ff" fillOpacity="0.55" />
+      <circle cx="112" cy="80" r="1.8" fill="#6fe2cf" fillOpacity="0.45" />
+      <circle cx="6" cy="110" r="2" fill="#f5c86f" fillOpacity="0.45" />
     </svg>
   );
 }

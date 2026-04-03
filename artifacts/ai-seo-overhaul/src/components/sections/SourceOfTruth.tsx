@@ -3,96 +3,79 @@ import { useInView } from "@/hooks/use-in-view";
 function WrenchIllustration() {
   return (
     <svg
-      viewBox="0 0 140 210"
-      width="200"
+      viewBox="0 0 120 240"
+      width="180"
       aria-hidden="true"
       focusable="false"
       style={{ display: "block", animation: "astronautFloat 4.5s ease-in-out infinite" }}
     >
       <defs>
-        <linearGradient id="ssot-wrench-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id="ssot-wrench-grad" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stopColor="#6fe2cf" />
-          <stop offset="100%" stopColor="#78c7ff" />
+          <stop offset="55%" stopColor="#78c7ff" />
+          <stop offset="100%" stopColor="#5eb0e8" />
         </linearGradient>
-        <radialGradient id="ssot-beam-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.7" />
+        <radialGradient id="ssot-glow-soft" cx="50%" cy="30%" r="60%">
+          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.35" />
           <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="ssot-hand-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.4" />
+        <radialGradient id="ssot-hand-bg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.25" />
           <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
         </radialGradient>
-        <filter id="ssot-glow-filter">
+        <filter id="ssot-jaw-glow">
           <feGaussianBlur stdDeviation="5" result="blur" />
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
 
-      {/* Light beam between hand and wrench */}
-      <rect x={66} y={82} width={8} height={60} rx={4} fill="url(#ssot-beam-glow)" opacity={0.8} />
-      <rect x={68} y={88} width={4} height={50} rx={2} fill="#6fe2cf" opacity={0.35} />
+      {/* Glow bloom at jaw */}
+      <ellipse cx="60" cy="32" rx="36" ry="20" fill="url(#ssot-glow-soft)" filter="url(#ssot-jaw-glow)" />
 
-      {/* Wrench body — horizontal, centered */}
-      {/* Left jaw (open end) */}
-      <path
-        d="M 22 58
-           C 22 48 28 42 36 42
-           L 36 50
-           C 32 50 30 54 30 58
-           C 30 62 32 66 36 66
-           L 36 74
-           C 28 74 22 68 22 58 Z"
-        fill="url(#ssot-wrench-grad)"
-      />
-      {/* Left jaw gap (the opening) */}
-      <path
-        d="M 36 50 L 48 50 L 48 66 L 36 66 Z"
-        fill="none"
-      />
-      {/* Shaft */}
-      <rect x={36} y={54} width={68} height={8} rx={2} fill="url(#ssot-wrench-grad)" />
-      {/* Right hex end */}
-      <path
-        d="M 104 50 L 118 50 L 118 66 L 104 66 Z"
-        fill="url(#ssot-wrench-grad)"
-      />
-      {/* Hex hole */}
-      <polygon
-        points="111,53 116,56 116,62 111,65 106,62 106,56"
-        fill="rgba(4,16,28,0.5)"
-        stroke="#78c7ff"
-        strokeWidth="1"
-      />
+      {/* ── Vertical wrench ── */}
+      {/* Left jaw prong */}
+      <path d="M 38 55 L 38 35 C 38 26 43 20 50 20 L 50 34 C 46 34 44 37 44 42 L 44 55 Z" fill="url(#ssot-wrench-grad)" />
+      {/* Right jaw prong */}
+      <path d="M 82 55 L 82 35 C 82 26 77 20 70 20 L 70 34 C 74 34 76 37 76 42 L 76 55 Z" fill="url(#ssot-wrench-grad)" />
+      {/* Jaw opening (gap between prongs — let dark background show) */}
+      <rect x="44" y="20" width="32" height="22" fill="#04101c" />
 
-      {/* Glow on wrench */}
-      <rect x={22} y={42} width={96} height={32} rx={4} fill="url(#ssot-beam-glow)" opacity={0.2} filter="url(#ssot-glow-filter)" />
+      {/* Shaft — vertical */}
+      <rect x="44" y="42" width="32" height="116" rx="4" fill="url(#ssot-wrench-grad)" />
 
-      {/* Palm / glove (open upward hand silhouette) */}
-      <ellipse cx={70} cy={155} rx={38} ry={14} fill="url(#ssot-hand-glow)" />
-      {/* Palm base */}
-      <path
-        d="M 45 165
-           C 45 155 50 148 60 146
-           L 60 158
-           C 60 162 63 164 70 164
-           C 77 164 80 162 80 158
-           L 80 146
-           C 90 148 95 155 95 165 Z"
-        stroke="#ff9d5c"
-        strokeWidth="2"
-        fill="none"
-        strokeLinejoin="round"
-      />
-      {/* Fingers */}
-      <path d="M 55 146 C 55 138 58 134 62 134 C 65 134 67 138 67 146" stroke="#ff9d5c" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-      <path d="M 63 144 C 63 136 66 132 70 132 C 74 132 77 136 77 144" stroke="#ff9d5c" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-      <path d="M 71 146 C 71 138 74 134 78 134 C 81 134 83 138 83 146" stroke="#ff9d5c" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-      <path d="M 47 158 C 44 152 45 146 49 144 C 53 142 56 145 56 150" stroke="#ff9d5c" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      {/* Box end (bottom) */}
+      <rect x="34" y="152" width="52" height="28" rx="7" fill="url(#ssot-wrench-grad)" />
+      {/* Hex socket hole */}
+      <polygon points="60,158 67,162 67,170 60,174 53,170 53,162" fill="#04101c" fillOpacity="0.6" />
 
-      {/* Sparkle dots near wrench */}
-      <circle cx={20} cy={44} r={2} fill="#f5c86f" fillOpacity={0.8} />
-      <circle cx={122} cy={48} r={1.5} fill="#78c7ff" fillOpacity={0.65} />
-      <circle cx={14} cy={62} r={1.2} fill="#6fe2cf" fillOpacity={0.5} />
+      {/* Shaft highlight stripe */}
+      <rect x="52" y="48" width="6" height="100" rx="3" fill="rgba(255,255,255,0.12)" />
+
+      {/* ── Gloved hand below ── */}
+      {/* Hand glow */}
+      <ellipse cx="60" cy="210" rx="34" ry="18" fill="url(#ssot-hand-bg)" />
+
+      {/* Palm — filled orange */}
+      <path d="M 42 220 C 42 208 48 200 60 198 C 72 200 78 208 78 220 L 78 228 L 42 228 Z" fill="#ff9d5c" />
+
+      {/* Thumb — left side, sticking out */}
+      <path d="M 42 218 C 38 214 36 208 40 204 C 44 200 48 203 48 208 L 46 218 Z" fill="#ff9d5c" />
+      <path d="M 46 218 C 40 216 38 210 41 206" stroke="#c46d28" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+
+      {/* Four fingers — stubs on top */}
+      <rect x="45" y="196" width="9" height="14" rx="4.5" fill="#ff9d5c" />
+      <rect x="56" y="193" width="9" height="17" rx="4.5" fill="#ff9d5c" />
+      <rect x="67" y="196" width="9" height="14" rx="4.5" fill="#ff9d5c" />
+      <rect x="77" y="200" width="7" height="12" rx="3.5" fill="#ff9d5c" />
+      {/* Finger knuckle lines */}
+      <line x1="49" y1="204" x2="49" y2="208" stroke="#c46d28" strokeWidth="1.2" strokeLinecap="round" />
+      <line x1="60" y1="201" x2="60" y2="206" stroke="#c46d28" strokeWidth="1.2" strokeLinecap="round" />
+      <line x1="71" y1="204" x2="71" y2="208" stroke="#c46d28" strokeWidth="1.2" strokeLinecap="round" />
+
+      {/* Accent sparkles */}
+      <circle cx="18" cy="22" r="2.5" fill="#f5c86f" fillOpacity="0.7" />
+      <circle cx="104" cy="28" r="2" fill="#78c7ff" fillOpacity="0.6" />
+      <circle cx="12" cy="80" r="1.5" fill="#6fe2cf" fillOpacity="0.45" />
     </svg>
   );
 }

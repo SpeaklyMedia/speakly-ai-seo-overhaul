@@ -2,70 +2,96 @@ import { useInView } from "@/hooks/use-in-view";
 import { useCountUp } from "@/hooks/use-count-up";
 
 function TrustShieldIllustration() {
-  const personAt = (cx: number, cy: number) => (
+  const Person = ({ cx, cy }: { cx: number; cy: number }) => (
     <g>
-      <circle cx={cx} cy={cy} r={9} fill="#ff9d5c" />
-      <path d={`M ${cx - 14} ${cy + 28} C ${cx - 14} ${cy + 14} ${cx + 14} ${cy + 14} ${cx + 14} ${cy + 28}`} stroke="#ff9d5c" strokeWidth="2" fill="none" strokeLinecap="round" />
+      {/* Head */}
+      <circle cx={cx} cy={cy} r={11} fill="#ff9d5c" />
+      {/* Body / shoulders */}
+      <path d={`M ${cx - 16} ${cy + 32} C ${cx - 16} ${cy + 16} ${cx + 16} ${cy + 16} ${cx + 16} ${cy + 32}`} fill="#ff9d5c" />
     </g>
   );
 
   return (
     <svg
-      viewBox="0 0 180 180"
-      width="210"
+      viewBox="0 0 200 200"
+      width="240"
       aria-hidden="true"
       focusable="false"
       style={{ display: "block", animation: "astronautFloat 5s ease-in-out infinite" }}
     >
       <defs>
-        <radialGradient id="proof-shield-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.25" />
+        <radialGradient id="proof-outer-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.20" />
           <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
         </radialGradient>
+        <radialGradient id="proof-shield-grad" cx="50%" cy="35%" r="65%">
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#c46d28" stopOpacity="0.55" />
+        </radialGradient>
+        <filter id="proof-arc-glow">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <filter id="proof-check-glow">
+          <feGaussianBlur stdDeviation="3.5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
       </defs>
 
-      {/* Ambient glow behind shield */}
-      <circle cx={90} cy={90} r={50} fill="url(#proof-shield-glow)" />
+      {/* Outer ring glow */}
+      <circle cx={100} cy={100} r={80} fill="none" stroke="#6fe2cf" strokeWidth="1" strokeOpacity="0.12" />
+      <circle cx={100} cy={100} r={60} fill="url(#proof-outer-glow)" />
 
-      {/* Connecting arcs (dashed) */}
-      {/* Top person to shield */}
-      <path d="M 90 38 L 90 58" stroke="#ff9d5c" strokeWidth="1.4" strokeDasharray="3,3" strokeOpacity="0.55" />
-      {/* Left person to shield */}
-      <path d="M 38 90 L 62 90" stroke="#ff9d5c" strokeWidth="1.4" strokeDasharray="3,3" strokeOpacity="0.55" />
-      {/* Right person to shield */}
-      <path d="M 118 90 L 142 90" stroke="#ff9d5c" strokeWidth="1.4" strokeDasharray="3,3" strokeOpacity="0.55" />
-      {/* Bottom person to shield */}
-      <path d="M 90 142 L 90 122" stroke="#ff9d5c" strokeWidth="1.4" strokeDasharray="3,3" strokeOpacity="0.55" />
+      {/* Dashed connecting lines WITH glow — N/S/E/W */}
+      <line x1={100} y1={42} x2={100} y2={60} stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4,3" strokeOpacity="0.7" filter="url(#proof-arc-glow)" />
+      <line x1={158} y1={100} x2={140} y2={100} stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4,3" strokeOpacity="0.7" filter="url(#proof-arc-glow)" />
+      <line x1={42} y1={100} x2={60} y2={100} stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4,3" strokeOpacity="0.7" filter="url(#proof-arc-glow)" />
+      <line x1={100} y1={158} x2={100} y2={140} stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4,3" strokeOpacity="0.7" filter="url(#proof-arc-glow)" />
 
-      {/* 4 person silhouettes at N/S/E/W */}
-      {personAt(90, 18)}
-      {personAt(18, 90)}
-      {personAt(162, 90)}
-      {personAt(90, 162)}
+      {/* 4 filled person icons at compass points */}
+      <Person cx={100} cy={20} />
+      <Person cx={178} cy={100} />
+      <Person cx={22} cy={100} />
+      <Person cx={100} cy={178} />
 
-      {/* Central shield */}
+      {/* Central shield — FILLED */}
       <path
-        d="M 90 58 C 90 58 66 65 66 82 C 66 100 78 116 90 122 C 102 116 114 100 114 82 C 114 65 90 58 90 58 Z"
-        stroke="#ff9d5c"
-        strokeWidth="2.5"
-        fill="rgba(255,157,92,0.08)"
-        strokeLinejoin="round"
+        d="M 100 58 C 100 58 70 66 70 86 C 70 108 84 126 100 134 C 116 126 130 108 130 86 C 130 66 100 58 100 58 Z"
+        fill="url(#proof-shield-grad)"
       />
-      {/* Teal checkmark inside shield */}
+      {/* Shield inner highlight */}
+      <path
+        d="M 100 66 C 100 66 78 73 78 88 C 78 104 88 118 100 124"
+        stroke="rgba(255,210,160,0.25)"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      {/* Thick teal checkmark inside shield — with glow */}
       <polyline
-        points="79,90 87,100 103,76"
+        points="84,98 96,110 118,82"
         stroke="#6fe2cf"
-        strokeWidth="3"
+        strokeWidth="6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        filter="url(#proof-check-glow)"
+      />
+      <polyline
+        points="84,98 96,110 118,82"
+        stroke="#6fe2cf"
+        strokeWidth="5"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
 
-      {/* Small connecting dots at arc ends */}
-      <circle cx={90} cy={38} r={2} fill="#ff9d5c" fillOpacity={0.5} />
-      <circle cx={18} cy={90} r={2} fill="#ff9d5c" fillOpacity={0.5} />
-      <circle cx={162} cy={90} r={2} fill="#ff9d5c" fillOpacity={0.5} />
-      <circle cx={90} cy={162} r={2} fill="#ff9d5c" fillOpacity={0.5} />
+      {/* Accent dots at line ends */}
+      <circle cx={100} cy={42} r={3} fill="#ff9d5c" fillOpacity={0.7} />
+      <circle cx={158} cy={100} r={3} fill="#ff9d5c" fillOpacity={0.7} />
+      <circle cx={42} cy={100} r={3} fill="#ff9d5c" fillOpacity={0.7} />
+      <circle cx={100} cy={158} r={3} fill="#ff9d5c" fillOpacity={0.7} />
     </svg>
   );
 }
