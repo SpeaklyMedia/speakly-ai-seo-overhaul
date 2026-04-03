@@ -70,6 +70,16 @@ export function Solution() {
           </article>
         </div>
 
+        <div className={`mt-[48px] relative rounded-[20px] overflow-hidden border border-[#7db0e7]/12 shadow-[0_24px_80px_rgba(2,7,16,0.5)] reveal ${isInView ? "is-visible" : ""}`}>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071321] pointer-events-none z-10"></div>
+          <img
+            src={`${import.meta.env.BASE_URL}previews/solution.png`}
+            alt="Solution — AI-SEO Overhaul deliverables overview"
+            className="w-full h-auto object-cover object-top max-h-[440px]"
+            loading="lazy"
+          />
+        </div>
+
         <div className={`mt-[60px] reveal ${isInView ? "is-visible" : ""}`}>
           <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">Why Speakly</div>
           <h2 className="mb-[24px]">The positioning advantage</h2>
@@ -78,7 +88,7 @@ export function Solution() {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[14px]">
-            {["Clarity over clever", "Proof over promises", "Systems over one-off posts"].map((standard, i) => (
+            {["Clarity over clever", "Proof over promises", "Systems over one-off posts"].map((standard) => (
               <div key={standard} className="p-[18px_20px] rounded-[18px] bg-gradient-to-r from-[#78c7ff]/10 to-[#6fe2cf]/5 border border-[#78c7ff]/15 text-ink-muted font-medium flex items-center justify-center text-center">
                 {standard}
               </div>

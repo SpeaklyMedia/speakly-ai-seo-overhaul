@@ -46,6 +46,16 @@ export function Problem() {
         <div className={`mt-[18px] p-[18px_20px] rounded-[18px] bg-gradient-to-r from-[#78c7ff]/10 to-[#6fe2cf]/5 border border-[#78c7ff]/15 text-ink-muted reveal ${isInView ? "is-visible" : ""}`}>
           If AI cannot clearly understand what you do, who you serve, why you are credible, and what makes you different, it cannot confidently recommend you.
         </div>
+
+        <div className={`mt-[48px] relative rounded-[20px] overflow-hidden border border-[#7db0e7]/12 shadow-[0_24px_80px_rgba(2,7,16,0.5)] reveal ${isInView ? "is-visible" : ""}`}>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071321] pointer-events-none z-10"></div>
+          <img
+            src={`${import.meta.env.BASE_URL}previews/problem.png`}
+            alt="The problem — fragmented visibility gaps"
+            className="w-full h-auto object-cover object-top max-h-[440px]"
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
   );

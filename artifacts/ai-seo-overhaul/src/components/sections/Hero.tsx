@@ -12,7 +12,7 @@ export function Hero() {
           </span>
           <h1>Turn your website into the source AI recommends.</h1>
           <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[58ch] mb-[30px]">
-            AI-generated answers are reshaping discovery. Speakly’s AI-SEO Overhaul transforms your website into a clear, trusted, answer-ready foundation that improves visibility now and fuels smarter future content later.
+            AI-generated answers are reshaping discovery. Speakly's AI-SEO Overhaul transforms your website into a clear, trusted, answer-ready foundation that improves visibility now and fuels smarter future content later.
           </p>
           <div className="flex flex-wrap gap-[14px] mb-[24px]">
             <a className="inline-flex items-center justify-center gap-[10px] min-h-[50px] px-[20px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border border-transparent cursor-pointer text-[#04101c] bg-gradient-to-br from-teal to-blue shadow-[0_12px_30px_rgba(70,170,214,0.28)] hover:-translate-y-[2px]" href="#next-step" data-testid="button-hero-primary">
@@ -47,7 +47,7 @@ export function Hero() {
               </div>
               <div className="p-[18px] min-h-[128px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px]">
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]">8% vs 15%</strong>
-                <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">Traditional-result click rate when AI summaries appear vs. when they don’t.<sup>2</sup></small>
+                <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">Traditional-result click rate when AI summaries appear vs. when they don't.<sup>2</sup></small>
               </div>
             </div>
 
@@ -89,6 +89,18 @@ export function Hero() {
               <span className="text-ink-muted text-[0.9rem]">This is a website-first visibility system for the answer era — not a pile of disconnected SEO tasks.</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="shell mt-[60px]">
+        <div className={`relative rounded-[20px] overflow-hidden border border-[#7db0e7]/12 shadow-[0_24px_80px_rgba(2,7,16,0.5)] reveal ${isInView ? "is-visible" : ""}`}>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071321] pointer-events-none z-10"></div>
+          <img
+            src={`${import.meta.env.BASE_URL}previews/hero.png`}
+            alt="AI-SEO Overhaul landing page preview"
+            className="w-full h-auto object-cover object-top max-h-[480px]"
+            loading="lazy"
+          />
         </div>
       </div>
     </section>

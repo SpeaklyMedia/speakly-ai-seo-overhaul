@@ -12,7 +12,7 @@ export function NextStep() {
               <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[14px]">Next step</div>
               <h2 className="max-w-[12ch] mb-[18px]">Start with a free AI-search readiness assessment.</h2>
               <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch] mb-[24px]">
-                We’ll show you where AI can see you today, where competitors are easier to recommend, and what a Phase 0 to Phase 2 overhaul could look like for your business.
+                We'll show you where AI can see you today, where competitors are easier to recommend, and what a Phase 0 to Phase 2 overhaul could look like for your business.
               </p>
               
               <ul className="list-none p-0 grid gap-[12px] mb-[34px]">
@@ -27,7 +27,7 @@ export function NextStep() {
                 <a className="inline-flex items-center justify-center gap-[10px] min-h-[50px] px-[20px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border border-transparent cursor-pointer text-[#04101c] bg-gradient-to-br from-teal to-blue shadow-[0_12px_30px_rgba(70,170,214,0.28)] hover:-translate-y-[2px]" href="mailto:mark@speaklymedia.com?subject=AI-Search%20Readiness%20Assessment" data-testid="button-cta-primary">
                   Request assessment
                 </a>
-                <a className="inline-flex items-center justify-center gap-[10px] min-h-[50px] px-[20px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]" href="#solution" data-testid="button-cta-secondary">
+                <a className="inline-flex items-center justify-center gap-[10px] min-h-[50px] px-[20px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]" href="#market" data-testid="button-cta-secondary">
                   Review market shift
                 </a>
               </div>
@@ -53,6 +53,16 @@ export function NextStep() {
               </div>
             </aside>
           </div>
+        </div>
+
+        <div className={`mt-[48px] relative rounded-[20px] overflow-hidden border border-[#7db0e7]/12 shadow-[0_24px_80px_rgba(2,7,16,0.5)] reveal ${isInView ? "is-visible" : ""}`}>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071321] pointer-events-none z-10"></div>
+          <img
+            src={`${import.meta.env.BASE_URL}previews/next-step.png`}
+            alt="Next step — AI-search readiness assessment"
+            className="w-full h-auto object-cover object-top max-h-[440px]"
+            loading="lazy"
+          />
         </div>
       </div>
     </section>

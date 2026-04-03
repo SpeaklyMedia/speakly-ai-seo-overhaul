@@ -10,7 +10,7 @@ export function System() {
           <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">How it works</div>
           <h2>A three-phase engagement built for momentum</h2>
           <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
-            Speakly’s customer-facing process mirrors the operator system without exposing proprietary mechanics. The structure is simple: diagnose, align, then compound.
+            Speakly's customer-facing process mirrors the operator system without exposing proprietary mechanics. The structure is simple: diagnose, align, then compound.
           </p>
         </div>
 
@@ -62,6 +62,16 @@ export function System() {
               ))}
             </ul>
           </article>
+        </div>
+
+        <div className={`mt-[48px] relative rounded-[20px] overflow-hidden border border-[#7db0e7]/12 shadow-[0_24px_80px_rgba(2,7,16,0.5)] reveal ${isInView ? "is-visible" : ""}`}>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071321] pointer-events-none z-10"></div>
+          <img
+            src={`${import.meta.env.BASE_URL}previews/system.png`}
+            alt="Three-phase system — Diagnose, Build, Expand"
+            className="w-full h-auto object-cover object-top max-h-[440px]"
+            loading="lazy"
+          />
         </div>
       </div>
     </section>

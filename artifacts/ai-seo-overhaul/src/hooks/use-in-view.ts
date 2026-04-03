@@ -1,14 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, RefObject } from "react";
 
-export function useInView(options = {}) {
+export function useInView<T extends HTMLElement = HTMLDivElement>(options: IntersectionObserverInit = {}): {
+  ref: RefObject<T | null>;
+  isInView: boolean;
+} {
   const [isInView, setIsInView] = useState(false);
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<T | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsInView(true);
-        // Optional: unobserve once visible if we only want entrance animations
         if (ref.current) {
           observer.unobserve(ref.current);
         }
@@ -28,7 +30,7 @@ export function useInView(options = {}) {
         observer.unobserve(currentRef);
       }
     };
-  }, [options]);
+  }, []);
 
   return { ref, isInView };
 }
