@@ -116,8 +116,10 @@ export function Market() {
           <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.65 }}>
             <MarketIllustration />
           </div>
-          <div className="absolute right-[218px] top-[10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.20 }}>
-            <img src={aiHeadIcon} alt="" width={80} height={80} style={{ display: "block", objectFit: "contain" }} />
+          <div className="absolute right-[218px] top-[10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
+            <div style={{ width: 80, height: 80, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
+              <img src={aiHeadIcon} alt="" width={80} height={80} style={{ display: "block", objectFit: "contain" }} />
+            </div>
           </div>
         </div>
 

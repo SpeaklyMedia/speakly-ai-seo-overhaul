@@ -123,8 +123,10 @@ export function Proof() {
           <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.45 }}>
             <TrustShieldIllustration />
           </div>
-          <div className="absolute right-[214px] top-[-8px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.20 }}>
-            <img src={astronautSpeech} alt="" width={76} height={76} style={{ display: "block", objectFit: "contain" }} />
+          <div className="absolute right-[214px] top-[-8px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.48 }}>
+            <div style={{ width: 76, height: 76, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
+              <img src={astronautSpeech} alt="" width={76} height={76} style={{ display: "block", objectFit: "contain" }} />
+            </div>
           </div>
           <div className="absolute right-[216px] top-[72px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.28 }}>
             <img src={magnetIcon} alt="" width={68} height={68} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
