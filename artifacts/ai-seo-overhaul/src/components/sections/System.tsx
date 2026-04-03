@@ -129,7 +129,7 @@ export function System() {
               Speakly's customer-facing process mirrors the operator system without exposing proprietary mechanics. The structure is simple: diagnose, align, then compound.
             </p>
           </div>
-          <div className="absolute right-[-20px] top-[-50px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.58 }}>
+          <div className="absolute right-[-20px] top-[-50px] hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.58 }}>
             <CommanderIllustration />
           </div>
         </div>

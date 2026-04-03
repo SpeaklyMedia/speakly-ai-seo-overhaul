@@ -82,7 +82,7 @@ export function NextStep() {
         <div ref={ref} className={`p-[34px] md:p-[50px] rounded-[28px] bg-[radial-gradient(circle_at_80%_0%,rgba(120,199,255,0.18),transparent_40%),linear-gradient(180deg,rgba(11,28,46,0.96),rgba(7,18,30,0.96))] border border-[#78c7ff]/20 shadow-[0_24px_80px_rgba(2,7,16,0.45)] relative overflow-hidden reveal ${isInView ? "is-visible" : ""}`}>
 
           {/* Chip illustration — bottom-right corner, clipped by overflow:hidden */}
-          <div className="hidden lg:block absolute bottom-[-10px] right-[-10px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.18 }}>
+          <div className="hidden md:block absolute bottom-[-10px] right-[-10px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.18 }}>
             <SecureChipIllustration />
           </div>
 

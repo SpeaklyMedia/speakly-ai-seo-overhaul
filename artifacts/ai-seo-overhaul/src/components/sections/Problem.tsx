@@ -92,7 +92,7 @@ export function Problem() {
               That gap is why strong businesses disappear from AI answers. A polished website is not enough if your services, proof, differentiators, audiences, and offers are fragmented or thin. If AI cannot clearly understand what you do and why you matter, it cannot confidently recommend you.
             </p>
           </div>
-          <div className="absolute right-0 top-0 hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.35 }}>
+          <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.35 }}>
             <ProblemIllustration />
           </div>
         </div>
