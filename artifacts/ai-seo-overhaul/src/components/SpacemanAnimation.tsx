@@ -115,9 +115,9 @@ function AstronautSVG() {
   return (
     <svg
       viewBox="0 0 160 272"
-      width="175"
-      height="297"
-      style={{ overflow: "visible", filter: "drop-shadow(0 0 14px rgba(255,157,92,0.4)) drop-shadow(0 4px 12px rgba(0,0,0,0.6))" }}
+      width="200"
+      height="340"
+      style={{ overflow: "visible", filter: "drop-shadow(0 0 20px rgba(255,157,92,0.55)) drop-shadow(0 4px 16px rgba(0,0,0,0.7))" }}
       aria-hidden="true"
     >
       {/* Backpack — behind body */}
@@ -374,34 +374,32 @@ export function SpacemanAnimation() {
 
         /* ── Responsive overrides ─────────────────────────────────── */
 
-        /* < 1280px: shrink phone slightly */
+        /* < 1280px: shrink phone slightly, keep centered */
         @media (max-width: 1279px) {
           .spaceman-phone {
-            width: 210px !important;
-            right: 26% !important;
+            width: 286px !important;
           }
         }
 
-        /* < 1024px (tablet/stacked layout): ghost astronaut, keep phone */
+        /* < 1024px (tablet/stacked layout): adjust spaceman, keep phone centered */
         @media (max-width: 1023px) {
-          .spaceman-halo  { opacity: 0.6 !important; }
+          .spaceman-halo  { opacity: 0.7 !important; }
           .spaceman-astronaut {
-            left: -50px !important;
-            top: 180px !important;
-            opacity: 0.18 !important;
-            width: 148px !important;
-            height: 252px !important;
+            right: 10px !important;
+            left: auto !important;
+            top: 160px !important;
+            opacity: 0.50 !important;
+            width: 160px !important;
+            height: 272px !important;
           }
         }
 
-        /* 768–1023px: show phone at tablet size, beside hero heading */
+        /* 768–1023px: tablet — phone visible and centered, no shrink */
         @media (min-width: 768px) and (max-width: 1023px) {
           .spaceman-phone {
-            width: 242px !important;
-            right: 18px !important;
-            top: 130px !important;
-            transform: scale(0.67) !important;
-            transform-origin: top right !important;
+            width: 272px !important;
+            top: 56px !important;
+            transform: none !important;
           }
         }
 
@@ -417,16 +415,16 @@ export function SpacemanAnimation() {
         }
       `}</style>
 
-      {/* Deep-space gradient ramp — depth and contrast layer */}
+      {/* Deep-space atmospheric gradient — lighter to keep stars visible */}
       <div style={{
         position: "absolute",
         inset: 0,
         zIndex: 0,
         background: `
-          radial-gradient(ellipse 140% 55% at 62% 0%, rgba(14,42,84,0.74) 0%, transparent 55%),
-          radial-gradient(ellipse 70% 40% at 18% 100%, rgba(8,24,50,0.5) 0%, transparent 50%),
-          radial-gradient(ellipse 50% 30% at 85% 60%, rgba(255,157,92,0.06) 0%, transparent 50%),
-          linear-gradient(180deg, rgba(4,10,20,0.78) 0%, rgba(7,18,34,0.12) 45%, rgba(4,10,20,0.78) 100%)
+          radial-gradient(ellipse 140% 55% at 62% 0%, rgba(14,42,84,0.52) 0%, transparent 55%),
+          radial-gradient(ellipse 70% 40% at 18% 100%, rgba(8,24,50,0.32) 0%, transparent 50%),
+          radial-gradient(ellipse 50% 30% at 85% 60%, rgba(255,157,92,0.10) 0%, transparent 50%),
+          linear-gradient(180deg, rgba(4,10,20,0.42) 0%, rgba(7,18,34,0.06) 45%, rgba(4,10,20,0.38) 100%)
         `,
         pointerEvents: "none",
       }}/>
@@ -489,17 +487,17 @@ export function SpacemanAnimation() {
         ))}
       </div>
 
-      {/* Astronaut — higher, more toward center */}
+      {/* Astronaut — upper-right, clearly floating in space, intentional placement */}
       <div
         className="spaceman-astronaut"
         style={{
           position: "absolute",
-          left: 50,
-          top: 60,
-          width: 175,
-          height: 297,
+          right: 60,
+          top: 30,
+          width: 200,
+          height: 340,
           zIndex: 1,
-          opacity: 0.52,
+          opacity: 0.82,
           animation: "astronautFloat 3.6s ease-in-out infinite",
           willChange: "transform",
         }}
@@ -507,161 +505,126 @@ export function SpacemanAnimation() {
         <AstronautSVG />
       </div>
 
-      {/* Orange halo anchored behind astronaut */}
+      {/* Orange halo anchored behind astronaut — upper-right */}
       <div
         className="spaceman-halo"
         style={{
           position: "absolute",
-          left: -40,
-          top: -20,
-          width: 440,
-          height: 520,
-          background: "radial-gradient(ellipse at center, rgba(255,157,92,0.12) 0%, transparent 65%)",
-          filter: "blur(60px)",
+          right: -60,
+          top: -30,
+          width: 500,
+          height: 580,
+          background: "radial-gradient(ellipse at center, rgba(255,157,92,0.18) 0%, transparent 62%)",
+          filter: "blur(50px)",
           borderRadius: "50%",
           zIndex: 0,
           pointerEvents: "none",
         }}
       />
 
-      {/* Phone — glass shell, right side, floats in sync with astronaut */}
+      {/* Phone — centered horizontally, near top of hero */}
       <div
         className="spaceman-phone"
         style={{
           position: "absolute",
-          right: "30%",
-          top: 58,
-          width: 242,
+          left: "50%",
+          marginLeft: -155,
+          top: 50,
+          width: 310,
           background: "rgba(4, 12, 26, 0.22)",
           backdropFilter: "blur(16px) saturate(1.6)",
           WebkitBackdropFilter: "blur(16px) saturate(1.6)",
           borderRadius: 32,
-          border: "2px solid rgba(255,157,92,0.72)",
-          animation: "phonePulse 3.8s ease-in-out infinite, astronautFloat 3.6s ease-in-out infinite",
-          padding: "14px 0 12px",
+          border: "1px solid rgba(255,157,92,0.40)",
+          boxShadow: "0 0 20px 6px rgba(255,157,92,0.50), 0 0 80px 24px rgba(255,157,92,0.16), inset 0 1px 0 rgba(255,255,255,0.08)",
+          animation: "phonePulse 3.2s ease-in-out infinite",
+          zIndex: 3,
+          overflow: "hidden",
+          padding: "14px 14px 16px",
           display: "flex",
           flexDirection: "column",
-          overflow: "hidden",
-          zIndex: 3,
+          gap: 0,
         }}
       >
-        {/* Speaker notch */}
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: 13 }}>
-          <div style={{ width: 46, height: 5, borderRadius: 3, background: "rgba(23,40,64,0.65)", boxShadow: "inset 0 1px 2px rgba(0,0,0,0.4)" }}/>
+        {/* Status bar */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8, padding: "0 2px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <HelmIcon />
+            <span style={{ fontSize: 10, fontWeight: 700, color: "#dbe8f7", letterSpacing: "0.04em" }}>SPEAKLY AI</span>
+          </div>
+          <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+            <span style={{ fontSize: 9, color: "#6fe2cf", fontWeight: 600 }}>ONLINE</span>
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#6fe2cf", boxShadow: "0 0 6px #6fe2cf" }} />
+          </div>
         </div>
 
-        {/* Screen area — fades out at loop end, fades in at start of next cycle */}
-        <div
-          style={{
-            background: "rgba(4, 10, 20, 0.38)",
-            margin: "0 8px",
-            borderRadius: 14,
-            height: 340,
-            maxHeight: 340,
-            padding: "12px 10px 10px",
-            display: "flex",
-            flexDirection: "column",
-            overflow: "hidden",
-            border: "1px solid rgba(120,199,255,0.10)",
-          }}
-        >
-          {/* Header */}
-          <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 12, paddingBottom: 9, borderBottom: "1px solid rgba(120,199,255,0.12)", flexShrink: 0 }}>
-            <div style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(10,32,54,0.7)", border: "1px solid rgba(120,199,255,0.35)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, flexShrink: 0 }}>🤖</div>
-            <span style={{ fontSize: 11, color: "#78c7ff", fontWeight: 700, letterSpacing: "0.04em", flex: 1 }}>AI Agent</span>
-            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#6fe2cf", boxShadow: "0 0 6px #6fe2cf" }}/>
-          </div>
-
-          {/* Messages */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 8, minHeight: 210 }}>
-            {messages.map((msg, i) => (
-              <div key={i}>
-                <div style={{ display: "flex", justifyContent: msg.from === "user" ? "flex-end" : "flex-start", alignItems: "flex-end", gap: 6 }}>
-                  {msg.from === "bot" && (
-                    <div style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(10,32,54,0.7)", border: "1px solid rgba(120,199,255,0.28)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, flexShrink: 0 }}>🤖</div>
-                  )}
-                  <div
-                    style={{
-                      maxWidth: "78%",
-                      padding: "7px 10px",
-                      borderRadius: msg.from === "user" ? "13px 13px 3px 13px" : "13px 13px 13px 3px",
-                      background: msg.from === "user" ? "#6fe2cf" : "rgba(11,34,54,0.85)",
-                      color: msg.from === "user" ? "#03111e" : "#c8dff0",
-                      fontSize: 13,
-                      fontWeight: msg.from === "user" ? 700 : 400,
-                      lineHeight: 1.45,
-                      border: msg.from === "bot" ? "1px solid rgba(120,199,255,0.2)" : "none",
-                    }}
-                  >
-                    {msg.text}
-                  </div>
-                  {msg.from === "user" && (
-                    <div style={{ width: 22, height: 22, borderRadius: "50%", flexShrink: 0, border: "1.5px solid #ff9d5c", background: "rgba(10,30,48,0.7)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <HelmIcon />
-                    </div>
-                  )}
-                </div>
-                {msg.from === "bot" && showCard && <ResultCard />}
-              </div>
-            ))}
-
-            {botTyping && (
-              <div style={{ display: "flex", alignItems: "flex-end", gap: 6 }}>
-                <div style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(10,32,54,0.7)", border: "1px solid rgba(120,199,255,0.28)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, flexShrink: 0 }}>🤖</div>
-                <div style={{ padding: "8px 12px", borderRadius: "13px 13px 13px 3px", background: "rgba(11,34,54,0.85)", border: "1px solid rgba(120,199,255,0.2)", display: "flex", gap: 4, alignItems: "center" }}>
-                  {[0, 1, 2].map((idx) => (
-                    <div key={idx} style={{ width: 5, height: 5, borderRadius: "50%", background: "#78c7ff", animation: `dotBounce 1.1s ease-in-out ${idx * 0.16}s infinite` }}/>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Input bar */}
-          <div
-            style={{
-              background: "rgba(10, 28, 48, 0.55)",
-              border: `1px solid ${input ? "rgba(255,157,92,0.65)" : "rgba(255,157,92,0.25)"}`,
-              borderRadius: 12,
-              padding: "7px 10px",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              marginTop: 10,
-              flexShrink: 0,
-              transition: "border-color 0.3s",
-            }}
-          >
-            <span style={{ flex: 1, fontSize: 12, color: input ? "#d4e8f5" : "#3d586e", lineHeight: 1.5, letterSpacing: "0.01em", minHeight: 16 }}>
-              {input || "Ask anything…"}
-              {input && (
-                <span style={{ display: "inline-block", width: 1.5, height: 12, background: "#ff9d5c", marginLeft: 1, verticalAlign: "text-bottom", animation: "blinkCaret 0.85s step-end infinite" }}/>
-              )}
-            </span>
+        {/* Chat area */}
+        <div style={{ minHeight: 200, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 8, padding: "4px 0" }}>
+          {messages.map((msg, i) => (
             <div
+              key={i}
               style={{
-                width: 22,
-                height: 22,
-                borderRadius: "50%",
-                background: phase === "sending" || messages.length > 0 ? "#ff9d5c" : "rgba(23,40,64,0.8)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 10,
-                color: "#04101c",
-                fontWeight: 900,
-                transition: "background 0.3s",
-                flexShrink: 0,
+                alignSelf: msg.from === "user" ? "flex-end" : "flex-start",
+                maxWidth: "82%",
+                padding: "9px 13px",
+                borderRadius: msg.from === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
+                background: msg.from === "user"
+                  ? "linear-gradient(135deg, #ff9d5c, #f5c86f)"
+                  : "rgba(120,199,255,0.12)",
+                border: msg.from === "bot" ? "1px solid rgba(120,199,255,0.22)" : "none",
+                color: msg.from === "user" ? "#04101c" : "#dbe8f7",
+                fontSize: 11,
+                fontWeight: msg.from === "user" ? 600 : 400,
+                lineHeight: 1.45,
+                animation: "cardFadeIn 0.3s ease forwards",
               }}
             >
-              ↑
+              {msg.text}
             </div>
-          </div>
+          ))}
+
+          {botTyping && (
+            <div style={{
+              alignSelf: "flex-start",
+              padding: "10px 14px",
+              borderRadius: "16px 16px 16px 4px",
+              background: "rgba(120,199,255,0.10)",
+              border: "1px solid rgba(120,199,255,0.20)",
+              display: "flex",
+              gap: 5,
+              alignItems: "center",
+            }}>
+              {[0, 0.16, 0.32].map((d) => (
+                <div key={d} style={{ width: 6, height: 6, borderRadius: "50%", background: "#78c7ff", animation: `dotBounce 1.1s ease-in-out ${d}s infinite` }} />
+              ))}
+            </div>
+          )}
+
+          {showCard && <ResultCard />}
         </div>
 
-        {/* Home button */}
-        <div style={{ display: "flex", justifyContent: "center", marginTop: 13 }}>
-          <div style={{ width: 24, height: 24, borderRadius: "50%", border: "2px solid rgba(255,157,92,0.55)", boxShadow: "0 0 8px rgba(255,157,92,0.25)" }}/>
+        {/* Input row */}
+        <div style={{
+          marginTop: 10,
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          padding: "9px 12px",
+          borderRadius: 18,
+          background: "rgba(255,255,255,0.05)",
+          border: "1px solid rgba(120,199,255,0.18)",
+        }}>
+          <span style={{ flex: 1, fontSize: 11, color: input ? "#dbe8f7" : "#4a6a8a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+            {input || "Ask anything…"}
+            {(phase === "typing-bad" || phase === "typing-good" || phase === "deleting") && (
+              <span style={{ display: "inline-block", width: 1.5, height: "1em", background: "#78c7ff", verticalAlign: "middle", marginLeft: 1, animation: "blinkCaret 0.85s step-end infinite" }} />
+            )}
+          </span>
+          <div style={{ width: 26, height: 26, borderRadius: 9, background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "grid", placeItems: "center", flexShrink: 0 }}>
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M1 10L10 1M10 1H3M10 1V8" stroke="#04101c" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
         </div>
       </div>
     </div>

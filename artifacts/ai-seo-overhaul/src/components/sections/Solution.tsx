@@ -1,71 +1,7 @@
 import { useInView } from "@/hooks/use-in-view";
 import spaceshipIcon from "@assets/8F8B77A1-1E0D-4616-A3E6-42759D6AF3F2_1775246793840.png";
-
-function WavingAstronautIllustration({ width = 190 }: { width?: number }) {
-  return (
-    <svg
-      viewBox="0 0 120 200"
-      width={width}
-      aria-hidden="true"
-      focusable="false"
-      style={{ display: "block", animation: "astronautFloat 3.8s ease-in-out infinite" }}
-    >
-      <defs>
-        <radialGradient id="sol-body-glow" cx="50%" cy="65%" r="55%">
-          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.30" />
-          <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
-        </radialGradient>
-        <radialGradient id="sol-helmet-grad" cx="30%" cy="30%" r="65%">
-          <stop offset="0%" stopColor="#ffb87d" />
-          <stop offset="100%" stopColor="#e8884a" />
-        </radialGradient>
-        <radialGradient id="sol-visor-grad" cx="30%" cy="25%" r="65%">
-          <stop offset="0%" stopColor="#1a3a5c" />
-          <stop offset="100%" stopColor="#04101c" />
-        </radialGradient>
-        <filter id="sol-visor-glow">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-      </defs>
-      <ellipse cx="58" cy="130" rx="44" ry="55" fill="url(#sol-body-glow)" />
-      <ellipse cx="30" cy="96" rx="17" ry="12" fill="#e8884a" />
-      <ellipse cx="86" cy="96" rx="17" ry="12" fill="#e8884a" />
-      <rect x="28" y="84" width="60" height="56" rx="14" fill="#ff9d5c" />
-      <rect x="38" y="94" width="40" height="28" rx="5" fill="#0d2d2a" />
-      <rect x="38" y="94" width="40" height="28" rx="5" fill="#6fe2cf" fillOpacity="0.12" />
-      <circle cx="46" cy="105" r="4" fill="#6fe2cf" />
-      <circle cx="58" cy="105" r="4" fill="#ff9d5c" />
-      <circle cx="70" cy="105" r="4" fill="#78c7ff" />
-      <rect x="40" y="114" width="36" height="3" rx="1.5" fill="#6fe2cf" fillOpacity="0.35" />
-      <rect x="28" y="132" width="60" height="8" rx="4" fill="#c46d28" />
-      <rect x="12" y="88" width="16" height="40" rx="8" fill="#ff9d5c" />
-      <ellipse cx="20" cy="132" rx="9" ry="7" fill="#c46d28" />
-      <path d="M 88 92 C 96 86 106 74 102 60 C 100 54 94 53 90 57 C 93 66 92 78 88 92 Z" fill="#ff9d5c" />
-      <ellipse cx="100" cy="56" rx="12" ry="9" fill="#ff9d5c" transform="rotate(-20,100,56)" />
-      <ellipse cx="100" cy="56" rx="10" ry="7" fill="#c46d28" transform="rotate(-20,100,56)" />
-      <ellipse cx="92" cy="50" rx="4" ry="6" fill="#c46d28" transform="rotate(20,92,50)" />
-      <path d="M 94 61 C 100 57 108 58 110 62" stroke="#ff9d5c" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-      <rect x="34" y="138" width="20" height="40" rx="10" fill="#e8884a" />
-      <rect x="62" y="138" width="20" height="40" rx="10" fill="#e8884a" />
-      <rect x="30" y="170" width="28" height="14" rx="7" fill="#c46d28" />
-      <rect x="58" y="170" width="28" height="14" rx="7" fill="#c46d28" />
-      <rect x="46" y="78" width="24" height="8" rx="4" fill="#c46d28" />
-      <circle cx="58" cy="52" r="32" fill="url(#sol-helmet-grad)" />
-      <circle cx="58" cy="52" r="32" fill="none" stroke="#ffb87d" strokeWidth="1.8" strokeOpacity="0.4" />
-      <rect x="24" y="48" width="8" height="10" rx="4" fill="#c46d28" />
-      <rect x="84" y="48" width="8" height="10" rx="4" fill="#c46d28" />
-      <path d="M 40 48 C 40 36 48 30 58 30 C 68 30 76 36 76 48 C 76 60 68 66 58 66 C 48 66 40 60 40 48 Z" fill="url(#sol-visor-grad)" />
-      <path d="M 42 46 C 42 38 48 34 58 34 C 62 34 65 35 68 38" stroke="#6fe2cf" strokeWidth="3.5" fill="none" strokeLinecap="round" filter="url(#sol-visor-glow)" />
-      <circle cx="46" cy="40" r="3" fill="#78c7ff" fillOpacity="0.5" />
-      <line x1="58" y1="20" x2="58" y2="32" stroke="#c46d28" strokeWidth="2.5" strokeLinecap="round" />
-      <circle cx="58" cy="17" r="4" fill="#6fe2cf" filter="url(#sol-visor-glow)" />
-      <circle cx="108" cy="20" r="2.5" fill="#78c7ff" fillOpacity="0.55" />
-      <circle cx="112" cy="80" r="1.8" fill="#6fe2cf" fillOpacity="0.45" />
-      <circle cx="6" cy="110" r="2" fill="#f5c86f" fillOpacity="0.45" />
-    </svg>
-  );
-}
+import wavingAstronaut from "@assets/68A9849C-780D-48EE-8FB8-EEF91E8CFDD4_1775208085481.png";
+import spaceOrangeBg from "@assets/IMG_0231_1775246914295.png";
 
 const overhauls = [
   {
@@ -100,18 +36,113 @@ const overhauls = [
   },
 ];
 
+function AstronautFigure({ width = 240 }: { width?: number }) {
+  return (
+    <div style={{ position: "relative", display: "inline-block" }}>
+      {/* Glow halo behind astronaut */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: "-30px",
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse 80% 70% at 50% 55%, rgba(255,157,92,0.28), rgba(111,226,207,0.12) 50%, transparent 70%)",
+          filter: "blur(24px)",
+        }}
+      />
+      <img
+        src={wavingAstronaut}
+        alt=""
+        width={width}
+        style={{
+          display: "block",
+          animation: "astronautFloat 3.8s ease-in-out infinite",
+          filter: "drop-shadow(0 0 28px rgba(255,157,92,0.50)) drop-shadow(0 0 12px rgba(111,226,207,0.25)) drop-shadow(0 6px 18px rgba(0,0,0,0.65))",
+          willChange: "transform",
+          position: "relative",
+          zIndex: 1,
+        }}
+      />
+      {/* Subtle orbit ring */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "50%",
+          bottom: "-12px",
+          transform: "translateX(-50%)",
+          width: width * 0.7,
+          height: 16,
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse, rgba(255,157,92,0.28) 0%, transparent 70%)",
+          filter: "blur(6px)",
+        }}
+      />
+    </div>
+  );
+}
+
 export function Solution() {
   const { ref: mobileRef, isInView: mobileInView } = useInView();
   const { ref: desktopRef, isInView: desktopInView } = useInView();
 
   return (
-    <section id="solution" className="py-[100px] relative scroll-mt-[86px] section-solution-bg">
-      <div className="shell">
+    <section id="solution" className="py-[100px] relative scroll-mt-[86px] overflow-hidden">
+      {/* Orange-star space background — full bleed */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          src={spaceOrangeBg}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center top",
+            opacity: 0.28,
+          }}
+        />
+      </div>
+
+      {/* Dark overlay — keeps warm orange tint without overwhelming */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          background: "linear-gradient(180deg, rgba(4,14,24,0.82) 0%, rgba(5,16,28,0.72) 50%, rgba(4,12,22,0.85) 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Warm orange radial accent overlay */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 2,
+          background: "radial-gradient(ellipse 60% 55% at 5% 50%, rgba(111,226,207,0.07), transparent 50%), radial-gradient(ellipse 50% 40% at 95% 0%, rgba(255,157,92,0.08), transparent 50%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div className="shell" style={{ position: "relative", zIndex: 3 }}>
 
         {/* Mobile layout: astronaut → heading → 2-col cards */}
         <div className="md:hidden">
-          <div className="flex justify-center mb-[30px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.38 }}>
-            <WavingAstronautIllustration width={140} />
+          <div className="flex justify-center mb-[30px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.72 }}>
+            <AstronautFigure width={160} />
           </div>
           <div ref={mobileRef} className={`mb-[32px] reveal-left ${mobileInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
@@ -137,15 +168,14 @@ export function Solution() {
         </div>
 
         {/* Desktop: 2-col split — astronaut LEFT, heading + 2-col cards RIGHT */}
-        <div className="hidden md:grid grid-cols-[260px_1fr] gap-[52px] items-start mb-[40px]">
+        <div className="hidden md:grid grid-cols-[280px_1fr] gap-[52px] items-start mb-[40px]">
 
           {/* Left column: astronaut */}
           <div className="relative flex flex-col items-center pt-[16px] pointer-events-none sticky top-[100px]" aria-hidden="true">
-            <div className="absolute inset-[-30px] rounded-full" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(111,226,207,0.13), transparent 70%)", filter: "blur(22px)" }} />
-            <div className={`relative reveal-right ${desktopInView ? "is-visible" : ""}`} style={{ opacity: 0.88 }}>
-              <WavingAstronautIllustration width={240} />
+            <div className={`relative reveal-right ${desktopInView ? "is-visible" : ""}`} style={{ opacity: 0.95 }}>
+              <AstronautFigure width={260} />
             </div>
-            <div className="mt-[14px] pointer-events-none" style={{ opacity: 0.30 }}>
+            <div className="mt-[14px] pointer-events-none" style={{ opacity: 0.35 }}>
               <img src={spaceshipIcon} alt="" width={72} height={72} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
             </div>
           </div>

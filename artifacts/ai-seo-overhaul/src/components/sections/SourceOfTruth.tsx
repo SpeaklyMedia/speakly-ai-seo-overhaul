@@ -1,45 +1,25 @@
+import { useRef, useState, useEffect } from "react";
 import { useInView } from "@/hooks/use-in-view";
-import { useParallax } from "@/hooks/use-parallax";
 import ssotBg from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_2_1775246793840.png";
 import ssotFg from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_1775246793840.png";
 
-function WrenchParallax() {
-  const { ref, offset } = useParallax(0.14);
+function useFullBleedParallax(speeds: [number, number]) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [offsets, setOffsets] = useState<[number, number]>([0, 0]);
 
-  return (
-    <div
-      ref={ref}
-      aria-hidden="true"
-      style={{ position: "relative", width: 280, height: 440, overflow: "hidden", borderRadius: 4 }}
-    >
-      <img
-        src={ssotBg}
-        alt=""
-        style={{
-          position: "absolute",
-          inset: "-12px",
-          width: "calc(100% + 24px)",
-          height: "calc(100% + 24px)",
-          objectFit: "cover",
-          objectPosition: "center",
-        }}
-      />
-      <img
-        src={ssotFg}
-        alt=""
-        style={{
-          position: "absolute",
-          inset: "-12px",
-          width: "calc(100% + 24px)",
-          height: "calc(100% + 24px)",
-          objectFit: "cover",
-          objectPosition: "center",
-          mixBlendMode: "screen",
-          transform: `translateY(${offset}px)`,
-        }}
-      />
-    </div>
-  );
+  useEffect(() => {
+    function update() {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const relY = rect.top + rect.height / 2 - window.innerHeight / 2;
+      setOffsets([relY * speeds[0], relY * speeds[1]]);
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", update);
+  }, [speeds[0], speeds[1]]);
+
+  return { ref, offsets };
 }
 
 const miniCardBorders = [
@@ -50,11 +30,92 @@ const miniCardBorders = [
 ] as const;
 
 export function SourceOfTruth() {
-  const { ref, isInView } = useInView();
+  const { ref: inViewRef, isInView } = useInView();
+  const { ref: sectionRef, offsets } = useFullBleedParallax([0.06, 0.14]);
 
   return (
-    <section id="ssot" className="py-[100px] relative scroll-mt-[86px] section-ssot-bg">
-      <div className="shell">
+    <section
+      id="ssot"
+      ref={sectionRef}
+      className="py-[100px] relative scroll-mt-[86px] overflow-hidden"
+    >
+      {/* Full-bleed background: wrench beam (deep layer, static) */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          src={ssotBg}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: "-8% 0",
+            width: "100%",
+            height: "116%",
+            objectFit: "cover",
+            objectPosition: "center 30%",
+            transform: `translateY(${offsets[0]}px)`,
+          }}
+        />
+      </div>
+
+      {/* Full-bleed foreground: hand+wrench (parallax lift layer) */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: "none",
+          mixBlendMode: "screen",
+        }}
+      >
+        <img
+          src={ssotFg}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: "-12% 0",
+            width: "100%",
+            height: "124%",
+            objectFit: "cover",
+            objectPosition: "center 25%",
+            transform: `translateY(${offsets[1]}px)`,
+            opacity: 0.72,
+          }}
+        />
+      </div>
+
+      {/* Dark overlay for readability — gradient from left (darker for text) to right (lighter for atmosphere) */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 2,
+          background: "linear-gradient(100deg, rgba(4,16,28,0.88) 0%, rgba(4,16,28,0.76) 50%, rgba(4,16,28,0.60) 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Section ambient gradient accent */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 3,
+          background: "radial-gradient(ellipse 65% 50% at 50% 0%, rgba(245,200,111,0.06), transparent 45%), radial-gradient(ellipse 55% 45% at 85% 60%, rgba(111,226,207,0.05), transparent 45%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div className="shell" style={{ position: "relative", zIndex: 4 }}>
         <div className="relative mb-[44px]">
 
           {/* Gold/teal radiance halo behind heading */}
@@ -62,17 +123,12 @@ export function SourceOfTruth() {
             style={{ background: "radial-gradient(ellipse 70% 80% at 30% 50%, rgba(245,200,111,0.07), rgba(111,226,207,0.05) 50%, transparent 75%)", filter: "blur(24px)" }}
           />
 
-          <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
+          <div ref={inViewRef} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The core idea</div>
             <h2>Your website becomes the single source of truth.</h2>
             <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
               Once your website is structured as the clearest version of your business, it starts fueling every other asset you create. Future service pages, FAQs, articles, campaigns, and sales materials become faster to produce and more consistent because the source is already clear.
             </p>
-          </div>
-
-          {/* WrenchParallax — visible from tablet, larger */}
-          <div className={`absolute right-0 top-[-50px] hidden sm:block pointer-events-none reveal-right ${isInView ? "is-visible" : ""}`} aria-hidden="true" style={{ opacity: 0.88 }}>
-            <WrenchParallax />
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { useInView } from "@/hooks/use-in-view";
 import aiSeoHub from "@assets/300ADAF0-C994-41B2-8324-1C87A6EC9BA4_1775246793841.png";
+import spaceOrangeBg from "@assets/IMG_0231_1775246914295.png";
 
 const phases = [
   {
@@ -38,19 +39,58 @@ export function System() {
   const { ref, isInView } = useInView();
 
   return (
-    <section id="system" className="py-[100px] relative scroll-mt-[86px] section-system-bg">
+    <section id="system" className="py-[100px] relative scroll-mt-[86px] overflow-hidden">
+      {/* Shared orange-star space background with Solution — creates warm continuity */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          src={spaceOrangeBg}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center bottom",
+            opacity: 0.22,
+          }}
+        />
+      </div>
+
+      {/* Dark overlay */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          background: "linear-gradient(180deg, rgba(4,12,22,0.85) 0%, rgba(5,14,26,0.75) 50%, rgba(4,12,22,0.88) 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
       {/* Precision grid overlay — brighter, scoped to this section */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
+          zIndex: 2,
           backgroundImage: "linear-gradient(rgba(120,199,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(120,199,255,0.045) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
           maskImage: "radial-gradient(ellipse 80% 70% at 70% 50%, black 30%, transparent 80%)",
           WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 70% 50%, black 30%, transparent 80%)",
         }}
       />
-      <div className="shell">
+
+      <div className="shell" style={{ position: "relative", zIndex: 3 }}>
         <div className="relative mb-[44px]">
           <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">How it works</div>

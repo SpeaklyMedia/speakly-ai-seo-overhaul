@@ -1,8 +1,80 @@
 import { useInView } from "@/hooks/use-in-view";
+import { useParallax } from "@/hooks/use-parallax";
+
+function WireframeGrid() {
+  const { ref, offset } = useParallax(0.06);
+
+  return (
+    <div
+      ref={ref}
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: "none",
+        transform: `translateY(${-offset * 0.4}px)`,
+        overflow: "hidden",
+      }}
+    >
+      <svg
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "115%", top: "-8%" }}
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="grid-fade" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="white" stopOpacity="0.18" />
+            <stop offset="65%" stopColor="white" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </radialGradient>
+          <mask id="grid-mask">
+            <rect width="100" height="100" fill="url(#grid-fade)" />
+          </mask>
+        </defs>
+        <g mask="url(#grid-mask)">
+          {/* Vertical grid lines */}
+          {[5, 15, 25, 35, 45, 55, 65, 75, 85, 95].map(x => (
+            <line key={`v${x}`} x1={x} y1={0} x2={x} y2={100} stroke="#ff9d5c" strokeWidth="0.25" />
+          ))}
+          {/* Horizontal grid lines */}
+          {[5, 15, 25, 35, 45, 55, 65, 75, 85, 95].map(y => (
+            <line key={`h${y}`} x1={0} y1={y} x2={100} y2={y} stroke="#ff9d5c" strokeWidth="0.25" />
+          ))}
+          {/* Junction accent dots */}
+          {[25, 50, 75].map(x =>
+            [25, 50, 75].map(y => (
+              <circle key={`d${x}${y}`} cx={x} cy={y} r={0.6} fill="#ff9d5c" fillOpacity="0.45" />
+            ))
+          )}
+        </g>
+      </svg>
+
+      {/* Diagonal accent lines */}
+      <svg
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "115%", top: "-8%", opacity: 0.06 }}
+        aria-hidden="true"
+      >
+        <line x1="0" y1="0" x2="100" y2="100" stroke="#ff9d5c" strokeWidth="0.4" />
+        <line x1="100" y1="0" x2="0" y2="100" stroke="#ff9d5c" strokeWidth="0.4" />
+        <line x1="0" y1="50" x2="50" y2="0" stroke="#ff9d5c" strokeWidth="0.3" />
+        <line x1="50" y1="100" x2="100" y2="50" stroke="#ff9d5c" strokeWidth="0.3" />
+      </svg>
+    </div>
+  );
+}
 
 function Robot({ cx, topY, s = 1, floatDelay = 0 }: { cx: number; topY: number; s?: number; floatDelay?: number }) {
   return (
     <g style={{ animation: `astronautFloat ${4.2 + floatDelay}s ease-in-out ${floatDelay}s infinite` }}>
+      {/* Grid connection lines from robot feet */}
+      <line x1={cx} y1={topY + 95 * s} x2={cx} y2={topY + 108 * s} stroke="#ff9d5c" strokeWidth={0.8 * s} strokeOpacity={0.35} strokeDasharray={`${2 * s} ${3 * s}`} />
+      <line x1={cx - 18 * s} y1={topY + 97 * s} x2={cx - 35 * s} y2={topY + 97 * s} stroke="#ff9d5c" strokeWidth={0.6 * s} strokeOpacity={0.20} />
+      <line x1={cx + 18 * s} y1={topY + 97 * s} x2={cx + 35 * s} y2={topY + 97 * s} stroke="#ff9d5c" strokeWidth={0.6 * s} strokeOpacity={0.20} />
+
       <ellipse cx={cx} cy={topY + 96 * s} rx={22 * s} ry={7 * s} fill="#c46d28" fillOpacity={0.45} />
       <rect x={cx - 20 * s} y={topY + 34 * s} width={40 * s} height={30 * s} rx={7 * s} fill="#c46d28" />
       <rect x={cx - 11 * s} y={topY + 40 * s} width={22 * s} height={14 * s} rx={3 * s} fill="#04101c" fillOpacity={0.55} />
@@ -32,7 +104,7 @@ function Robot({ cx, topY, s = 1, floatDelay = 0 }: { cx: number; topY: number; 
 function ProblemIllustration({ size = 320 }: { size?: number }) {
   return (
     <svg
-      viewBox="0 0 240 180"
+      viewBox="0 0 240 200"
       width={size}
       aria-hidden="true"
       focusable="false"
@@ -40,7 +112,7 @@ function ProblemIllustration({ size = 320 }: { size?: number }) {
     >
       <defs>
         <radialGradient id="prob-bg-glow" cx="50%" cy="80%" r="50%">
-          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.12" />
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.16" />
           <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
         </radialGradient>
         <filter id="prob-glow-filter">
@@ -48,11 +120,19 @@ function ProblemIllustration({ size = 320 }: { size?: number }) {
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
-      <ellipse cx="120" cy="162" rx="110" ry="22" fill="url(#prob-bg-glow)" />
+
+      {/* Grid base glow under robots */}
+      <ellipse cx="120" cy="170" rx="110" ry="22" fill="url(#prob-bg-glow)" />
+
+      {/* Grid connection lines between robots */}
+      <line x1="42" y1="155" x2="120" y2="130" stroke="#ff9d5c" strokeWidth="0.8" strokeOpacity="0.25" strokeDasharray="4 5" />
+      <line x1="198" y1="155" x2="120" y2="130" stroke="#ff9d5c" strokeWidth="0.8" strokeOpacity="0.25" strokeDasharray="4 5" />
+      <line x1="42" y1="155" x2="198" y2="155" stroke="#ff9d5c" strokeWidth="0.5" strokeOpacity="0.15" />
+
       <Robot cx={42} topY={60} s={0.72} floatDelay={0.4} />
       <Robot cx={120} topY={30} s={1.0} floatDelay={0} />
       <Robot cx={198} topY={60} s={0.72} floatDelay={0.7} />
-      <ellipse cx={120} cy={164} rx={70} ry={8} fill="#04101c" fillOpacity={0.25} />
+      <ellipse cx={120} cy={172} rx={70} ry={8} fill="#04101c" fillOpacity={0.25} />
       <circle cx={10} cy={20} r={2} fill="#78c7ff" fillOpacity={0.5} filter="url(#prob-glow-filter)" />
       <circle cx={228} cy={30} r={1.5} fill="#6fe2cf" fillOpacity={0.45} />
       <circle cx={66} cy={14} r={1.2} fill="#f5c86f" fillOpacity={0.5} />
@@ -66,7 +146,10 @@ export function Problem() {
 
   return (
     <section id="problem" className="py-[100px] relative scroll-mt-[86px] section-problem-bg overflow-hidden">
-      <div className="shell">
+      {/* Orange wireframe grid background with parallax */}
+      <WireframeGrid />
+
+      <div className="shell relative z-10">
 
         <div className="relative mb-[44px]">
           {/* Mobile: background watermark — absolute so it stays within this section */}
@@ -83,8 +166,8 @@ export function Problem() {
           </div>
 
           {/* Desktop illustration */}
-          <div className={`absolute right-0 top-0 hidden md:block pointer-events-none reveal-right ${isInView ? "is-visible" : ""}`} aria-hidden="true" style={{ opacity: 0.60 }}>
-            <ProblemIllustration size={320} />
+          <div className={`absolute right-0 top-0 hidden md:block pointer-events-none reveal-right ${isInView ? "is-visible" : ""}`} aria-hidden="true" style={{ opacity: 0.65 }}>
+            <ProblemIllustration size={340} />
           </div>
         </div>
 
@@ -117,7 +200,7 @@ export function Problem() {
           </article>
         </div>
 
-        {/* Warning banner — redesigned from quote strip */}
+        {/* Warning banner */}
         <div className={`mt-[24px] p-[24px_28px] rounded-[18px] relative overflow-hidden bg-[rgba(18,8,4,0.85)] border border-[#ff9d5c]/30 shadow-[0_0_40px_rgba(255,157,92,0.08),inset_0_1px_0_rgba(255,157,92,0.06)] backdrop-blur-[14px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "210ms" }}>
           <div className="absolute inset-0 rounded-[18px] bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(255,157,92,0.08),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start gap-[16px]">

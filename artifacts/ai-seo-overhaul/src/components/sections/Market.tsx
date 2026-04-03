@@ -4,71 +4,131 @@ import aiHeadIcon from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_17752467938
 function MarketIllustration() {
   return (
     <svg
-      viewBox="0 0 160 180"
-      width="290"
+      viewBox="0 0 200 200"
+      width="300"
       aria-hidden="true"
       focusable="false"
-      style={{ display: "block", animation: "astronautFloat 5s ease-in-out infinite" }}
+      style={{ display: "block", overflow: "visible" }}
     >
       <defs>
-        <radialGradient id="mkt-head-grad" cx="35%" cy="30%" r="70%">
-          <stop offset="0%" stopColor="#ffb87d" />
-          <stop offset="100%" stopColor="#ff9d5c" />
-        </radialGradient>
-        <radialGradient id="mkt-brain-soft" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.9" />
+        <radialGradient id="mkt-core-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.28" />
           <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="mkt-halo-soft" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
+        <radialGradient id="mkt-node-glow-r" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#78c7ff" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#78c7ff" stopOpacity="0" />
         </radialGradient>
-        <filter id="mkt-brain-filter">
-          <feGaussianBlur stdDeviation="6" result="blur" />
+        <filter id="mkt-glow-f">
+          <feGaussianBlur stdDeviation="3.5" result="blur" />
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
-        <filter id="mkt-node-glow">
-          <feGaussianBlur stdDeviation="3" result="blur" />
+        <filter id="mkt-soft-glow">
+          <feGaussianBlur stdDeviation="8" result="blur" />
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
 
-      <circle cx="68" cy="85" r="62" fill="url(#mkt-halo-soft)" />
-      <path d="M 16 108 A 62 62 0 1 1 92 24" stroke="#ff9d5c" strokeWidth="4.5" fill="none" strokeLinecap="round" strokeOpacity="0.65" />
-      <path
-        d="M 58 24 C 82 18 114 32 120 62 C 126 88 116 118 98 130 L 88 138 L 62 138 L 54 130 C 32 116 20 92 24 66 C 28 40 42 26 58 24 Z"
-        fill="url(#mkt-head-grad)"
-      />
-      <path
-        d="M 98 130 C 116 118 126 88 120 62 C 114 32 82 18 58 24 L 66 26 C 88 32 112 48 116 70 C 120 94 112 120 100 132 Z"
-        fill="#c46d28"
-        fillOpacity="0.30"
-      />
-      <ellipse cx="74" cy="78" rx="30" ry="25" fill="url(#mkt-brain-soft)" filter="url(#mkt-brain-filter)" />
-      <path
-        d="M 52 78 C 52 62 60 52 74 50 C 88 50 98 60 98 74 C 98 86 90 96 78 98 C 66 100 52 92 52 78 Z"
-        fill="#6fe2cf"
-        fillOpacity="0.88"
-      />
-      <path d="M 60 72 C 64 66 74 66 78 72" stroke="#04101c" strokeWidth="2" fill="none" strokeOpacity="0.35" strokeLinecap="round" />
-      <path d="M 68 84 C 74 80 84 82 86 88" stroke="#04101c" strokeWidth="2" fill="none" strokeOpacity="0.35" strokeLinecap="round" />
-      <circle cx="102" cy="72" r="6" fill="#6fe2cf" filter="url(#mkt-node-glow)" />
-      <circle cx="102" cy="72" r="3" fill="#04101c" fillOpacity="0.5" />
-      <polyline points="120,56 136,56 136,40 154,40" stroke="#6fe2cf" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="154" cy="40" r="5.5" fill="#6fe2cf" filter="url(#mkt-node-glow)" />
-      <circle cx="154" cy="40" r="2.5" fill="#04101c" fillOpacity="0.5" />
-      <polyline points="122,74 140,74 140,90 156,90" stroke="#6fe2cf" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="156" cy="90" r="4.5" fill="#6fe2cf" fillOpacity="0.85" />
-      <polyline points="118,96 134,96 134,112 154,112" stroke="#78c7ff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="154" cy="112" r="4" fill="#78c7ff" fillOpacity="0.85" />
-      <polyline points="102,130 118,130 118,148 140,148" stroke="#ff9d5c" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.65" />
-      <circle cx="140" cy="148" r="3.5" fill="#ff9d5c" fillOpacity="0.7" />
-      <polyline points="80,32 100,32 100,20 140,20" stroke="#f5c86f" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.55" />
-      <circle cx="140" cy="20" r="3.5" fill="#f5c86f" fillOpacity="0.70" />
-      <polyline points="26,80 8,80 8,60" stroke="#78c7ff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.55" />
-      <circle cx="8" cy="60" r="3.5" fill="#78c7ff" fillOpacity="0.65" />
-      <circle cx="10" cy="32" r="2.5" fill="#f5c86f" fillOpacity="0.55" />
-      <circle cx="148" cy="162" r="1.8" fill="#78c7ff" fillOpacity="0.4" />
+      {/* Outer ring — faint orbit */}
+      <circle cx="100" cy="100" r="86" stroke="#6fe2cf" strokeWidth="0.6" strokeOpacity="0.12" fill="none" strokeDasharray="5 8" />
+      <circle cx="100" cy="100" r="60" stroke="#78c7ff" strokeWidth="0.5" strokeOpacity="0.10" fill="none" strokeDasharray="4 6" />
+
+      {/* Core halo */}
+      <circle cx="100" cy="100" r="42" fill="url(#mkt-core-glow)" filter="url(#mkt-soft-glow)" />
+
+      {/* Core brain node */}
+      <circle cx="100" cy="100" r="28" fill="#04101c" stroke="#6fe2cf" strokeWidth="1.6" strokeOpacity="0.7" />
+      <circle cx="100" cy="100" r="24" fill="rgba(111,226,207,0.08)" />
+      {/* Brain squiggle lines */}
+      <path d="M 88 96 C 90 92 94 90 100 90 C 106 90 110 94 110 100 C 110 106 106 108 100 108" stroke="#6fe2cf" strokeWidth="2.4" fill="none" strokeLinecap="round" filter="url(#mkt-glow-f)" />
+      <path d="M 88 104 C 88 108 92 110 96 108" stroke="#6fe2cf" strokeWidth="1.6" fill="none" strokeLinecap="round" opacity="0.65" />
+      <circle cx="100" cy="100" r="5" fill="#6fe2cf" opacity="0.22" />
+
+      {/* Spoke connections — 6 spokes */}
+      {/* Top */}
+      <line x1="100" y1="72" x2="100" y2="50" stroke="#6fe2cf" strokeWidth="1.2" strokeOpacity="0.45" strokeDasharray="3 4" />
+      {/* Top-right */}
+      <line x1="124" y1="76" x2="148" y2="52" stroke="#78c7ff" strokeWidth="1.2" strokeOpacity="0.40" strokeDasharray="3 4" />
+      {/* Bottom-right */}
+      <line x1="128" y1="100" x2="158" y2="100" stroke="#ff9d5c" strokeWidth="1.2" strokeOpacity="0.40" strokeDasharray="3 4" />
+      {/* Bottom */}
+      <line x1="100" y1="128" x2="100" y2="158" stroke="#f5c86f" strokeWidth="1.2" strokeOpacity="0.38" strokeDasharray="3 4" />
+      {/* Bottom-left */}
+      <line x1="76" y1="124" x2="52" y2="148" stroke="#6fe2cf" strokeWidth="1.2" strokeOpacity="0.36" strokeDasharray="3 4" />
+      {/* Left */}
+      <line x1="72" y1="100" x2="42" y2="100" stroke="#78c7ff" strokeWidth="1.2" strokeOpacity="0.40" strokeDasharray="3 4" />
+
+      {/* Mid-ring nodes */}
+      <circle cx="100" cy="72" r="8" fill="#04101c" stroke="#6fe2cf" strokeWidth="1.4" filter="url(#mkt-glow-f)" />
+      <circle cx="100" cy="72" r="3.5" fill="#6fe2cf" opacity="0.8" />
+
+      <circle cx="124" cy="76" r="7" fill="#04101c" stroke="#78c7ff" strokeWidth="1.2" filter="url(#mkt-glow-f)" />
+      <circle cx="124" cy="76" r="3" fill="#78c7ff" opacity="0.75" />
+
+      <circle cx="128" cy="100" r="7" fill="#04101c" stroke="#ff9d5c" strokeWidth="1.2" />
+      <circle cx="128" cy="100" r="3" fill="#ff9d5c" opacity="0.70" />
+
+      <circle cx="100" cy="128" r="7" fill="#04101c" stroke="#f5c86f" strokeWidth="1.2" />
+      <circle cx="100" cy="128" r="3" fill="#f5c86f" opacity="0.68" />
+
+      <circle cx="76" cy="124" r="7" fill="#04101c" stroke="#6fe2cf" strokeWidth="1.2" />
+      <circle cx="76" cy="124" r="3" fill="#6fe2cf" opacity="0.65" />
+
+      <circle cx="72" cy="100" r="7" fill="#04101c" stroke="#78c7ff" strokeWidth="1.2" filter="url(#mkt-glow-f)" />
+      <circle cx="72" cy="100" r="3" fill="#78c7ff" opacity="0.70" />
+
+      {/* Outer nodes */}
+      <circle cx="100" cy="50" r="5.5" fill="#04101c" stroke="#6fe2cf" strokeWidth="1.2" />
+      <circle cx="100" cy="50" r="2.5" fill="#6fe2cf" opacity="0.85" />
+
+      <circle cx="148" cy="52" r="5" fill="#04101c" stroke="#78c7ff" strokeWidth="1" />
+      <circle cx="148" cy="52" r="2" fill="#78c7ff" opacity="0.80" />
+
+      <circle cx="158" cy="100" r="5" fill="#04101c" stroke="#ff9d5c" strokeWidth="1" />
+      <circle cx="158" cy="100" r="2" fill="#ff9d5c" opacity="0.75" />
+
+      <circle cx="100" cy="158" r="4.5" fill="#04101c" stroke="#f5c86f" strokeWidth="1" />
+      <circle cx="100" cy="158" r="2" fill="#f5c86f" opacity="0.72" />
+
+      <circle cx="52" cy="148" r="4.5" fill="#04101c" stroke="#6fe2cf" strokeWidth="1" />
+      <circle cx="52" cy="148" r="2" fill="#6fe2cf" opacity="0.68" />
+
+      <circle cx="42" cy="100" r="4.5" fill="#04101c" stroke="#78c7ff" strokeWidth="1" />
+      <circle cx="42" cy="100" r="2" fill="#78c7ff" opacity="0.70" />
+
+      {/* Animated signal pulses */}
+      <circle cx="100" cy="72" r="3" fill="#6fe2cf" opacity="0">
+        <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s">
+          <mpath xlinkHref="#path-top" />
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" repeatCount="indefinite" begin="0s" />
+      </circle>
+      <circle cx="0" cy="0" r="2.5" fill="#78c7ff" opacity="0">
+        <animateMotion dur="2.8s" repeatCount="indefinite" begin="0.6s">
+          <mpath xlinkHref="#path-tr" />
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.85;0" dur="2.8s" repeatCount="indefinite" begin="0.6s" />
+      </circle>
+      <circle cx="0" cy="0" r="2" fill="#ff9d5c" opacity="0">
+        <animateMotion dur="2.4s" repeatCount="indefinite" begin="1.1s">
+          <mpath xlinkHref="#path-right" />
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.8;0" dur="2.4s" repeatCount="indefinite" begin="1.1s" />
+      </circle>
+      <circle cx="0" cy="0" r="2" fill="#6fe2cf" opacity="0">
+        <animateMotion dur="2.6s" repeatCount="indefinite" begin="1.8s">
+          <mpath xlinkHref="#path-left" />
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.75;0" dur="2.6s" repeatCount="indefinite" begin="1.8s" />
+      </circle>
+
+      {/* Signal pulse paths */}
+      <defs>
+        <path id="path-top" d="M 100 72 L 100 50" />
+        <path id="path-tr" d="M 124 76 L 148 52" />
+        <path id="path-right" d="M 128 100 L 158 100" />
+        <path id="path-left" d="M 72 100 L 42 100" />
+      </defs>
     </svg>
   );
 }
@@ -103,20 +163,47 @@ export function Market() {
             </p>
           </div>
 
-          {/* Illustration — shown from tablet */}
-          <div className={`absolute right-0 top-0 hidden sm:block pointer-events-none reveal-right ${isInView ? "is-visible" : ""}`} aria-hidden="true" style={{ opacity: 0.70 }}>
+          {/* AI neural-network illustration — shown from tablet */}
+          <div className={`absolute right-0 top-0 hidden sm:block pointer-events-none reveal-right ${isInView ? "is-visible" : ""}`} aria-hidden="true" style={{ opacity: 0.78 }}>
             <MarketIllustration />
           </div>
-          <div className="absolute right-[248px] top-[10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
+          <div className="absolute right-[258px] top-[10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
             <div style={{ width: 80, height: 80, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
               <img src={aiHeadIcon} alt="" width={80} height={80} style={{ display: "block", objectFit: "contain" }} />
             </div>
           </div>
         </div>
 
-        {/* Hero stat card — "60%" takes the spotlight */}
+        {/* Hero stat card — "60%" takes the spotlight with connectivity elements */}
         <article className={`w-full mb-[18px] p-[32px] md:p-[40px] relative overflow-hidden rounded-[22px] bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(120,199,255,0.16),transparent_55%),linear-gradient(180deg,rgba(11,28,48,0.97),rgba(7,18,30,0.97))] border border-[#78c7ff]/25 shadow-[0_24px_80px_rgba(2,7,16,0.45)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`}>
+          {/* Blue glow orb top-right */}
           <div className="absolute w-[320px] h-[320px] -right-[60px] -top-[60px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.12),transparent_70%)] pointer-events-none" />
+
+          {/* Connectivity node decorations — top-right corner */}
+          <div className="absolute top-[18px] right-[18px] pointer-events-none hidden md:block" aria-hidden="true">
+            <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
+              <circle cx="12" cy="12" r="5" fill="#78c7ff" fillOpacity="0.18" stroke="#78c7ff" strokeWidth="1" strokeOpacity="0.35" />
+              <circle cx="12" cy="12" r="2" fill="#78c7ff" fillOpacity="0.6" />
+              <circle cx="60" cy="20" r="4" fill="#6fe2cf" fillOpacity="0.15" stroke="#6fe2cf" strokeWidth="1" strokeOpacity="0.30" />
+              <circle cx="60" cy="20" r="1.5" fill="#6fe2cf" fillOpacity="0.55" />
+              <circle cx="108" cy="8" r="3.5" fill="#78c7ff" fillOpacity="0.14" stroke="#78c7ff" strokeWidth="0.8" strokeOpacity="0.28" />
+              <circle cx="108" cy="8" r="1.5" fill="#78c7ff" fillOpacity="0.52" />
+              <circle cx="90" cy="54" r="3" fill="#ff9d5c" fillOpacity="0.12" stroke="#ff9d5c" strokeWidth="0.8" strokeOpacity="0.25" />
+              <circle cx="90" cy="54" r="1.2" fill="#ff9d5c" fillOpacity="0.48" />
+              <line x1="17" y1="12" x2="56" y2="20" stroke="#78c7ff" strokeWidth="0.7" strokeOpacity="0.22" strokeDasharray="3 4" />
+              <line x1="64" y1="20" x2="104" y2="10" stroke="#6fe2cf" strokeWidth="0.7" strokeOpacity="0.20" strokeDasharray="3 4" />
+              <line x1="106" y1="12" x2="93" y2="50" stroke="#78c7ff" strokeWidth="0.7" strokeOpacity="0.18" strokeDasharray="3 4" />
+              {/* Animated pulse */}
+              <circle r="1.8" fill="#6fe2cf" fillOpacity="0.9">
+                <animateMotion dur="3.4s" repeatCount="indefinite">
+                  <mpath xlinkHref="#mkt-card-path" />
+                </animateMotion>
+                <animate attributeName="opacity" values="0;1;0" dur="3.4s" repeatCount="indefinite" />
+              </circle>
+              <path id="mkt-card-path" d="M 12 12 L 60 20 L 108 8 L 90 54" />
+            </svg>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-[28px] md:gap-[44px] items-center">
             <div>
               <div className="text-[clamp(4rem,10vw,7rem)] font-extrabold leading-none tracking-[-0.05em] mb-[6px]" style={{ color: "var(--blue)" }}>60%</div>
