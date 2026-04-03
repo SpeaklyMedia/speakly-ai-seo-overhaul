@@ -7,16 +7,8 @@ import starfieldPortrait from "@assets/IMG_0231_1775246914295.png";
 function StarfieldBackground() {
   useEffect(() => {
     const root = document.documentElement;
-    const mql = window.matchMedia("(min-width: 768px)");
-
-    function update() {
-      const url = mql.matches ? starfieldLandscape : starfieldPortrait;
-      root.style.setProperty("--starfield-url", `url("${url}")`);
-    }
-
-    update();
-    mql.addEventListener("change", update);
-    return () => mql.removeEventListener("change", update);
+    root.style.setProperty("--starfield-landscape", `url("${starfieldLandscape}")`);
+    root.style.setProperty("--starfield-portrait", `url("${starfieldPortrait}")`);
   }, []);
 
   return null;

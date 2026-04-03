@@ -174,11 +174,28 @@
   }
 
   body::before {
-    background-image: var(--starfield-url);
+    background-image: var(--starfield-portrait);
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     opacity: 0.50;
+  }
+
+  @media (min-width: 768px) {
+    body::before {
+      background-image: var(--starfield-landscape);
+    }
+  }
+
+  section#top {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(120, 199, 255, 0.15), transparent 30%),
+      radial-gradient(circle at 85% 10%, rgba(209, 140, 255, 0.13), transparent 22%),
+      radial-gradient(circle at 50% 40%, rgba(111, 226, 207, 0.08), transparent 30%),
+      linear-gradient(180deg, #06111d 0%, #071321 42%, #081727 100%);
+    position: relative;
+    isolation: isolate;
   }
 
   body::after {

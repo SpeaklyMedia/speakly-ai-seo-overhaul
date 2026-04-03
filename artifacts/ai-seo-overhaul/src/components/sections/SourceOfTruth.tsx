@@ -1,23 +1,10 @@
-import { useEffect, useRef, useState } from "react";
 import { useInView } from "@/hooks/use-in-view";
+import { useParallax } from "@/hooks/use-parallax";
 import ssotBg from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_2_1775246793840.png";
 import ssotFg from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_1775246793840.png";
 
 function WrenchParallax() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [fgOffset, setFgOffset] = useState(0);
-
-  useEffect(() => {
-    function update() {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const relY = rect.top + rect.height / 2 - window.innerHeight / 2;
-      setFgOffset(relY * 0.14);
-    }
-    window.addEventListener("scroll", update, { passive: true });
-    update();
-    return () => window.removeEventListener("scroll", update);
-  }, []);
+  const { ref, offset } = useParallax(0.14);
 
   return (
     <div
@@ -48,7 +35,7 @@ function WrenchParallax() {
           objectFit: "cover",
           objectPosition: "center",
           mixBlendMode: "screen",
-          transform: `translateY(${fgOffset}px)`,
+          transform: `translateY(${offset}px)`,
         }}
       />
     </div>
