@@ -4,7 +4,7 @@ import { useCountUp } from "@/hooks/use-count-up";
 import astronautSpeech from "@assets/B360D418-5C13-49A9-B3D5-E5B625E203B2_1775246793840.png";
 import magnetIcon from "@assets/B8D35E42-BF1A-4E3C-AA9D-9556E2C80BD2_1775246793840.png";
 
-function TrustShieldIllustration() {
+function TrustShieldIllustration({ size = 300 }: { size?: number }) {
   const Person = ({ cx, cy }: { cx: number; cy: number }) => (
     <g>
       <circle cx={cx} cy={cy} r={11} fill="#ff9d5c" />
@@ -15,10 +15,10 @@ function TrustShieldIllustration() {
   return (
     <svg
       viewBox="0 0 200 200"
-      width="300"
+      width={size}
       aria-hidden="true"
       focusable="false"
-      style={{ display: "block", animation: "astronautFloat 5s ease-in-out infinite" }}
+      style={{ display: "block" }}
     >
       <defs>
         <radialGradient id="proof-outer-glow" cx="50%" cy="50%" r="50%">
@@ -48,17 +48,8 @@ function TrustShieldIllustration() {
       <Person cx={178} cy={100} />
       <Person cx={22} cy={100} />
       <Person cx={100} cy={178} />
-      <path
-        d="M 100 58 C 100 58 70 66 70 86 C 70 108 84 126 100 134 C 116 126 130 108 130 86 C 130 66 100 58 100 58 Z"
-        fill="url(#proof-shield-grad)"
-      />
-      <path
-        d="M 100 66 C 100 66 78 73 78 88 C 78 104 88 118 100 124"
-        stroke="rgba(255,210,160,0.25)"
-        strokeWidth="2"
-        fill="none"
-        strokeLinecap="round"
-      />
+      <path d="M 100 58 C 100 58 70 66 70 86 C 70 108 84 126 100 134 C 116 126 130 108 130 86 C 130 66 100 58 100 58 Z" fill="url(#proof-shield-grad)" />
+      <path d="M 100 66 C 100 66 78 73 78 88 C 78 104 88 118 100 124" stroke="rgba(255,210,160,0.25)" strokeWidth="2" fill="none" strokeLinecap="round" />
       <polyline points="84,98 96,110 118,82" stroke="#6fe2cf" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" filter="url(#proof-check-glow)" />
       <polyline points="84,98 96,110 118,82" stroke="#6fe2cf" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx={100} cy={42} r={3} fill="#ff9d5c" fillOpacity={0.7} />
@@ -92,26 +83,30 @@ export function Proof() {
               These are customer-facing proof points drawn from the existing Speakly sales deck. They show the kind of visibility and clarity gains this work is built to create.
             </p>
           </div>
-          {/* Accent icons — desktop only */}
-          <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.45 }}>
-            <TrustShieldIllustration />
-          </div>
-          <div className="absolute right-[252px] top-[-8px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.48 }}>
-            <div style={{ width: 76, height: 76, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
-              <img src={astronautSpeech} alt="" width={76} height={76} style={{ display: "block", objectFit: "contain" }} />
+          {/* Accent icons — desktop only, in section header area */}
+          <div className="absolute right-0 top-0 hidden lg:flex gap-[10px] pointer-events-none" aria-hidden="true">
+            <div style={{ opacity: 0.44 }}>
+              <div style={{ width: 76, height: 76, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
+                <img src={astronautSpeech} alt="" width={76} height={76} style={{ display: "block", objectFit: "contain" }} />
+              </div>
             </div>
-          </div>
-          <div className="absolute right-[254px] top-[72px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.28 }}>
-            <img src={magnetIcon} alt="" width={68} height={68} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
+            <div style={{ opacity: 0.28 }}>
+              <img src={magnetIcon} alt="" width={72} height={72} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
+            </div>
           </div>
         </div>
 
-        {/* Wolf Moon — HERO proof card (full width) */}
+        {/* Wolf Moon — HERO proof card (full width) with TrustShield behind */}
         <article className={`w-full mb-[18px] relative overflow-hidden rounded-[24px] bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(111,226,207,0.12),transparent_55%),linear-gradient(180deg,rgba(11,28,46,0.97),rgba(7,18,30,0.97))] border border-[#6fe2cf]/20 shadow-[0_24px_80px_rgba(2,7,16,0.45),inset_0_1px_0_rgba(111,226,207,0.06)] glass-card reveal ${isInView ? "is-visible" : ""}`}>
           {/* Top-edge teal accent line */}
           <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[24px]" style={{ background: "linear-gradient(90deg, transparent 0%, #ff9d5c 20%, #6fe2cf 70%, transparent 100%)" }} aria-hidden="true" />
 
-          <div className="p-[28px] md:p-[40px] grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-[32px] md:gap-[48px] items-start">
+          {/* TrustShield centered behind hero card content */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true" style={{ opacity: 0.055 }}>
+            <TrustShieldIllustration size={300} />
+          </div>
+
+          <div className="relative z-10 p-[28px] md:p-[40px] grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-[32px] md:gap-[48px] items-start">
             {/* Left: stats + progress bar */}
             <div>
               <small className="block uppercase tracking-[0.16em] text-teal/80 text-[0.76rem] mb-[20px]">Wolf Moon Wellness</small>
@@ -124,7 +119,7 @@ export function Proof() {
                 <span className="block text-ink-soft text-[0.85rem] mb-[20px]">AI-indexed visibility probability</span>
 
                 {/* Progress bar */}
-                <div className="relative h-[10px] rounded-full bg-[#071320] border border-[#7db0e7]/12 overflow-hidden" aria-label={`Visibility improved from 12% to 78%`}>
+                <div className="relative h-[10px] rounded-full bg-[#071320] border border-[#7db0e7]/12 overflow-hidden" aria-label="Visibility improved from 12% to 78%">
                   {/* 12% baseline marker */}
                   <div className="absolute left-[12%] top-0 bottom-0 w-[1px] bg-[#ff9d5c]/40 z-10" aria-hidden="true" />
                   {/* Animated fill */}

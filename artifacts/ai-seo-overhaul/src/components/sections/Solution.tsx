@@ -28,7 +28,6 @@ function WavingAstronautIllustration({ width = 190 }: { width?: number }) {
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
-
       <ellipse cx="58" cy="130" rx="44" ry="55" fill="url(#sol-body-glow)" />
       <ellipse cx="30" cy="96" rx="17" ry="12" fill="#e8884a" />
       <ellipse cx="86" cy="96" rx="17" ry="12" fill="#e8884a" />
@@ -85,7 +84,7 @@ const overhauls = [
     body: "Strengthen the most important pages so they are easier to understand for both search systems and real buyers.",
   },
   {
-    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7H20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/><path d="M4 12H14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/><path d="M4 17H10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>,
+    icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7H20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/><path d="M8 12H16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/><path d="M10 17H14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>,
     title: "FAQ and objection architecture",
     body: "Turn real buyer questions into assets that support AI answers, conversion clarity, and future content expansion.",
   },
@@ -108,71 +107,83 @@ export function Solution() {
     <section id="solution" className="py-[100px] relative scroll-mt-[86px] section-solution-bg">
       <div className="shell">
 
-        {/* Mobile astronaut — centered above content */}
-        <div className="md:hidden flex justify-center mb-[30px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.38 }}>
-          <WavingAstronautIllustration width={140} />
+        {/* Mobile layout: astronaut → heading → 2-col cards */}
+        <div className="md:hidden">
+          <div className="flex justify-center mb-[30px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.38 }}>
+            <WavingAstronautIllustration width={140} />
+          </div>
+          <div ref={ref} className={`mb-[32px] reveal-left ${isInView ? "is-visible" : ""}`}>
+            <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
+            <h2>What the overhaul is designed to do</h2>
+            <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
+              A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px] mb-[40px]">
+            {overhauls.map(({ icon, title, body }, i) => (
+              <article
+                key={title}
+                className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 border-l-[3px] border-l-[#6fe2cf]/35 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`}
+                style={{ transitionDelay: `${i * 70}ms` }}
+              >
+                <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(111,226,207,0.10),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
+                <div className="w-[46px] h-[46px] rounded-[14px] inline-grid place-items-center mb-[18px] bg-[#6fe2cf]/10 border border-[#6fe2cf]/15 text-teal" aria-hidden="true">{icon}</div>
+                <h3 className="mb-[18px] font-extrabold tracking-[-0.03em] leading-[1.04]">{title}</h3>
+                <p className="m-0 text-ink-muted text-[clamp(1rem,1.5vw,1.08rem)]">{body}</p>
+              </article>
+            ))}
+          </div>
         </div>
 
-        {/* Desktop: two-column split — astronaut left, content right */}
-        <div className="hidden md:grid grid-cols-[auto_1fr] gap-[52px] items-start mb-[44px]">
-          {/* Left: astronaut column */}
-          <div className="relative flex flex-col items-center pt-[20px] pointer-events-none" aria-hidden="true">
-            {/* Teal radiance behind astronaut */}
-            <div className="absolute inset-[-30px] rounded-full" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(111,226,207,0.12), transparent 70%)", filter: "blur(20px)" }} />
-            <div className={`relative reveal ${isInView ? "is-visible" : ""}`} style={{ opacity: 0.88 }}>
+        {/* Desktop: 2-col split — astronaut LEFT, heading + 2-col cards RIGHT */}
+        <div className="hidden md:grid grid-cols-[260px_1fr] gap-[52px] items-start mb-[40px]">
+
+          {/* Left column: astronaut */}
+          <div className="relative flex flex-col items-center pt-[16px] pointer-events-none sticky top-[100px]" aria-hidden="true">
+            <div className="absolute inset-[-30px] rounded-full" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(111,226,207,0.13), transparent 70%)", filter: "blur(22px)" }} />
+            <div className={`relative reveal-right ${isInView ? "is-visible" : ""}`} style={{ opacity: 0.88 }}>
               <WavingAstronautIllustration width={240} />
             </div>
-            <div className="mt-[14px] pointer-events-none" style={{ opacity: 0.32 }}>
+            <div className="mt-[14px] pointer-events-none" style={{ opacity: 0.30 }}>
               <img src={spaceshipIcon} alt="" width={72} height={72} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
             </div>
           </div>
 
-          {/* Right: heading + intro */}
-          <div ref={ref} className={`reveal-left ${isInView ? "is-visible" : ""}`}>
-            <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
-            <h2>What the overhaul is designed to do</h2>
-            <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
-              A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
-            </p>
+          {/* Right column: heading + 2-col card grid */}
+          <div>
+            <div ref={ref} className={`mb-[32px] reveal-left ${isInView ? "is-visible" : ""}`}>
+              <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
+              <h2>What the overhaul is designed to do</h2>
+              <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
+                A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
+              </p>
+            </div>
+
+            {/* 2-col card grid within right column */}
+            <div className="grid grid-cols-2 gap-[18px]">
+              {overhauls.map(({ icon, title, body }, i) => (
+                <article
+                  key={title}
+                  className={`p-[22px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 border-l-[3px] border-l-[#6fe2cf]/35 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`}
+                  style={{ transitionDelay: `${i * 70}ms` }}
+                >
+                  <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(111,226,207,0.10),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
+                  <div className="w-[42px] h-[42px] rounded-[14px] inline-grid place-items-center mb-[16px] bg-[#6fe2cf]/10 border border-[#6fe2cf]/15 text-teal" aria-hidden="true">{icon}</div>
+                  <h3 className="mb-[14px] font-extrabold tracking-[-0.03em] leading-[1.04] text-[1rem]">{title}</h3>
+                  <p className="m-0 text-ink-muted text-[0.9rem]">{body}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Mobile heading */}
-        <div className="md:hidden mb-[32px]">
-          <div ref={ref} className={`reveal ${isInView ? "is-visible" : ""}`}>
-            <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
-            <h2>What the overhaul is designed to do</h2>
-            <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
-              A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
-            </p>
-          </div>
-        </div>
-
-        {/* Card grid — 2-col on desktop (inside right column area) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px] mb-[40px]">
-          {overhauls.map(({ icon, title, body }, i) => (
-            <article
-              key={title}
-              className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 border-l-[3px] border-l-[#6fe2cf]/35 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`}
-              style={{ transitionDelay: `${i * 70}ms` }}
-            >
-              <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(111,226,207,0.10),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
-              <div className="w-[46px] h-[46px] rounded-[14px] inline-grid place-items-center mb-[18px] bg-[#6fe2cf]/10 border border-[#6fe2cf]/15 text-teal" aria-hidden="true">
-                {icon}
-              </div>
-              <h3 className="mb-[18px] font-extrabold tracking-[-0.03em] leading-[1.04]">{title}</h3>
-              <p className="m-0 text-ink-muted text-[clamp(1rem,1.5vw,1.08rem)]">{body}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className={`mt-[60px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "420ms" }}>
+        {/* Why Speakly — full width on all breakpoints */}
+        <div className={`mt-[48px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "420ms" }}>
           <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">Why Speakly</div>
           <h2 className="mb-[24px]">The positioning advantage</h2>
           <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch] mb-[30px]">
             Most agencies treat AI search like a bolt-on. Speakly positions it as a website system, a visibility system, and a content system at the same time. The result is stronger clarity, better reuse, and a more durable growth asset.
           </p>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[14px]">
             {["Clarity over clever", "Proof over promises", "Systems over one-off posts"].map((standard) => (
               <div key={standard} className="p-[18px_20px] rounded-[18px] bg-gradient-to-r from-[#6fe2cf]/10 to-[#78c7ff]/5 border border-[#6fe2cf]/15 text-ink-muted font-medium flex items-center justify-center text-center">

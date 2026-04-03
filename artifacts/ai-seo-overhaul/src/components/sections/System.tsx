@@ -39,6 +39,17 @@ export function System() {
 
   return (
     <section id="system" className="py-[100px] relative scroll-mt-[86px] section-system-bg">
+      {/* Precision grid overlay — brighter, scoped to this section */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          backgroundImage: "linear-gradient(rgba(120,199,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(120,199,255,0.045) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+          maskImage: "radial-gradient(ellipse 80% 70% at 70% 50%, black 30%, transparent 80%)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 70% 50%, black 30%, transparent 80%)",
+        }}
+      />
       <div className="shell">
         <div className="relative mb-[44px]">
           <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
