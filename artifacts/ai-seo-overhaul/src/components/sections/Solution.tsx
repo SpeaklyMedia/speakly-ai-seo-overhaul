@@ -31,11 +31,11 @@ function WavingAstronautIllustration() {
       {/* Body atmospheric glow */}
       <ellipse cx="58" cy="130" rx="44" ry="55" fill="url(#sol-body-glow)" />
 
-      {/* ── Shoulder pads (behind torso) ── */}
+      {/* Shoulder pads */}
       <ellipse cx="30" cy="96" rx="17" ry="12" fill="#e8884a" />
       <ellipse cx="86" cy="96" rx="17" ry="12" fill="#e8884a" />
 
-      {/* ── Torso ── */}
+      {/* Torso */}
       <rect x="28" y="84" width="60" height="56" rx="14" fill="#ff9d5c" />
       {/* Chest panel */}
       <rect x="38" y="94" width="40" height="28" rx="5" fill="#04101c" fillOpacity="0.5" />
@@ -46,11 +46,11 @@ function WavingAstronautIllustration() {
       {/* Belt */}
       <rect x="28" y="132" width="60" height="8" rx="4" fill="#c46d28" />
 
-      {/* ── Left arm — down at side ── */}
+      {/* Left arm */}
       <rect x="12" y="88" width="16" height="40" rx="8" fill="#ff9d5c" />
       <ellipse cx="20" cy="132" rx="9" ry="7" fill="#c46d28" />
 
-      {/* ── Right arm — raised, elbow bent, waving ── */}
+      {/* Right arm — raised */}
       {/* Upper arm going up-right */}
       <path d="M 88 92 C 96 86 106 74 102 60 C 100 54 94 53 90 57 C 93 66 92 78 88 92 Z" fill="#ff9d5c" />
       {/* Mitten/glove — raised */}
@@ -61,17 +61,17 @@ function WavingAstronautIllustration() {
       {/* Knuckle line */}
       <path d="M 94 61 C 100 57 108 58 110 62" stroke="#ff9d5c" strokeWidth="2.5" fill="none" strokeLinecap="round" />
 
-      {/* ── Legs ── */}
+      {/* Legs */}
       <rect x="34" y="138" width="20" height="40" rx="10" fill="#e8884a" />
       <rect x="62" y="138" width="20" height="40" rx="10" fill="#e8884a" />
       {/* Boots */}
       <rect x="30" y="170" width="28" height="14" rx="7" fill="#c46d28" />
       <rect x="58" y="170" width="28" height="14" rx="7" fill="#c46d28" />
 
-      {/* ── Neck ring ── */}
+      {/* Neck */}
       <rect x="46" y="78" width="24" height="8" rx="4" fill="#c46d28" />
 
-      {/* ── Helmet ── */}
+      {/* Helmet */}
       <circle cx="58" cy="52" r="32" fill="url(#sol-helmet-grad)" />
       {/* Helmet ring highlight */}
       <circle cx="58" cy="52" r="32" fill="none" stroke="#ffb87d" strokeWidth="1.8" strokeOpacity="0.4" />

@@ -44,13 +44,13 @@ function TrustShieldIllustration() {
 
       {/* Dashed connecting ARCS WITH glow — N/S/E/W (quadratic bezier curves) */}
       {/* North arc: person bottom → shield top */}
-      <path d="M 100 42 Q 112 50 100 60" stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4,3" strokeOpacity="0.7" fill="none" filter="url(#proof-arc-glow)" />
+      <path d="M 100 42 Q 112 50 100 60" stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4 4" strokeOpacity="0.7" fill="none" filter="url(#proof-arc-glow)" />
       {/* East arc: shield right edge → person left side */}
-      <path d="M 130 90 Q 148 88 158 100" stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4,3" strokeOpacity="0.7" fill="none" filter="url(#proof-arc-glow)" />
+      <path d="M 130 90 Q 148 88 158 100" stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4 4" strokeOpacity="0.7" fill="none" filter="url(#proof-arc-glow)" />
       {/* West arc: person right side → shield left edge */}
-      <path d="M 42 100 Q 52 88 70 90" stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4,3" strokeOpacity="0.7" fill="none" filter="url(#proof-arc-glow)" />
+      <path d="M 42 100 Q 52 88 70 90" stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4 4" strokeOpacity="0.7" fill="none" filter="url(#proof-arc-glow)" />
       {/* South arc: shield bottom → person top */}
-      <path d="M 100 134 Q 112 148 100 158" stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4,3" strokeOpacity="0.7" fill="none" filter="url(#proof-arc-glow)" />
+      <path d="M 100 134 Q 112 148 100 158" stroke="#ff9d5c" strokeWidth="2.5" strokeDasharray="4 4" strokeOpacity="0.7" fill="none" filter="url(#proof-arc-glow)" />
 
       {/* 4 filled person icons at compass points */}
       <Person cx={100} cy={20} />

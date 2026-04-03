@@ -48,8 +48,7 @@ function WrenchIllustration() {
       {/* Glow bloom at jaw */}
       <ellipse cx="60" cy="32" rx="36" ry="20" fill="url(#ssot-glow-soft)" filter="url(#ssot-jaw-glow)" />
 
-      {/* ── Vertical wrench ── */}
-      {/* Left jaw prong */}
+      {/* Wrench — jaw prongs */}
       <path d="M 38 55 L 38 35 C 38 26 43 20 50 20 L 50 34 C 46 34 44 37 44 42 L 44 55 Z" fill="url(#ssot-wrench-grad)" />
       {/* Right jaw prong */}
       <path d="M 82 55 L 82 35 C 82 26 77 20 70 20 L 70 34 C 74 34 76 37 76 42 L 76 55 Z" fill="url(#ssot-wrench-grad)" />
@@ -67,10 +66,10 @@ function WrenchIllustration() {
       {/* Shaft highlight stripe */}
       <rect x="52" y="48" width="6" height="100" rx="3" fill="rgba(255,255,255,0.12)" />
 
-      {/* ── Vertical light column connecting wrench jaw to hand ── */}
+      {/* Light column between wrench and hand */}
       <rect x="56" y="158" width="8" height="42" rx="4" fill="url(#ssot-light-col)" filter="url(#ssot-col-glow)" />
 
-      {/* ── Gloved hand below ── */}
+      {/* Gloved hand */}
       {/* Hand glow */}
       <ellipse cx="60" cy="210" rx="34" ry="18" fill="url(#ssot-hand-bg)" />
 

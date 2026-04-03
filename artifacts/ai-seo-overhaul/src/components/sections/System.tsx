@@ -43,8 +43,7 @@ function CommanderIllustration() {
       <circle cx={10} cy={95} r={1.5} fill="#f5c86f" fillOpacity={0.55} />
       <circle cx={215} cy={28} r={1.2} fill="#f5c86f" fillOpacity={0.5} />
 
-      {/* ── WRENCH held high by commander's RIGHT arm ── */}
-      {/* Gold glow bloom — upper right */}
+      {/* Gold wrench — held aloft by right arm */}
       <circle cx={198} cy={22} r={24} fill="url(#sys-gold-glow)" filter="url(#sys-gold-bloom)" opacity={0.85} />
       {/* Jaw prong */}
       <path d="M 174 18 C 174 10 178 6 182 6 L 182 14 C 180 14 178 16 178 20 C 178 24 180 26 182 26 L 182 34 C 178 34 174 30 174 18 Z" fill="#f5c86f" />
@@ -54,8 +53,7 @@ function CommanderIllustration() {
       <rect x={210} y={12} width={18} height={16} rx={3.5} fill="#f5c86f" />
       <polygon points="219,15 226,18 226,24 219,27 212,24 212,18" fill="#04101c" fillOpacity={0.45} />
 
-      {/* ── COMMANDER (center, tall) ── */}
-      {/* Shoulder pads */}
+      {/* Commander — shoulder pads */}
       <ellipse cx={112} cy={105} rx={18} ry={12} fill="#e8884a" />
       <ellipse cx={168} cy={105} rx={18} ry={12} fill="#e8884a" />
       {/* Torso */}
@@ -92,10 +90,9 @@ function CommanderIllustration() {
       <rect x={114} y={68} width={7} height={10} rx={3.5} fill="#c46d28" />
       <rect x={159} y={68} width={7} height={10} rx={3.5} fill="#c46d28" />
 
-      {/* ── LEFT FLANKING ROBOT ── */}
+      {/* Left flanking robot */}
       <g style={{ animation: "astronautFloat 4.8s ease-in-out 0.3s infinite" }}>
-        {/* Cast shadow */}
-        <ellipse cx={54} cy={207} rx={24} ry={7} fill="#6fe2cf" fillOpacity={0.15} />
+        <ellipse cx={54} cy={207} rx={24} ry={7} fill="#c46d28" fillOpacity={0.40} />
         {/* Body */}
         <rect x={36} y={148} width={36} height={28} rx={7} fill="#c46d28" />
         <rect x={42} y={154} width={24} height={14} rx={3} fill="#04101c" fillOpacity={0.5} />
@@ -124,9 +121,9 @@ function CommanderIllustration() {
         <circle cx={54} cy={110} r={3.5} fill="#6fe2cf" />
       </g>
 
-      {/* ── RIGHT FLANKING ROBOT ── */}
+      {/* Right flanking robot */}
       <g style={{ animation: "astronautFloat 4.6s ease-in-out 0.6s infinite" }}>
-        <ellipse cx={226} cy={207} rx={24} ry={7} fill="#6fe2cf" fillOpacity={0.15} />
+        <ellipse cx={226} cy={207} rx={24} ry={7} fill="#c46d28" fillOpacity={0.40} />
         <rect x={208} y={148} width={36} height={28} rx={7} fill="#c46d28" />
         <rect x={214} y={154} width={24} height={14} rx={3} fill="#04101c" fillOpacity={0.5} />
         <circle cx={222} cy={161} r={3.5} fill="#6fe2cf" filter="url(#sys-teal-glow)" />

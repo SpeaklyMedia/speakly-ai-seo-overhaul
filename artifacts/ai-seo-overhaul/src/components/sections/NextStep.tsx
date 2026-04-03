@@ -35,7 +35,6 @@ function SecureChipIllustration() {
         </filter>
       </defs>
 
-      {/* ── 4 pins per side (16 total) ── */}
       {/* Top — center two pins bright blue */}
       <Pin x1={56} y1={30} x2={56} y2={14} cx={56} cy={12} />
       <Pin x1={70} y1={30} x2={70} y2={14} cx={70} cy={12} blue />
@@ -57,12 +56,11 @@ function SecureChipIllustration() {
       <Pin x1={130} y1={84} x2={146} y2={84} cx={148} cy={84} />
       <Pin x1={130} y1={98} x2={146} y2={98} cx={148} cy={98} teal />
 
-      {/* ── Outer orange radial glow behind chip body ── */}
-      <circle cx={80} cy={80} r={62} fill="none" />
+      {/* Outer orange glow rings */}
       <circle cx={80} cy={80} r={55} fill="#ff9d5c" fillOpacity={0.10} />
       <circle cx={80} cy={80} r={40} fill="#ff9d5c" fillOpacity={0.08} />
 
-      {/* ── Chip body — FILLED gradient ── */}
+      {/* Chip body */}
       <rect x={30} y={30} width={100} height={100} rx={12} fill="url(#chip-body-grad)" />
       {/* Inner inset panel */}
       <rect x={36} y={36} width={88} height={88} rx={8} fill="#0d1e2e" fillOpacity={0.75} />
@@ -74,7 +72,7 @@ function SecureChipIllustration() {
       <polyline points="116,112 116,100 102,100" stroke="#6fe2cf" strokeWidth={1.5} fill="none" strokeOpacity={0.5} strokeLinecap="round" strokeLinejoin="round" />
       <polyline points="44,110 44,102 54,102" stroke="#78c7ff" strokeWidth={1.2} fill="none" strokeOpacity={0.4} strokeLinecap="round" strokeLinejoin="round" />
 
-      {/* ── Central shield — FILLED dark navy interior, orange border ── */}
+      {/* Central shield — dark navy interior, orange border */}
       <path
         d="M 80 48 C 80 48 58 56 58 70 C 58 84 68 96 80 102 C 92 96 102 84 102 70 C 102 56 80 48 80 48 Z"
         fill="#04101c"
