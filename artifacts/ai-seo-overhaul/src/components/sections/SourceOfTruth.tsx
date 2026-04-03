@@ -102,7 +102,7 @@ export function SourceOfTruth() {
               },
               {
                 title: "FAQs, supporting content, and proof assets",
-                body: "Instead of asking what to publish next, you work from a structured expansion plan.",
+                body: "Instead of \u201cwhat should we publish next?\u201d, you work from a structured expansion plan.",
               },
               {
                 title: "Ads, social, email, and sales enablement",

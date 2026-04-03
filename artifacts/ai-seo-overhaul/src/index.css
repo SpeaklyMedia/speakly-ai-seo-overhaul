@@ -318,8 +318,8 @@
 
 /* ── CTA pulse animation (NextStep) ─────────────────────── */
 @keyframes ctaPulse {
-  0%,100% { box-shadow: 0 0 26px rgba(111,226,207,0.22), 0 12px 30px rgba(70,170,214,0.28); }
-  50%      { box-shadow: 0 0 52px rgba(111,226,207,0.48), 0 12px 40px rgba(70,170,214,0.40); }
+  0%,100% { box-shadow: 0 0 30px rgba(111,226,207,0.25); }
+  50%      { box-shadow: 0 0 60px rgba(111,226,207,0.45); }
 }
 .cta-pulse {
   animation: ctaPulse 2.4s ease-in-out infinite;

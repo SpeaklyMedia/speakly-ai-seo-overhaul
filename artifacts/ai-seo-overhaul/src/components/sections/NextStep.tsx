@@ -44,7 +44,7 @@ export function NextStep() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-[40px] items-start relative z-10">
-            <div>
+            <div className={`reveal-left ${isInView ? "is-visible" : ""}`}>
               <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[14px]">Next step</div>
               <h2 className="max-w-[12ch] mb-[18px]">Start with a free AI-search readiness assessment.</h2>
               <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch] mb-[24px]">
