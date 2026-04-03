@@ -26,8 +26,8 @@ function WavingAstronautIllustration() {
       {/* Helmet */}
       <circle cx="50" cy="38" r="26" fill="#ff9d5c" />
       <circle cx="50" cy="38" r="22" fill="#e8884a" />
-      {/* Visor */}
-      <ellipse cx="50" cy="38" rx="14" ry="15" fill="url(#sol-visor)" />
+      {/* Visor — outline only, no fill */}
+      <ellipse cx="50" cy="38" rx="14" ry="15" stroke="#78c7ff" strokeWidth="1.5" fill="none" strokeOpacity="0.55" />
       {/* Helmet ring */}
       <circle cx="50" cy="38" r="26" stroke="#c46d28" strokeWidth="1.5" fill="none" />
       {/* Helmet side details */}
@@ -46,22 +46,22 @@ function WavingAstronautIllustration() {
       {/* Belt */}
       <rect x="28" y="108" width="44" height="8" rx="4" fill="#c46d28" />
 
-      {/* LEFT arm — raised in a wave */}
+      {/* LEFT arm — relaxed at side */}
+      <rect x="14" y="72" width="14" height="36" rx="7" fill="#ff9d5c" />
+      <ellipse cx="21" cy="112" rx="7" ry="6" fill="#e8884a" />
+
+      {/* RIGHT arm — raised in a wave */}
       <path
-        d="M 28 76 C 18 72 8 58 12 44 C 14 38 20 36 26 40 C 22 52 24 64 28 76 Z"
+        d="M 72 76 C 82 72 92 58 88 44 C 86 38 80 36 74 40 C 78 52 76 64 72 76 Z"
         fill="#ff9d5c"
       />
       {/* Waving hand */}
-      <ellipse cx="14" cy="40" rx="10" ry="8" fill="#ff9d5c" transform="rotate(-30, 14, 40)" />
+      <ellipse cx="86" cy="40" rx="10" ry="8" fill="#ff9d5c" transform="rotate(30, 86, 40)" />
       {/* Fingers */}
-      <line x1="7" y1="36" x2="4" y2="28" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
-      <line x1="12" y1="33" x2="10" y2="25" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
-      <line x1="17" y1="33" x2="16" y2="25" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
-      <line x1="21" y1="35" x2="22" y2="27" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
-
-      {/* RIGHT arm — relaxed at side */}
-      <rect x="72" y="72" width="14" height="36" rx="7" fill="#ff9d5c" />
-      <ellipse cx="79" cy="112" rx="7" ry="6" fill="#e8884a" />
+      <line x1="93" y1="36" x2="96" y2="28" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
+      <line x1="88" y1="33" x2="90" y2="25" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
+      <line x1="83" y1="33" x2="84" y2="25" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
+      <line x1="79" y1="35" x2="78" y2="27" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
 
       {/* Legs */}
       <rect x="34" y="114" width="14" height="36" rx="7" fill="#ff9d5c" />

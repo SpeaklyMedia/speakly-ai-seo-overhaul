@@ -7,7 +7,7 @@ function CommanderIllustration() {
       width="340"
       aria-hidden="true"
       focusable="false"
-      style={{ display: "block" }}
+      style={{ display: "block", animation: "astronautFloat 5.5s ease-in-out infinite" }}
     >
       <defs>
         <radialGradient id="sys-commander-glow" cx="50%" cy="50%" r="50%">
