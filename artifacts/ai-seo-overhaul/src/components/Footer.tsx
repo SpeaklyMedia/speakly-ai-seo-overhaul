@@ -45,7 +45,7 @@ export function Footer() {
 
         <div className="mt-[56px] pt-[24px] border-t border-[#7db0e7]/10 flex flex-wrap gap-[14px] justify-between items-center text-[0.82rem] text-ink-soft">
           <span>Speakly Media — Website-first visibility systems for the answer era.</span>
-          <a href="mailto:mark@speaklymedia.com" className="hover:text-ink transition-colors">mark@speaklymedia.com</a>
+          <a href="mailto:david@speaklymedia.com" className="hover:text-ink transition-colors">Questions? reach out to david@speaklymedia.com</a>
         </div>
       </div>
     </footer>

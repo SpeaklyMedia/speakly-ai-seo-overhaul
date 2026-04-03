@@ -381,14 +381,15 @@ export function SpacemanAnimation() {
 
         /* ── Responsive overrides ─────────────────────────────────── */
 
-        /* 1024–1279px: shrink phone slightly, keep right-offset */
+        /* 1024–1279px: slightly smaller phone, same right-anchor */
         @media (max-width: 1279px) {
           .spaceman-phone {
-            width: 286px !important;
+            width: 272px !important;
+            right: 65px !important;
           }
         }
 
-        /* < 1024px (tablet/stacked layout): adjust spaceman, keep phone right-offset */
+        /* < 1024px (tablet/stacked layout): adjust spaceman */
         @media (max-width: 1023px) {
           .spaceman-halo  { opacity: 0.7 !important; }
           .spaceman-astronaut {
@@ -401,21 +402,23 @@ export function SpacemanAnimation() {
           }
         }
 
-        /* 768–1023px: tablet — phone still right-offset, slightly narrower */
+        /* 768–1023px: tablet — phone tracks with smaller astronaut (right:10, width:160) */
         @media (min-width: 768px) and (max-width: 1023px) {
           .spaceman-phone {
-            width: 272px !important;
-            top: 56px !important;
+            width: 258px !important;
+            right: 28px !important;
+            top: 70px !important;
           }
         }
 
-        /* < 768px (mobile): recenter phone for small screens */
+        /* < 768px (mobile): recenter phone */
         @media (max-width: 767px) {
           .spaceman-phone {
             width: 220px !important;
             top: 36px !important;
             opacity: 0.52 !important;
             left: 50% !important;
+            right: auto !important;
             transform: translateX(-50%) !important;
           }
         }
@@ -499,7 +502,7 @@ export function SpacemanAnimation() {
         ))}
       </div>
 
-      {/* Astronaut — upper-right, clearly floating in space, intentional placement */}
+      {/* Astronaut — upper-right, in FRONT of phone (zIndex:4 > phone's zIndex:2) so arms appear to hold it */}
       <div
         className="spaceman-astronaut"
         style={{
@@ -508,7 +511,7 @@ export function SpacemanAnimation() {
           top: 30,
           width: 200,
           height: 340,
-          zIndex: 1,
+          zIndex: 4,
           opacity: 0.82,
           animation: "astronautFloat 3.6s ease-in-out infinite",
           willChange: "transform",
@@ -534,15 +537,14 @@ export function SpacemanAnimation() {
         }}
       />
 
-      {/* Phone — offset right of center so chat clears hero headline; blue to read as a phone screen */}
+      {/* Phone — right-anchored adjacent to the astronaut so it reads as held in its arms; blue screen tint */}
       <div
         className="spaceman-phone"
         style={{
           position: "absolute",
-          left: "calc(50% + 38px)",
-          transform: "translateX(-50%)",
-          top: 22,
-          width: 310,
+          right: 72,
+          top: 92,
+          width: 290,
           background: "rgba(4, 14, 34, 0.35)",
           backdropFilter: "blur(16px) saturate(1.6)",
           WebkitBackdropFilter: "blur(16px) saturate(1.6)",
@@ -550,7 +552,7 @@ export function SpacemanAnimation() {
           border: "1px solid rgba(120,199,255,0.45)",
           boxShadow: "0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10)",
           animation: "phonePulse 3.2s ease-in-out infinite",
-          zIndex: 3,
+          zIndex: 2,
           overflow: "hidden",
           padding: "14px 14px 16px",
           display: "flex",

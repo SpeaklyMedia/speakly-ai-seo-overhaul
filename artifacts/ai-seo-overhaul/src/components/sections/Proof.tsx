@@ -113,7 +113,7 @@ export function Proof() {
           <div className="relative z-10 p-[28px] md:p-[40px] grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-[32px] md:gap-[48px] items-start">
             {/* Left: stats + progress bar */}
             <div>
-              <small className="block uppercase tracking-[0.16em] text-teal/80 text-[0.76rem] mb-[20px]">Wellness brand</small>
+              <small className="block uppercase tracking-[0.16em] text-teal/80 text-[0.76rem] mb-[20px]">AI-SEO Overhaul Results</small>
               <div className="mb-[10px]">
                 <div className="relative inline-block">
                   <strong className="block text-[clamp(2.4rem,5vw,3.6rem)] leading-none tracking-[-0.05em] mb-[6px]">
@@ -175,7 +175,7 @@ export function Proof() {
           {/* Local restaurant */}
           <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '70ms' }}>
             <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.14),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
-            <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">Local restaurant</small>
+            <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">AI-SEO Overhaul Results</small>
             <h3 className="mb-[14px]">Better discoverability for the searches that actually matter</h3>
             <div className="grid grid-cols-2 gap-[12px] mb-[16px]">
               <div className="p-[12px] rounded-[12px] bg-[#091726]/60 border border-[#7db0e7]/12">
@@ -196,7 +196,7 @@ export function Proof() {
           {/* Beverage / platform brand */}
           <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '140ms' }}>
             <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.14),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
-            <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">Beverage brand</small>
+            <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">AI-SEO Overhaul Results</small>
             <h3 className="mb-[14px]">Stronger positioning inside an AI-driven market</h3>
             <div className="grid grid-cols-2 gap-[12px] mb-[16px]">
               <div className="p-[12px] rounded-[12px] bg-[#091726]/60 border border-[#7db0e7]/12">
@@ -213,6 +213,14 @@ export function Proof() {
               <li className="relative pl-[22px] text-ink-muted text-[0.9rem] before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-blue before:to-teal before:shadow-[0_0_0_4px_rgba(120,199,255,0.08)]">Higher-confidence competitive positioning across AI platforms</li>
             </ul>
           </article>
+        </div>
+
+        {/* Results disclaimer */}
+        <div className="mt-[28px] flex items-start gap-[12px] px-[20px] py-[16px] rounded-[14px] bg-[#071320]/70 border border-[#7db0e7]/10">
+          <div className="shrink-0 w-[6px] h-[6px] rounded-full bg-[#78c7ff]/40 mt-[7px]" aria-hidden="true" />
+          <p className="text-[0.76rem] text-ink-soft/60 leading-[1.6]">
+            Results may vary. Outcomes depend on starting conditions, category competitiveness, existing site architecture, and execution consistency. These proof points represent illustrative visibility movement, not guaranteed outcomes.
+          </p>
         </div>
       </div>
     </section>
