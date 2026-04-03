@@ -1,10 +1,12 @@
 import { useInView } from "@/hooks/use-in-view";
+import { SpacemanAnimation } from "@/components/SpacemanAnimation";
 
 export function Hero() {
   const { ref, isInView } = useInView();
 
   return (
-    <section id="top" className="pt-[92px] pb-[82px] overflow-hidden">
+    <section id="top" className="pt-[92px] pb-[82px] overflow-hidden relative">
+      <SpacemanAnimation />
       <div className="shell grid grid-cols-1 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] gap-[34px] items-stretch">
         <div ref={ref} className={`relative z-10 reveal ${isInView ? "is-visible" : ""}`}>
           <span className="inline-flex items-center gap-[10px] px-[14px] py-[10px] rounded-full border border-[#7db0e7]/25 bg-[#081624]/50 text-ink-muted text-[0.84rem] tracking-[0.14em] uppercase backdrop-blur-[12px] mb-6 before:content-[''] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-teal before:to-blue before:shadow-[0_0_14px_rgba(111,226,207,0.6)]">
