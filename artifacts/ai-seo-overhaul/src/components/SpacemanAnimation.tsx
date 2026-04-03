@@ -240,6 +240,9 @@ export function SpacemanAnimation() {
   phaseRef.current = phase;
   inputRef.current = input;
 
+  // Screen content visible = smooth fade out on pause-end/idle, fade in on typing-bad+
+  const screenVisible = phase !== "pause-end" && phase !== "idle";
+
   // Show result card 500ms after bot reply
   useEffect(() => {
     if (phase === "bot-replied") {
@@ -292,7 +295,8 @@ export function SpacemanAnimation() {
       setMessages((prev) => [...prev, { from: "bot", text: "Found it — here's what came up 👇" }]);
       t = setTimeout(() => setPhase("pause-end"), 5500);
     } else if (phase === "pause-end") {
-      t = setTimeout(() => setPhase("idle"), 1100);
+      // Content fades out via CSS during this 1400ms window, then we reset
+      t = setTimeout(() => setPhase("idle"), 1400);
     }
 
     return () => clearTimeout(t);
@@ -371,6 +375,36 @@ export function SpacemanAnimation() {
           3%  { opacity:0.95; transform:translate(44px,23px) rotate(28deg); }
           16% { opacity:0; transform:translate(175px,92px) rotate(28deg); }
         }
+
+        /* ── Responsive overrides ─────────────────────────────────── */
+
+        /* < 1280px: shrink phone slightly */
+        @media (max-width: 1279px) {
+          .spaceman-phone {
+            width: 210px !important;
+            right: 10% !important;
+          }
+        }
+
+        /* < 1024px (tablet/stacked layout): hide phone, keep astronaut smaller */
+        @media (max-width: 1023px) {
+          .spaceman-phone { display: none !important; }
+          .spaceman-halo  { display: none !important; }
+          .spaceman-astronaut {
+            left: auto !important;
+            right: 4% !important;
+            opacity: 0.22 !important;
+            top: 60px !important;
+            transform-origin: center;
+            width: 140px !important;
+            height: 238px !important;
+          }
+        }
+
+        /* < 640px (mobile): hide astronaut too — only stars remain */
+        @media (max-width: 639px) {
+          .spaceman-astronaut { display: none !important; }
+        }
       `}</style>
 
       {/* Deep-space gradient ramp — depth and contrast layer */}
@@ -445,16 +479,17 @@ export function SpacemanAnimation() {
         ))}
       </div>
 
-      {/* Astronaut — background layer, holding pose, ghost-like */}
+      {/* Astronaut — left side, background ghost layer */}
       <div
+        className="spaceman-astronaut"
         style={{
           position: "absolute",
-          right: "8%",
-          top: 120,
+          left: "1%",
+          top: 110,
           width: 175,
           height: 297,
           zIndex: 1,
-          opacity: 0.36,
+          opacity: 0.42,
           animation: "astronautFloat 3.6s ease-in-out infinite",
           willChange: "transform",
         }}
@@ -462,27 +497,29 @@ export function SpacemanAnimation() {
         <AstronautSVG />
       </div>
 
-      {/* Orange halo behind phone area */}
+      {/* Orange halo behind astronaut (left side) */}
       <div
+        className="spaceman-halo"
         style={{
           position: "absolute",
-          right: "12%",
-          top: 40,
-          width: 400,
-          height: 560,
-          background: "radial-gradient(ellipse at center, rgba(255,157,92,0.10) 0%, transparent 68%)",
-          filter: "blur(50px)",
+          left: "-8%",
+          top: 60,
+          width: 380,
+          height: 500,
+          background: "radial-gradient(ellipse at center, rgba(255,157,92,0.09) 0%, transparent 68%)",
+          filter: "blur(55px)",
           borderRadius: "50%",
-          zIndex: 2,
+          zIndex: 0,
           pointerEvents: "none",
         }}
       />
 
-      {/* Phone — glass shell, center-right, floats in sync with astronaut */}
+      {/* Phone — glass shell, right side, floats in sync with astronaut */}
       <div
+        className="spaceman-phone"
         style={{
           position: "absolute",
-          right: "16%",
+          right: "14%",
           top: 58,
           width: 242,
           background: "rgba(4, 12, 26, 0.22)",
@@ -502,7 +539,7 @@ export function SpacemanAnimation() {
           <div style={{ width: 46, height: 5, borderRadius: 3, background: "rgba(23,40,64,0.65)", boxShadow: "inset 0 1px 2px rgba(0,0,0,0.4)" }}/>
         </div>
 
-        {/* Screen area — glass, no opaque fill */}
+        {/* Screen area — fades out at loop end, fades in at start of next cycle */}
         <div
           style={{
             background: "rgba(4, 10, 20, 0.38)",
@@ -514,6 +551,8 @@ export function SpacemanAnimation() {
             flexDirection: "column",
             overflow: "hidden",
             border: "1px solid rgba(120,199,255,0.10)",
+            opacity: screenVisible ? 1 : 0,
+            transition: "opacity 0.75s ease",
           }}
         >
           {/* Header */}
