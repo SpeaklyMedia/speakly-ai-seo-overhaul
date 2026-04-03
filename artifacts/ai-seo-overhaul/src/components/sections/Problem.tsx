@@ -3,8 +3,8 @@ import { useInView } from "@/hooks/use-in-view";
 function Robot({ cx, topY, s = 1, floatDelay = 0 }: { cx: number; topY: number; s?: number; floatDelay?: number }) {
   return (
     <g style={{ animation: `astronautFloat ${4.2 + floatDelay}s ease-in-out ${floatDelay}s infinite` }}>
-      {/* Cast shadow */}
-      <ellipse cx={cx} cy={topY + 96 * s} rx={22 * s} ry={7 * s} fill="#6fe2cf" fillOpacity={0.18} />
+      {/* Cast shadow — darker orange ellipse */}
+      <ellipse cx={cx} cy={topY + 96 * s} rx={22 * s} ry={7 * s} fill="#c46d28" fillOpacity={0.45} />
 
       {/* Body */}
       <rect x={cx - 20 * s} y={topY + 34 * s} width={40 * s} height={30 * s} rx={7 * s} fill="#c46d28" />
@@ -105,7 +105,7 @@ export function Problem() {
               That gap is why strong businesses disappear from AI answers. A polished website is not enough if your services, proof, differentiators, audiences, and offers are fragmented or thin. If AI cannot clearly understand what you do and why you matter, it cannot confidently recommend you.
             </p>
           </div>
-          <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.35 }}>
+          <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.55 }}>
             <ProblemIllustration />
           </div>
         </div>

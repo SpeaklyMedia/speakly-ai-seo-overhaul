@@ -15,6 +15,11 @@ function WrenchIllustration() {
           <stop offset="55%" stopColor="#78c7ff" />
           <stop offset="100%" stopColor="#5eb0e8" />
         </linearGradient>
+        <linearGradient id="ssot-light-col" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.55" />
+          <stop offset="60%" stopColor="#6fe2cf" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
+        </linearGradient>
         <radialGradient id="ssot-glow-soft" cx="50%" cy="30%" r="60%">
           <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.35" />
           <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
@@ -23,11 +28,22 @@ function WrenchIllustration() {
           <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.25" />
           <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
         </radialGradient>
+        <radialGradient id="ssot-bg-orange" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
+        </radialGradient>
         <filter id="ssot-jaw-glow">
           <feGaussianBlur stdDeviation="5" result="blur" />
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
+        <filter id="ssot-col-glow">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
       </defs>
+
+      {/* Faint circular orange background glow behind the whole composition */}
+      <circle cx="60" cy="120" r="90" fill="url(#ssot-bg-orange)" />
 
       {/* Glow bloom at jaw */}
       <ellipse cx="60" cy="32" rx="36" ry="20" fill="url(#ssot-glow-soft)" filter="url(#ssot-jaw-glow)" />
@@ -50,6 +66,9 @@ function WrenchIllustration() {
 
       {/* Shaft highlight stripe */}
       <rect x="52" y="48" width="6" height="100" rx="3" fill="rgba(255,255,255,0.12)" />
+
+      {/* ── Vertical light column connecting wrench jaw to hand ── */}
+      <rect x="56" y="158" width="8" height="42" rx="4" fill="url(#ssot-light-col)" filter="url(#ssot-col-glow)" />
 
       {/* ── Gloved hand below ── */}
       {/* Hand glow */}

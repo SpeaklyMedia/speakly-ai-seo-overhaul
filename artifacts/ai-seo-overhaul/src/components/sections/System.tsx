@@ -43,17 +43,16 @@ function CommanderIllustration() {
       <circle cx={10} cy={95} r={1.5} fill="#f5c86f" fillOpacity={0.55} />
       <circle cx={215} cy={28} r={1.2} fill="#f5c86f" fillOpacity={0.5} />
 
-      {/* ── WRENCH held high by commander ── */}
-      {/* Gold glow bloom */}
-      <circle cx={140} cy={22} r={24} fill="url(#sys-gold-glow)" filter="url(#sys-gold-bloom)" opacity={0.85} />
-      {/* Horizontal wrench above head */}
-      {/* Left jaw prong top */}
-      <path d="M 118 18 C 118 10 122 6 126 6 L 126 14 C 124 14 122 16 122 20 C 122 24 124 26 126 26 L 126 34 C 122 34 118 30 118 18 Z" fill="#f5c86f" />
+      {/* ── WRENCH held high by commander's RIGHT arm ── */}
+      {/* Gold glow bloom — upper right */}
+      <circle cx={198} cy={22} r={24} fill="url(#sys-gold-glow)" filter="url(#sys-gold-bloom)" opacity={0.85} />
+      {/* Jaw prong */}
+      <path d="M 174 18 C 174 10 178 6 182 6 L 182 14 C 180 14 178 16 178 20 C 178 24 180 26 182 26 L 182 34 C 178 34 174 30 174 18 Z" fill="#f5c86f" />
       {/* Shaft */}
-      <rect x={126} y={16} width={28} height={8} rx={3} fill="#f5c86f" />
-      {/* Right box end */}
-      <rect x={154} y={12} width={18} height={16} rx={3.5} fill="#f5c86f" />
-      <polygon points="163,15 170,18 170,24 163,27 156,24 156,18" fill="#04101c" fillOpacity={0.45} />
+      <rect x={182} y={16} width={28} height={8} rx={3} fill="#f5c86f" />
+      {/* Box end */}
+      <rect x={210} y={12} width={18} height={16} rx={3.5} fill="#f5c86f" />
+      <polygon points="219,15 226,18 226,24 219,27 212,24 212,18" fill="#04101c" fillOpacity={0.45} />
 
       {/* ── COMMANDER (center, tall) ── */}
       {/* Shoulder pads */}
@@ -67,12 +66,12 @@ function CommanderIllustration() {
       <path d="M 148 112 C 148 108 144 106 140 108 C 136 110 136 114 140 116 C 144 118 144 122 140 124 C 136 126 132 124 132 120" stroke="#ff9d5c" strokeWidth="3.5" fill="none" strokeLinecap="round" />
       {/* Belt */}
       <rect x={112} y={143} width={56} height={8} rx={4} fill="#c46d28" />
-      {/* Left arm raised — holding wrench */}
-      <path d="M 112 102 C 100 94 90 76 96 60 C 98 54 104 52 110 56 C 106 68 106 84 112 102 Z" fill="#ff9d5c" />
-      <ellipse cx={96} cy={56} rx={10} ry={8} fill="#c46d28" />
-      {/* Right arm — relaxed */}
-      <rect x={168} y={100} width={14} height={36} rx={7} fill="#ff9d5c" />
-      <ellipse cx={175} cy={140} rx={8} ry={6} fill="#c46d28" />
+      {/* Left arm — relaxed, hanging down */}
+      <rect x={98} y={100} width={14} height={36} rx={7} fill="#ff9d5c" />
+      <ellipse cx={105} cy={140} rx={8} ry={6} fill="#c46d28" />
+      {/* Right arm — fully extended upward, holding wrench */}
+      <path d="M 168 102 C 180 94 192 76 186 60 C 184 54 178 52 172 56 C 176 68 176 84 168 102 Z" fill="#ff9d5c" />
+      <ellipse cx={184} cy={57} rx={10} ry={8} fill="#c46d28" />
       {/* Legs */}
       <rect x={118} y={150} width={18} height={42} rx={9} fill="#e8884a" />
       <rect x={144} y={150} width={18} height={42} rx={9} fill="#e8884a" />

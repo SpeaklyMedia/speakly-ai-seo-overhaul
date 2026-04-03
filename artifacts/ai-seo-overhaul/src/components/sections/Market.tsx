@@ -108,7 +108,7 @@ export function Market() {
               The shift is not "Google versus AI." AI is increasingly built into Google, while ChatGPT, Perplexity, commerce, video, and social all influence discovery. If your brand is hard to interpret, it becomes easy to ignore.
             </p>
           </div>
-          <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.45 }}>
+          <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.65 }}>
             <MarketIllustration />
           </div>
         </div>

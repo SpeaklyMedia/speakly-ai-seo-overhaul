@@ -1,8 +1,8 @@
 import { useInView } from "@/hooks/use-in-view";
 
 function SecureChipIllustration() {
-  const Pin = ({ x1, y1, x2, y2, cx, cy, teal }: { x1: number; y1: number; x2: number; y2: number; cx: number; cy: number; teal?: boolean }) => {
-    const color = teal ? "#6fe2cf" : "#ff9d5c";
+  const Pin = ({ x1, y1, x2, y2, cx, cy, teal, blue }: { x1: number; y1: number; x2: number; y2: number; cx: number; cy: number; teal?: boolean; blue?: boolean }) => {
+    const color = blue ? "#78c7ff" : teal ? "#6fe2cf" : "#ff9d5c";
     return (
       <g>
         <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={3} strokeLinecap="round" />
@@ -36,10 +36,10 @@ function SecureChipIllustration() {
       </defs>
 
       {/* ── 4 pins per side (16 total) ── */}
-      {/* Top */}
+      {/* Top — center two pins bright blue */}
       <Pin x1={56} y1={30} x2={56} y2={14} cx={56} cy={12} />
-      <Pin x1={70} y1={30} x2={70} y2={14} cx={70} cy={12} teal />
-      <Pin x1={84} y1={30} x2={84} y2={14} cx={84} cy={12} />
+      <Pin x1={70} y1={30} x2={70} y2={14} cx={70} cy={12} blue />
+      <Pin x1={84} y1={30} x2={84} y2={14} cx={84} cy={12} blue />
       <Pin x1={98} y1={30} x2={98} y2={14} cx={98} cy={12} teal />
       {/* Bottom */}
       <Pin x1={56} y1={130} x2={56} y2={146} cx={56} cy={148} teal />
@@ -69,18 +69,18 @@ function SecureChipIllustration() {
       <polyline points="116,112 116,100 102,100" stroke="#6fe2cf" strokeWidth={1.5} fill="none" strokeOpacity={0.5} strokeLinecap="round" strokeLinejoin="round" />
       <polyline points="44,110 44,102 54,102" stroke="#78c7ff" strokeWidth={1.2} fill="none" strokeOpacity={0.4} strokeLinecap="round" strokeLinejoin="round" />
 
-      {/* ── Central shield — FILLED ── */}
+      {/* ── Central shield — FILLED dark navy interior, orange border ── */}
       <path
         d="M 80 48 C 80 48 58 56 58 70 C 58 84 68 96 80 102 C 92 96 102 84 102 70 C 102 56 80 48 80 48 Z"
-        fill="#ff9d5c"
-        fillOpacity={0.22}
+        fill="#04101c"
+        fillOpacity={0.85}
       />
       <path
         d="M 80 48 C 80 48 58 56 58 70 C 58 84 68 96 80 102 C 92 96 102 84 102 70 C 102 56 80 48 80 48 Z"
         stroke="#ff9d5c"
-        strokeWidth={2}
+        strokeWidth={2.5}
         fill="none"
-        strokeOpacity={0.6}
+        strokeOpacity={0.85}
       />
 
       {/* Teal checkmark with glow */}
