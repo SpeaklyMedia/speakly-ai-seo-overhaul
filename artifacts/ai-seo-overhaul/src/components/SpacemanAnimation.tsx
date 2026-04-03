@@ -325,7 +325,7 @@ export function SpacemanAnimation() {
   phaseRef.current = phase;
   inputRef.current = input;
 
-  /* Show result card 600 ms after bot reply arrives */
+  /* Show result card 500 ms after bot reply arrives */
   useEffect(() => {
     if (phase === "bot-replied") {
       const id = setTimeout(() => setShowCard(true), 500);
