@@ -152,20 +152,20 @@ function AstronautSVG() {
         <ellipse cx="67.5" cy="223" rx="16" ry="10" fill="#0d2640" stroke="#ff9d5c" strokeWidth="1.8"/>
         <ellipse cx="92.5" cy="223" rx="16" ry="10" fill="#0d2640" stroke="#ff9d5c" strokeWidth="1.8"/>
 
-        {/* Left arm — holding pose: upper arm down, forearm bends sharply inward */}
-        <polygon points="30,102 46,102 48,144 32,144" fill="#ff9d5c"/>
-        <polygon points="32,140 48,144 66,156 50,153" fill="#e08545"/>
-        <ellipse cx="60" cy="157" rx="12" ry="8" fill="#c06830"/>
+        {/* Left arm — cradling phone: upper arm angled forward/down, forearm bends steeply inward */}
+        <polygon points="28,100 44,98 52,138 36,142" fill="#ff9d5c"/>
+        <polygon points="36,140 52,136 72,152 56,158" fill="#e08545"/>
+        <ellipse cx="65" cy="156" rx="12" ry="8" fill="#c06830"/>
 
-        {/* Right arm — mirrored holding pose */}
-        <polygon points="130,102 114,102 112,144 128,144" fill="#ff9d5c"/>
-        <polygon points="128,140 112,144 94,156 110,153" fill="#e08545"/>
-        <ellipse cx="100" cy="157" rx="12" ry="8" fill="#c06830"/>
+        {/* Right arm — mirrored cradling pose */}
+        <polygon points="132,100 116,98 108,138 124,142" fill="#ff9d5c"/>
+        <polygon points="124,140 108,136 88,152 104,158" fill="#e08545"/>
+        <ellipse cx="95" cy="156" rx="12" ry="8" fill="#c06830"/>
 
         {/* Thumbs — exaggerated typing rhythm at hand level */}
         <g style={{ animation: "astronautThumb 0.38s ease-in-out infinite", transformBox: "fill-box" as const, transformOrigin: "50% 50%", willChange: "transform" }}>
-          <rect x="56" y="154" width="10" height="5" rx="2.5" fill="#a05520"/>
-          <rect x="94" y="154" width="10" height="5" rx="2.5" fill="#a05520"/>
+          <rect x="61" y="153" width="10" height="5" rx="2.5" fill="#a05520"/>
+          <rect x="89" y="153" width="10" height="5" rx="2.5" fill="#a05520"/>
         </g>
 
         {/* Helmet group — head bob */}
@@ -381,15 +381,14 @@ export function SpacemanAnimation() {
 
         /* ── Responsive overrides ─────────────────────────────────── */
 
-        /* < 1280px: shrink phone slightly, maintain offset centering */
+        /* 1024–1279px: shrink phone slightly, keep right-offset */
         @media (max-width: 1279px) {
           .spaceman-phone {
             width: 286px !important;
-            transform: translateX(-50%) !important;
           }
         }
 
-        /* < 1024px (tablet/stacked layout): adjust spaceman, recenter phone */
+        /* < 1024px (tablet/stacked layout): adjust spaceman, keep phone right-offset */
         @media (max-width: 1023px) {
           .spaceman-halo  { opacity: 0.7 !important; }
           .spaceman-astronaut {
@@ -400,22 +399,17 @@ export function SpacemanAnimation() {
             width: 160px !important;
             height: 272px !important;
           }
-          .spaceman-phone {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-          }
         }
 
-        /* 768–1023px: tablet — phone visible and centered */
+        /* 768–1023px: tablet — phone still right-offset, slightly narrower */
         @media (min-width: 768px) and (max-width: 1023px) {
           .spaceman-phone {
             width: 272px !important;
             top: 56px !important;
-            transform: translateX(-50%) !important;
           }
         }
 
-        /* < 768px (mobile): show phone smaller and slightly transparent as background element */
+        /* < 768px (mobile): recenter phone for small screens */
         @media (max-width: 767px) {
           .spaceman-phone {
             width: 220px !important;
