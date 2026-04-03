@@ -382,9 +382,8 @@ export function SpacemanAnimation() {
           }
         }
 
-        /* < 1024px (tablet/stacked layout): hide phone, keep astronaut on left edge */
+        /* < 1024px (tablet/stacked layout): ghost astronaut, keep phone */
         @media (max-width: 1023px) {
-          .spaceman-phone { display: none !important; }
           .spaceman-halo  { opacity: 0.6 !important; }
           .spaceman-astronaut {
             left: -50px !important;
@@ -393,6 +392,20 @@ export function SpacemanAnimation() {
             width: 148px !important;
             height: 252px !important;
           }
+        }
+
+        /* 768–1023px: show phone at tablet size, tucked upper-right */
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .spaceman-phone {
+            width: 162px !important;
+            right: 18px !important;
+            top: 78px !important;
+          }
+        }
+
+        /* < 768px (mobile): hide phone */
+        @media (max-width: 767px) {
+          .spaceman-phone { display: none !important; }
         }
 
         /* < 640px (mobile): hide astronaut — only stars remain */
