@@ -1,6 +1,8 @@
 import { useInView } from "@/hooks/use-in-view";
-import spaceshipIcon from "@assets/8F8B77A1-1E0D-4616-A3E6-42759D6AF3F2_1775246793840.png";
-import wavingAstronaut from "@assets/68A9849C-780D-48EE-8FB8-EEF91E8CFDD4_1775208085481.png";
+import spaceshipIcon from "@assets/8F8B77A1-1E0D-4616-A3E6-42759D6AF3F2_1775255124092.png";
+import aiBrainHead from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_1775255124092.png";
+import astronautChat from "@assets/B360D418-5C13-49A9-B3D5-E5B625E203B2_1775255124092.png";
+import magnetIcon from "@assets/B8D35E42-BF1A-4E3C-AA9D-9556E2C80BD2_1775255124092.png";
 import spaceOrangeBg from "@assets/IMG_0231_1775246914295.png";
 
 const overhauls = [
@@ -36,48 +38,102 @@ const overhauls = [
   },
 ];
 
-function AstronautFigure({ width = 240 }: { width?: number }) {
+const brandItems = [
+  {
+    src: aiBrainHead,
+    alt: "AI brain — machine intelligence",
+    label: "Machine intelligence",
+    darkCard: true,
+    delay: 0,
+  },
+  {
+    src: astronautChat,
+    alt: "Astronaut chatting — AI conversation",
+    label: "AI-native copy",
+    darkCard: true,
+    delay: 80,
+  },
+  {
+    src: spaceshipIcon,
+    alt: "Spaceship — velocity and reach",
+    label: "Visibility at scale",
+    darkCard: false,
+    delay: 160,
+  },
+  {
+    src: magnetIcon,
+    alt: "Magnet — attraction and authority",
+    label: "Authority signals",
+    darkCard: false,
+    delay: 240,
+  },
+];
+
+function BrandGrid({ inView }: { inView: boolean }) {
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      {/* Glow halo behind astronaut */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: "-30px",
-          borderRadius: "50%",
-          background: "radial-gradient(ellipse 80% 70% at 50% 55%, rgba(255,157,92,0.28), rgba(111,226,207,0.12) 50%, transparent 70%)",
-          filter: "blur(24px)",
-        }}
-      />
-      <img
-        src={wavingAstronaut}
-        alt=""
-        width={width}
-        style={{
-          display: "block",
-          animation: "astronautFloat 3.8s ease-in-out infinite",
-          filter: "drop-shadow(0 0 28px rgba(255,157,92,0.50)) drop-shadow(0 0 12px rgba(111,226,207,0.25)) drop-shadow(0 6px 18px rgba(0,0,0,0.65))",
-          willChange: "transform",
-          position: "relative",
-          zIndex: 1,
-        }}
-      />
-      {/* Subtle orbit ring */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          left: "50%",
-          bottom: "-12px",
-          transform: "translateX(-50%)",
-          width: width * 0.7,
-          height: 16,
-          borderRadius: "50%",
-          background: "radial-gradient(ellipse, rgba(255,157,92,0.28) 0%, transparent 70%)",
-          filter: "blur(6px)",
-        }}
-      />
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 14,
+      }}
+    >
+      {brandItems.map(({ src, alt, label, darkCard, delay }, i) => (
+        <div
+          key={i}
+          className={`reveal ${inView ? "is-visible" : ""}`}
+          style={{
+            transitionDelay: `${delay}ms`,
+            borderRadius: 20,
+            overflow: "hidden",
+            background: darkCard
+              ? "rgba(4, 14, 28, 0.72)"
+              : "transparent",
+            border: darkCard
+              ? "1px solid rgba(120,199,255,0.14)"
+              : "none",
+            backdropFilter: darkCard ? "blur(12px)" : "none",
+            WebkitBackdropFilter: darkCard ? "blur(12px)" : "none",
+            boxShadow: darkCard
+              ? "0 4px 24px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.05)"
+              : "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            animation: `astronautFloat ${3.6 + i * 0.42}s ease-in-out ${i * 0.65}s infinite`,
+          }}
+        >
+          <img
+            src={src}
+            alt={alt}
+            style={{
+              width: "100%",
+              aspectRatio: "1 / 1",
+              objectFit: darkCard ? "contain" : "cover",
+              padding: darkCard ? "10%" : 0,
+              display: "block",
+              mixBlendMode: darkCard ? "normal" : "screen",
+              filter: darkCard
+                ? "brightness(1.05)"
+                : "drop-shadow(0 0 12px rgba(255,157,92,0.28))",
+            }}
+          />
+          <div
+            style={{
+              width: "100%",
+              padding: darkCard ? "6px 12px 10px" : "6px 12px 10px",
+              fontSize: "0.72rem",
+              fontWeight: 600,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              textAlign: "center",
+              color: darkCard ? "rgba(120,199,255,0.75)" : "rgba(255,157,92,0.72)",
+            }}
+          >
+            {label}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -139,12 +195,12 @@ export function Solution() {
 
       <div className="shell" style={{ position: "relative", zIndex: 3 }}>
 
-        {/* Mobile layout: astronaut → heading → 2-col cards */}
+        {/* Mobile layout: brand grid → heading → 2-col cards */}
         <div className="md:hidden">
-          <div className="flex justify-center mb-[30px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.72 }}>
-            <AstronautFigure width={160} />
+          <div ref={mobileRef} className="mb-[28px] pointer-events-none" aria-hidden="true" style={{ maxWidth: 280, margin: "0 auto 28px" }}>
+            <BrandGrid inView={mobileInView} />
           </div>
-          <div ref={mobileRef} className={`mb-[32px] reveal-left ${mobileInView ? "is-visible" : ""}`}>
+          <div className={`mb-[32px] reveal-left ${mobileInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
             <h2>What the overhaul is designed to do</h2>
             <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
@@ -167,22 +223,22 @@ export function Solution() {
           </div>
         </div>
 
-        {/* Desktop: 2-col split — astronaut LEFT, heading + 2-col cards RIGHT */}
+        {/* Desktop: 2-col split — brand grid LEFT, heading + 2-col cards RIGHT */}
         <div className="hidden md:grid grid-cols-[280px_1fr] gap-[52px] items-start mb-[40px]">
 
-          {/* Left column: astronaut */}
-          <div className="relative flex flex-col items-center pt-[16px] pointer-events-none sticky top-[100px]" aria-hidden="true">
-            <div className={`relative reveal-right ${desktopInView ? "is-visible" : ""}`} style={{ opacity: 0.95 }}>
-              <AstronautFigure width={260} />
+          {/* Left column: brand image grid */}
+          <div ref={desktopRef} className="relative flex flex-col items-center pt-[8px] sticky top-[100px]" aria-hidden="true">
+            <div style={{ width: "100%" }}>
+              <BrandGrid inView={desktopInView} />
             </div>
-            <div className="mt-[14px] pointer-events-none" style={{ opacity: 0.35 }}>
-              <img src={spaceshipIcon} alt="" width={72} height={72} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
+            <div className="mt-[14px] pointer-events-none" style={{ opacity: 0.30 }}>
+              <img src={spaceshipIcon} alt="" width={56} height={56} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
             </div>
           </div>
 
           {/* Right column: heading + 2-col card grid */}
           <div>
-            <div ref={desktopRef} className={`mb-[32px] reveal-left ${desktopInView ? "is-visible" : ""}`}>
+            <div className={`mb-[32px] reveal-left ${desktopInView ? "is-visible" : ""}`}>
               <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
               <h2>What the overhaul is designed to do</h2>
               <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">

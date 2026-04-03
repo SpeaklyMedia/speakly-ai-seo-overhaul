@@ -27,6 +27,16 @@ function MarketIllustration() {
           <feGaussianBlur stdDeviation="8" result="blur" />
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
+        {/* Signal pulse paths — original spokes */}
+        <path id="path-top" d="M 100 72 L 100 50" />
+        <path id="path-tr" d="M 124 76 L 148 52" />
+        <path id="path-right" d="M 128 100 L 158 100" />
+        <path id="path-left" d="M 72 100 L 42 100" />
+        {/* Signal pulse paths — sub-branch extensions */}
+        <path id="path-top-sub-l" d="M 100 50 L 76 24 L 56 8" />
+        <path id="path-tr-sub" d="M 148 52 L 174 30 L 196 14" />
+        <path id="path-right-sub-t" d="M 158 100 L 186 78" />
+        <path id="path-bottom-sub-l" d="M 100 158 L 80 182" />
       </defs>
 
       {/* Outer ring — faint orbit */}
@@ -122,13 +132,83 @@ function MarketIllustration() {
         <animate attributeName="opacity" values="0;0.75;0" dur="2.6s" repeatCount="indefinite" begin="1.8s" />
       </circle>
 
-      {/* Signal pulse paths */}
-      <defs>
-        <path id="path-top" d="M 100 72 L 100 50" />
-        <path id="path-tr" d="M 124 76 L 148 52" />
-        <path id="path-right" d="M 128 100 L 158 100" />
-        <path id="path-left" d="M 72 100 L 42 100" />
-      </defs>
+      {/* ── Extra branches from outer nodes for tree-like depth ── */}
+      {/* Top node (100,50) → two sub-branches */}
+      <line x1="100" y1="50" x2="76" y2="24" stroke="#6fe2cf" strokeWidth="0.9" strokeOpacity="0.35" strokeDasharray="3 5" />
+      <line x1="100" y1="50" x2="126" y2="22" stroke="#78c7ff" strokeWidth="0.9" strokeOpacity="0.32" strokeDasharray="3 5" />
+      <circle cx="76" cy="24" r="3.5" fill="#04101c" stroke="#6fe2cf" strokeWidth="0.9" />
+      <circle cx="76" cy="24" r="1.5" fill="#6fe2cf" opacity="0.75" />
+      <circle cx="126" cy="22" r="3.5" fill="#04101c" stroke="#78c7ff" strokeWidth="0.9" />
+      <circle cx="126" cy="22" r="1.5" fill="#78c7ff" opacity="0.72" />
+      {/* Sub-sub branches from top-left sub-node */}
+      <line x1="76" y1="24" x2="56" y2="8" stroke="#6fe2cf" strokeWidth="0.7" strokeOpacity="0.22" strokeDasharray="2 5" />
+      <circle cx="56" cy="8" r="2.5" fill="#04101c" stroke="#6fe2cf" strokeWidth="0.7" opacity="0.6" />
+      <circle cx="56" cy="8" r="1" fill="#6fe2cf" opacity="0.55" />
+
+      {/* TR node (148,52) → sub-branch */}
+      <line x1="148" y1="52" x2="174" y2="30" stroke="#ff9d5c" strokeWidth="0.9" strokeOpacity="0.32" strokeDasharray="3 5" />
+      <circle cx="174" cy="30" r="3.5" fill="#04101c" stroke="#ff9d5c" strokeWidth="0.9" />
+      <circle cx="174" cy="30" r="1.5" fill="#ff9d5c" opacity="0.70" />
+      {/* And a further sub from there */}
+      <line x1="174" y1="30" x2="196" y2="14" stroke="#ff9d5c" strokeWidth="0.7" strokeOpacity="0.20" strokeDasharray="2 5" />
+      <circle cx="196" cy="14" r="2.5" fill="#04101c" stroke="#ff9d5c" strokeWidth="0.7" opacity="0.5" />
+      <circle cx="196" cy="14" r="1" fill="#ff9d5c" opacity="0.50" />
+
+      {/* Right node (158,100) → two sub-branches */}
+      <line x1="158" y1="100" x2="186" y2="78" stroke="#78c7ff" strokeWidth="0.9" strokeOpacity="0.30" strokeDasharray="3 5" />
+      <line x1="158" y1="100" x2="188" y2="122" stroke="#6fe2cf" strokeWidth="0.9" strokeOpacity="0.28" strokeDasharray="3 5" />
+      <circle cx="186" cy="78" r="3.5" fill="#04101c" stroke="#78c7ff" strokeWidth="0.9" />
+      <circle cx="186" cy="78" r="1.5" fill="#78c7ff" opacity="0.68" />
+      <circle cx="188" cy="122" r="3.5" fill="#04101c" stroke="#6fe2cf" strokeWidth="0.9" />
+      <circle cx="188" cy="122" r="1.5" fill="#6fe2cf" opacity="0.65" />
+
+      {/* Bottom node (100,158) → two sub-branches */}
+      <line x1="100" y1="158" x2="80" y2="182" stroke="#f5c86f" strokeWidth="0.9" strokeOpacity="0.30" strokeDasharray="3 5" />
+      <line x1="100" y1="158" x2="122" y2="180" stroke="#ff9d5c" strokeWidth="0.9" strokeOpacity="0.28" strokeDasharray="3 5" />
+      <circle cx="80" cy="182" r="3" fill="#04101c" stroke="#f5c86f" strokeWidth="0.8" />
+      <circle cx="80" cy="182" r="1.2" fill="#f5c86f" opacity="0.68" />
+      <circle cx="122" cy="180" r="3" fill="#04101c" stroke="#ff9d5c" strokeWidth="0.8" />
+      <circle cx="122" cy="180" r="1.2" fill="#ff9d5c" opacity="0.65" />
+
+      {/* BL node (52,148) → sub-branch */}
+      <line x1="52" y1="148" x2="26" y2="170" stroke="#6fe2cf" strokeWidth="0.9" strokeOpacity="0.28" strokeDasharray="3 5" />
+      <circle cx="26" cy="170" r="3" fill="#04101c" stroke="#6fe2cf" strokeWidth="0.8" />
+      <circle cx="26" cy="170" r="1.2" fill="#6fe2cf" opacity="0.60" />
+
+      {/* Left node (42,100) → sub-branch */}
+      <line x1="42" y1="100" x2="14" y2="82" stroke="#78c7ff" strokeWidth="0.9" strokeOpacity="0.26" strokeDasharray="3 5" />
+      <line x1="42" y1="100" x2="12" y2="118" stroke="#78c7ff" strokeWidth="0.7" strokeOpacity="0.20" strokeDasharray="2 5" />
+      <circle cx="14" cy="82" r="3" fill="#04101c" stroke="#78c7ff" strokeWidth="0.8" />
+      <circle cx="14" cy="82" r="1.2" fill="#78c7ff" opacity="0.62" />
+      <circle cx="12" cy="118" r="2.5" fill="#04101c" stroke="#78c7ff" strokeWidth="0.7" />
+      <circle cx="12" cy="118" r="1" fill="#78c7ff" opacity="0.52" />
+
+      {/* Extra animated signal pulses for new branches */}
+      <circle r="1.4" fill="#6fe2cf" fillOpacity="0.9">
+        <animateMotion dur="3.1s" repeatCount="indefinite" begin="0.4s">
+          <mpath xlinkHref="#path-top-sub-l" />
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.9;0" dur="3.1s" repeatCount="indefinite" begin="0.4s" />
+      </circle>
+      <circle r="1.4" fill="#ff9d5c" fillOpacity="0.9">
+        <animateMotion dur="3.6s" repeatCount="indefinite" begin="1.4s">
+          <mpath xlinkHref="#path-tr-sub" />
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.85;0" dur="3.6s" repeatCount="indefinite" begin="1.4s" />
+      </circle>
+      <circle r="1.4" fill="#78c7ff" fillOpacity="0.9">
+        <animateMotion dur="3.3s" repeatCount="indefinite" begin="2.0s">
+          <mpath xlinkHref="#path-right-sub-t" />
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.80;0" dur="3.3s" repeatCount="indefinite" begin="2.0s" />
+      </circle>
+      <circle r="1.4" fill="#f5c86f" fillOpacity="0.9">
+        <animateMotion dur="3.8s" repeatCount="indefinite" begin="0.9s">
+          <mpath xlinkHref="#path-bottom-sub-l" />
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.78;0" dur="3.8s" repeatCount="indefinite" begin="0.9s" />
+      </circle>
+
     </svg>
   );
 }

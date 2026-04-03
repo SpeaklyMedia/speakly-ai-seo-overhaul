@@ -90,6 +90,60 @@ export function System() {
         }}
       />
 
+      {/* Comet streak — diagonal travel across section */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "12%",
+          left: "-120px",
+          zIndex: 2,
+          pointerEvents: "none",
+          animation: "comet 28s linear 3s infinite",
+          willChange: "transform, opacity",
+        }}
+      >
+        {/* Comet head */}
+        <div style={{
+          width: 6,
+          height: 6,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, #fff 0%, #78c7ff 50%, transparent 100%)",
+          boxShadow: "0 0 8px 4px rgba(120,199,255,0.60)",
+          position: "relative",
+          zIndex: 1,
+        }} />
+        {/* Comet tail */}
+        <div style={{
+          position: "absolute",
+          top: "50%",
+          right: "100%",
+          transform: "translateY(-50%)",
+          width: 90,
+          height: 2,
+          background: "linear-gradient(270deg, rgba(120,199,255,0.55) 0%, rgba(120,199,255,0.12) 60%, transparent 100%)",
+          borderRadius: 2,
+        }} />
+      </div>
+
+      {/* Supernova radial bloom — slow pulse in upper right of section */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "8%",
+          right: "14%",
+          zIndex: 2,
+          pointerEvents: "none",
+          width: 220,
+          height: 220,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(245,200,111,0.18) 0%, rgba(255,157,92,0.09) 40%, transparent 70%)",
+          animation: "supernova 12s ease-in-out 6s infinite",
+          willChange: "transform, opacity",
+        }}
+      />
+
       <div className="shell" style={{ position: "relative", zIndex: 3 }}>
         <div className="relative mb-[44px]">
           <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>

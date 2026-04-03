@@ -91,14 +91,14 @@ export function SourceOfTruth() {
         />
       </div>
 
-      {/* Dark overlay for readability — gradient from left (darker for text) to right (lighter for atmosphere) */}
+      {/* Dark overlay — reduced to let wrench image show through at all breakpoints */}
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,
           zIndex: 2,
-          background: "linear-gradient(100deg, rgba(4,16,28,0.88) 0%, rgba(4,16,28,0.76) 50%, rgba(4,16,28,0.60) 100%)",
+          background: "linear-gradient(110deg, rgba(4,16,28,0.72) 0%, rgba(4,16,28,0.52) 45%, rgba(4,16,28,0.28) 100%)",
           pointerEvents: "none",
         }}
       />

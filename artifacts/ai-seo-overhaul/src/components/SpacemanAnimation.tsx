@@ -162,8 +162,8 @@ function AstronautSVG() {
         <polygon points="128,140 112,144 94,156 110,153" fill="#e08545"/>
         <ellipse cx="100" cy="157" rx="12" ry="8" fill="#c06830"/>
 
-        {/* Thumbs — typing rhythm, centered at hand level */}
-        <g style={{ animation: "astronautThumb 0.52s ease-in-out infinite", transformBox: "fill-box" as const, transformOrigin: "50% 50%", willChange: "transform" }}>
+        {/* Thumbs — exaggerated typing rhythm at hand level */}
+        <g style={{ animation: "astronautThumb 0.38s ease-in-out infinite", transformBox: "fill-box" as const, transformOrigin: "50% 50%", willChange: "transform" }}>
           <rect x="56" y="154" width="10" height="5" rx="2.5" fill="#a05520"/>
           <rect x="94" y="154" width="10" height="5" rx="2.5" fill="#a05520"/>
         </g>
@@ -235,6 +235,7 @@ export function SpacemanAnimation() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [botTyping, setBotTyping] = useState(false);
   const [showCard, setShowCard] = useState(false);
+  const [fadingOut, setFadingOut] = useState(false);
   const phaseRef = useRef(phase);
   const inputRef = useRef(input);
   phaseRef.current = phase;
@@ -292,7 +293,12 @@ export function SpacemanAnimation() {
       setMessages((prev) => [...prev, { from: "bot", text: "Found it — here's what came up 👇" }]);
       t = setTimeout(() => setPhase("pause-end"), 5500);
     } else if (phase === "pause-end") {
-      t = setTimeout(() => setPhase("idle"), 1100);
+      // Start graceful fade-out of all chat elements, then reset
+      setFadingOut(true);
+      t = setTimeout(() => {
+        setFadingOut(false);
+        setPhase("idle");
+      }, 950);
     }
 
     return () => clearTimeout(t);
@@ -324,8 +330,8 @@ export function SpacemanAnimation() {
           40%          { transform:scale(1.15); opacity:1; }
         }
         @keyframes phonePulse {
-          0%,100% { box-shadow:0 0 20px 6px rgba(255,157,92,0.50), 0 0 80px 24px rgba(255,157,92,0.16), inset 0 1px 0 rgba(255,255,255,0.08); }
-          50%      { box-shadow:0 0 32px 10px rgba(255,157,92,0.68), 0 0 110px 32px rgba(255,157,92,0.24), inset 0 1px 0 rgba(255,255,255,0.08); }
+          0%,100% { box-shadow:0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10); }
+          50%      { box-shadow:0 0 28px 8px rgba(120,199,255,0.60), 0 0 100px 28px rgba(120,199,255,0.20), inset 0 1px 0 rgba(255,255,255,0.10); }
         }
         @keyframes astronautFloat {
           0%,100% { transform:translateY(0px); }
@@ -336,12 +342,13 @@ export function SpacemanAnimation() {
           50%      { transform:rotate(0.4deg); }
         }
         @keyframes astronautHead {
-          0%,100% { transform:translateY(0px); }
-          50%      { transform:translateY(-2.5px); }
+          0%,100% { transform:translateY(0px) rotate(-9deg); }
+          50%      { transform:translateY(-1.5px) rotate(-12deg); }
         }
         @keyframes astronautThumb {
-          0%,100% { transform:translateY(0px); }
-          50%      { transform:translateY(-2.5px); }
+          0%,100% { transform:translateY(0px) scale(1); }
+          30%      { transform:translateY(-7px) scale(0.82); }
+          65%      { transform:translateY(2px) scale(1.06); }
         }
         @keyframes helmetLight {
           0%,100% { opacity:1; }
@@ -374,7 +381,7 @@ export function SpacemanAnimation() {
 
         /* ── Responsive overrides ─────────────────────────────────── */
 
-        /* < 1280px: shrink phone slightly, maintain centering */
+        /* < 1280px: shrink phone slightly, maintain offset centering */
         @media (max-width: 1279px) {
           .spaceman-phone {
             width: 286px !important;
@@ -382,7 +389,7 @@ export function SpacemanAnimation() {
           }
         }
 
-        /* < 1024px (tablet/stacked layout): adjust spaceman, keep phone centered */
+        /* < 1024px (tablet/stacked layout): adjust spaceman, recenter phone */
         @media (max-width: 1023px) {
           .spaceman-halo  { opacity: 0.7 !important; }
           .spaceman-astronaut {
@@ -393,9 +400,13 @@ export function SpacemanAnimation() {
             width: 160px !important;
             height: 272px !important;
           }
+          .spaceman-phone {
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+          }
         }
 
-        /* 768–1023px: tablet — phone visible and centered, no scale */
+        /* 768–1023px: tablet — phone visible and centered */
         @media (min-width: 768px) and (max-width: 1023px) {
           .spaceman-phone {
             width: 272px !important;
@@ -410,6 +421,7 @@ export function SpacemanAnimation() {
             width: 220px !important;
             top: 36px !important;
             opacity: 0.52 !important;
+            left: 50% !important;
             transform: translateX(-50%) !important;
           }
         }
@@ -528,21 +540,21 @@ export function SpacemanAnimation() {
         }}
       />
 
-      {/* Phone — centered horizontally, near top of hero */}
+      {/* Phone — offset right of center so chat clears hero headline; blue to read as a phone screen */}
       <div
         className="spaceman-phone"
         style={{
           position: "absolute",
-          left: "50%",
+          left: "calc(50% + 38px)",
           transform: "translateX(-50%)",
-          top: 50,
+          top: 22,
           width: 310,
-          background: "rgba(4, 12, 26, 0.22)",
+          background: "rgba(4, 14, 34, 0.35)",
           backdropFilter: "blur(16px) saturate(1.6)",
           WebkitBackdropFilter: "blur(16px) saturate(1.6)",
           borderRadius: 32,
-          border: "1px solid rgba(255,157,92,0.40)",
-          boxShadow: "0 0 20px 6px rgba(255,157,92,0.50), 0 0 80px 24px rgba(255,157,92,0.16), inset 0 1px 0 rgba(255,255,255,0.08)",
+          border: "1px solid rgba(120,199,255,0.45)",
+          boxShadow: "0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10)",
           animation: "phonePulse 3.2s ease-in-out infinite",
           zIndex: 3,
           overflow: "hidden",
@@ -575,14 +587,19 @@ export function SpacemanAnimation() {
                 padding: "9px 13px",
                 borderRadius: msg.from === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
                 background: msg.from === "user"
-                  ? "linear-gradient(135deg, #ff9d5c, #f5c86f)"
+                  ? "linear-gradient(135deg, #78c7ff, #6fe2cf)"
                   : "rgba(120,199,255,0.12)",
                 border: msg.from === "bot" ? "1px solid rgba(120,199,255,0.22)" : "none",
                 color: msg.from === "user" ? "#04101c" : "#dbe8f7",
                 fontSize: 11,
                 fontWeight: msg.from === "user" ? 600 : 400,
                 lineHeight: 1.45,
-                animation: "cardFadeIn 0.3s ease forwards",
+                animation: fadingOut ? undefined : "cardFadeIn 0.3s ease forwards",
+                opacity: fadingOut ? 0 : 1,
+                transform: fadingOut ? "translateY(18px)" : "translateY(0)",
+                transition: fadingOut
+                  ? `opacity 700ms ease ${i * 90}ms, transform 700ms ease ${i * 90}ms`
+                  : "none",
               }}
             >
               {msg.text}
@@ -606,7 +623,15 @@ export function SpacemanAnimation() {
             </div>
           )}
 
-          {showCard && <ResultCard />}
+          {showCard && (
+            <div style={{
+              opacity: fadingOut ? 0 : 1,
+              transform: fadingOut ? "translateY(18px)" : "translateY(0)",
+              transition: fadingOut ? "opacity 700ms ease 180ms, transform 700ms ease 180ms" : "none",
+            }}>
+              <ResultCard />
+            </div>
+          )}
         </div>
 
         {/* Input row */}
