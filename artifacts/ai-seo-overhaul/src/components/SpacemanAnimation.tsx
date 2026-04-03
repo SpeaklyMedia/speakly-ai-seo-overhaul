@@ -378,7 +378,7 @@ export function SpacemanAnimation() {
         @media (max-width: 1279px) {
           .spaceman-phone {
             width: 210px !important;
-            right: 10% !important;
+            right: 26% !important;
           }
         }
 
@@ -489,13 +489,13 @@ export function SpacemanAnimation() {
         ))}
       </div>
 
-      {/* Astronaut — drifts in from left edge, partially clipped */}
+      {/* Astronaut — higher, more toward center */}
       <div
         className="spaceman-astronaut"
         style={{
           position: "absolute",
-          left: -22,
-          top: 160,
+          left: 50,
+          top: 60,
           width: 175,
           height: 297,
           zIndex: 1,
@@ -512,8 +512,8 @@ export function SpacemanAnimation() {
         className="spaceman-halo"
         style={{
           position: "absolute",
-          left: -120,
-          top: 80,
+          left: -40,
+          top: -20,
           width: 440,
           height: 520,
           background: "radial-gradient(ellipse at center, rgba(255,157,92,0.12) 0%, transparent 65%)",
@@ -529,7 +529,7 @@ export function SpacemanAnimation() {
         className="spaceman-phone"
         style={{
           position: "absolute",
-          right: "14%",
+          right: "30%",
           top: 58,
           width: 242,
           background: "rgba(4, 12, 26, 0.22)",
