@@ -1,17 +1,100 @@
 import { useInView } from "@/hooks/use-in-view";
 
+function WavingAstronautIllustration() {
+  return (
+    <svg
+      viewBox="0 0 100 170"
+      width="160"
+      aria-hidden="true"
+      focusable="false"
+      style={{ display: "block", animation: "astronautFloat 3.8s ease-in-out infinite" }}
+    >
+      <defs>
+        <radialGradient id="sol-glow" cx="50%" cy="60%" r="50%">
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="sol-visor" cx="35%" cy="35%" r="60%">
+          <stop offset="0%" stopColor="#78c7ff" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#04101c" stopOpacity="0.8" />
+        </radialGradient>
+      </defs>
+
+      {/* Body glow */}
+      <ellipse cx="50" cy="110" rx="38" ry="50" fill="url(#sol-glow)" />
+
+      {/* Helmet */}
+      <circle cx="50" cy="38" r="26" fill="#ff9d5c" />
+      <circle cx="50" cy="38" r="22" fill="#e8884a" />
+      {/* Visor */}
+      <ellipse cx="50" cy="38" rx="14" ry="15" fill="url(#sol-visor)" />
+      {/* Helmet ring */}
+      <circle cx="50" cy="38" r="26" stroke="#c46d28" strokeWidth="1.5" fill="none" />
+      {/* Helmet side details */}
+      <rect x="22" y="34" width="6" height="8" rx="3" fill="#c46d28" />
+      <rect x="72" y="34" width="6" height="8" rx="3" fill="#c46d28" />
+
+      {/* Neck ring */}
+      <rect x="40" y="62" width="20" height="6" rx="3" fill="#c46d28" />
+
+      {/* Torso */}
+      <rect x="28" y="68" width="44" height="48" rx="10" fill="#ff9d5c" />
+      {/* Chest plate */}
+      <rect x="36" y="76" width="28" height="20" rx="4" fill="#c46d28" />
+      {/* Chest square detail */}
+      <rect x="40" y="80" width="20" height="12" rx="2" fill="rgba(4,16,28,0.4)" />
+      {/* Belt */}
+      <rect x="28" y="108" width="44" height="8" rx="4" fill="#c46d28" />
+
+      {/* LEFT arm — raised in a wave */}
+      <path
+        d="M 28 76 C 18 72 8 58 12 44 C 14 38 20 36 26 40 C 22 52 24 64 28 76 Z"
+        fill="#ff9d5c"
+      />
+      {/* Waving hand */}
+      <ellipse cx="14" cy="40" rx="10" ry="8" fill="#ff9d5c" transform="rotate(-30, 14, 40)" />
+      {/* Fingers */}
+      <line x1="7" y1="36" x2="4" y2="28" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
+      <line x1="12" y1="33" x2="10" y2="25" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
+      <line x1="17" y1="33" x2="16" y2="25" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
+      <line x1="21" y1="35" x2="22" y2="27" stroke="#e8884a" strokeWidth="3" strokeLinecap="round" />
+
+      {/* RIGHT arm — relaxed at side */}
+      <rect x="72" y="72" width="14" height="36" rx="7" fill="#ff9d5c" />
+      <ellipse cx="79" cy="112" rx="7" ry="6" fill="#e8884a" />
+
+      {/* Legs */}
+      <rect x="34" y="114" width="14" height="36" rx="7" fill="#ff9d5c" />
+      <rect x="52" y="114" width="14" height="36" rx="7" fill="#ff9d5c" />
+      {/* Boots */}
+      <rect x="32" y="144" width="18" height="12" rx="6" fill="#c46d28" />
+      <rect x="50" y="144" width="18" height="12" rx="6" fill="#c46d28" />
+
+      {/* Small stars */}
+      <circle cx="88" cy="18" r="2" fill="#78c7ff" fillOpacity="0.6" />
+      <circle cx="94" cy="50" r="1.5" fill="#6fe2cf" fillOpacity="0.5" />
+      <circle cx="4" cy="80" r="1.5" fill="#78c7ff" fillOpacity="0.4" />
+    </svg>
+  );
+}
+
 export function Solution() {
   const { ref, isInView } = useInView();
 
   return (
     <section id="solution" className="py-[100px] relative scroll-mt-[86px]">
       <div className="shell">
-        <div ref={ref} className={`max-w-[760px] mb-[44px] reveal ${isInView ? "is-visible" : ""}`}>
-          <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">The solution</div>
-          <h2>What the overhaul is designed to do</h2>
-          <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
-            A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
-          </p>
+        <div className="relative mb-[44px]">
+          <div ref={ref} className={`relative z-10 max-w-[620px] reveal ${isInView ? "is-visible" : ""}`}>
+            <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">The solution</div>
+            <h2>What the overhaul is designed to do</h2>
+            <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
+              A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
+            </p>
+          </div>
+          <div className="absolute right-0 top-[-40px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
+            <WavingAstronautIllustration />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px] mb-[40px]">

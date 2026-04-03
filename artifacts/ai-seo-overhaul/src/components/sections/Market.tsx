@@ -1,17 +1,131 @@
 import { useInView } from "@/hooks/use-in-view";
 
+function MarketIllustration() {
+  return (
+    <svg
+      viewBox="0 0 130 150"
+      width="220"
+      aria-hidden="true"
+      focusable="false"
+      style={{ display: "block", animation: "astronautFloat 5s ease-in-out infinite" }}
+    >
+      <defs>
+        <radialGradient id="mkt-brain-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="mkt-halo-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#ff9d5c" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#ff9d5c" stopOpacity="0" />
+        </radialGradient>
+        <filter id="mkt-blur">
+          <feGaussianBlur stdDeviation="4" result="b" />
+          <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+
+      {/* Halo glow behind head */}
+      <ellipse cx="52" cy="68" rx="42" ry="42" fill="url(#mkt-halo-glow)" />
+
+      {/* Outer arc (partial ring, ~300°) */}
+      <path
+        d="M 18 85 A 42 42 0 1 1 65 27"
+        stroke="#ff9d5c"
+        strokeWidth="1.8"
+        fill="none"
+        strokeOpacity="0.55"
+        strokeLinecap="round"
+      />
+
+      {/* Head profile silhouette */}
+      <path
+        d="M 52 26
+           C 72 26 86 40 86 58
+           C 86 74 76 88 62 93
+           L 58 100 L 44 100 L 44 93
+           C 30 88 20 74 20 58
+           C 20 40 34 26 52 26 Z"
+        stroke="#ff9d5c"
+        strokeWidth="2.2"
+        fill="none"
+        strokeLinejoin="round"
+      />
+
+      {/* Brain teal glow */}
+      <circle cx="56" cy="60" r="14" fill="url(#mkt-brain-glow)" />
+      <circle cx="56" cy="60" r="6" fill="#6fe2cf" fillOpacity="0.85" filter="url(#mkt-blur)" />
+      <circle cx="56" cy="60" r="3.5" fill="#6fe2cf" />
+
+      {/* Circuit traces from right side of head */}
+      <polyline
+        points="86,50 105,44 118,44"
+        stroke="#6fe2cf"
+        strokeWidth="1.6"
+        fill="none"
+        strokeOpacity="0.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="118" cy="44" r="3" fill="#6fe2cf" fillOpacity="0.8" />
+
+      <polyline
+        points="86,62 108,62 108,72 120,72"
+        stroke="#6fe2cf"
+        strokeWidth="1.4"
+        fill="none"
+        strokeOpacity="0.55"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="120" cy="72" r="2.5" fill="#6fe2cf" fillOpacity="0.7" />
+
+      <polyline
+        points="80,80 100,92 118,92"
+        stroke="#ff9d5c"
+        strokeWidth="1.2"
+        fill="none"
+        strokeOpacity="0.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="118" cy="92" r="2" fill="#ff9d5c" fillOpacity="0.65" />
+
+      {/* Left side trace */}
+      <polyline
+        points="20,52 8,48"
+        stroke="#78c7ff"
+        strokeWidth="1.2"
+        fill="none"
+        strokeOpacity="0.45"
+        strokeLinecap="round"
+      />
+      <circle cx="8" cy="48" r="2" fill="#78c7ff" fillOpacity="0.55" />
+
+      {/* Accent dots */}
+      <circle cx="14" cy="30" r="1.5" fill="#78c7ff" fillOpacity="0.5" />
+      <circle cx="8" cy="100" r="1.2" fill="#78c7ff" fillOpacity="0.35" />
+      <circle cx="126" cy="55" r="1.5" fill="#78c7ff" fillOpacity="0.4" />
+    </svg>
+  );
+}
+
 export function Market() {
   const { ref, isInView } = useInView();
 
   return (
     <section id="market" className="py-[100px] relative scroll-mt-[86px]">
       <div className="shell">
-        <div ref={ref} className={`max-w-[760px] mb-[44px] reveal ${isInView ? "is-visible" : ""}`}>
-          <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">The market</div>
-          <h2>Search is no longer just a list of links. It is an answer layer.</h2>
-          <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
-            The shift is not "Google versus AI." AI is increasingly built into Google, while ChatGPT, Perplexity, commerce, video, and social all influence discovery. If your brand is hard to interpret, it becomes easy to ignore.
-          </p>
+        <div className="relative mb-[44px]">
+          <div ref={ref} className={`relative z-10 max-w-[620px] reveal ${isInView ? "is-visible" : ""}`}>
+            <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">The market</div>
+            <h2>Search is no longer just a list of links. It is an answer layer.</h2>
+            <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
+              The shift is not "Google versus AI." AI is increasingly built into Google, while ChatGPT, Perplexity, commerce, video, and social all influence discovery. If your brand is hard to interpret, it becomes easy to ignore.
+            </p>
+          </div>
+          <div className="absolute right-0 top-0 hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.45 }}>
+            <MarketIllustration />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
@@ -45,7 +159,6 @@ export function Market() {
             <div className="inline-flex items-center gap-[8px] px-[10px] py-[7px] rounded-full bg-[#78c7ff]/10 border border-[#78c7ff]/15 text-[0.72rem] text-ink-soft uppercase tracking-[0.12em] mt-[12px] w-fit">SparkToro / Datos • Mar 2026</div>
           </article>
         </div>
-
       </div>
     </section>
   );
