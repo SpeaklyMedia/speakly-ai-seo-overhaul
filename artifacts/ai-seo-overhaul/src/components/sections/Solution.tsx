@@ -37,12 +37,13 @@ function WavingAstronautIllustration() {
 
       {/* Torso */}
       <rect x="28" y="84" width="60" height="56" rx="14" fill="#ff9d5c" />
-      {/* Chest panel */}
-      <rect x="38" y="94" width="40" height="28" rx="5" fill="#04101c" fillOpacity="0.5" />
+      {/* Chest panel — teal-forward */}
+      <rect x="38" y="94" width="40" height="28" rx="5" fill="#0d2d2a" />
+      <rect x="38" y="94" width="40" height="28" rx="5" fill="#6fe2cf" fillOpacity="0.12" />
       <circle cx="46" cy="105" r="4" fill="#6fe2cf" />
       <circle cx="58" cy="105" r="4" fill="#ff9d5c" />
       <circle cx="70" cy="105" r="4" fill="#78c7ff" />
-      <rect x="40" y="114" width="36" height="3" rx="1.5" fill="#78c7ff" fillOpacity="0.3" />
+      <rect x="40" y="114" width="36" height="3" rx="1.5" fill="#6fe2cf" fillOpacity="0.35" />
       {/* Belt */}
       <rect x="28" y="132" width="60" height="8" rx="4" fill="#c46d28" />
 

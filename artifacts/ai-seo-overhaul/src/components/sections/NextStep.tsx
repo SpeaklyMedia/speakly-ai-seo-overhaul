@@ -67,10 +67,12 @@ function SecureChipIllustration() {
       {/* Inner glow */}
       <rect x={38} y={38} width={84} height={84} rx={7} fill="url(#chip-inner-glow)" />
 
-      {/* Circuit trace details inside chip */}
-      <polyline points="44,48 44,60 58,60" stroke="#ff9d5c" strokeWidth={1.5} fill="none" strokeOpacity={0.5} strokeLinecap="round" strokeLinejoin="round" />
-      <polyline points="116,112 116,100 102,100" stroke="#6fe2cf" strokeWidth={1.5} fill="none" strokeOpacity={0.5} strokeLinecap="round" strokeLinejoin="round" />
-      <polyline points="44,110 44,102 54,102" stroke="#78c7ff" strokeWidth={1.2} fill="none" strokeOpacity={0.4} strokeLinecap="round" strokeLinejoin="round" />
+      {/* Circuit traces — two route from shield area to side pin anchors */}
+      <polyline points="58,70 44,70 38,70" stroke="#6fe2cf" strokeWidth={1.5} fill="none" strokeOpacity={0.55} strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="102,80 116,80 122,80" stroke="#ff9d5c" strokeWidth={1.5} fill="none" strokeOpacity={0.55} strokeLinecap="round" strokeLinejoin="round" />
+      {/* Interior detail traces */}
+      <polyline points="44,48 44,60 58,60" stroke="#ff9d5c" strokeWidth={1.5} fill="none" strokeOpacity={0.4} strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="116,112 116,100 102,100" stroke="#6fe2cf" strokeWidth={1.5} fill="none" strokeOpacity={0.4} strokeLinecap="round" strokeLinejoin="round" />
 
       {/* Central shield — dark navy interior, orange border */}
       <path

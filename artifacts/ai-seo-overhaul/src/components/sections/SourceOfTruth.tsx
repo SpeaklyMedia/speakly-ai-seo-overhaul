@@ -66,8 +66,11 @@ function WrenchIllustration() {
       {/* Shaft highlight stripe */}
       <rect x="52" y="48" width="6" height="100" rx="3" fill="rgba(255,255,255,0.12)" />
 
-      {/* Light column between wrench and hand */}
-      <rect x="56" y="158" width="8" height="42" rx="4" fill="url(#ssot-light-col)" filter="url(#ssot-col-glow)" />
+      {/* Light column spanning from jaw to hand */}
+      <rect x="56" y="22" width="8" height="176" rx="4" fill="url(#ssot-light-col)" filter="url(#ssot-col-glow)" />
+
+      {/* Handle extension connecting box-end to glove */}
+      <rect x="50" y="178" width="20" height="16" rx="3" fill="url(#ssot-wrench-grad)" fillOpacity="0.7" />
 
       {/* Gloved hand */}
       {/* Hand glow */}
