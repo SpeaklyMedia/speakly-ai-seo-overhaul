@@ -68,6 +68,8 @@ export function Proof() {
   const count43 = useCountUp(43,  { enabled: isInView, duration: 1300 });
   const count67 = useCountUp(67,  { enabled: isInView, duration: 1400 });
   const count3x = useCountUp(3,   { enabled: isInView, duration: 900 });
+  const count2x = useCountUp(2,   { enabled: isInView, duration: 1000 });
+  const count55 = useCountUp(55,  { enabled: isInView, duration: 1350 });
 
   const [proofComplete, setProofComplete] = useState(false);
   useEffect(() => {
@@ -196,55 +198,19 @@ export function Proof() {
             <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.14),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
             <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">Beverage brand</small>
             <h3 className="mb-[14px]">Stronger positioning inside an AI-driven market</h3>
-            <div className="p-[14px] rounded-[14px] bg-[#091726]/60 border border-[#7db0e7]/12 mb-[16px]">
-              <strong className="block text-[0.82rem] uppercase tracking-[0.12em] text-blue mb-[6px]">Outcome</strong>
-              <p className="m-0 text-ink-muted text-[0.88rem] leading-[1.5]">Clearer brand story positioned across AI platforms, with a structured roadmap for compounding visibility in a fast-changing market.</p>
+            <div className="grid grid-cols-2 gap-[12px] mb-[16px]">
+              <div className="p-[12px] rounded-[12px] bg-[#091726]/60 border border-[#7db0e7]/12">
+                <strong className="block text-[1.4rem] leading-none tracking-[-0.04em] mb-[4px]" style={{ color: "var(--blue)" }}>{count2x}×</strong>
+                <span className="block text-ink-soft text-[0.75rem] leading-[1.4]">AI platform mentions</span>
+              </div>
+              <div className="p-[12px] rounded-[12px] bg-[#091726]/60 border border-[#7db0e7]/12">
+                <strong className="block text-[1.4rem] leading-none tracking-[-0.04em] mb-[4px]" style={{ color: "var(--teal)" }}>+{count55}%</strong>
+                <span className="block text-ink-soft text-[0.75rem] leading-[1.4]">Structured content clarity</span>
+              </div>
             </div>
             <ul className="list-none p-0 grid gap-[10px]">
               <li className="relative pl-[22px] text-ink-muted text-[0.9rem] before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-blue before:to-teal before:shadow-[0_0_0_4px_rgba(120,199,255,0.08)]">More structured visibility and automation roadmap</li>
-              <li className="relative pl-[22px] text-ink-muted text-[0.9rem] before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-blue before:to-teal before:shadow-[0_0_0_4px_rgba(120,199,255,0.08)]">Higher-confidence competitive positioning</li>
-            </ul>
-          </article>
-
-          {/* Professional services brand */}
-          <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '210ms' }}>
-            <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(111,226,207,0.12),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
-            <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">Professional services brand</small>
-            <h3 className="mb-[14px]">From scattered expertise to a clear, trustworthy authority signal</h3>
-            <div className="grid grid-cols-2 gap-[12px] mb-[16px]">
-              <div className="p-[12px] rounded-[12px] bg-[#091726]/60 border border-[#7db0e7]/12">
-                <strong className="block text-[1.4rem] leading-none tracking-[-0.04em] mb-[4px]" style={{ color: "var(--teal)" }}>+52%</strong>
-                <span className="block text-ink-soft text-[0.75rem] leading-[1.4]">AI citation frequency</span>
-              </div>
-              <div className="p-[12px] rounded-[12px] bg-[#091726]/60 border border-[#7db0e7]/12">
-                <strong className="block text-[1.4rem] leading-none tracking-[-0.04em] mb-[4px]" style={{ color: "var(--gold)" }}>+38%</strong>
-                <span className="block text-ink-soft text-[0.75rem] leading-[1.4]">Qualified inbound leads</span>
-              </div>
-            </div>
-            <ul className="list-none p-0 grid gap-[10px]">
-              <li className="relative pl-[22px] text-ink-muted text-[0.9rem] before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-teal before:to-gold before:shadow-[0_0_0_4px_rgba(111,226,207,0.08)]">Core service pages restructured around real buyer intent</li>
-              <li className="relative pl-[22px] text-ink-muted text-[0.9rem] before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-teal before:to-gold before:shadow-[0_0_0_4px_rgba(111,226,207,0.08)]">Consistent AI answer appearances across three major platforms</li>
-            </ul>
-          </article>
-
-          {/* Home services brand */}
-          <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '280ms' }}>
-            <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(245,200,111,0.10),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
-            <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">Home services brand</small>
-            <h3 className="mb-[14px]">Local intent captured — AI answers, maps, and voice results</h3>
-            <div className="grid grid-cols-2 gap-[12px] mb-[16px]">
-              <div className="p-[12px] rounded-[12px] bg-[#091726]/60 border border-[#7db0e7]/12">
-                <strong className="block text-[1.4rem] leading-none tracking-[-0.04em] mb-[4px]" style={{ color: "var(--orange)" }}>+91%</strong>
-                <span className="block text-ink-soft text-[0.75rem] leading-[1.4]">Local search coverage</span>
-              </div>
-              <div className="p-[12px] rounded-[12px] bg-[#091726]/60 border border-[#7db0e7]/12">
-                <strong className="block text-[1.4rem] leading-none tracking-[-0.04em] mb-[4px]" style={{ color: "var(--teal)" }}>4×</strong>
-                <span className="block text-ink-soft text-[0.75rem] leading-[1.4]">AI recommendation rate</span>
-              </div>
-            </div>
-            <ul className="list-none p-0 grid gap-[10px]">
-              <li className="relative pl-[22px] text-ink-muted text-[0.9rem] before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-orange before:to-gold before:shadow-[0_0_0_4px_rgba(255,157,92,0.08)]">Service + location pages rebuilt for AI clarity and trust</li>
-              <li className="relative pl-[22px] text-ink-muted text-[0.9rem] before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-orange before:to-gold before:shadow-[0_0_0_4px_rgba(255,157,92,0.08)]">Expanded FAQ architecture supports voice and map queries</li>
+              <li className="relative pl-[22px] text-ink-muted text-[0.9rem] before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-blue before:to-teal before:shadow-[0_0_0_4px_rgba(120,199,255,0.08)]">Higher-confidence competitive positioning across AI platforms</li>
             </ul>
           </article>
         </div>

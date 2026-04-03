@@ -403,9 +403,13 @@ export function SpacemanAnimation() {
           }
         }
 
-        /* < 768px (mobile): hide phone */
+        /* < 768px (mobile): show phone smaller and slightly transparent as background element */
         @media (max-width: 767px) {
-          .spaceman-phone { display: none !important; }
+          .spaceman-phone {
+            width: 220px !important;
+            top: 36px !important;
+            opacity: 0.52 !important;
+          }
         }
 
         /* < 640px (mobile): hide astronaut — only stars remain */
