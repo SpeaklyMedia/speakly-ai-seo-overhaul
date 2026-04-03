@@ -397,9 +397,11 @@ export function SpacemanAnimation() {
         /* 768–1023px: show phone at tablet size, tucked upper-right */
         @media (min-width: 768px) and (max-width: 1023px) {
           .spaceman-phone {
-            width: 162px !important;
+            width: 242px !important;
             right: 18px !important;
             top: 78px !important;
+            transform: scale(0.67) !important;
+            transform-origin: top right !important;
           }
         }
 
