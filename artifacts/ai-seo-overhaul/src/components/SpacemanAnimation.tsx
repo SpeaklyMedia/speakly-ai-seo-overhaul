@@ -374,10 +374,11 @@ export function SpacemanAnimation() {
 
         /* ── Responsive overrides ─────────────────────────────────── */
 
-        /* < 1280px: shrink phone slightly, keep centered */
+        /* < 1280px: shrink phone slightly, maintain centering */
         @media (max-width: 1279px) {
           .spaceman-phone {
             width: 286px !important;
+            transform: translateX(-50%) !important;
           }
         }
 
@@ -394,12 +395,12 @@ export function SpacemanAnimation() {
           }
         }
 
-        /* 768–1023px: tablet — phone visible and centered, no shrink */
+        /* 768–1023px: tablet — phone visible and centered, no scale */
         @media (min-width: 768px) and (max-width: 1023px) {
           .spaceman-phone {
             width: 272px !important;
             top: 56px !important;
-            transform: none !important;
+            transform: translateX(-50%) !important;
           }
         }
 
@@ -409,6 +410,7 @@ export function SpacemanAnimation() {
             width: 220px !important;
             top: 36px !important;
             opacity: 0.52 !important;
+            transform: translateX(-50%) !important;
           }
         }
 
@@ -532,7 +534,7 @@ export function SpacemanAnimation() {
         style={{
           position: "absolute",
           left: "50%",
-          marginLeft: -155,
+          transform: "translateX(-50%)",
           top: 50,
           width: 310,
           background: "rgba(4, 12, 26, 0.22)",
