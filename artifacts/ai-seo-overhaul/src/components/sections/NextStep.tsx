@@ -64,6 +64,8 @@ function PricingCard({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const idSlug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
   function handleChange(field: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -211,9 +213,9 @@ function PricingCard({
             <form onSubmit={handleSubmit} className="grid gap-[10px]" noValidate>
               {/* Name */}
               <div>
-                <label className="sr-only" htmlFor={`name-${title}`}>Your name</label>
+                <label className="sr-only" htmlFor={`name-${idSlug}`}>Your name</label>
                 <input
-                  id={`name-${title}`}
+                  id={`name-${idSlug}`}
                   type="text"
                   placeholder="Your name"
                   autoComplete="name"
@@ -235,9 +237,9 @@ function PricingCard({
 
               {/* Email */}
               <div>
-                <label className="sr-only" htmlFor={`email-${title}`}>Email address</label>
+                <label className="sr-only" htmlFor={`email-${idSlug}`}>Email address</label>
                 <input
-                  id={`email-${title}`}
+                  id={`email-${idSlug}`}
                   type="email"
                   placeholder="you@company.com"
                   autoComplete="email"
@@ -259,9 +261,9 @@ function PricingCard({
 
               {/* Website */}
               <div>
-                <label className="sr-only" htmlFor={`website-${title}`}>Website URL</label>
+                <label className="sr-only" htmlFor={`website-${idSlug}`}>Website URL</label>
                 <input
-                  id={`website-${title}`}
+                  id={`website-${idSlug}`}
                   type="text"
                   placeholder="yoursite.com"
                   autoComplete="url"
