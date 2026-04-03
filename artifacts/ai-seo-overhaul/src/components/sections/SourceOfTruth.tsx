@@ -31,17 +31,17 @@ export function SourceOfTruth() {
               <strong className="block mb-[10px] text-[1.04rem]">AI answers and recommendation flows</strong>
               <p className="text-ink-muted">Clearer source material makes you easier to interpret and easier to cite across AI-assisted discovery.</p>
             </article>
-            <article className={`p-[22px] rounded-[22px] relative bg-[#0a1828]/70 border border-[#7db0e7]/15 min-h-[160px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '100ms' }}>
+            <article className={`p-[22px] rounded-[22px] relative bg-[#0a1828]/70 border border-[#7db0e7]/15 min-h-[160px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '70ms' }}>
               <div className="hidden md:block absolute -left-[15px] top-1/2 w-[15px] h-[1px] bg-gradient-to-r from-[#78c7ff]/55 to-transparent"></div>
               <strong className="block mb-[10px] text-[1.04rem]">Core service and location pages</strong>
               <p className="text-ink-muted">The most important pages become more consistent, more discoverable, and more persuasive.</p>
             </article>
-            <article className={`p-[22px] rounded-[22px] relative bg-[#0a1828]/70 border border-[#7db0e7]/15 min-h-[160px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '200ms' }}>
+            <article className={`p-[22px] rounded-[22px] relative bg-[#0a1828]/70 border border-[#7db0e7]/15 min-h-[160px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '140ms' }}>
               <div className="hidden md:block absolute -left-[15px] top-1/2 w-[15px] h-[1px] bg-gradient-to-r from-[#78c7ff]/55 to-transparent"></div>
               <strong className="block mb-[10px] text-[1.04rem]">FAQs, supporting content, and proof assets</strong>
               <p className="text-ink-muted">Instead of "what should we publish next?", you work from a structured expansion plan.</p>
             </article>
-            <article className={`p-[22px] rounded-[22px] relative bg-[#0a1828]/70 border border-[#7db0e7]/15 min-h-[160px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '300ms' }}>
+            <article className={`p-[22px] rounded-[22px] relative bg-[#0a1828]/70 border border-[#7db0e7]/15 min-h-[160px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '210ms' }}>
               <div className="hidden md:block absolute -left-[15px] top-1/2 w-[15px] h-[1px] bg-gradient-to-r from-[#78c7ff]/55 to-transparent"></div>
               <strong className="block mb-[10px] text-[1.04rem]">Ads, social, email, and sales enablement</strong>
               <p className="text-ink-muted">Campaign language becomes stronger because it pulls from the same clarified business story.</p>
@@ -49,15 +49,6 @@ export function SourceOfTruth() {
           </div>
         </div>
 
-        <div className={`mt-[48px] relative rounded-[20px] overflow-hidden border border-[#7db0e7]/12 shadow-[0_24px_80px_rgba(2,7,16,0.5)] reveal ${isInView ? "is-visible" : ""}`}>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071321] pointer-events-none z-10"></div>
-          <img
-            src={`${import.meta.env.BASE_URL}previews/ssot.png`}
-            alt="Single source of truth — website as content infrastructure"
-            className="w-full h-auto object-cover object-top max-h-[440px]"
-            loading="lazy"
-          />
-        </div>
       </div>
     </section>
   );

@@ -1,7 +1,12 @@
 import { useInView } from "@/hooks/use-in-view";
+import { useCountUp } from "@/hooks/use-count-up";
 
 export function Proof() {
   const { ref, isInView } = useInView();
+
+  const count12  = useCountUp(12,  { enabled: isInView, duration: 800 });
+  const count78  = useCountUp(78,  { enabled: isInView, duration: 1600 });
+  const count43  = useCountUp(43,  { enabled: isInView, duration: 1300 });
 
   return (
     <section id="proof" className="py-[100px] relative scroll-mt-[86px]">
@@ -20,17 +25,21 @@ export function Proof() {
             <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">Wolf Moon Wellness</small>
             <h3 className="mb-[18px]">From weak AI visibility to stronger answer-layer presence</h3>
             <div className="mb-[14px]">
-              <strong className="block text-[1.4rem] text-blue mb-[4px]">12% → 78%</strong>
+              <strong className="block text-[1.4rem] mb-[4px]">
+                <span style={{ color: "var(--orange)" }}>{count12}%</span>
+                <span className="text-ink-soft/60 mx-[0.3em] font-normal">→</span>
+                <span style={{ color: "var(--teal)" }}>{count78}%</span>
+              </strong>
               <span className="text-ink-muted text-[0.9rem]">AI-indexed visibility probability</span>
             </div>
             <div className="mb-[18px]">
-              <strong className="block text-[1.4rem] text-teal mb-[4px]">+43%</strong>
+              <strong className="block text-[1.4rem] mb-[4px]" style={{ color: "var(--teal)" }}>+{count43}%</strong>
               <span className="text-ink-muted text-[0.9rem]">Organic traffic growth within 3 months</span>
             </div>
             <p className="m-0 text-ink-muted text-[0.95rem]">Appeared in Google, Bing Copilot, ChatGPT, and Perplexity after the visibility overhaul work described in the original deck.</p>
           </article>
 
-          <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '100ms' }}>
+          <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '70ms' }}>
             <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.14),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
             <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">Tula Kitchen</small>
             <h3 className="mb-[18px]">Better discoverability for the searches that actually matter</h3>
@@ -41,7 +50,7 @@ export function Proof() {
             </ul>
           </article>
 
-          <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '200ms' }}>
+          <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '140ms' }}>
             <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.14),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
             <small className="block uppercase tracking-[0.16em] text-ink-soft text-[0.76rem] mb-[10px]">Beaudette Beverage / BEValuator</small>
             <h3 className="mb-[18px]">Stronger positioning inside an AI-driven market</h3>
@@ -51,16 +60,6 @@ export function Proof() {
               <li className="relative pl-[22px] text-ink-muted before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-blue before:to-teal before:shadow-[0_0_0_4px_rgba(120,199,255,0.08)]">Higher-confidence competitive positioning</li>
             </ul>
           </article>
-        </div>
-
-        <div className={`mt-[48px] relative rounded-[20px] overflow-hidden border border-[#7db0e7]/12 shadow-[0_24px_80px_rgba(2,7,16,0.5)] reveal ${isInView ? "is-visible" : ""}`}>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071321] pointer-events-none z-10"></div>
-          <img
-            src={`${import.meta.env.BASE_URL}previews/proof.png`}
-            alt="Proof — real client visibility gains"
-            className="w-full h-auto object-cover object-top max-h-[440px]"
-            loading="lazy"
-          />
         </div>
       </div>
     </section>

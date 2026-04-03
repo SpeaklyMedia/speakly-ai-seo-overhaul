@@ -7,10 +7,12 @@ import { System } from "@/components/sections/System";
 import { Proof } from "@/components/sections/Proof";
 import { NextStep } from "@/components/sections/NextStep";
 import { Footer } from "@/components/Footer";
+import { SectionNav } from "@/components/SectionNav";
 
 export function Home() {
   return (
     <main className="flex-1 w-full bg-background text-foreground">
+      <SectionNav />
       <Hero />
       <Market />
       <Problem />

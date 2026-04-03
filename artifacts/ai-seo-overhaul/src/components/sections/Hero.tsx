@@ -1,8 +1,15 @@
 import { useInView } from "@/hooks/use-in-view";
+import { useCountUp } from "@/hooks/use-count-up";
 import { SpacemanAnimation } from "@/components/SpacemanAnimation";
 
 export function Hero() {
   const { ref, isInView } = useInView();
+  const { ref: statRef, isInView: statsVisible } = useInView();
+
+  const count80  = useCountUp(80,  { enabled: statsVisible, duration: 1400 });
+  const count60  = useCountUp(60,  { enabled: statsVisible, duration: 1200 });
+  const count8   = useCountUp(8,   { enabled: statsVisible, duration: 900 });
+  const count15  = useCountUp(15,  { enabled: statsVisible, duration: 1100 });
 
   return (
     <section id="top" className="pt-[92px] pb-[82px] overflow-hidden relative">
@@ -36,19 +43,27 @@ export function Hero() {
         <div className={`relative rounded-xl border border-[#7db0e7]/15 bg-[radial-gradient(circle_at_50%_18%,rgba(120,199,255,0.18),transparent_28%),radial-gradient(circle_at_75%_84%,rgba(255,157,92,0.16),transparent_24%),linear-gradient(180deg,rgba(13,32,52,0.92),rgba(8,19,33,0.92))] shadow-[0_24px_80px_rgba(2,7,16,0.45)] overflow-hidden lg:min-h-[620px] reveal ${isInView ? "is-visible" : ""}`} aria-label="AI-SEO core visual">
           <div className="absolute w-[280px] h-[280px] -right-[40px] -top-[30px] rounded-full blur-[16px] opacity-80 pointer-events-none bg-[radial-gradient(circle,rgba(120,199,255,0.42),transparent_70%)]"></div>
           <div className="absolute w-[260px] h-[260px] -left-[60px] -bottom-[40px] rounded-full blur-[16px] opacity-80 pointer-events-none bg-[radial-gradient(circle,rgba(255,157,92,0.28),transparent_70%)]"></div>
-          
+
           <div className="relative h-full p-[18px] lg:p-[26px] grid grid-rows-[auto_1fr_auto] gap-[18px]">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-[14px]">
+            <div ref={statRef} className="grid grid-cols-1 md:grid-cols-3 gap-[14px]">
               <div className="p-[18px] min-h-[128px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px]">
-                <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]">80%</strong>
+                <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--gold)" }}>
+                  {count80}%
+                </strong>
                 <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">of search users rely on AI summaries at least 40% of the time.<sup>1</sup></small>
               </div>
               <div className="p-[18px] min-h-[128px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px]">
-                <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]">60%</strong>
+                <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--orange)" }}>
+                  {count60}%
+                </strong>
                 <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">of searches now end without the user progressing to another destination.<sup>1</sup></small>
               </div>
               <div className="p-[18px] min-h-[128px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px]">
-                <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]">8% vs 15%</strong>
+                <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]">
+                  <span style={{ color: "var(--orange)" }}>{count8}%</span>
+                  <span className="text-ink-soft/60 text-[0.75em] mx-[0.25em]">vs</span>
+                  <span style={{ color: "var(--teal)" }}>{count15}%</span>
+                </strong>
                 <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">Traditional-result click rate when AI summaries appear vs. when they don't.<sup>2</sup></small>
               </div>
             </div>
@@ -91,18 +106,6 @@ export function Hero() {
               <span className="text-ink-muted text-[0.9rem]">This is a website-first visibility system for the answer era — not a pile of disconnected SEO tasks.</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="shell mt-[60px]">
-        <div className={`relative rounded-[20px] overflow-hidden border border-[#7db0e7]/12 shadow-[0_24px_80px_rgba(2,7,16,0.5)] reveal ${isInView ? "is-visible" : ""}`}>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071321] pointer-events-none z-10"></div>
-          <img
-            src={`${import.meta.env.BASE_URL}previews/hero.png`}
-            alt="AI-SEO Overhaul landing page preview"
-            className="w-full h-auto object-cover object-top max-h-[480px]"
-            loading="lazy"
-          />
         </div>
       </div>
     </section>
