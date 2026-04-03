@@ -1,5 +1,7 @@
 import { useInView } from "@/hooks/use-in-view";
 import { useCountUp } from "@/hooks/use-count-up";
+import astronautSpeech from "@assets/B360D418-5C13-49A9-B3D5-E5B625E203B2_1775246793840.png";
+import magnetIcon from "@assets/B8D35E42-BF1A-4E3C-AA9D-9556E2C80BD2_1775246793840.png";
 
 function TrustShieldIllustration() {
   const Person = ({ cx, cy }: { cx: number; cy: number }) => (
@@ -120,6 +122,12 @@ export function Proof() {
           </div>
           <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.45 }}>
             <TrustShieldIllustration />
+          </div>
+          <div className="absolute right-[214px] top-[-8px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.20 }}>
+            <img src={astronautSpeech} alt="" width={76} height={76} style={{ display: "block", objectFit: "contain" }} />
+          </div>
+          <div className="absolute right-[216px] top-[72px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.28 }}>
+            <img src={magnetIcon} alt="" width={68} height={68} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
           </div>
         </div>
 

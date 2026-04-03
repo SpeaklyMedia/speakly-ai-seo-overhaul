@@ -1,4 +1,5 @@
 import { useInView } from "@/hooks/use-in-view";
+import spaceshipIcon from "@assets/8F8B77A1-1E0D-4616-A3E6-42759D6AF3F2_1775246793840.png";
 
 function WavingAstronautIllustration() {
   return (
@@ -114,6 +115,9 @@ export function Solution() {
           </div>
           <div className="absolute right-0 top-[-40px] hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.60 }}>
             <WavingAstronautIllustration />
+          </div>
+          <div className="absolute right-[162px] top-[-24px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.32 }}>
+            <img src={spaceshipIcon} alt="" width={88} height={88} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
           </div>
         </div>
 

@@ -1,99 +1,5 @@
 import { useInView } from "@/hooks/use-in-view";
-
-function SecureChipIllustration() {
-  const Pin = ({ x1, y1, x2, y2, cx, cy, teal, blue }: { x1: number; y1: number; x2: number; y2: number; cx: number; cy: number; teal?: boolean; blue?: boolean }) => {
-    const color = blue ? "#78c7ff" : teal ? "#6fe2cf" : "#ff9d5c";
-    return (
-      <g>
-        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={3} strokeLinecap="round" />
-        <circle cx={cx} cy={cy} r={4} fill={color} />
-      </g>
-    );
-  };
-
-  return (
-    <svg
-      viewBox="0 0 160 160"
-      width="200"
-      aria-hidden="true"
-      focusable="false"
-      style={{ display: "block" }}
-    >
-      <defs>
-        <linearGradient id="chip-body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#ff9d5c" />
-          <stop offset="50%" stopColor="#f5a53a" />
-          <stop offset="100%" stopColor="#f5c86f" />
-        </linearGradient>
-        <radialGradient id="chip-inner-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#6fe2cf" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="#6fe2cf" stopOpacity="0" />
-        </radialGradient>
-        <filter id="chip-check-glow">
-          <feGaussianBlur stdDeviation="2.5" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-      </defs>
-
-      {/* Top — center two pins bright blue */}
-      <Pin x1={56} y1={30} x2={56} y2={14} cx={56} cy={12} />
-      <Pin x1={70} y1={30} x2={70} y2={14} cx={70} cy={12} blue />
-      <Pin x1={84} y1={30} x2={84} y2={14} cx={84} cy={12} blue />
-      <Pin x1={98} y1={30} x2={98} y2={14} cx={98} cy={12} teal />
-      {/* Bottom */}
-      <Pin x1={56} y1={130} x2={56} y2={146} cx={56} cy={148} teal />
-      <Pin x1={70} y1={130} x2={70} y2={146} cx={70} cy={148} />
-      <Pin x1={84} y1={130} x2={84} y2={146} cx={84} cy={148} teal />
-      <Pin x1={98} y1={130} x2={98} y2={146} cx={98} cy={148} />
-      {/* Left */}
-      <Pin x1={30} y1={56} x2={14} y2={56} cx={12} cy={56} teal />
-      <Pin x1={30} y1={70} x2={14} y2={70} cx={12} cy={70} />
-      <Pin x1={30} y1={84} x2={14} y2={84} cx={12} cy={84} teal />
-      <Pin x1={30} y1={98} x2={14} y2={98} cx={12} cy={98} />
-      {/* Right */}
-      <Pin x1={130} y1={56} x2={146} y2={56} cx={148} cy={56} />
-      <Pin x1={130} y1={70} x2={146} y2={70} cx={148} cy={70} teal />
-      <Pin x1={130} y1={84} x2={146} y2={84} cx={148} cy={84} />
-      <Pin x1={130} y1={98} x2={146} y2={98} cx={148} cy={98} teal />
-
-      {/* Outer orange glow rings */}
-      <circle cx={80} cy={80} r={55} fill="#ff9d5c" fillOpacity={0.10} />
-      <circle cx={80} cy={80} r={40} fill="#ff9d5c" fillOpacity={0.08} />
-
-      {/* Chip body */}
-      <rect x={30} y={30} width={100} height={100} rx={12} fill="url(#chip-body-grad)" />
-      {/* Inner inset panel */}
-      <rect x={36} y={36} width={88} height={88} rx={8} fill="#0d1e2e" fillOpacity={0.75} />
-      {/* Inner glow */}
-      <rect x={38} y={38} width={84} height={84} rx={7} fill="url(#chip-inner-glow)" />
-
-      {/* Circuit traces — two route from shield area to side pin anchors */}
-      <polyline points="58,70 44,70 38,70" stroke="#6fe2cf" strokeWidth={1.5} fill="none" strokeOpacity={0.55} strokeLinecap="round" strokeLinejoin="round" />
-      <polyline points="102,80 116,80 122,80" stroke="#ff9d5c" strokeWidth={1.5} fill="none" strokeOpacity={0.55} strokeLinecap="round" strokeLinejoin="round" />
-      {/* Interior detail traces */}
-      <polyline points="44,48 44,60 58,60" stroke="#ff9d5c" strokeWidth={1.5} fill="none" strokeOpacity={0.4} strokeLinecap="round" strokeLinejoin="round" />
-      <polyline points="116,112 116,100 102,100" stroke="#6fe2cf" strokeWidth={1.5} fill="none" strokeOpacity={0.4} strokeLinecap="round" strokeLinejoin="round" />
-
-      {/* Central shield — dark navy interior, orange border */}
-      <path
-        d="M 80 48 C 80 48 58 56 58 70 C 58 84 68 96 80 102 C 92 96 102 84 102 70 C 102 56 80 48 80 48 Z"
-        fill="#04101c"
-        fillOpacity={0.85}
-      />
-      <path
-        d="M 80 48 C 80 48 58 56 58 70 C 58 84 68 96 80 102 C 92 96 102 84 102 70 C 102 56 80 48 80 48 Z"
-        stroke="#ff9d5c"
-        strokeWidth={2.5}
-        fill="none"
-        strokeOpacity={0.85}
-      />
-
-      {/* Teal checkmark with glow */}
-      <polyline points="68,74 77,84 96,62" stroke="#6fe2cf" strokeWidth={5} fill="none" strokeLinecap="round" strokeLinejoin="round" filter="url(#chip-check-glow)" />
-      <polyline points="68,74 77,84 96,62" stroke="#6fe2cf" strokeWidth={4} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
+import chipShield from "@assets/9B2F690A-4269-4AFA-A53E-71DACE864366_1775246793840.png";
 
 export function NextStep() {
   const { ref, isInView } = useInView();
@@ -103,9 +9,14 @@ export function NextStep() {
       <div className="shell">
         <div ref={ref} className={`p-[34px] md:p-[50px] rounded-[28px] bg-[radial-gradient(circle_at_80%_0%,rgba(120,199,255,0.18),transparent_40%),linear-gradient(180deg,rgba(11,28,46,0.96),rgba(7,18,30,0.96))] border border-[#78c7ff]/20 shadow-[0_24px_80px_rgba(2,7,16,0.45)] relative overflow-hidden reveal ${isInView ? "is-visible" : ""}`}>
 
-          {/* Chip illustration — bottom-right corner, clipped by overflow:hidden */}
           <div className="hidden md:block absolute bottom-[-10px] right-[-10px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.22 }}>
-            <SecureChipIllustration />
+            <img
+              src={chipShield}
+              alt=""
+              width={210}
+              height={210}
+              style={{ display: "block" }}
+            />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-[40px] items-start relative z-10">

@@ -1,4 +1,5 @@
 import { useInView } from "@/hooks/use-in-view";
+import aiHeadIcon from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_1775246793840.png";
 
 function MarketIllustration() {
   return (
@@ -114,6 +115,9 @@ export function Market() {
           </div>
           <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.65 }}>
             <MarketIllustration />
+          </div>
+          <div className="absolute right-[218px] top-[10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.20 }}>
+            <img src={aiHeadIcon} alt="" width={80} height={80} style={{ display: "block", objectFit: "contain" }} />
           </div>
         </div>
 
