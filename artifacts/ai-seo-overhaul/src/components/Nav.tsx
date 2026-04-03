@@ -35,7 +35,7 @@ export function Nav() {
             <span className="block text-[0.78rem] tracking-[0.08em] uppercase text-ink-soft whitespace-nowrap overflow-hidden text-ellipsis">AI-SEO Overhaul web deck</span>
           </div>
         </a>
-        <nav className="hidden lg:flex items-center gap-[10px] flex-wrap justify-end" aria-label="Section navigation">
+        <nav className="hidden xl:flex items-center gap-[10px] justify-end" aria-label="Section navigation">
           {["Market", "Problem", "Source of Truth", "Solution", "System", "Proof", "Next Step"].map((item) => {
             const id = item === "Source of Truth" ? "ssot" : item.toLowerCase().replace(/ /g, "-");
             return (
