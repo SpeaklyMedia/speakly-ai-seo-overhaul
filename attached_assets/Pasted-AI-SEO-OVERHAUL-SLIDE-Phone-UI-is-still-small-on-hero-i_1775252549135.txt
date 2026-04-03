@@ -1,0 +1,27 @@
+AI-SEO OVERHAUL SLIDE:
+
+Phone UI is still small on hero, it's also not grabbing my attention as it is NOT located towards the top middle of the screen in ANY resolution. I HAVE ASKED YOU TO FIND A FIX FOR THIS 6 TIMES.
+
+The spaceman on the hero was designed to be floating in the background in front of space. Instead he looks more like a mistake than intentional.
+
+You have edited the hero space background to have less starts and less contrast despite my explicit instructions NOT TO FUCKING TOUCH THE HERO BACKGROUND. FIX THIS.
+
+The hero copy gets darker the further down you scroll. This makes the entire panel look broken. I NEEDS TO CHANGE DYNAMICALLY AS WE MAKE OUR WATY DOWN THE PAGE . IT CAN NOT STAY DARK. IT LOOKS LIKE A MISTAKE.
+
+THE MARKET SLIDE:
+
+I don't know what the fuck that thing you drew is but it doesn't visually represent AI or a system... it looks,like a fucking balloon... refine it to look like an AI-brain or something.
+
+the hero in this section is empty and boring, introduce more "connectivity" elements and break up the blue on blue on blue with something. Create visual contrast.
+
+THE PROBLEM SLIDE:
+
+create a thin-stoke background wireframe that is orange and has parallel motion that the robots can clearly connect to.
+
+THE CORE IDE SLIDE: The baclground image NEEDS TO BE FULL BLEED. I HAVE SAID THIS 5 FUCKING TIMES. MAKE BOTH IMAGES ANCHORED TO THE CENTER OF THE SLIDE BLOCK AND SCALE THEM UP SO THE FILL THE ENTIER FUCKING BACKGROUND. HAVE THE PARALAX MOTION DYNAMICALLY LIFT TH HAND AND THE WRENCH. FILL THE BACGROUND. DO NOT FUCKING NOT FILL THE BACKGROUND. DO YOU UNDERSTAND???
+
+THE SOLUTION SLIDE; the illustrations here SUCK. What story are we trying to tell??? SHOW ME DYAMIC MOTION BETWEEN THE CHARACTERS. Use the space background I provided on upload to FILL THE FUCKING BLOCK BACKGROUND.
+
+THE POITIONING SLIDE AND THE HOW IT WORKS SLIDE: make these two slide share a background and make it look and feel like the top hero space background but more orange.
+
+SELECTED PROOF: DO NOT USE CLIENT NAMES. DO NOT USE BRAND NAMES. ONLY THE NICHE NEVER THE NAMES. THERE ARE TWO MORE EXAMPLES THAT WERE LOADED IN.WHY ARE THEE RESULTS OF THOSE TWO EXAMPLES NOT EVEN MENTIOND?!??!?!
