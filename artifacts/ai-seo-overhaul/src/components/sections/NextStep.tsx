@@ -78,10 +78,7 @@ function PricingCard({
     }
     setErrors({});
     setSubmitting(true);
-    console.log("NextStep form submission:", { tier: title, ...form });
-    window.location.href = `mailto:david@speaklymedia.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nWebsite: ${form.website}`
-    )}`;
+    console.log("NextStep form submission:", { tier: title, emailSubject, ...form });
     await new Promise((res) => setTimeout(res, 900));
     setSubmitting(false);
     setSubmitted(true);
