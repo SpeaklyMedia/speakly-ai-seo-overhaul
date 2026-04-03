@@ -83,6 +83,10 @@ function MarketIllustration() {
       <polyline points="102,130 118,130 118,148 140,148" stroke="#ff9d5c" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.65" />
       <circle cx="140" cy="148" r="3.5" fill="#ff9d5c" fillOpacity="0.7" />
 
+      {/* Trace 5 — upper right, from forehead area */}
+      <polyline points="80,32 100,32 100,20 140,20" stroke="#f5c86f" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.55" />
+      <circle cx="140" cy="20" r="3.5" fill="#f5c86f" fillOpacity="0.70" />
+
       {/* Left side trace */}
       <polyline points="26,80 8,80 8,60" stroke="#78c7ff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.55" />
       <circle cx="8" cy="60" r="3.5" fill="#78c7ff" fillOpacity="0.65" />

@@ -113,7 +113,7 @@ export function SourceOfTruth() {
               Once your website is structured as the clearest version of your business, it starts fueling every other asset you create. Future service pages, FAQs, articles, campaigns, and sales materials become faster to produce and more consistent because the source is already clear.
             </p>
           </div>
-          <div className="absolute right-0 top-[-30px] hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.60 }}>
+          <div className="absolute right-0 top-[-30px] hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.75 }}>
             <WrenchIllustration />
           </div>
         </div>

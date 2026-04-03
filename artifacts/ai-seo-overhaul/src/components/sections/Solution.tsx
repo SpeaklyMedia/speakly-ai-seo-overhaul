@@ -111,7 +111,7 @@ export function Solution() {
               A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
             </p>
           </div>
-          <div className="absolute right-0 top-[-40px] hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
+          <div className="absolute right-0 top-[-40px] hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.60 }}>
             <WavingAstronautIllustration />
           </div>
         </div>

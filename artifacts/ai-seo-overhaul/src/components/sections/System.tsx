@@ -62,8 +62,8 @@ function CommanderIllustration() {
       <rect x={112} y={96} width={56} height={54} rx={10} fill="#ff9d5c" />
       {/* S badge panel */}
       <rect x={120} y={104} width={40} height={28} rx={5} fill="#c46d28" />
-      {/* S letter as filled path */}
-      <path d="M 148 112 C 148 108 144 106 140 108 C 136 110 136 114 140 116 C 144 118 144 122 140 124 C 136 126 132 124 132 120" stroke="#ff9d5c" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+      {/* S letterform — filled orange shape */}
+      <path d="M 146 111 C 146 108 143 106 140 107 C 136 107 133 109 133 112 C 133 114 135 115 138 116 L 142 117 C 146 118 148 120 148 123 C 148 127 144 130 140 130 C 136 130 132 128 132 124 L 134 124 C 134 127 137 128 140 128 C 143 128 146 126 146 123 C 146 121 144 120 141 119 L 137 118 C 134 117 131 115 131 112 C 131 108 135 105 140 105 C 145 105 148 108 148 111 Z" fill="#ff9d5c" />
       {/* Belt */}
       <rect x={112} y={143} width={56} height={8} rx={4} fill="#c46d28" />
       {/* Left arm — relaxed, hanging down */}
@@ -164,7 +164,7 @@ export function System() {
               Speakly's customer-facing process mirrors the operator system without exposing proprietary mechanics. The structure is simple: diagnose, align, then compound.
             </p>
           </div>
-          <div className="absolute right-[-20px] top-[-50px] hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.58 }}>
+          <div className="absolute right-[-20px] top-[-50px] hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.65 }}>
             <CommanderIllustration />
           </div>
         </div>

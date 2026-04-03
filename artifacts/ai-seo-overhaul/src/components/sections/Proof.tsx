@@ -118,7 +118,7 @@ export function Proof() {
               These are customer-facing proof points drawn from the existing Speakly sales deck. They show the kind of visibility and clarity gains this work is built to create.
             </p>
           </div>
-          <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.30 }}>
+          <div className="absolute right-0 top-0 hidden md:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.45 }}>
             <TrustShieldIllustration />
           </div>
         </div>
