@@ -111,11 +111,16 @@ export function Proof() {
             <div>
               <small className="block uppercase tracking-[0.16em] text-teal/80 text-[0.76rem] mb-[20px]">Wolf Moon Wellness</small>
               <div className="mb-[10px]">
-                <strong className={`block text-[clamp(2.4rem,5vw,3.6rem)] leading-none tracking-[-0.05em] mb-[6px] ${proofComplete ? "proof-glow-burst" : ""}`}>
-                  <span style={{ color: "var(--orange)" }}>{count12}%</span>
-                  <span className="text-ink-soft/50 mx-[0.3em] font-normal text-[0.55em]">→</span>
-                  <span style={{ color: "var(--teal)" }}>{count78}%</span>
-                </strong>
+                <div className="relative inline-block">
+                  <strong className="block text-[clamp(2.4rem,5vw,3.6rem)] leading-none tracking-[-0.05em] mb-[6px]">
+                    <span style={{ color: "var(--orange)" }}>{count12}%</span>
+                    <span className="text-ink-soft/50 mx-[0.3em] font-normal text-[0.55em]">→</span>
+                    <span style={{ color: "var(--teal)" }}>{count78}%</span>
+                  </strong>
+                  {proofComplete && (
+                    <div className="proof-glow-burst absolute inset-0 pointer-events-none rounded-lg" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(111,226,207,0.35), transparent 70%)" }} aria-hidden="true" />
+                  )}
+                </div>
                 <span className="block text-ink-soft text-[0.85rem] mb-[20px]">AI-indexed visibility probability</span>
 
                 {/* Progress bar */}

@@ -81,7 +81,7 @@ export function Market() {
       <div className="shell">
 
         {/* Section header with ghost numeral */}
-        <div className="relative mb-[44px] overflow-hidden">
+        <div className="relative mb-[44px]">
           {/* Ghost "60" behind heading */}
           <div className="absolute left-[-10px] top-[-60px] pointer-events-none select-none" aria-hidden="true">
             <span style={{
@@ -117,7 +117,7 @@ export function Market() {
         {/* Hero stat card — "60%" takes the spotlight */}
         <article className={`w-full mb-[18px] p-[32px] md:p-[40px] relative overflow-hidden rounded-[22px] bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(120,199,255,0.16),transparent_55%),linear-gradient(180deg,rgba(11,28,48,0.97),rgba(7,18,30,0.97))] border border-[#78c7ff]/25 shadow-[0_24px_80px_rgba(2,7,16,0.45)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`}>
           <div className="absolute w-[320px] h-[320px] -right-[60px] -top-[60px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.12),transparent_70%)] pointer-events-none" />
-          <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-[28px] md:gap-[44px] items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-[28px] md:gap-[44px] items-center">
             <div>
               <div className="text-[clamp(4rem,10vw,7rem)] font-extrabold leading-none tracking-[-0.05em] mb-[6px]" style={{ color: "var(--blue)" }}>60%</div>
               <div className="text-[0.78rem] uppercase tracking-[0.14em] text-ink-soft">Bain + Pew • 2025</div>

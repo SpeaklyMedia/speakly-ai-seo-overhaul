@@ -76,7 +76,7 @@ export function SourceOfTruth() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(300px,1fr)_minmax(0,1.3fr)] gap-[22px] items-stretch">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[minmax(300px,1fr)_minmax(0,1.3fr)] gap-[22px] items-stretch">
           {/* Feature card with top-edge gold→teal gradient accent */}
           <article className={`p-[32px] rounded-[28px] relative bg-[radial-gradient(circle_at_50%_0%,rgba(120,199,255,0.18),transparent_40%),linear-gradient(180deg,rgba(11,28,46,0.96),rgba(7,18,30,0.96))] border border-[#78c7ff]/20 shadow-[0_24px_80px_rgba(2,7,16,0.45)] grid content-start gap-[20px] overflow-hidden glass-card reveal ${isInView ? "is-visible" : ""}`}>
             {/* Top-edge gradient accent line */}

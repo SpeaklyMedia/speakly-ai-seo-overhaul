@@ -101,7 +101,8 @@ const overhauls = [
 ];
 
 export function Solution() {
-  const { ref, isInView } = useInView();
+  const { ref: mobileRef, isInView: mobileInView } = useInView();
+  const { ref: desktopRef, isInView: desktopInView } = useInView();
 
   return (
     <section id="solution" className="py-[100px] relative scroll-mt-[86px] section-solution-bg">
@@ -112,7 +113,7 @@ export function Solution() {
           <div className="flex justify-center mb-[30px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.38 }}>
             <WavingAstronautIllustration width={140} />
           </div>
-          <div ref={ref} className={`mb-[32px] reveal-left ${isInView ? "is-visible" : ""}`}>
+          <div ref={mobileRef} className={`mb-[32px] reveal-left ${mobileInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
             <h2>What the overhaul is designed to do</h2>
             <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
@@ -123,7 +124,7 @@ export function Solution() {
             {overhauls.map(({ icon, title, body }, i) => (
               <article
                 key={title}
-                className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 border-l-[3px] border-l-[#6fe2cf]/35 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`}
+                className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 border-l-[3px] border-l-[#6fe2cf]/35 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${mobileInView ? "is-visible" : ""}`}
                 style={{ transitionDelay: `${i * 70}ms` }}
               >
                 <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(111,226,207,0.10),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
@@ -141,7 +142,7 @@ export function Solution() {
           {/* Left column: astronaut */}
           <div className="relative flex flex-col items-center pt-[16px] pointer-events-none sticky top-[100px]" aria-hidden="true">
             <div className="absolute inset-[-30px] rounded-full" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(111,226,207,0.13), transparent 70%)", filter: "blur(22px)" }} />
-            <div className={`relative reveal-right ${isInView ? "is-visible" : ""}`} style={{ opacity: 0.88 }}>
+            <div className={`relative reveal-right ${desktopInView ? "is-visible" : ""}`} style={{ opacity: 0.88 }}>
               <WavingAstronautIllustration width={240} />
             </div>
             <div className="mt-[14px] pointer-events-none" style={{ opacity: 0.30 }}>
@@ -151,7 +152,7 @@ export function Solution() {
 
           {/* Right column: heading + 2-col card grid */}
           <div>
-            <div ref={ref} className={`mb-[32px] reveal-left ${isInView ? "is-visible" : ""}`}>
+            <div ref={desktopRef} className={`mb-[32px] reveal-left ${desktopInView ? "is-visible" : ""}`}>
               <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
               <h2>What the overhaul is designed to do</h2>
               <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
@@ -164,7 +165,7 @@ export function Solution() {
               {overhauls.map(({ icon, title, body }, i) => (
                 <article
                   key={title}
-                  className={`p-[22px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 border-l-[3px] border-l-[#6fe2cf]/35 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`}
+                  className={`p-[22px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 border-l-[3px] border-l-[#6fe2cf]/35 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${desktopInView ? "is-visible" : ""}`}
                   style={{ transitionDelay: `${i * 70}ms` }}
                 >
                   <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(111,226,207,0.10),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
@@ -178,7 +179,7 @@ export function Solution() {
         </div>
 
         {/* Why Speakly — full width on all breakpoints */}
-        <div className={`mt-[48px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "420ms" }}>
+        <div className={`mt-[48px] reveal ${(mobileInView || desktopInView) ? "is-visible" : ""}`} style={{ transitionDelay: "420ms" }}>
           <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">Why Speakly</div>
           <h2 className="mb-[24px]">The positioning advantage</h2>
           <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch] mb-[30px]">

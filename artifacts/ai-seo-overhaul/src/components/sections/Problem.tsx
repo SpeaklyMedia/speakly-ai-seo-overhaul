@@ -65,12 +65,12 @@ export function Problem() {
   const { ref, isInView } = useInView();
 
   return (
-    <section id="problem" className="py-[100px] relative scroll-mt-[86px] section-problem-bg">
+    <section id="problem" className="py-[100px] relative scroll-mt-[86px] section-problem-bg overflow-hidden">
       <div className="shell">
 
         <div className="relative mb-[44px]">
           {/* Mobile: fixed-position background watermark */}
-          <div className="md:hidden fixed right-0 top-[28vh] pointer-events-none z-0" aria-hidden="true" style={{ opacity: 0.06 }}>
+          <div className="md:hidden absolute right-0 bottom-0 pointer-events-none z-0" aria-hidden="true" style={{ opacity: 0.06 }}>
             <ProblemIllustration size={260} />
           </div>
 
