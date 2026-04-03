@@ -79,8 +79,8 @@ function AstronautSVG() {
   return (
     <svg
       viewBox="0 0 160 272"
-      width="160"
-      height="272"
+      width="118"
+      height="200"
       style={{
         overflow: "visible",
         filter:
@@ -800,9 +800,9 @@ export function SpacemanAnimation() {
         style={{
           position: "absolute",
           right: -28,
-          top: 310,
-          width: 160,
-          height: 272,
+          top: 340,
+          width: 118,
+          height: 200,
           zIndex: 3,
           animation: "astronautFloat 3.6s ease-in-out infinite",
           willChange: "transform",
