@@ -389,4 +389,8 @@
     animation: none !important;
     width: 78% !important;
   }
+  /* Suppress float animations used by Problem robots, System hub image, Solution cards */
+  @keyframes astronautFloat {
+    0%, 100% { transform: none; }
+  }
 }

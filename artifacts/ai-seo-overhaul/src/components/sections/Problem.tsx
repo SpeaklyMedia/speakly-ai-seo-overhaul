@@ -152,11 +152,6 @@ export function Problem() {
       <div className="shell relative z-10">
 
         <div className="relative mb-[44px]">
-          {/* Mobile: background watermark — absolute so it stays within this section */}
-          <div className="md:hidden absolute right-0 bottom-0 pointer-events-none z-0" aria-hidden="true" style={{ opacity: 0.06 }}>
-            <ProblemIllustration size={260} />
-          </div>
-
           <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-orange mb-[16px]">The problem</div>
             <h2>Most websites were built to be browsed. They were not built to be understood.</h2>
@@ -198,6 +193,11 @@ export function Problem() {
             <h3 className="mb-[18px] font-extrabold tracking-[-0.03em] leading-[1.04]">No governed source model</h3>
             <p className="m-0 text-ink-muted text-[clamp(1rem,1.5vw,1.08rem)]">Future blog posts, landing pages, ad copy, and sales materials get created from scratch instead of from a single trusted foundation.</p>
           </article>
+        </div>
+
+        {/* Mobile-only: robots illustration — replaces the removed faint watermark */}
+        <div className="md:hidden mt-[32px] flex justify-center pointer-events-none" aria-hidden="true" style={{ opacity: 0.65 }}>
+          <ProblemIllustration size={240} />
         </div>
 
         {/* Warning banner */}

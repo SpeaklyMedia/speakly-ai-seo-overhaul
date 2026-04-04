@@ -164,6 +164,17 @@ export function System() {
           </div>
         </div>
 
+        {/* Mobile/small-tablet: AI-SEO hub image below heading, hidden on desktop */}
+        <div className="hidden min-[480px]:flex md:hidden justify-center mb-[28px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.65 }}>
+          <img
+            src={aiSeoHub}
+            alt=""
+            width={220}
+            height={220}
+            style={{ display: "block", mixBlendMode: "screen", animation: "astronautFloat 5.5s ease-in-out infinite" }}
+          />
+        </div>
+
         {/* Desktop: flex with connector arrows */}
         <div className="hidden md:flex items-stretch gap-0">
           {phases.map((phase, i) => (

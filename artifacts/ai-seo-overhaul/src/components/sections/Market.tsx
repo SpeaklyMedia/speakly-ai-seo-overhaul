@@ -1,11 +1,11 @@
 import { useInView } from "@/hooks/use-in-view";
 import aiHeadIcon from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_1775246793840.png";
 
-function MarketIllustration() {
+function MarketIllustration({ width = 300 }: { width?: number }) {
   return (
     <svg
       viewBox="0 0 200 200"
-      width="300"
+      width={width}
       aria-hidden="true"
       focusable="false"
       style={{ display: "block", overflow: "visible" }}
@@ -317,6 +317,11 @@ export function Market() {
             <p className="m-0 text-ink-muted text-[clamp(1rem,1.5vw,1.08rem)]">SparkToro and Datos frame search as a behavior, not a single channel. Google still dominates, but discovery also happens on AI tools, commerce sites, video platforms, and social.<sup>3</sup></p>
             <div className="inline-flex items-center gap-[8px] px-[10px] py-[7px] rounded-full bg-[#78c7ff]/10 border border-[#78c7ff]/15 text-[0.72rem] text-ink-soft uppercase tracking-[0.12em] mt-[12px] w-fit">SparkToro / Datos • Mar 2026</div>
           </article>
+        </div>
+
+        {/* Mobile-only: neural-network illustration below cards */}
+        <div className="sm:hidden mt-[36px] flex justify-center pointer-events-none" aria-hidden="true" style={{ opacity: 0.62 }}>
+          <MarketIllustration width={220} />
         </div>
       </div>
     </section>

@@ -100,6 +100,11 @@ export function Proof() {
           </div>
         </div>
 
+        {/* Tablet-only: TrustShield illustration between heading and cards */}
+        <div className="hidden md:flex lg:hidden justify-center mb-[32px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
+          <TrustShieldIllustration size={200} />
+        </div>
+
         {/* Hero proof card — Wellness brand */}
         <article className={`w-full mb-[18px] relative overflow-hidden rounded-[24px] bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(111,226,207,0.12),transparent_55%),linear-gradient(180deg,rgba(11,28,46,0.97),rgba(7,18,30,0.97))] border border-[#6fe2cf]/20 shadow-[0_24px_80px_rgba(2,7,16,0.45),inset_0_1px_0_rgba(111,226,207,0.06)] glass-card reveal ${isInView ? "is-visible" : ""}`}>
           {/* Top-edge teal accent line */}
