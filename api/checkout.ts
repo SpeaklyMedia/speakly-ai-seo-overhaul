@@ -18,7 +18,7 @@ const PRICE_IDS: Record<string, string> = {
 };
 
 const ALLOWED_ORIGINS = [
-  /^https:\/\/(www\.)?speaklymedia\.com$/,
+  /^https:\/\/([a-z0-9-]+\.)*speaklymedia\.com$/,
   /^https:\/\/[a-z0-9-]+\.vercel\.app$/,
   /^http:\/\/localhost(:\d+)?$/,
 ];
