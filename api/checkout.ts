@@ -1,17 +1,29 @@
 import Stripe from "stripe";
 
+interface CheckoutRequest {
+  method?: string;
+  body: { planSlug?: string };
+}
+
+interface CheckoutResponse {
+  status(code: number): CheckoutResponse;
+  json(data: unknown): CheckoutResponse;
+}
+
 const PRICE_IDS: Record<string, string> = {
   "competitor-scan": "price_1TIHS5EHagIjCpKA4W8ff42R",
   "visibility-overhaul": "price_1TIHS5EHagIjCpKAITYXikae",
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function handler(req: any, res: any) {
+export default async function handler(
+  req: CheckoutRequest,
+  res: CheckoutResponse,
+): Promise<CheckoutResponse> {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { planSlug } = req.body as { planSlug?: string };
+  const { planSlug } = req.body;
 
   if (!planSlug || !(planSlug in PRICE_IDS)) {
     return res.status(400).json({ error: "Invalid plan slug" });
