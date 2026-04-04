@@ -47,7 +47,7 @@ const PROPS = [
 export function WidgetHome() {
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-4 sm:p-6"
+      className="flex items-center justify-center p-4 sm:p-6"
       style={{
         background:
           "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120,199,255,0.14), transparent 50%), linear-gradient(180deg, #06111d 0%, #071321 60%, #081727 100%)",

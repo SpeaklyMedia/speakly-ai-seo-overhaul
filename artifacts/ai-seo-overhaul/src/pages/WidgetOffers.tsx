@@ -199,7 +199,7 @@ function CheckoutCard({ title, price, description, features, badge, highlight, s
 export function WidgetOffers() {
   return (
     <div
-      className="min-h-screen py-8 px-4 sm:px-6"
+      className="py-8 px-4 sm:px-6"
       style={{
         background:
           "radial-gradient(ellipse 80% 55% at 50% 100%, rgba(111,226,207,0.10), transparent 55%), radial-gradient(ellipse 55% 45% at 80% 0%, rgba(120,199,255,0.10), transparent 50%), linear-gradient(180deg, #06111d 0%, #071321 50%, #081727 100%)",
