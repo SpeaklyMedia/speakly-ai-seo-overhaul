@@ -68,7 +68,16 @@ export default async function handler(
   const notifyEmail = process.env.NOTIFY_EMAIL;
 
   if (!resendKey || !notifyEmail) {
-    console.warn("RESEND_API_KEY or NOTIFY_EMAIL not set — cannot send assessment email");
+    console.log(
+      JSON.stringify({
+        event: "assessment_lead",
+        timestamp: new Date().toISOString(),
+        name: name.trim(),
+        email: email.trim(),
+        website: website.trim(),
+        note: "RESEND_API_KEY or NOTIFY_EMAIL not configured — lead captured in logs only",
+      }),
+    );
     return res.status(200).json({ ok: true });
   }
 

@@ -144,24 +144,46 @@ export function WidgetHome() {
             ))}
           </div>
 
-          <a
-            href="https://speaklymedia.com/ai-seo-overhaul/"
-            target="_parent"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-[10px] w-full min-h-[48px] px-[32px] rounded-full font-bold tracking-[0.01em] transition-all duration-300"
-            style={{
-              background: "linear-gradient(135deg, #6fe2cf, #78c7ff)",
-              color: "#04101c",
-              fontSize: "0.95rem",
-              boxShadow: "0 6px 20px rgba(111,226,207,0.30)",
-              textDecoration: "none",
-            }}
-          >
-            See the full picture
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href="https://speaklymedia.com/ai-seo-overhaul/"
+              target="_parent"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-[10px] flex-1 min-h-[48px] px-[28px] rounded-full font-bold tracking-[0.01em] transition-all duration-300"
+              style={{
+                background: "linear-gradient(135deg, #6fe2cf, #78c7ff)",
+                color: "#04101c",
+                fontSize: "0.95rem",
+                boxShadow: "0 6px 20px rgba(111,226,207,0.30)",
+                textDecoration: "none",
+              }}
+            >
+              See the full picture
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+            <a
+              href="https://speaklymedia.com/ai-seo-overhaul/#free-assessment"
+              target="_parent"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-[9px] flex-1 min-h-[48px] px-[28px] rounded-full font-bold tracking-[0.01em] transition-all duration-300"
+              style={{
+                background: "#ffffff",
+                color: "#0f1923",
+                fontSize: "0.95rem",
+                border: "1.5px solid #dde5ef",
+                boxShadow: "0 2px 8px rgba(30,60,100,0.07)",
+                textDecoration: "none",
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="6.5" stroke="#1a9e8e" strokeWidth="1.5" />
+                <path d="M8 5v3.5l2 1.5" stroke="#1a9e8e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Get a Free Assessment
+            </a>
+          </div>
         </div>
       </div>
     </div>
