@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useIframeAutoresize } from "@/hooks/use-iframe-autoresize";
 
 interface FormState {
   name: string;
@@ -197,6 +198,7 @@ function CheckoutCard({ title, price, description, features, badge, highlight, s
 }
 
 export function WidgetOffers() {
+  useIframeAutoresize();
   return (
     <div
       className="py-8 px-4 sm:px-6"

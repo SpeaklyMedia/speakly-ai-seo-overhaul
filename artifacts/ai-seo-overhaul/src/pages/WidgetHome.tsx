@@ -1,3 +1,5 @@
+import { useIframeAutoresize } from "@/hooks/use-iframe-autoresize";
+
 const PROPS = [
   {
     icon: (
@@ -45,6 +47,7 @@ const PROPS = [
 ];
 
 export function WidgetHome() {
+  useIframeAutoresize();
   return (
     <div
       className="flex items-center justify-center p-4 sm:p-6"
