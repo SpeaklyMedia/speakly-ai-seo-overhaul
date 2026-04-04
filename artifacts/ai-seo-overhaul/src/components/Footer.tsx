@@ -18,13 +18,13 @@ export function Footer() {
             <div className="flex flex-wrap gap-[14px]">
               <a
                 href="#next-step"
-                className="inline-flex items-center justify-center gap-[10px] min-h-[50px] px-[20px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border border-transparent cursor-pointer text-[#04101c] bg-gradient-to-br from-teal to-blue shadow-[0_12px_30px_rgba(70,170,214,0.28)] hover:-translate-y-[2px]"
+                className="inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border border-transparent cursor-pointer text-[#04101c] bg-gradient-to-br from-teal to-blue shadow-[0_12px_30px_rgba(70,170,214,0.28)] hover:-translate-y-[2px]"
               >
                 Request a free AI-search readiness assessment
               </a>
               <a
                 href="#solution"
-                className="inline-flex items-center justify-center gap-[10px] min-h-[50px] px-[20px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]"
+                className="inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]"
               >
                 See the AI-SEO Overhaul
               </a>
