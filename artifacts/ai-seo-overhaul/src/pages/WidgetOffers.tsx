@@ -137,8 +137,7 @@ function CheckoutCard({ title, price, description, features, badge, highlight, s
     setLoading(true);
     setError(null);
     try {
-      const base = "https://speakly-ai-seo-overhaul.vercel.app";
-      const response = await fetch(`${base}/api/checkout`, {
+      const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ planSlug }),
