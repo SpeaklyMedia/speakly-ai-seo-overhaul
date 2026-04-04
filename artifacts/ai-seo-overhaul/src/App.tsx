@@ -99,6 +99,7 @@ function App() {
       <Routes>
         <Route path="/widget-home" element={<WidgetHome />} />
         <Route path="/widget-offers" element={<WidgetOffers />} />
+        <Route path="/" element={<MainApp />} />
         <Route path="*" element={<MainApp />} />
       </Routes>
     </BrowserRouter>
