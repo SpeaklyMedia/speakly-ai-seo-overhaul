@@ -1,7 +1,20 @@
+import { useState, useEffect } from "react";
 import { useInView } from "@/hooks/use-in-view";
 import aiHeadIcon from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_1775246793840.png";
 
-function MarketIllustration({ width = 300 }: { width?: number }) {
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return reduced;
+}
+
+function MarketIllustration({ width = 300, reduced = false }: { width?: number; reduced?: boolean }) {
   return (
     <svg
       viewBox="0 0 200 200"
@@ -106,31 +119,33 @@ function MarketIllustration({ width = 300 }: { width?: number }) {
       <circle cx="42" cy="100" r="4.5" fill="#04101c" stroke="#78c7ff" strokeWidth="1" />
       <circle cx="42" cy="100" r="2" fill="#78c7ff" opacity="0.70" />
 
-      {/* Animated signal pulses */}
-      <circle cx="100" cy="72" r="3" fill="#6fe2cf" opacity="0">
-        <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s">
-          <mpath xlinkHref="#path-top" />
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" repeatCount="indefinite" begin="0s" />
-      </circle>
-      <circle cx="0" cy="0" r="2.5" fill="#78c7ff" opacity="0">
-        <animateMotion dur="2.8s" repeatCount="indefinite" begin="0.6s">
-          <mpath xlinkHref="#path-tr" />
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.85;0" dur="2.8s" repeatCount="indefinite" begin="0.6s" />
-      </circle>
-      <circle cx="0" cy="0" r="2" fill="#ff9d5c" opacity="0">
-        <animateMotion dur="2.4s" repeatCount="indefinite" begin="1.1s">
-          <mpath xlinkHref="#path-right" />
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.8;0" dur="2.4s" repeatCount="indefinite" begin="1.1s" />
-      </circle>
-      <circle cx="0" cy="0" r="2" fill="#6fe2cf" opacity="0">
-        <animateMotion dur="2.6s" repeatCount="indefinite" begin="1.8s">
-          <mpath xlinkHref="#path-left" />
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.75;0" dur="2.6s" repeatCount="indefinite" begin="1.8s" />
-      </circle>
+      {/* Animated signal pulses — suppressed when prefers-reduced-motion */}
+      {!reduced && <>
+        <circle cx="100" cy="72" r="3" fill="#6fe2cf" opacity="0">
+          <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s">
+            <mpath xlinkHref="#path-top" />
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" repeatCount="indefinite" begin="0s" />
+        </circle>
+        <circle cx="0" cy="0" r="2.5" fill="#78c7ff" opacity="0">
+          <animateMotion dur="2.8s" repeatCount="indefinite" begin="0.6s">
+            <mpath xlinkHref="#path-tr" />
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.85;0" dur="2.8s" repeatCount="indefinite" begin="0.6s" />
+        </circle>
+        <circle cx="0" cy="0" r="2" fill="#ff9d5c" opacity="0">
+          <animateMotion dur="2.4s" repeatCount="indefinite" begin="1.1s">
+            <mpath xlinkHref="#path-right" />
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.8;0" dur="2.4s" repeatCount="indefinite" begin="1.1s" />
+        </circle>
+        <circle cx="0" cy="0" r="2" fill="#6fe2cf" opacity="0">
+          <animateMotion dur="2.6s" repeatCount="indefinite" begin="1.8s">
+            <mpath xlinkHref="#path-left" />
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.75;0" dur="2.6s" repeatCount="indefinite" begin="1.8s" />
+        </circle>
+      </>}
 
       {/* ── Extra branches from outer nodes for tree-like depth ── */}
       {/* Top node (100,50) → two sub-branches */}
@@ -183,31 +198,33 @@ function MarketIllustration({ width = 300 }: { width?: number }) {
       <circle cx="12" cy="118" r="2.5" fill="#04101c" stroke="#78c7ff" strokeWidth="0.7" />
       <circle cx="12" cy="118" r="1" fill="#78c7ff" opacity="0.52" />
 
-      {/* Extra animated signal pulses for new branches */}
-      <circle r="1.4" fill="#6fe2cf" fillOpacity="0.9">
-        <animateMotion dur="3.1s" repeatCount="indefinite" begin="0.4s">
-          <mpath xlinkHref="#path-top-sub-l" />
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.9;0" dur="3.1s" repeatCount="indefinite" begin="0.4s" />
-      </circle>
-      <circle r="1.4" fill="#ff9d5c" fillOpacity="0.9">
-        <animateMotion dur="3.6s" repeatCount="indefinite" begin="1.4s">
-          <mpath xlinkHref="#path-tr-sub" />
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.85;0" dur="3.6s" repeatCount="indefinite" begin="1.4s" />
-      </circle>
-      <circle r="1.4" fill="#78c7ff" fillOpacity="0.9">
-        <animateMotion dur="3.3s" repeatCount="indefinite" begin="2.0s">
-          <mpath xlinkHref="#path-right-sub-t" />
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.80;0" dur="3.3s" repeatCount="indefinite" begin="2.0s" />
-      </circle>
-      <circle r="1.4" fill="#f5c86f" fillOpacity="0.9">
-        <animateMotion dur="3.8s" repeatCount="indefinite" begin="0.9s">
-          <mpath xlinkHref="#path-bottom-sub-l" />
-        </animateMotion>
-        <animate attributeName="opacity" values="0;0.78;0" dur="3.8s" repeatCount="indefinite" begin="0.9s" />
-      </circle>
+      {/* Extra animated signal pulses for new branches — suppressed when prefers-reduced-motion */}
+      {!reduced && <>
+        <circle r="1.4" fill="#6fe2cf" fillOpacity="0.9">
+          <animateMotion dur="3.1s" repeatCount="indefinite" begin="0.4s">
+            <mpath xlinkHref="#path-top-sub-l" />
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.9;0" dur="3.1s" repeatCount="indefinite" begin="0.4s" />
+        </circle>
+        <circle r="1.4" fill="#ff9d5c" fillOpacity="0.9">
+          <animateMotion dur="3.6s" repeatCount="indefinite" begin="1.4s">
+            <mpath xlinkHref="#path-tr-sub" />
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.85;0" dur="3.6s" repeatCount="indefinite" begin="1.4s" />
+        </circle>
+        <circle r="1.4" fill="#78c7ff" fillOpacity="0.9">
+          <animateMotion dur="3.3s" repeatCount="indefinite" begin="2.0s">
+            <mpath xlinkHref="#path-right-sub-t" />
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.80;0" dur="3.3s" repeatCount="indefinite" begin="2.0s" />
+        </circle>
+        <circle r="1.4" fill="#f5c86f" fillOpacity="0.9">
+          <animateMotion dur="3.8s" repeatCount="indefinite" begin="0.9s">
+            <mpath xlinkHref="#path-bottom-sub-l" />
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.78;0" dur="3.8s" repeatCount="indefinite" begin="0.9s" />
+        </circle>
+      </>}
 
     </svg>
   );
@@ -215,6 +232,7 @@ function MarketIllustration({ width = 300 }: { width?: number }) {
 
 export function Market() {
   const { ref, isInView } = useInView();
+  const reduced = useReducedMotion();
 
   return (
     <section id="market" className="py-[100px] relative scroll-mt-[86px] section-market-bg">
@@ -245,7 +263,7 @@ export function Market() {
 
           {/* AI neural-network illustration — shown from tablet */}
           <div className={`absolute right-0 top-0 hidden sm:block pointer-events-none reveal-right ${isInView ? "is-visible" : ""}`} aria-hidden="true" style={{ opacity: 0.78 }}>
-            <MarketIllustration />
+            <MarketIllustration reduced={reduced} />
           </div>
           <div className="absolute right-[258px] top-[10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
             <div style={{ width: 80, height: 80, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
@@ -321,7 +339,7 @@ export function Market() {
 
         {/* Mobile-only: neural-network illustration below cards */}
         <div className="sm:hidden mt-[36px] flex justify-center pointer-events-none" aria-hidden="true" style={{ opacity: 0.62 }}>
-          <MarketIllustration width={220} />
+          <MarketIllustration width={220} reduced={reduced} />
         </div>
       </div>
     </section>
