@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Nav } from "./components/Nav";
 import { Home } from "./pages/Home";
+import { WidgetHome } from "./pages/WidgetHome";
+import { WidgetOffers } from "./pages/WidgetOffers";
 import starfieldLandscape from "@assets/IMG_0228_1775246914295.png";
 import starfieldPortrait from "@assets/IMG_0231_1775246914295.png";
 
@@ -64,7 +67,7 @@ function PaymentSuccessBanner({ onClose }: { onClose: () => void }) {
   );
 }
 
-function App() {
+function MainApp() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   useEffect(() => {
@@ -86,6 +89,19 @@ function App() {
       <Nav />
       <Home />
     </div>
+  );
+}
+
+function App() {
+  const basename = import.meta.env.BASE_URL ?? "/";
+  return (
+    <BrowserRouter basename={basename}>
+      <Routes>
+        <Route path="/widget-home" element={<WidgetHome />} />
+        <Route path="/widget-offers" element={<WidgetOffers />} />
+        <Route path="*" element={<MainApp />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
