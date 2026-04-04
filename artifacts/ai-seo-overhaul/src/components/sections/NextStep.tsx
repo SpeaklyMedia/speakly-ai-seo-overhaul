@@ -82,7 +82,7 @@ function FreeAssessmentCard({
 
   return (
     <div
-      className="relative flex flex-col rounded-[22px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)]"
+      className="relative flex flex-col rounded-[22px] overflow-hidden h-full transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)]"
       style={{
         background: "linear-gradient(180deg, rgba(10,24,40,0.96), rgba(7,18,30,0.96))",
         border: "1px solid rgba(120,199,255,0.15)",
@@ -290,27 +290,9 @@ function CheckoutCard({
     : "linear-gradient(180deg, rgba(10,24,40,0.96), rgba(7,18,30,0.96))";
 
   return (
-    <div
-      className="relative flex flex-col rounded-[22px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)]"
-      style={{
-        background: cardBg,
-        border: `${highlight ? "1.5px" : "1px"} solid ${borderColor}`,
-        boxShadow: highlight
-          ? "0 0 0 1px rgba(120,199,255,0.10), 0 24px 60px rgba(2,7,16,0.45)"
-          : "0 10px 30px rgba(0,0,0,0.22)",
-      }}
-    >
-      <div
-        className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[22px]"
-        style={{
-          background: highlight
-            ? "linear-gradient(90deg, transparent, #78c7ff 40%, #6fe2cf 70%, transparent)"
-            : "linear-gradient(90deg, transparent, rgba(120,199,255,0.25) 50%, transparent)",
-        }}
-        aria-hidden="true"
-      />
+    <div className="relative pt-[14px]">
       {badge && (
-        <div className="absolute top-[-14px] left-[50%] -translate-x-1/2 z-10">
+        <div className="absolute top-0 left-[50%] -translate-x-1/2 z-10">
           <span
             className="inline-flex items-center gap-[5px] px-[14px] py-[5px] rounded-full text-[0.72rem] font-bold tracking-[0.10em] uppercase whitespace-nowrap"
             style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", color: "#04101c" }}
@@ -319,6 +301,25 @@ function CheckoutCard({
           </span>
         </div>
       )}
+      <div
+        className="relative flex flex-col rounded-[22px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)] h-full"
+        style={{
+          background: cardBg,
+          border: `${highlight ? "1.5px" : "1px"} solid ${borderColor}`,
+          boxShadow: highlight
+            ? "0 0 0 1px rgba(120,199,255,0.10), 0 24px 60px rgba(2,7,16,0.45)"
+            : "0 10px 30px rgba(0,0,0,0.22)",
+        }}
+      >
+        <div
+          className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[22px]"
+          style={{
+            background: highlight
+              ? "linear-gradient(90deg, transparent, #78c7ff 40%, #6fe2cf 70%, transparent)"
+              : "linear-gradient(90deg, transparent, rgba(120,199,255,0.25) 50%, transparent)",
+          }}
+          aria-hidden="true"
+        />
       <div className="p-[28px] flex flex-col flex-1">
         <div className="mb-[20px]">
           <p className="text-[0.72rem] tracking-[0.16em] uppercase text-teal/70 mb-[8px]">Speakly AI-SEO</p>
@@ -388,6 +389,7 @@ function CheckoutCard({
           )}
         </div>
       </div>
+      </div>
     </div>
   );
 }
@@ -453,6 +455,7 @@ export function NextStep() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] mb-[48px] pt-[28px]">
+              <div className="pt-[14px] flex flex-col">
               <FreeAssessmentCard
                 title="Free Assessment"
                 description="A no-cost snapshot of where you stand in AI-driven search today — and where your biggest gaps are."
@@ -465,6 +468,7 @@ export function NextStep() {
                 submitLabel="Get my free assessment"
                 emailSubject="Free AI-Search Readiness Assessment"
               />
+              </div>
               <CheckoutCard
                 title="Competitor Scan & AI-SEO Visibility Readiness Kit"
                 price="$350"

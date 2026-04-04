@@ -54,3 +54,19 @@ Connected via Replit's native Stripe integration (sandbox). `stripe-replit-sync`
 
 ### Important note on build
 `stripe-replit-sync` is added to esbuild's `external` list in `build.mjs` because it uses `__dirname` to locate its SQL migration files at runtime.
+
+## Vercel Deployment
+
+The repo is configured for Vercel deployment of the AI-SEO landing page as a standalone SPA with a serverless checkout function.
+
+### Files
+- `vercel.json` (repo root) — build command, output directory, SPA rewrite, iframe-allow headers
+- `api/checkout.ts` (repo root) — Vercel serverless function; accepts `POST { planSlug }`, maps to hardcoded Stripe price IDs, returns Stripe Checkout URL
+- `DEPLOY.md` (repo root) — step-by-step Vercel setup guide with required env vars and iframe snippet
+
+### Vercel env vars required
+- `STRIPE_SECRET_KEY` — Stripe secret key
+- `SITE_URL` — full URL of the deployed site (e.g. `https://ai-seo.speaklymedia.com`)
+
+### Pricing cards / badge fix
+The "Most Popular" badge on the Visibility Overhaul card is positioned outside the `overflow-hidden` inner card via a `relative pt-[14px]` outer wrapper. FreeAssessmentCard is wrapped in a matching `pt-[14px]` wrapper at the call site for consistent grid alignment.
