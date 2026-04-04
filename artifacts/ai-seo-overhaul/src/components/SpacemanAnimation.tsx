@@ -522,7 +522,7 @@ export function PhoneAnimation() {
         borderRadius: 32,
         border: "1px solid rgba(120,199,255,0.45)",
         boxShadow: "0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10)",
-        animation: "phonePulse 3.2s ease-in-out infinite",
+        animation: reduced ? undefined : "phonePulse 3.2s ease-in-out infinite",
         overflow: "hidden",
         padding: "18px 18px 20px",
         display: "flex",
