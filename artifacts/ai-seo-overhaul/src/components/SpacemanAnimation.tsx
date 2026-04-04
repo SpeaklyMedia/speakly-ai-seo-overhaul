@@ -328,8 +328,8 @@ const CANVAS_H = 480;
 function getScale(w: number): number {
   if (w >= 1024) return 1.0;
   if (w >= 768)  return 0.75;
-  if (w >= 480)  return 0.60;
-  return 0.50;
+  if (w >= 480)  return 0.82;
+  return 0.72;
 }
 
 export function useHeroIllustrationScale() {
