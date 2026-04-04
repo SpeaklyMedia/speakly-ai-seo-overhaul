@@ -1,6 +1,6 @@
 import { useInView } from "@/hooks/use-in-view";
 import { useCountUp } from "@/hooks/use-count-up";
-import { SpacemanAnimation, PhoneAnimation } from "@/components/SpacemanAnimation";
+import { StarsAnimation, AstronautFloat, PhoneAnimation } from "@/components/SpacemanAnimation";
 
 export function Hero() {
   const { ref, isInView } = useInView();
@@ -13,7 +13,8 @@ export function Hero() {
 
   return (
     <section id="top" className="pt-[92px] pb-[82px] overflow-hidden relative">
-      <SpacemanAnimation />
+      <StarsAnimation />
+      <AstronautFloat />
 
       <div className="shell">
 
@@ -46,9 +47,14 @@ export function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — animated phone, hidden below lg */}
-          <div className={`hidden lg:flex items-start relative z-[6] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "120ms" }}>
-            <PhoneAnimation />
+          {/* RIGHT — animated phone; visible at md+ centered (tablet) or in right column (lg+) */}
+          <div
+            className={`hidden md:flex items-start justify-center lg:justify-start relative z-[5] reveal ${isInView ? "is-visible" : ""}`}
+            style={{ transitionDelay: "120ms" }}
+          >
+            <div className="w-full max-w-[290px] md:max-w-[310px] lg:max-w-none">
+              <PhoneAnimation />
+            </div>
           </div>
         </div>
 

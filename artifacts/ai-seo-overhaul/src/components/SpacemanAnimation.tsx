@@ -149,7 +149,6 @@ function AstronautSVG() {
       style={{ overflow: "visible", filter: "drop-shadow(0 0 20px rgba(255,157,92,0.55)) drop-shadow(0 4px 16px rgba(0,0,0,0.7))" }}
       aria-hidden="true"
     >
-      {/* Backpack — behind body */}
       <rect x="38" y="108" width="18" height="54" rx="7" fill="#0d2640" stroke="#ff9d5c" strokeWidth="1.5"/>
       <rect x="42" y="118" width="10" height="5" rx="2" fill="#78c7ff" opacity="0.55"/>
       <rect x="42" y="129" width="10" height="5" rx="2" fill="#6fe2cf" opacity="0.55"/>
@@ -157,23 +156,18 @@ function AstronautSVG() {
       <line x1="55" y1="120" x2="50" y2="120" stroke="#ff9d5c" strokeWidth="1" opacity="0.5"/>
       <line x1="55" y1="148" x2="50" y2="148" stroke="#ff9d5c" strokeWidth="1" opacity="0.5"/>
 
-      {/* Body group — gentle sway */}
       <g style={{ animation: "astronautBody 2.8s ease-in-out infinite", transformBox: "fill-box" as const, transformOrigin: "50% 95%", willChange: "transform" }}>
-        {/* Torso */}
         <rect x="50" y="94" width="60" height="72" rx="18" fill="#ff9d5c"/>
         <rect x="88" y="94" width="22" height="72" rx="18" fill="rgba(0,0,0,0.15)"/>
-        {/* Chest display */}
         <rect x="61" y="108" width="38" height="28" rx="5" fill="#030d18" stroke="#78c7ff" strokeWidth="1"/>
         <circle cx="68" cy="116" r="2.8" fill="#6fe2cf"/>
         <circle cx="77" cy="116" r="2.8" fill="#ff9d5c"/>
         <circle cx="86" cy="116" r="2.8" fill="#78c7ff"/>
         <rect x="64" y="123" width="32" height="1.5" rx="1" fill="#78c7ff" opacity="0.35"/>
         <rect x="64" y="128" width="22" height="1.5" rx="1" fill="#78c7ff" opacity="0.2"/>
-        {/* Shoulder pads */}
         <ellipse cx="46" cy="107" rx="14" ry="10" fill="#e08545"/>
         <ellipse cx="114" cy="107" rx="14" ry="10" fill="#e08545"/>
 
-        {/* Legs — rendered before arms so arms appear in front */}
         <rect x="56" y="162" width="23" height="60" rx="11.5" fill="#e08545"/>
         <rect x="81" y="162" width="23" height="60" rx="11.5" fill="#e08545"/>
         <ellipse cx="67.5" cy="192" rx="10" ry="6" fill="#c06830" opacity="0.6"/>
@@ -181,23 +175,19 @@ function AstronautSVG() {
         <ellipse cx="67.5" cy="223" rx="16" ry="10" fill="#0d2640" stroke="#ff9d5c" strokeWidth="1.8"/>
         <ellipse cx="92.5" cy="223" rx="16" ry="10" fill="#0d2640" stroke="#ff9d5c" strokeWidth="1.8"/>
 
-        {/* Left arm — cradling phone: upper arm angled forward/down, forearm bends steeply inward */}
         <polygon points="28,100 44,98 52,138 36,142" fill="#ff9d5c"/>
         <polygon points="36,140 52,136 72,152 56,158" fill="#e08545"/>
         <ellipse cx="65" cy="156" rx="12" ry="8" fill="#c06830"/>
 
-        {/* Right arm — mirrored cradling pose */}
         <polygon points="132,100 116,98 108,138 124,142" fill="#ff9d5c"/>
         <polygon points="124,140 108,136 88,152 104,158" fill="#e08545"/>
         <ellipse cx="95" cy="156" rx="12" ry="8" fill="#c06830"/>
 
-        {/* Thumbs — exaggerated typing rhythm at hand level */}
         <g style={{ animation: "astronautThumb 0.38s ease-in-out infinite", transformBox: "fill-box" as const, transformOrigin: "50% 50%", willChange: "transform" }}>
           <rect x="61" y="153" width="10" height="5" rx="2.5" fill="#a05520"/>
           <rect x="89" y="153" width="10" height="5" rx="2.5" fill="#a05520"/>
         </g>
 
-        {/* Helmet group — head bob */}
         <g style={{ animation: "astronautHead 2.4s ease-in-out infinite", transformBox: "fill-box" as const, transformOrigin: "50% 100%", willChange: "transform" }}>
           <rect x="66" y="86" width="28" height="14" rx="7" fill="#c06830"/>
           <ellipse cx="80" cy="96" rx="32" ry="8" fill="#e08545"/>
@@ -229,7 +219,184 @@ function AstronautSVG() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   PhoneAnimation — exported so Hero.tsx can render it in the right column
+   StarsAnimation — z-index:1 background layer (stars + gradient + shooting)
+   ───────────────────────────────────────────────────────────────────────── */
+export function StarsAnimation() {
+  const reduced = useReducedMotion();
+  if (reduced) return null;
+
+  return (
+    <div
+      aria-hidden="true"
+      role="presentation"
+      style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none", overflow: "hidden" }}
+    >
+      <style>{`
+        @keyframes starTwinkle {
+          0%,100% { opacity:1.0; transform:scale(1.2); }
+          50%      { opacity:0.15; transform:scale(0.8); }
+        }
+        @keyframes starGlimmer {
+          0%,100% { opacity:1; transform:scale(1.25); filter:brightness(1.6); }
+          50%      { opacity:0.38; transform:scale(0.78); filter:brightness(0.5); }
+        }
+        @keyframes shA {
+          0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(148deg); }
+          3%  { opacity:0.95; transform:translate(-60px,42px) rotate(148deg); }
+          16% { opacity:0; transform:translate(-240px,168px) rotate(148deg); }
+        }
+        @keyframes shB {
+          0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(32deg); }
+          3%  { opacity:0.95; transform:translate(52px,33px) rotate(32deg); }
+          16% { opacity:0; transform:translate(210px,130px) rotate(32deg); }
+        }
+        @keyframes shC {
+          0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(152deg); }
+          3%  { opacity:0.95; transform:translate(-50px,37px) rotate(152deg); }
+          16% { opacity:0; transform:translate(-200px,148px) rotate(152deg); }
+        }
+        @keyframes shD {
+          0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(28deg); }
+          3%  { opacity:0.95; transform:translate(44px,23px) rotate(28deg); }
+          16% { opacity:0; transform:translate(175px,92px) rotate(28deg); }
+        }
+      `}</style>
+
+      {/* Deep-space atmospheric gradient */}
+      <div style={{
+        position: "absolute", inset: 0, zIndex: 0,
+        background: `
+          radial-gradient(ellipse 140% 55% at 62% 0%, rgba(14,42,84,0.74) 0%, transparent 55%),
+          radial-gradient(ellipse 70% 40% at 18% 100%, rgba(8,24,50,0.50) 0%, transparent 50%),
+          radial-gradient(ellipse 50% 30% at 85% 60%, rgba(255,157,92,0.08) 0%, transparent 50%),
+          linear-gradient(180deg, rgba(4,10,20,0.78) 0%, rgba(7,18,34,0.12) 45%, rgba(4,10,20,0.78) 100%)
+        `,
+        pointerEvents: "none",
+      }}/>
+
+      {/* Regular starfield */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+        {STARS.map(([l, t, s, d, o], i) => (
+          <div key={i} style={{
+            position: "absolute",
+            left: `${l}%`, top: `${t}%`,
+            width: s, height: s, borderRadius: "50%",
+            background: o ? "rgba(255,157,92,0.72)" : "rgba(255,255,255,0.82)",
+            animation: `starTwinkle ${Math.min(1.8 + d * 0.6, 3.9).toFixed(2)}s ease-in-out ${(d * 0.9).toFixed(2)}s infinite`,
+            willChange: "opacity, transform",
+          }}/>
+        ))}
+
+        {/* Bright glowing stars */}
+        {BRIGHT_STARS.map(([l, t, s, d], i) => (
+          <div key={`b${i}`} style={{
+            position: "absolute",
+            left: `${l}%`, top: `${t}%`,
+            width: s, height: s, borderRadius: "50%",
+            background: "rgba(255,255,255,0.97)",
+            boxShadow: `0 0 ${s * 3}px ${s}px rgba(200,225,255,0.62)`,
+            animation: `starGlimmer ${Math.min(2.2 + d * 0.5, 4.0).toFixed(2)}s ease-in-out ${(d * 0.8).toFixed(2)}s infinite`,
+            willChange: "opacity, transform, filter",
+          }}/>
+        ))}
+
+        {/* Shooting stars */}
+        {SHOOTING_STARS.map(([l, t, name, delay], i) => (
+          <div key={`sh${i}`} style={{
+            position: "absolute",
+            left: `${l}%`, top: `${t}%`,
+            width: 200, height: 2,
+            background: "linear-gradient(90deg, rgba(255,210,130,0.95), rgba(255,157,92,0.6) 35%, transparent 100%)",
+            borderRadius: 2, opacity: 0,
+            animation: `${name} 20s linear ${delay}s infinite`,
+            willChange: "transform, opacity",
+          }}/>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   AstronautFloat — z-index:7, renders IN FRONT of the phone panel (z-5)
+   so the astronaut appears to cradle the device
+   ───────────────────────────────────────────────────────────────────────── */
+export function AstronautFloat() {
+  const reduced = useReducedMotion();
+  if (reduced) return null;
+
+  return (
+    <div
+      aria-hidden="true"
+      role="presentation"
+      style={{ position: "absolute", inset: 0, zIndex: 7, pointerEvents: "none", overflow: "hidden" }}
+    >
+      <style>{`
+        @keyframes astronautFloat {
+          0%,100% { transform:translateY(0px); }
+          50%      { transform:translateY(-14px); }
+        }
+        @keyframes astronautBody {
+          0%,100% { transform:rotate(-0.4deg); }
+          50%      { transform:rotate(0.4deg); }
+        }
+        @keyframes astronautHead {
+          0%,100% { transform:translateY(0px) rotate(-9deg); }
+          50%      { transform:translateY(-1.5px) rotate(-12deg); }
+        }
+        @keyframes astronautThumb {
+          0%,100% { transform:translateY(0px) scale(1); }
+          30%      { transform:translateY(-7px) scale(0.82); }
+          65%      { transform:translateY(2px) scale(1.06); }
+        }
+        @keyframes helmetLight {
+          0%,100% { opacity:1; }
+          50%      { opacity:0.15; }
+        }
+
+        /* Hide astronaut on tablet/mobile — phone shows in stacked layout without astronaut */
+        @media (max-width: 1023px) {
+          .spaceman-astronaut { display: none !important; }
+        }
+      `}</style>
+
+      {/* Orange atmospheric halo */}
+      <div
+        className="spaceman-halo"
+        style={{
+          position: "absolute",
+          right: -60, top: -30,
+          width: 500, height: 580,
+          background: "radial-gradient(ellipse at center, rgba(255,157,92,0.18) 0%, transparent 62%)",
+          filter: "blur(50px)",
+          borderRadius: "50%",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Astronaut — floats upper-right, IN FRONT of phone panel */}
+      <div
+        className="spaceman-astronaut"
+        style={{
+          position: "absolute",
+          right: 60, top: 30,
+          width: 200, height: 340,
+          zIndex: 1,
+          opacity: 0.90,
+          animation: "astronautFloat 3.6s ease-in-out infinite",
+          willChange: "transform",
+        }}
+      >
+        <AstronautSVG />
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PhoneAnimation — exported so Hero.tsx can render it in the layout column
+   z-index in Hero: z-[5] — BETWEEN stars (z-1) and astronaut (z-7)
    ───────────────────────────────────────────────────────────────────────── */
 export function PhoneAnimation() {
   const reduced = useReducedMotion();
@@ -244,7 +411,6 @@ export function PhoneAnimation() {
   phaseRef.current = phase;
   inputRef.current = input;
 
-  // Show result card 500ms after bot reply
   useEffect(() => {
     if (phase === "bot-replied") {
       const id = setTimeout(() => setShowCard(true), 500);
@@ -254,15 +420,12 @@ export function PhoneAnimation() {
     return;
   }, [phase]);
 
-  // Typewriter state machine
   useEffect(() => {
     if (reduced) return;
     let t: ReturnType<typeof setTimeout>;
 
     if (phase === "idle") {
-      setInput("");
-      setMessages([]);
-      setBotTyping(false);
+      setInput(""); setMessages([]); setBotTyping(false);
       t = setTimeout(() => setPhase("typing-bad"), 1200);
     } else if (phase === "typing-bad") {
       if (input.length < BAD_TEXT.length) {
@@ -297,10 +460,7 @@ export function PhoneAnimation() {
       t = setTimeout(() => setPhase("pause-end"), 5500);
     } else if (phase === "pause-end") {
       setFadingOut(true);
-      t = setTimeout(() => {
-        setFadingOut(false);
-        setPhase("idle");
-      }, 950);
+      t = setTimeout(() => { setFadingOut(false); setPhase("idle"); }, 950);
     }
 
     return () => clearTimeout(t);
@@ -327,23 +487,21 @@ export function PhoneAnimation() {
         }
       `}</style>
 
-      <div
-        style={{
-          width: "100%",
-          background: "rgba(4, 14, 34, 0.55)",
-          backdropFilter: "blur(20px) saturate(1.6)",
-          WebkitBackdropFilter: "blur(20px) saturate(1.6)",
-          borderRadius: 32,
-          border: "1px solid rgba(120,199,255,0.45)",
-          boxShadow: "0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10)",
-          animation: "phonePulse 3.2s ease-in-out infinite",
-          overflow: "hidden",
-          padding: "18px 18px 20px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 0,
-        }}
-      >
+      <div style={{
+        width: "100%",
+        background: "rgba(4, 14, 34, 0.55)",
+        backdropFilter: "blur(20px) saturate(1.6)",
+        WebkitBackdropFilter: "blur(20px) saturate(1.6)",
+        borderRadius: 32,
+        border: "1px solid rgba(120,199,255,0.45)",
+        boxShadow: "0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10)",
+        animation: "phonePulse 3.2s ease-in-out infinite",
+        overflow: "hidden",
+        padding: "18px 18px 20px",
+        display: "flex",
+        flexDirection: "column",
+        gap: 0,
+      }}>
         {/* Status bar */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, padding: "0 2px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
@@ -356,16 +514,13 @@ export function PhoneAnimation() {
           </div>
         </div>
 
-        {/* Chat area — taller to fill the column */}
+        {/* Chat area */}
         <div style={{ minHeight: 280, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 8, padding: "4px 0" }}>
 
-          {/* Idle / suggestion pills — visible when chat is empty and not fading */}
+          {/* Idle suggestion pills — fade out once conversation starts */}
           {messages.length === 0 && !botTyping && (
             <div style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 7,
-              marginBottom: 4,
+              display: "flex", flexDirection: "column", gap: 7, marginBottom: 4,
               opacity: (phase === "idle" || phase === "typing-bad" || phase === "deleting") ? 0.65 : 0,
               transition: "opacity 400ms ease",
             }}>
@@ -380,42 +535,29 @@ export function PhoneAnimation() {
                   borderRadius: "14px 14px 14px 4px",
                   background: "rgba(120,199,255,0.07)",
                   border: "1px solid rgba(120,199,255,0.15)",
-                  fontSize: 11,
-                  color: "#7d9ab5",
-                  lineHeight: 1.4,
-                }}>
-                  {q}
-                </div>
+                  fontSize: 11, color: "#7d9ab5", lineHeight: 1.4,
+                }}>{q}</div>
               ))}
             </div>
           )}
 
           {messages.map((msg, i) => (
-            <div
-              key={i}
-              style={{
-                alignSelf: msg.from === "user" ? "flex-end" : "flex-start",
-                maxWidth: "82%",
-                padding: "9px 13px",
-                borderRadius: msg.from === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
-                background: msg.from === "user"
-                  ? "linear-gradient(135deg, #78c7ff, #6fe2cf)"
-                  : "rgba(120,199,255,0.12)",
-                border: msg.from === "bot" ? "1px solid rgba(120,199,255,0.22)" : "none",
-                color: msg.from === "user" ? "#04101c" : "#dbe8f7",
-                fontSize: 12,
-                fontWeight: msg.from === "user" ? 600 : 400,
-                lineHeight: 1.45,
-                animation: fadingOut ? undefined : "cardFadeIn 0.3s ease forwards",
-                opacity: fadingOut ? 0 : 1,
-                transform: fadingOut ? "translateY(18px)" : "translateY(0)",
-                transition: fadingOut
-                  ? `opacity 700ms ease ${i * 90}ms, transform 700ms ease ${i * 90}ms`
-                  : "none",
-              }}
-            >
-              {msg.text}
-            </div>
+            <div key={i} style={{
+              alignSelf: msg.from === "user" ? "flex-end" : "flex-start",
+              maxWidth: "82%",
+              padding: "9px 13px",
+              borderRadius: msg.from === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
+              background: msg.from === "user"
+                ? "linear-gradient(135deg, #78c7ff, #6fe2cf)"
+                : "rgba(120,199,255,0.12)",
+              border: msg.from === "bot" ? "1px solid rgba(120,199,255,0.22)" : "none",
+              color: msg.from === "user" ? "#04101c" : "#dbe8f7",
+              fontSize: 12, fontWeight: msg.from === "user" ? 600 : 400, lineHeight: 1.45,
+              animation: fadingOut ? undefined : "cardFadeIn 0.3s ease forwards",
+              opacity: fadingOut ? 0 : 1,
+              transform: fadingOut ? "translateY(18px)" : "translateY(0)",
+              transition: fadingOut ? `opacity 700ms ease ${i * 90}ms, transform 700ms ease ${i * 90}ms` : "none",
+            }}>{msg.text}</div>
           ))}
 
           {botTyping && (
@@ -425,9 +567,7 @@ export function PhoneAnimation() {
               borderRadius: "16px 16px 16px 4px",
               background: "rgba(120,199,255,0.10)",
               border: "1px solid rgba(120,199,255,0.20)",
-              display: "flex",
-              gap: 5,
-              alignItems: "center",
+              display: "flex", gap: 5, alignItems: "center",
             }}>
               {[0, 0.16, 0.32].map((d) => (
                 <div key={d} style={{ width: 6, height: 6, borderRadius: "50%", background: "#78c7ff", animation: `dotBounce 1.1s ease-in-out ${d}s infinite` }} />
@@ -449,9 +589,7 @@ export function PhoneAnimation() {
         {/* Input row */}
         <div style={{
           marginTop: 12,
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
+          display: "flex", alignItems: "center", gap: 8,
           padding: "10px 14px",
           borderRadius: 18,
           background: "rgba(255,255,255,0.05)",
@@ -470,189 +608,6 @@ export function PhoneAnimation() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────────────────
-   SpacemanAnimation — stars + astronaut + halo, NO phone
-   Renders as a full-section absolute overlay (pointer-events:none)
-   ───────────────────────────────────────────────────────────────────────── */
-export function SpacemanAnimation() {
-  const reduced = useReducedMotion();
-
-  if (reduced) return null;
-
-  return (
-    <div
-      aria-hidden="true"
-      role="presentation"
-      style={{ position: "absolute", inset: 0, zIndex: 5, pointerEvents: "none", overflow: "hidden" }}
-    >
-      <style>{`
-        @keyframes starTwinkle {
-          0%,100% { opacity:1.0; transform:scale(1.2); }
-          50%      { opacity:0.15; transform:scale(0.8); }
-        }
-        @keyframes starGlimmer {
-          0%,100% { opacity:1; transform:scale(1.25); filter:brightness(1.6); }
-          50%      { opacity:0.38; transform:scale(0.78); filter:brightness(0.5); }
-        }
-        @keyframes astronautFloat {
-          0%,100% { transform:translateY(0px); }
-          50%      { transform:translateY(-14px); }
-        }
-        @keyframes astronautBody {
-          0%,100% { transform:rotate(-0.4deg); }
-          50%      { transform:rotate(0.4deg); }
-        }
-        @keyframes astronautHead {
-          0%,100% { transform:translateY(0px) rotate(-9deg); }
-          50%      { transform:translateY(-1.5px) rotate(-12deg); }
-        }
-        @keyframes astronautThumb {
-          0%,100% { transform:translateY(0px) scale(1); }
-          30%      { transform:translateY(-7px) scale(0.82); }
-          65%      { transform:translateY(2px) scale(1.06); }
-        }
-        @keyframes helmetLight {
-          0%,100% { opacity:1; }
-          50%      { opacity:0.15; }
-        }
-        @keyframes shA {
-          0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(148deg); }
-          3%  { opacity:0.95; transform:translate(-60px,42px) rotate(148deg); }
-          16% { opacity:0; transform:translate(-240px,168px) rotate(148deg); }
-        }
-        @keyframes shB {
-          0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(32deg); }
-          3%  { opacity:0.95; transform:translate(52px,33px) rotate(32deg); }
-          16% { opacity:0; transform:translate(210px,130px) rotate(32deg); }
-        }
-        @keyframes shC {
-          0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(152deg); }
-          3%  { opacity:0.95; transform:translate(-50px,37px) rotate(152deg); }
-          16% { opacity:0; transform:translate(-200px,148px) rotate(152deg); }
-        }
-        @keyframes shD {
-          0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(28deg); }
-          3%  { opacity:0.95; transform:translate(44px,23px) rotate(28deg); }
-          16% { opacity:0; transform:translate(175px,92px) rotate(28deg); }
-        }
-
-        /* Astronaut responsive — hidden at ≤ 1023px (layout stacks, phone hidden) */
-        @media (max-width: 1023px) {
-          .spaceman-astronaut { display: none !important; }
-          .spaceman-halo      { opacity: 0.5 !important; }
-        }
-      `}</style>
-
-      {/* Deep-space atmospheric gradient */}
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 0,
-        background: `
-          radial-gradient(ellipse 140% 55% at 62% 0%, rgba(14,42,84,0.74) 0%, transparent 55%),
-          radial-gradient(ellipse 70% 40% at 18% 100%, rgba(8,24,50,0.50) 0%, transparent 50%),
-          radial-gradient(ellipse 50% 30% at 85% 60%, rgba(255,157,92,0.08) 0%, transparent 50%),
-          linear-gradient(180deg, rgba(4,10,20,0.78) 0%, rgba(7,18,34,0.12) 45%, rgba(4,10,20,0.78) 100%)
-        `,
-        pointerEvents: "none",
-      }}/>
-
-      {/* Regular starfield */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-        {STARS.map(([l, t, s, d, o], i) => (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              left: `${l}%`,
-              top: `${t}%`,
-              width: s,
-              height: s,
-              borderRadius: "50%",
-              background: o ? "rgba(255,157,92,0.72)" : "rgba(255,255,255,0.82)",
-              animation: `starTwinkle ${Math.min(1.8 + d * 0.6, 3.9).toFixed(2)}s ease-in-out ${(d * 0.9).toFixed(2)}s infinite`,
-              willChange: "opacity, transform",
-            }}
-          />
-        ))}
-
-        {/* Bright glowing stars */}
-        {BRIGHT_STARS.map(([l, t, s, d], i) => (
-          <div
-            key={`b${i}`}
-            style={{
-              position: "absolute",
-              left: `${l}%`,
-              top: `${t}%`,
-              width: s,
-              height: s,
-              borderRadius: "50%",
-              background: "rgba(255,255,255,0.97)",
-              boxShadow: `0 0 ${s * 3}px ${s}px rgba(200,225,255,0.62)`,
-              animation: `starGlimmer ${Math.min(2.2 + d * 0.5, 4.0).toFixed(2)}s ease-in-out ${(d * 0.8).toFixed(2)}s infinite`,
-              willChange: "opacity, transform, filter",
-            }}
-          />
-        ))}
-
-        {/* Shooting stars */}
-        {SHOOTING_STARS.map(([l, t, name, delay], i) => (
-          <div
-            key={`sh${i}`}
-            style={{
-              position: "absolute",
-              left: `${l}%`,
-              top: `${t}%`,
-              width: 200,
-              height: 2,
-              background: "linear-gradient(90deg, rgba(255,210,130,0.95), rgba(255,157,92,0.6) 35%, transparent 100%)",
-              borderRadius: 2,
-              opacity: 0,
-              animation: `${name} 20s linear ${delay}s infinite`,
-              willChange: "transform, opacity",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Astronaut — floats in upper-right, above phone column */}
-      <div
-        className="spaceman-astronaut"
-        style={{
-          position: "absolute",
-          right: 60,
-          top: 30,
-          width: 200,
-          height: 340,
-          zIndex: 4,
-          opacity: 0.82,
-          animation: "astronautFloat 3.6s ease-in-out infinite",
-          willChange: "transform",
-        }}
-      >
-        <AstronautSVG />
-      </div>
-
-      {/* Orange halo behind astronaut */}
-      <div
-        className="spaceman-halo"
-        style={{
-          position: "absolute",
-          right: -60,
-          top: -30,
-          width: 500,
-          height: 580,
-          background: "radial-gradient(ellipse at center, rgba(255,157,92,0.18) 0%, transparent 62%)",
-          filter: "blur(50px)",
-          borderRadius: "50%",
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-      />
     </div>
   );
 }
