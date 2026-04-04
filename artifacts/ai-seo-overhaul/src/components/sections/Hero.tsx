@@ -56,8 +56,9 @@ export function Hero() {
           >
             {/* Scale-aware outer box — exact pixel layout footprint of the scaled canvas */}
             <div style={{ width: outerW, height: outerH, overflow: "visible", position: "relative", flexShrink: 0 }}>
-              {/* Fixed 340×480 canvas, scaled to fit the outer box from the top-left origin */}
-              <div style={{ width: 340, height: 480, transform: `scale(${scale})`, transformOrigin: "top left", position: "absolute", top: 0, left: 0 }}>
+              {/* Fixed 340×480 canvas, scaled from top-center; left offset re-centers the canvas
+                   within the outer box so the visual content exactly fills outerW. */}
+              <div style={{ width: 340, height: 480, transform: `scale(${scale})`, transformOrigin: "top center", position: "absolute", top: 0, left: (outerW - 340) / 2 }}>
                 <HeroIllustration />
               </div>
             </div>
