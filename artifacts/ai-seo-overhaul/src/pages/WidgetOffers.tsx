@@ -260,21 +260,14 @@ function CheckoutCard({ title, price, description, features, badge, highlight, s
               onClick={handleCheckout}
               disabled={loading}
               className="w-full min-h-[44px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
-              style={
-                highlight
-                  ? {
-                      background: loading
-                        ? "linear-gradient(135deg, rgba(111,226,207,0.65), rgba(120,199,255,0.65))"
-                        : "linear-gradient(135deg, #6fe2cf, #78c7ff)",
-                      color: "#04101c",
-                      border: "none",
-                    }
-                  : {
-                      background: loading ? "rgba(120,199,255,0.08)" : "transparent",
-                      color: "#1a5e8a",
-                      border: "1.5px solid rgba(120,199,255,0.55)",
-                    }
-              }
+              style={{
+                background: loading
+                  ? "linear-gradient(135deg, rgba(111,226,207,0.65), rgba(120,199,255,0.65))"
+                  : "linear-gradient(135deg, #6fe2cf, #78c7ff)",
+                color: "#04101c",
+                border: "none",
+                opacity: highlight ? 1 : 0.88,
+              }}
             >
               {loading ? (
                 <>
