@@ -13,10 +13,12 @@ interface AssessResponse {
   end(): void;
 }
 
-const ALLOWED_ORIGINS = [
+const isProduction = process.env.VERCEL_ENV === "production";
+
+const ALLOWED_ORIGINS: RegExp[] = [
   /^https:\/\/([a-z0-9-]+\.)*speaklymedia\.com$/,
   /^https:\/\/[a-z0-9-]+\.vercel\.app$/,
-  /^http:\/\/localhost(:\d+)?$/,
+  ...(!isProduction ? [/^http:\/\/localhost(:\d+)?$/] : []),
 ];
 
 function isAllowedOrigin(origin: string | undefined): boolean {
