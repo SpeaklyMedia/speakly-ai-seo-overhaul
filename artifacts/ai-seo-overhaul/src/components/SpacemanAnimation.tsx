@@ -320,7 +320,7 @@ export function StarsAnimation() {
    useHeroIllustrationScale — returns the current discrete scale factor and
    the corresponding outer-wrapper pixel dimensions so the layout box always
    matches the visually-scaled canvas size.
-   Breakpoints:  ≥1024 → 1.0   768-1023 → 0.75   480-767 → 0.60   <480 → 0.50
+   Breakpoints:  ≥1024 → 1.0   768-1023 → 0.75   480-767 → 0.82   <480 → 0.72
    ───────────────────────────────────────────────────────────────────────── */
 const CANVAS_W = 340;
 const CANVAS_H = 480;
