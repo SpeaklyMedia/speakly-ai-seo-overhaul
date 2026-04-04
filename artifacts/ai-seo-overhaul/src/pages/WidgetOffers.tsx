@@ -125,7 +125,7 @@ function FreeAssessmentCard() {
                     disabled={submitting}
                     className="w-full px-[13px] py-[10px] rounded-[10px] text-[0.87rem] outline-none transition-all duration-200 disabled:opacity-60"
                     style={{
-                      background: "#f7f9fc",
+                      background: "#ffffff",
                       border: errors[field] ? "1px solid rgba(220,60,60,0.55)" : "1px solid #dde5ef",
                       color: "#0f1923",
                     }}
