@@ -111,6 +111,35 @@ function HelmIcon() {
   );
 }
 
+function ResultCard() {
+  return (
+    <div
+      style={{
+        marginTop: 8,
+        background: "linear-gradient(135deg, rgba(13,36,64,0.97), rgba(9,24,44,0.97))",
+        border: "1px solid rgba(120,199,255,0.3)",
+        borderRadius: 12,
+        padding: "10px 12px",
+        animation: "cardFadeIn 0.4s ease forwards",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 6 }}>
+        <span style={{ fontSize: 12 }}>🚀</span>
+        <span style={{ fontSize: 10, color: "#5d8099", letterSpacing: "0.02em" }}>nasa.gov</span>
+      </div>
+      <div style={{ fontSize: 12, fontWeight: 700, color: "#dbe8f7", marginBottom: 5, lineHeight: 1.3 }}>
+        Book Your Moon Trip
+      </div>
+      <div style={{ fontSize: 10, color: "#7d9ab5", lineHeight: 1.5, marginBottom: 9 }}>
+        Reserve your seat on the next lunar mission.
+      </div>
+      <div style={{ display: "inline-flex", alignItems: "center", gap: 3, padding: "4px 10px", borderRadius: 7, background: "#ff9d5c", color: "#04101c", fontSize: 10, fontWeight: 700 }}>
+        Book your trip →
+      </div>
+    </div>
+  );
+}
+
 function AstronautSVG() {
   return (
     <svg
@@ -199,36 +228,10 @@ function AstronautSVG() {
   );
 }
 
-function ResultCard() {
-  return (
-    <div
-      style={{
-        marginTop: 8,
-        background: "linear-gradient(135deg, rgba(13,36,64,0.97), rgba(9,24,44,0.97))",
-        border: "1px solid rgba(120,199,255,0.3)",
-        borderRadius: 12,
-        padding: "10px 12px",
-        animation: "cardFadeIn 0.4s ease forwards",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 6 }}>
-        <span style={{ fontSize: 12 }}>🚀</span>
-        <span style={{ fontSize: 10, color: "#5d8099", letterSpacing: "0.02em" }}>nasa.gov</span>
-      </div>
-      <div style={{ fontSize: 12, fontWeight: 700, color: "#dbe8f7", marginBottom: 5, lineHeight: 1.3 }}>
-        Book Your Moon Trip
-      </div>
-      <div style={{ fontSize: 10, color: "#7d9ab5", lineHeight: 1.5, marginBottom: 9 }}>
-        Reserve your seat on the next lunar mission.
-      </div>
-      <div style={{ display: "inline-flex", alignItems: "center", gap: 3, padding: "4px 10px", borderRadius: 7, background: "#ff9d5c", color: "#04101c", fontSize: 10, fontWeight: 700 }}>
-        Book your trip →
-      </div>
-    </div>
-  );
-}
-
-export function SpacemanAnimation() {
+/* ─────────────────────────────────────────────────────────────────────────
+   PhoneAnimation — exported so Hero.tsx can render it in the right column
+   ───────────────────────────────────────────────────────────────────────── */
+export function PhoneAnimation() {
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState<Phase>("idle");
   const [input, setInput] = useState("");
@@ -293,7 +296,6 @@ export function SpacemanAnimation() {
       setMessages((prev) => [...prev, { from: "bot", text: "Found it — here's what came up 👇" }]);
       t = setTimeout(() => setPhase("pause-end"), 5500);
     } else if (phase === "pause-end") {
-      // Start graceful fade-out of all chat elements, then reset
       setFadingOut(true);
       t = setTimeout(() => {
         setFadingOut(false);
@@ -303,6 +305,181 @@ export function SpacemanAnimation() {
 
     return () => clearTimeout(t);
   }, [phase, input, reduced]);
+
+  return (
+    <div aria-hidden="true" role="presentation" style={{ width: "100%" }}>
+      <style>{`
+        @keyframes phonePulse {
+          0%,100% { box-shadow:0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10); }
+          50%      { box-shadow:0 0 28px 8px rgba(120,199,255,0.60), 0 0 100px 28px rgba(120,199,255,0.20), inset 0 1px 0 rgba(255,255,255,0.10); }
+        }
+        @keyframes blinkCaret {
+          0%,100% { opacity:1; }
+          50%      { opacity:0; }
+        }
+        @keyframes dotBounce {
+          0%,80%,100% { transform:scale(0.65); opacity:0.35; }
+          40%          { transform:scale(1.15); opacity:1; }
+        }
+        @keyframes cardFadeIn {
+          from { opacity:0; transform:translateY(6px); }
+          to   { opacity:1; transform:translateY(0); }
+        }
+      `}</style>
+
+      <div
+        style={{
+          width: "100%",
+          background: "rgba(4, 14, 34, 0.55)",
+          backdropFilter: "blur(20px) saturate(1.6)",
+          WebkitBackdropFilter: "blur(20px) saturate(1.6)",
+          borderRadius: 32,
+          border: "1px solid rgba(120,199,255,0.45)",
+          boxShadow: "0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10)",
+          animation: "phonePulse 3.2s ease-in-out infinite",
+          overflow: "hidden",
+          padding: "18px 18px 20px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 0,
+        }}
+      >
+        {/* Status bar */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, padding: "0 2px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <HelmIcon />
+            <span style={{ fontSize: 10, fontWeight: 700, color: "#dbe8f7", letterSpacing: "0.04em" }}>SPEAKLY AI</span>
+          </div>
+          <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+            <span style={{ fontSize: 9, color: "#6fe2cf", fontWeight: 600 }}>ONLINE</span>
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#6fe2cf", boxShadow: "0 0 6px #6fe2cf" }} />
+          </div>
+        </div>
+
+        {/* Chat area — taller to fill the column */}
+        <div style={{ minHeight: 280, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 8, padding: "4px 0" }}>
+
+          {/* Idle / suggestion pills — visible when chat is empty and not fading */}
+          {messages.length === 0 && !botTyping && (
+            <div style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 7,
+              marginBottom: 4,
+              opacity: (phase === "idle" || phase === "typing-bad" || phase === "deleting") ? 0.65 : 0,
+              transition: "opacity 400ms ease",
+            }}>
+              {[
+                "Why isn't my business in AI answers?",
+                "What makes a website AI-ready?",
+                "How does Speakly improve visibility?",
+              ].map((q) => (
+                <div key={q} style={{
+                  alignSelf: "flex-start",
+                  padding: "8px 12px",
+                  borderRadius: "14px 14px 14px 4px",
+                  background: "rgba(120,199,255,0.07)",
+                  border: "1px solid rgba(120,199,255,0.15)",
+                  fontSize: 11,
+                  color: "#7d9ab5",
+                  lineHeight: 1.4,
+                }}>
+                  {q}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              style={{
+                alignSelf: msg.from === "user" ? "flex-end" : "flex-start",
+                maxWidth: "82%",
+                padding: "9px 13px",
+                borderRadius: msg.from === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
+                background: msg.from === "user"
+                  ? "linear-gradient(135deg, #78c7ff, #6fe2cf)"
+                  : "rgba(120,199,255,0.12)",
+                border: msg.from === "bot" ? "1px solid rgba(120,199,255,0.22)" : "none",
+                color: msg.from === "user" ? "#04101c" : "#dbe8f7",
+                fontSize: 12,
+                fontWeight: msg.from === "user" ? 600 : 400,
+                lineHeight: 1.45,
+                animation: fadingOut ? undefined : "cardFadeIn 0.3s ease forwards",
+                opacity: fadingOut ? 0 : 1,
+                transform: fadingOut ? "translateY(18px)" : "translateY(0)",
+                transition: fadingOut
+                  ? `opacity 700ms ease ${i * 90}ms, transform 700ms ease ${i * 90}ms`
+                  : "none",
+              }}
+            >
+              {msg.text}
+            </div>
+          ))}
+
+          {botTyping && (
+            <div style={{
+              alignSelf: "flex-start",
+              padding: "10px 14px",
+              borderRadius: "16px 16px 16px 4px",
+              background: "rgba(120,199,255,0.10)",
+              border: "1px solid rgba(120,199,255,0.20)",
+              display: "flex",
+              gap: 5,
+              alignItems: "center",
+            }}>
+              {[0, 0.16, 0.32].map((d) => (
+                <div key={d} style={{ width: 6, height: 6, borderRadius: "50%", background: "#78c7ff", animation: `dotBounce 1.1s ease-in-out ${d}s infinite` }} />
+              ))}
+            </div>
+          )}
+
+          {showCard && (
+            <div style={{
+              opacity: fadingOut ? 0 : 1,
+              transform: fadingOut ? "translateY(18px)" : "translateY(0)",
+              transition: fadingOut ? "opacity 700ms ease 180ms, transform 700ms ease 180ms" : "none",
+            }}>
+              <ResultCard />
+            </div>
+          )}
+        </div>
+
+        {/* Input row */}
+        <div style={{
+          marginTop: 12,
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          padding: "10px 14px",
+          borderRadius: 18,
+          background: "rgba(255,255,255,0.05)",
+          border: "1px solid rgba(120,199,255,0.18)",
+        }}>
+          <span style={{ flex: 1, fontSize: 12, color: input ? "#dbe8f7" : "#4a6a8a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+            {input || "Ask anything…"}
+            {(phase === "typing-bad" || phase === "typing-good" || phase === "deleting") && (
+              <span style={{ display: "inline-block", width: 1.5, height: "1em", background: "#78c7ff", verticalAlign: "middle", marginLeft: 1, animation: "blinkCaret 0.85s step-end infinite" }} />
+            )}
+          </span>
+          <div style={{ width: 28, height: 28, borderRadius: 9, background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "grid", placeItems: "center", flexShrink: 0 }}>
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M1 10L10 1M10 1H3M10 1V8" stroke="#04101c" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SpacemanAnimation — stars + astronaut + halo, NO phone
+   Renders as a full-section absolute overlay (pointer-events:none)
+   ───────────────────────────────────────────────────────────────────────── */
+export function SpacemanAnimation() {
+  const reduced = useReducedMotion();
 
   if (reduced) return null;
 
@@ -320,18 +497,6 @@ export function SpacemanAnimation() {
         @keyframes starGlimmer {
           0%,100% { opacity:1; transform:scale(1.25); filter:brightness(1.6); }
           50%      { opacity:0.38; transform:scale(0.78); filter:brightness(0.5); }
-        }
-        @keyframes blinkCaret {
-          0%,100% { opacity:1; }
-          50%      { opacity:0; }
-        }
-        @keyframes dotBounce {
-          0%,80%,100% { transform:scale(0.65); opacity:0.35; }
-          40%          { transform:scale(1.15); opacity:1; }
-        }
-        @keyframes phonePulse {
-          0%,100% { box-shadow:0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10); }
-          50%      { box-shadow:0 0 28px 8px rgba(120,199,255,0.60), 0 0 100px 28px rgba(120,199,255,0.20), inset 0 1px 0 rgba(255,255,255,0.10); }
         }
         @keyframes astronautFloat {
           0%,100% { transform:translateY(0px); }
@@ -354,10 +519,6 @@ export function SpacemanAnimation() {
           0%,100% { opacity:1; }
           50%      { opacity:0.15; }
         }
-        @keyframes cardFadeIn {
-          from { opacity:0; transform:translateY(6px); }
-          to   { opacity:1; transform:translateY(0); }
-        }
         @keyframes shA {
           0%,18%,100% { opacity:0; transform:translate(0px,0px) rotate(148deg); }
           3%  { opacity:0.95; transform:translate(-60px,42px) rotate(148deg); }
@@ -379,58 +540,14 @@ export function SpacemanAnimation() {
           16% { opacity:0; transform:translate(175px,92px) rotate(28deg); }
         }
 
-        /* ── Responsive overrides ─────────────────────────────────── */
-
-        /* 1024–1279px: slightly smaller phone, same right-anchor */
-        @media (max-width: 1279px) {
-          .spaceman-phone {
-            width: 272px !important;
-            right: 65px !important;
-          }
-        }
-
-        /* < 1024px (tablet/stacked layout): adjust spaceman */
+        /* Astronaut responsive — hidden at ≤ 1023px (layout stacks, phone hidden) */
         @media (max-width: 1023px) {
-          .spaceman-halo  { opacity: 0.7 !important; }
-          .spaceman-astronaut {
-            right: 10px !important;
-            left: auto !important;
-            top: 160px !important;
-            opacity: 0.50 !important;
-            width: 160px !important;
-            height: 272px !important;
-          }
-        }
-
-        /* 768–1023px: tablet — phone tracks with smaller astronaut (right:10, width:160) */
-        @media (min-width: 768px) and (max-width: 1023px) {
-          .spaceman-phone {
-            width: 258px !important;
-            right: 28px !important;
-            top: 70px !important;
-          }
-        }
-
-        /* < 768px (mobile): recenter phone */
-        @media (max-width: 767px) {
-          .spaceman-phone {
-            width: 220px !important;
-            top: 36px !important;
-            opacity: 0.52 !important;
-            left: 50% !important;
-            right: auto !important;
-            transform: translateX(-50%) !important;
-          }
-        }
-
-        /* < 640px (mobile): hide astronaut — only stars remain */
-        @media (max-width: 639px) {
           .spaceman-astronaut { display: none !important; }
-          .spaceman-halo      { display: none !important; }
+          .spaceman-halo      { opacity: 0.5 !important; }
         }
       `}</style>
 
-      {/* Deep-space atmospheric gradient — preserves star visibility in mid-section, anchors edges */}
+      {/* Deep-space atmospheric gradient */}
       <div style={{
         position: "absolute",
         inset: 0,
@@ -502,7 +619,7 @@ export function SpacemanAnimation() {
         ))}
       </div>
 
-      {/* Astronaut — upper-right, in FRONT of phone (zIndex:4 > phone's zIndex:2) so arms appear to hold it */}
+      {/* Astronaut — floats in upper-right, above phone column */}
       <div
         className="spaceman-astronaut"
         style={{
@@ -520,7 +637,7 @@ export function SpacemanAnimation() {
         <AstronautSVG />
       </div>
 
-      {/* Orange halo anchored behind astronaut — upper-right */}
+      {/* Orange halo behind astronaut */}
       <div
         className="spaceman-halo"
         style={{
@@ -536,124 +653,6 @@ export function SpacemanAnimation() {
           pointerEvents: "none",
         }}
       />
-
-      {/* Phone — right-anchored adjacent to the astronaut so it reads as held in its arms; blue screen tint */}
-      <div
-        className="spaceman-phone"
-        style={{
-          position: "absolute",
-          right: 72,
-          top: 92,
-          width: 290,
-          background: "rgba(4, 14, 34, 0.35)",
-          backdropFilter: "blur(16px) saturate(1.6)",
-          WebkitBackdropFilter: "blur(16px) saturate(1.6)",
-          borderRadius: 32,
-          border: "1px solid rgba(120,199,255,0.45)",
-          boxShadow: "0 0 18px 5px rgba(120,199,255,0.42), 0 0 70px 20px rgba(120,199,255,0.14), inset 0 1px 0 rgba(255,255,255,0.10)",
-          animation: "phonePulse 3.2s ease-in-out infinite",
-          zIndex: 2,
-          overflow: "hidden",
-          padding: "14px 14px 16px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 0,
-        }}
-      >
-        {/* Status bar */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8, padding: "0 2px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-            <HelmIcon />
-            <span style={{ fontSize: 10, fontWeight: 700, color: "#dbe8f7", letterSpacing: "0.04em" }}>SPEAKLY AI</span>
-          </div>
-          <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
-            <span style={{ fontSize: 9, color: "#6fe2cf", fontWeight: 600 }}>ONLINE</span>
-            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#6fe2cf", boxShadow: "0 0 6px #6fe2cf" }} />
-          </div>
-        </div>
-
-        {/* Chat area */}
-        <div style={{ minHeight: 200, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 8, padding: "4px 0" }}>
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              style={{
-                alignSelf: msg.from === "user" ? "flex-end" : "flex-start",
-                maxWidth: "82%",
-                padding: "9px 13px",
-                borderRadius: msg.from === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
-                background: msg.from === "user"
-                  ? "linear-gradient(135deg, #78c7ff, #6fe2cf)"
-                  : "rgba(120,199,255,0.12)",
-                border: msg.from === "bot" ? "1px solid rgba(120,199,255,0.22)" : "none",
-                color: msg.from === "user" ? "#04101c" : "#dbe8f7",
-                fontSize: 11,
-                fontWeight: msg.from === "user" ? 600 : 400,
-                lineHeight: 1.45,
-                animation: fadingOut ? undefined : "cardFadeIn 0.3s ease forwards",
-                opacity: fadingOut ? 0 : 1,
-                transform: fadingOut ? "translateY(18px)" : "translateY(0)",
-                transition: fadingOut
-                  ? `opacity 700ms ease ${i * 90}ms, transform 700ms ease ${i * 90}ms`
-                  : "none",
-              }}
-            >
-              {msg.text}
-            </div>
-          ))}
-
-          {botTyping && (
-            <div style={{
-              alignSelf: "flex-start",
-              padding: "10px 14px",
-              borderRadius: "16px 16px 16px 4px",
-              background: "rgba(120,199,255,0.10)",
-              border: "1px solid rgba(120,199,255,0.20)",
-              display: "flex",
-              gap: 5,
-              alignItems: "center",
-            }}>
-              {[0, 0.16, 0.32].map((d) => (
-                <div key={d} style={{ width: 6, height: 6, borderRadius: "50%", background: "#78c7ff", animation: `dotBounce 1.1s ease-in-out ${d}s infinite` }} />
-              ))}
-            </div>
-          )}
-
-          {showCard && (
-            <div style={{
-              opacity: fadingOut ? 0 : 1,
-              transform: fadingOut ? "translateY(18px)" : "translateY(0)",
-              transition: fadingOut ? "opacity 700ms ease 180ms, transform 700ms ease 180ms" : "none",
-            }}>
-              <ResultCard />
-            </div>
-          )}
-        </div>
-
-        {/* Input row */}
-        <div style={{
-          marginTop: 10,
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          padding: "9px 12px",
-          borderRadius: 18,
-          background: "rgba(255,255,255,0.05)",
-          border: "1px solid rgba(120,199,255,0.18)",
-        }}>
-          <span style={{ flex: 1, fontSize: 11, color: input ? "#dbe8f7" : "#4a6a8a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-            {input || "Ask anything…"}
-            {(phase === "typing-bad" || phase === "typing-good" || phase === "deleting") && (
-              <span style={{ display: "inline-block", width: 1.5, height: "1em", background: "#78c7ff", verticalAlign: "middle", marginLeft: 1, animation: "blinkCaret 0.85s step-end infinite" }} />
-            )}
-          </span>
-          <div style={{ width: 26, height: 26, borderRadius: 9, background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "grid", placeItems: "center", flexShrink: 0 }}>
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-              <path d="M1 10L10 1M10 1H3M10 1V8" stroke="#04101c" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
