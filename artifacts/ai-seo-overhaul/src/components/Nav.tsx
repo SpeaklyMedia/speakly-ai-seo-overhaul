@@ -54,9 +54,23 @@ export function Nav() {
             );
           })}
         </nav>
-        <a className="inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer w-full md:w-auto text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]" href="#next-step" data-testid="button-nav-cta">
-          Request assessment
-        </a>
+        <div className="flex items-center gap-[10px]">
+          <a
+            href="https://speaklymedia.com"
+            target="_parent"
+            rel="noopener noreferrer"
+            data-testid="link-speaklymedia"
+            className="hidden md:inline-flex items-center gap-[6px] text-[0.82rem] text-ink-soft hover:text-ink transition-colors duration-200 whitespace-nowrap"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M9 11L5 7l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            speaklymedia.com
+          </a>
+          <a className="inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer w-full md:w-auto text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]" href="#next-step" data-testid="button-nav-cta">
+            Request assessment
+          </a>
+        </div>
       </div>
     </div>
   );
