@@ -158,9 +158,11 @@ Vercel project: `prj_YXWOyopYetXZrOR9zdoK13HCrWVK`, team `team_Fk5OMn1ovpKqUNQWu
 Production URL: `https://speakly-ai-seo-overhaul.vercel.app`
 
 ### Deployment files
-- `vercel.json` (repo root) — build command, output directory, SPA rewrite (`/(.*) → /index.html`), iframe-allow headers
-- `api/checkout.ts` (repo root) — Vercel serverless function; accepts `POST { planSlug }`, maps to hardcoded Stripe price IDs, returns Stripe Checkout URL
-- `DEPLOY.md` (repo root) — step-by-step Vercel setup guide with required env vars and iframe snippet
+- `vercel.json` (repo root) — build command, output directory, functions config (webhook `maxDuration`), SPA rewrite, iframe-allow headers
+- `api/checkout.ts` (repo root) — Vercel serverless function; accepts `POST { planSlug }`, maps to hardcoded Stripe price IDs, returns Stripe Checkout URL; CORS restricted to `*.speaklymedia.com` + `*.vercel.app` (localhost in dev only)
+- `api/webhook.ts` (repo root) — Vercel serverless function; receives Stripe `checkout.session.completed` events; verifies signature with `STRIPE_WEBHOOK_SECRET`; sends payment notification email via Resend. Uses `export const config = { api: { bodyParser: false } }` so raw body is available for signature verification.
+- `api/assess.ts` (repo root) — Vercel serverless function; accepts free assessment form submissions; logs every lead as structured JSON; sends lead notification email via Resend when configured
+- `DEPLOY.md` (repo root) — step-by-step Vercel setup guide with all 5 required env vars, webhook registration, lead capture, and iframe embedding instructions
 
 ### Vercel env vars required
 - `STRIPE_SECRET_KEY` — Stripe secret key (`sk_live_...` or `sk_test_...`)

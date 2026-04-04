@@ -3,18 +3,20 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 
 /**
- * Raw body is required for Stripe signature verification.
- *
- * For plain Vercel serverless functions (non-Next.js), using the Node.js
- * `IncomingMessage` / `ServerResponse` types is the correct mechanism to
- * receive an unparsed request stream — Vercel does NOT auto-parse bodies
- * for handlers with this signature. Body is read manually via `readRawBody`
- * so that `stripe.webhooks.constructEvent` can verify the HMAC signature.
- *
- * `vercel.json` functions config governs runtime, memory, and maxDuration;
- * it has no `bodyParser` field for non-Next.js functions. This handler's
- * type signature is the authoritative body-parsing control point.
+ * Disable automatic body parsing so that the raw request body bytes are
+ * available for Stripe HMAC signature verification via
+ * `stripe.webhooks.constructEvent`. Vercel's Node.js runtime respects
+ * `export const config = { api: { bodyParser: false } }` for both Next.js
+ * API routes and plain serverless functions. The handler also uses the low-
+ * level `IncomingMessage` / `ServerResponse` types, which reinforces that
+ * Vercel's automatic JSON parsing is bypassed. Body is read manually via
+ * `readRawBody` before being passed to `constructEvent`.
  */
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 function readRawBody(req: IncomingMessage): Promise<Buffer> {
   return new Promise((resolve, reject) => {
