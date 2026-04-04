@@ -146,7 +146,7 @@ export function WidgetHome() {
             href="https://speaklymedia.com/ai-seo-overhaul/"
             target="_parent"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-[10px] w-full sm:w-auto sm:inline-flex min-h-[48px] px-[32px] rounded-full font-bold tracking-[0.01em] transition-all duration-300"
+            className="flex items-center justify-center gap-[10px] w-full min-h-[48px] px-[32px] rounded-full font-bold tracking-[0.01em] transition-all duration-300"
             style={{
               background: "linear-gradient(135deg, #6fe2cf, #78c7ff)",
               color: "#04101c",
