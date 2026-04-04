@@ -67,17 +67,17 @@ export default async function handler(
   const resendKey = process.env.RESEND_API_KEY;
   const notifyEmail = process.env.NOTIFY_EMAIL;
 
+  console.log(
+    JSON.stringify({
+      event: "assessment_lead",
+      timestamp: new Date().toISOString(),
+      name: name.trim(),
+      email: email.trim(),
+      website: website.trim(),
+    }),
+  );
+
   if (!resendKey || !notifyEmail) {
-    console.log(
-      JSON.stringify({
-        event: "assessment_lead",
-        timestamp: new Date().toISOString(),
-        name: name.trim(),
-        email: email.trim(),
-        website: website.trim(),
-        note: "RESEND_API_KEY or NOTIFY_EMAIL not configured — lead captured in logs only",
-      }),
-    );
     return res.status(200).json({ ok: true });
   }
 

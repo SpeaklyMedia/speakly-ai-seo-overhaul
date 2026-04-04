@@ -141,6 +141,53 @@ Once deployed, embed the page on any domain using:
 The `Content-Security-Policy: frame-ancestors *` header in `vercel.json` allows
 embedding from any origin, including speaklymedia.com.
 
+### Home widget — "Get a Free Assessment" button
+
+The home page widget (`/widget-home`) now includes a dedicated **Get a Free Assessment** button alongside the main CTA. When clicked, it navigates the parent window to:
+
+```
+https://speaklymedia.com/ai-seo-overhaul/#free-assessment
+```
+
+To make this scroll directly to the assessment form on your service page, add `id="free-assessment"` to the wrapper element around the offers widget iframe on `speaklymedia.com/ai-seo-overhaul/`:
+
+```html
+<div id="free-assessment">
+  <iframe
+    src="https://YOUR_VERCEL_DOMAIN/widget-offers"
+    width="100%"
+    ...
+  ></iframe>
+</div>
+```
+
+---
+
+## Capturing leads before Resend is configured
+
+The `/api/assess` endpoint works immediately — no Resend setup required to accept form
+submissions. Until `RESEND_API_KEY` and `NOTIFY_EMAIL` are set in Vercel, every
+submitted lead is written as a structured JSON log line to Vercel's function logs:
+
+```json
+{
+  "event": "assessment_lead",
+  "timestamp": "2026-04-04T18:30:00.000Z",
+  "name": "Jane Smith",
+  "email": "jane@example.com",
+  "website": "example.com"
+}
+```
+
+To access these leads:
+1. Go to your [Vercel project dashboard](https://vercel.com).
+2. Click **Functions** in the left sidebar.
+3. Select the `/api/assess` function.
+4. Search for `assessment_lead` to filter to form submissions.
+
+Once you configure Resend, leads are delivered by email automatically and the log
+fallback still runs alongside it.
+
 ---
 
 ## Local build test
