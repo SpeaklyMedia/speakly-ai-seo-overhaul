@@ -52,7 +52,7 @@ export function Hero() {
             className={`hidden md:flex items-start justify-center lg:justify-start relative z-[5] reveal ${isInView ? "is-visible" : ""}`}
             style={{ transitionDelay: "120ms" }}
           >
-            <div className="w-full max-w-[290px] md:max-w-[310px] lg:max-w-none">
+            <div style={{ width: "100%", maxWidth: "clamp(260px, 40vw, 340px)" }} className="lg:max-w-none">
               <PhoneAnimation />
             </div>
           </div>
