@@ -56,46 +56,62 @@ function FreeAssessmentCard() {
 
   return (
     <div
-      className="relative flex flex-col rounded-[22px] overflow-hidden h-full transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)]"
+      className="relative flex flex-col rounded-[20px] overflow-hidden h-full transition-shadow duration-300"
       style={{
-        background: "linear-gradient(180deg, rgba(10,24,40,0.96), rgba(7,18,30,0.96))",
-        border: "1px solid rgba(120,199,255,0.15)",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.22)",
+        background: "#ffffff",
+        border: "1px solid #e2eaf3",
+        boxShadow: "0 2px 12px rgba(30,60,100,0.06)",
       }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[22px]" style={{ background: "linear-gradient(90deg, transparent, rgba(120,199,255,0.25) 50%, transparent)" }} aria-hidden="true" />
-      <div className="p-[28px] flex flex-col flex-1">
-        <div className="mb-[20px]">
-          <p className="text-[0.72rem] tracking-[0.16em] uppercase mb-[8px]" style={{ color: "rgba(111,226,207,0.70)" }}>Speakly AI-SEO</p>
-          <h3 className="mb-[8px] leading-[1.18]" style={{ fontSize: "clamp(1rem, 1.8vw, 1.14rem)", fontWeight: 800, color: "#dbe8f7" }}>
+      <div
+        className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[20px]"
+        style={{ background: "linear-gradient(90deg, #6fe2cf, #78c7ff)" }}
+        aria-hidden="true"
+      />
+      <div className="p-[26px] flex flex-col flex-1 pt-[30px]">
+        <div className="mb-[18px]">
+          <p className="text-[0.68rem] tracking-[0.16em] uppercase font-semibold mb-[7px]" style={{ color: "#1a9e8e" }}>Speakly AI-SEO</p>
+          <h3 className="mb-[8px] leading-[1.2]" style={{ fontSize: "clamp(1rem, 1.8vw, 1.12rem)", fontWeight: 800, color: "#0f1923" }}>
             Free Assessment
           </h3>
-          <div className="flex items-baseline gap-[6px] mb-[12px]">
-            <span className="text-[1.15rem] font-bold" style={{ color: "#6fe2cf" }}>Free</span>
+          <div className="flex items-baseline gap-[6px] mb-[10px]">
+            <span className="text-[1.1rem] font-bold" style={{ color: "#1a9e8e" }}>Free</span>
           </div>
-          <p className="text-[0.85rem] leading-[1.56]" style={{ color: "rgba(219,232,247,0.65)" }}>
+          <p className="text-[0.84rem] leading-[1.58]" style={{ color: "#5a6a7e" }}>
             A no-cost snapshot of where you stand in AI-driven search today — and where your biggest gaps are.
           </p>
         </div>
-        <ul className="list-none p-0 grid gap-[8px] mb-[24px]">
+        <ul className="list-none p-0 grid gap-[7px] mb-[22px]">
           {["AI visibility snapshot", "Competitor comparison", "Source-of-truth gap review", "Tailored roadmap overview"].map((f) => (
-            <li key={f} className="relative pl-[20px] text-[0.84rem]" style={{ color: "rgba(219,232,247,0.65)", lineHeight: 1.5 }}>
-              <span className="absolute left-0 top-[0.52em] w-[7px] h-[7px] rounded-full" style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "block" }} aria-hidden="true" />
+            <li key={f} className="relative pl-[18px] text-[0.83rem]" style={{ color: "#5a6a7e", lineHeight: 1.5 }}>
+              <span
+                className="absolute left-0 top-[0.52em] w-[6px] h-[6px] rounded-full"
+                style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "block" }}
+                aria-hidden="true"
+              />
               {f}
             </li>
           ))}
         </ul>
         <div className="mt-auto">
           {submitted ? (
-            <div className="flex flex-col items-center text-center py-[20px] px-[10px] rounded-[16px]" style={{ background: "rgba(111,226,207,0.06)", border: "1px solid rgba(111,226,207,0.22)" }}>
-              <div className="w-[44px] h-[44px] rounded-full mb-[12px] flex items-center justify-center" style={{ background: "linear-gradient(135deg, rgba(111,226,207,0.18), rgba(120,199,255,0.18))", border: "1px solid rgba(111,226,207,0.35)" }}>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><polyline points="3.5,10 8,14.5 16.5,5.5" stroke="#6fe2cf" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            <div
+              className="flex flex-col items-center text-center py-[18px] px-[10px] rounded-[14px]"
+              style={{ background: "rgba(111,226,207,0.08)", border: "1px solid rgba(111,226,207,0.28)" }}
+            >
+              <div
+                className="w-[42px] h-[42px] rounded-full mb-[10px] flex items-center justify-center"
+                style={{ background: "rgba(111,226,207,0.15)", border: "1px solid rgba(111,226,207,0.35)" }}
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <polyline points="3.5,10 8,14.5 16.5,5.5" stroke="#1a9e8e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
-              <p className="text-[0.92rem] font-semibold mb-[4px]" style={{ color: "#6fe2cf" }}>We'll be in touch!</p>
-              <p className="text-[0.78rem]" style={{ color: "rgba(219,232,247,0.55)" }}>Expect a reply within 1 business day.</p>
+              <p className="text-[0.9rem] font-semibold mb-[3px]" style={{ color: "#1a9e8e" }}>We'll be in touch!</p>
+              <p className="text-[0.77rem]" style={{ color: "#5a6a7e" }}>Expect a reply within 1 business day.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="grid gap-[10px]" noValidate>
+            <form onSubmit={handleSubmit} className="grid gap-[9px]" noValidate>
               {(["name", "email", "website"] as const).map((field) => (
                 <div key={field}>
                   <label className="sr-only" htmlFor={`wo-${field}`}>{field === "name" ? "Your name" : field === "email" ? "Email address" : "Website URL"}</label>
@@ -107,18 +123,35 @@ function FreeAssessmentCard() {
                     value={form[field]}
                     onChange={(e) => handleChange(field, e.target.value)}
                     disabled={submitting}
-                    className="w-full px-[14px] py-[10px] rounded-[11px] text-[0.88rem] outline-none transition-all duration-200 disabled:opacity-60"
+                    className="w-full px-[13px] py-[10px] rounded-[10px] text-[0.87rem] outline-none transition-all duration-200 disabled:opacity-60"
                     style={{
-                      background: "rgba(8,20,36,0.80)",
-                      border: errors[field] ? "1px solid rgba(255,100,100,0.65)" : "1px solid rgba(120,199,255,0.20)",
-                      color: "#dbe8f7",
+                      background: "#f7f9fc",
+                      border: errors[field] ? "1px solid rgba(220,60,60,0.55)" : "1px solid #dde5ef",
+                      color: "#0f1923",
                     }}
                   />
-                  {errors[field] && <p className="mt-[4px] text-[0.71rem]" style={{ color: "#ff8a8a" }}>{errors[field]}</p>}
+                  {errors[field] && <p className="mt-[4px] text-[0.70rem]" style={{ color: "#c0392b" }}>{errors[field]}</p>}
                 </div>
               ))}
-              <button type="submit" disabled={submitting} className="w-full min-h-[44px] mt-[4px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70" style={{ background: submitting ? "linear-gradient(135deg, rgba(111,226,207,0.7), rgba(120,199,255,0.7))" : "linear-gradient(135deg, #6fe2cf, #78c7ff)", color: "#04101c", border: "none" }}>
-                {submitting ? (<><svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeOpacity="0.25" /><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" /></svg>Sending…</>) : "Get my free assessment"}
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full min-h-[44px] mt-[4px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
+                style={{
+                  background: submitting ? "linear-gradient(135deg, rgba(111,226,207,0.65), rgba(120,199,255,0.65))" : "linear-gradient(135deg, #6fe2cf, #78c7ff)",
+                  color: "#04101c",
+                  border: "none",
+                }}
+              >
+                {submitting ? (
+                  <>
+                    <svg className="animate-spin" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeOpacity="0.25" />
+                      <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                    </svg>
+                    Sending…
+                  </>
+                ) : "Get my free assessment"}
               </button>
             </form>
           )}
@@ -130,7 +163,16 @@ function FreeAssessmentCard() {
 
 interface CheckoutResponse { url?: string; error?: string; }
 
-function CheckoutCard({ title, price, description, features, badge, highlight, submitLabel, planSlug }: { title: string; price: string; description: string; features: string[]; badge?: string; highlight?: boolean; submitLabel: string; planSlug: string; }) {
+function CheckoutCard({ title, price, description, features, badge, highlight, submitLabel, planSlug }: {
+  title: string;
+  price: string;
+  description: string;
+  features: string[];
+  badge?: string;
+  highlight?: boolean;
+  submitLabel: string;
+  planSlug: string;
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -153,43 +195,98 @@ function CheckoutCard({ title, price, description, features, badge, highlight, s
     }
   }
 
-  const borderColor = highlight ? "rgba(120,199,255,0.40)" : "rgba(120,199,255,0.15)";
-  const cardBg = highlight
-    ? "radial-gradient(ellipse 90% 60% at 50% 0%, rgba(120,199,255,0.18), transparent 55%), linear-gradient(180deg, rgba(13,34,58,0.98), rgba(8,20,36,0.98))"
-    : "linear-gradient(180deg, rgba(10,24,40,0.96), rgba(7,18,30,0.96))";
+  const cardStyle = highlight
+    ? {
+        background: "rgba(111,226,207,0.06)",
+        border: "1.5px solid rgba(111,226,207,0.35)",
+        boxShadow: "0 4px 24px rgba(111,226,207,0.12), 0 2px 8px rgba(30,60,100,0.06)",
+      }
+    : {
+        background: "#ffffff",
+        border: "1px solid #e2eaf3",
+        boxShadow: "0 2px 12px rgba(30,60,100,0.06)",
+      };
+
+  const topBarStyle = highlight
+    ? { background: "linear-gradient(90deg, #6fe2cf, #78c7ff)" }
+    : { background: "linear-gradient(90deg, rgba(111,226,207,0.40), rgba(120,199,255,0.40))" };
 
   return (
     <div className="relative pt-[14px]">
       {badge && (
         <div className="absolute top-0 left-[50%] -translate-x-1/2 z-10">
-          <span className="inline-flex items-center gap-[5px] px-[14px] py-[5px] rounded-full text-[0.72rem] font-bold tracking-[0.10em] uppercase whitespace-nowrap" style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", color: "#04101c" }}>★ {badge}</span>
+          <span
+            className="inline-flex items-center gap-[5px] px-[13px] py-[4px] rounded-full text-[0.70rem] font-bold tracking-[0.10em] uppercase whitespace-nowrap"
+            style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", color: "#04101c" }}
+          >
+            ★ {badge}
+          </span>
         </div>
       )}
-      <div className="relative flex flex-col rounded-[22px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)] h-full" style={{ background: cardBg, border: `${highlight ? "1.5px" : "1px"} solid ${borderColor}`, boxShadow: highlight ? "0 0 0 1px rgba(120,199,255,0.10), 0 24px 60px rgba(2,7,16,0.45)" : "0 10px 30px rgba(0,0,0,0.22)" }}>
-        <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[22px]" style={{ background: highlight ? "linear-gradient(90deg, transparent, #78c7ff 40%, #6fe2cf 70%, transparent)" : "linear-gradient(90deg, transparent, rgba(120,199,255,0.25) 50%, transparent)" }} aria-hidden="true" />
-        <div className="p-[28px] flex flex-col flex-1">
-          <div className="mb-[20px]">
-            <p className="text-[0.72rem] tracking-[0.16em] uppercase mb-[8px]" style={{ color: "rgba(111,226,207,0.70)" }}>Speakly AI-SEO</p>
-            <h3 className="mb-[8px] leading-[1.18]" style={{ fontSize: "clamp(1rem, 1.8vw, 1.14rem)", fontWeight: 800, color: "#dbe8f7" }}>{title}</h3>
-            <div className="flex items-baseline gap-[6px] mb-[12px]">
-              <span className="text-[2rem] font-extrabold tracking-[-0.04em]" style={{ color: highlight ? "#78c7ff" : "#dbe8f7" }}>{price}</span>
-              <span className="text-[0.8rem]" style={{ color: "rgba(219,232,247,0.50)" }}>one-time</span>
+      <div
+        className="relative flex flex-col rounded-[20px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_6px_28px_rgba(111,226,207,0.18)] h-full"
+        style={cardStyle}
+      >
+        <div
+          className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[20px]"
+          style={topBarStyle}
+          aria-hidden="true"
+        />
+        <div className="p-[26px] flex flex-col flex-1 pt-[30px]">
+          <div className="mb-[18px]">
+            <p className="text-[0.68rem] tracking-[0.16em] uppercase font-semibold mb-[7px]" style={{ color: "#1a9e8e" }}>Speakly AI-SEO</p>
+            <h3 className="mb-[8px] leading-[1.2]" style={{ fontSize: "clamp(1rem, 1.8vw, 1.12rem)", fontWeight: 800, color: "#0f1923" }}>{title}</h3>
+            <div className="flex items-baseline gap-[6px] mb-[10px]">
+              <span className="text-[1.9rem] font-extrabold tracking-[-0.04em]" style={{ color: highlight ? "#1a9e8e" : "#0f1923" }}>{price}</span>
+              <span className="text-[0.78rem]" style={{ color: "#8a9ab0" }}>one-time</span>
             </div>
-            <p className="text-[0.85rem] leading-[1.56]" style={{ color: "rgba(219,232,247,0.65)" }}>{description}</p>
+            <p className="text-[0.84rem] leading-[1.58]" style={{ color: "#5a6a7e" }}>{description}</p>
           </div>
-          <ul className="list-none p-0 grid gap-[8px] mb-[24px]">
+          <ul className="list-none p-0 grid gap-[7px] mb-[22px]">
             {features.map((f) => (
-              <li key={f} className="relative pl-[20px] text-[0.84rem]" style={{ color: "rgba(219,232,247,0.65)", lineHeight: 1.5 }}>
-                <span className="absolute left-0 top-[0.52em] w-[7px] h-[7px] rounded-full" style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "block" }} aria-hidden="true" />
+              <li key={f} className="relative pl-[18px] text-[0.83rem]" style={{ color: "#5a6a7e", lineHeight: 1.5 }}>
+                <span
+                  className="absolute left-0 top-[0.52em] w-[6px] h-[6px] rounded-full"
+                  style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "block" }}
+                  aria-hidden="true"
+                />
                 {f}
               </li>
             ))}
           </ul>
           <div className="mt-auto grid gap-[8px]">
-            <button type="button" onClick={handleCheckout} disabled={loading} className="w-full min-h-[44px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70" style={highlight ? { background: loading ? "linear-gradient(135deg, rgba(111,226,207,0.7), rgba(120,199,255,0.7))" : "linear-gradient(135deg, #6fe2cf, #78c7ff)", color: "#04101c", border: "none" } : { background: loading ? "rgba(120,199,255,0.12)" : "rgba(120,199,255,0.08)", color: "#dbe8f7", border: "1px solid rgba(120,199,255,0.28)" }}>
-              {loading ? (<><svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeOpacity="0.25" /><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" /></svg>Opening checkout…</>) : submitLabel}
+            <button
+              type="button"
+              onClick={handleCheckout}
+              disabled={loading}
+              className="w-full min-h-[44px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
+              style={
+                highlight
+                  ? {
+                      background: loading
+                        ? "linear-gradient(135deg, rgba(111,226,207,0.65), rgba(120,199,255,0.65))"
+                        : "linear-gradient(135deg, #6fe2cf, #78c7ff)",
+                      color: "#04101c",
+                      border: "none",
+                    }
+                  : {
+                      background: loading ? "rgba(120,199,255,0.08)" : "transparent",
+                      color: "#1a5e8a",
+                      border: "1.5px solid rgba(120,199,255,0.55)",
+                    }
+              }
+            >
+              {loading ? (
+                <>
+                  <svg className="animate-spin" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeOpacity="0.25" />
+                    <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                  </svg>
+                  Opening checkout…
+                </>
+              ) : submitLabel}
             </button>
-            {error && <p className="text-center text-[0.75rem] px-[4px]" style={{ color: "#ff8a8a" }}>{error}</p>}
+            {error && <p className="text-center text-[0.74rem] px-[4px]" style={{ color: "#c0392b" }}>{error}</p>}
           </div>
         </div>
       </div>
@@ -200,28 +297,45 @@ function CheckoutCard({ title, price, description, features, badge, highlight, s
 export function WidgetOffers() {
   useIframeAutoresize();
   return (
-    <div
-      className="py-8 px-4 sm:px-6"
-      style={{
-        background:
-          "radial-gradient(ellipse 80% 55% at 50% 100%, rgba(111,226,207,0.10), transparent 55%), radial-gradient(ellipse 55% 45% at 80% 0%, rgba(120,199,255,0.10), transparent 50%), linear-gradient(180deg, #06111d 0%, #071321 50%, #081727 100%)",
-      }}
-    >
+    <div className="py-8 px-4 sm:px-6" style={{ background: "#f7f9fc" }}>
       <div className="w-full max-w-[1040px] mx-auto">
         <div className="text-center mb-8 sm:mb-10">
           <span
-            className="inline-flex items-center gap-[8px] px-[12px] py-[7px] rounded-full text-[0.76rem] tracking-[0.14em] uppercase mb-4"
-            style={{ background: "rgba(111,226,207,0.07)", border: "1px solid rgba(111,226,207,0.18)", color: "rgba(219,232,247,0.65)" }}
+            className="inline-flex items-center gap-[8px] px-[12px] py-[6px] rounded-full text-[0.72rem] tracking-[0.14em] uppercase mb-4"
+            style={{
+              background: "rgba(111,226,207,0.10)",
+              border: "1px solid rgba(111,226,207,0.30)",
+              color: "#1a9e8e",
+            }}
           >
-            <span className="w-[6px] h-[6px] rounded-full" style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", boxShadow: "0 0 8px rgba(111,226,207,0.6)" }} aria-hidden="true" />
+            <span
+              className="w-[6px] h-[6px] rounded-full"
+              style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)" }}
+              aria-hidden="true"
+            />
             AI-Search Visibility
           </span>
           <h2
-            style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "#dbe8f7", lineHeight: 1.06, margin: "0 0 14px" }}
+            style={{
+              fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              color: "#0f1923",
+              lineHeight: 1.08,
+              margin: "0 0 14px",
+            }}
           >
             Choose the right starting point for your visibility.
           </h2>
-          <p style={{ color: "rgba(219,232,247,0.60)", fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)", maxWidth: "56ch", margin: "0 auto", lineHeight: 1.6 }}>
+          <p
+            style={{
+              color: "#5a6a7e",
+              fontSize: "clamp(0.9rem, 1.5vw, 1.02rem)",
+              maxWidth: "56ch",
+              margin: "0 auto",
+              lineHeight: 1.65,
+            }}
+          >
             Start with a free assessment, go deeper with competitive intelligence, or commit to the full system. All paths include a conversation before anything starts.
           </p>
         </div>
@@ -262,16 +376,16 @@ export function WidgetOffers() {
         </div>
 
         <div
-          className="text-center py-5 px-6 rounded-[18px]"
-          style={{ background: "rgba(8,20,36,0.60)", border: "1px solid rgba(120,199,255,0.12)" }}
+          className="text-center py-4 px-6 rounded-[14px]"
+          style={{ background: "#eef2f7", border: "1px solid #dde5ef" }}
         >
-          <p className="text-[0.85rem]" style={{ color: "rgba(219,232,247,0.55)", margin: 0 }}>
+          <p className="text-[0.84rem]" style={{ color: "#5a6a7e", margin: 0 }}>
             All plans include a conversation before anything starts —{" "}
             <a
               href="https://speaklymedia.com/ai-seo-overhaul/"
               target="_parent"
               rel="noopener noreferrer"
-              style={{ color: "#78c7ff", textDecoration: "none", fontWeight: 600 }}
+              style={{ color: "#2a7ab5", textDecoration: "none", fontWeight: 600 }}
             >
               see how the full system works →
             </a>
