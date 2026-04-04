@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useInView } from "@/hooks/use-in-view";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import aiSeoHub from "@assets/300ADAF0-C994-41B2-8324-1C87A6EC9BA4_1775246793841.png";
 import spaceOrangeBg from "@assets/IMG_0231_1775246914295.png";
-
-function useReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return reduced;
-}
 
 const phases = [
   {

@@ -1,18 +1,6 @@
-import { useState, useEffect } from "react";
 import { useInView } from "@/hooks/use-in-view";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import aiHeadIcon from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_1775246793840.png";
-
-function useReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return reduced;
-}
 
 function MarketIllustration({ width = 300, reduced = false }: { width?: number; reduced?: boolean }) {
   return (
