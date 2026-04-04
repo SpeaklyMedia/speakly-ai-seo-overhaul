@@ -1,10 +1,11 @@
 import { useInView } from "@/hooks/use-in-view";
 import { useCountUp } from "@/hooks/use-count-up";
-import { StarsAnimation, HeroIllustration } from "@/components/SpacemanAnimation";
+import { StarsAnimation, HeroIllustration, useHeroIllustrationScale } from "@/components/SpacemanAnimation";
 
 export function Hero() {
   const { ref, isInView } = useInView();
   const { ref: statRef, isInView: statsVisible } = useInView();
+  const { scale, outerW, outerH } = useHeroIllustrationScale();
 
   const count80  = useCountUp(80,  { enabled: statsVisible, duration: 1400 });
   const count60  = useCountUp(60,  { enabled: statsVisible, duration: 1200 });
@@ -46,13 +47,19 @@ export function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — phone + astronaut illustration, visible at all breakpoints */}
+          {/* RIGHT — phone + astronaut illustration, visible at all breakpoints.
+               Outer wrapper matches the scaled canvas dimensions so layout flow
+               accounts for the visually-scaled size; scale < 1 centres on tablet/mobile. */}
           <div
             className={`flex items-start justify-center lg:justify-start relative z-[5] reveal ${isInView ? "is-visible" : ""}`}
             style={{ transitionDelay: "120ms" }}
           >
-            <div style={{ width: "100%", maxWidth: "clamp(200px, 60vw, 340px)" }} className="lg:max-w-none">
-              <HeroIllustration />
+            {/* Scale-aware outer box — exact pixel layout footprint of the scaled canvas */}
+            <div style={{ width: outerW, height: outerH, overflow: "visible", position: "relative", flexShrink: 0 }}>
+              {/* Fixed 340×480 canvas, scaled to fit the outer box from the top-left origin */}
+              <div style={{ width: 340, height: 480, transform: `scale(${scale})`, transformOrigin: "top left", position: "absolute", top: 0, left: 0 }}>
+                <HeroIllustration />
+              </div>
             </div>
           </div>
         </div>

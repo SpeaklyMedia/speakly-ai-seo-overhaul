@@ -317,9 +317,37 @@ export function StarsAnimation() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   HeroIllustration — self-contained phone + astronaut in one relative
-   container. Scales with its wrapper at every breakpoint; the astronaut
-   is proportionally positioned so it always appears to cradle the phone.
+   useHeroIllustrationScale — returns the current discrete scale factor and
+   the corresponding outer-wrapper pixel dimensions so the layout box always
+   matches the visually-scaled canvas size.
+   Breakpoints:  ≥1024 → 1.0   768-1023 → 0.75   480-767 → 0.60   <480 → 0.50
+   ───────────────────────────────────────────────────────────────────────── */
+const CANVAS_W = 340;
+const CANVAS_H = 480;
+
+function getScale(w: number): number {
+  if (w >= 1024) return 1.0;
+  if (w >= 768)  return 0.75;
+  if (w >= 480)  return 0.60;
+  return 0.50;
+}
+
+export function useHeroIllustrationScale() {
+  const [scale, setScale] = useState(() =>
+    typeof window !== "undefined" ? getScale(window.innerWidth) : 1.0
+  );
+  useEffect(() => {
+    const update = () => setScale(getScale(window.innerWidth));
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  return { scale, outerW: Math.round(CANVAS_W * scale), outerH: Math.round(CANVAS_H * scale) };
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   HeroIllustration — fixed 340×480 logical canvas; phone fills the canvas
+   width and the astronaut is pinned in fixed pixel coords so the geometry
+   never changes regardless of the external scale applied in Hero.tsx.
    ───────────────────────────────────────────────────────────────────────── */
 export function HeroIllustration() {
   const reduced = useReducedMotion();
@@ -328,7 +356,7 @@ export function HeroIllustration() {
     <div
       aria-hidden="true"
       role="presentation"
-      style={{ position: "relative", width: "100%", overflow: "visible" }}
+      style={{ position: "relative", width: CANVAS_W, height: CANVAS_H, overflow: "visible", flexShrink: 0 }}
     >
       <style>{`
         @keyframes astronautFloat {
@@ -358,8 +386,8 @@ export function HeroIllustration() {
       {!reduced && (
         <div style={{
           position: "absolute",
-          right: "-20%", top: "-10%",
-          width: "80%", height: "80%",
+          right: -60, top: -40,
+          width: 280, height: 280,
           background: "radial-gradient(ellipse at center, rgba(255,157,92,0.20) 0%, transparent 65%)",
           filter: "blur(40px)",
           borderRadius: "50%",
@@ -368,18 +396,18 @@ export function HeroIllustration() {
         }} />
       )}
 
-      {/* Phone panel — z:1 */}
-      <div style={{ position: "relative", zIndex: 1 }}>
+      {/* Phone panel — fills full canvas width, top-aligned, z:1 */}
+      <div style={{ position: "absolute", top: 0, left: 0, width: "100%", zIndex: 1 }}>
         <PhoneAnimation />
       </div>
 
-      {/* Astronaut — z:2, in front of phone, proportionally sized/positioned */}
+      {/* Astronaut — fixed pixel coords in the 340×480 coordinate space, z:2 */}
       {!reduced && (
         <div style={{
           position: "absolute",
-          right: "-16%",
+          right: -54,
           top: -30,
-          width: "58%",
+          width: 200,
           zIndex: 2,
           opacity: 0.92,
           animation: "astronautFloat 3.6s ease-in-out infinite",
