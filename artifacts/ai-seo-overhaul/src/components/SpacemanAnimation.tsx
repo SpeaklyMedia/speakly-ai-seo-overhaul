@@ -144,9 +144,8 @@ function AstronautSVG() {
   return (
     <svg
       viewBox="0 0 160 272"
-      width="200"
-      height="340"
-      style={{ overflow: "visible", filter: "drop-shadow(0 0 20px rgba(255,157,92,0.55)) drop-shadow(0 4px 16px rgba(0,0,0,0.7))" }}
+      width="100%"
+      style={{ overflow: "visible", display: "block", filter: "drop-shadow(0 0 20px rgba(255,157,92,0.55)) drop-shadow(0 4px 16px rgba(0,0,0,0.7))" }}
       aria-hidden="true"
     >
       <rect x="38" y="108" width="18" height="54" rx="7" fill="#0d2640" stroke="#ff9d5c" strokeWidth="1.5"/>
@@ -318,18 +317,18 @@ export function StarsAnimation() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   AstronautFloat — z-index:7, renders IN FRONT of the phone panel (z-5)
-   so the astronaut appears to cradle the device
+   HeroIllustration — self-contained phone + astronaut in one relative
+   container. Scales with its wrapper at every breakpoint; the astronaut
+   is proportionally positioned so it always appears to cradle the phone.
    ───────────────────────────────────────────────────────────────────────── */
-export function AstronautFloat() {
+export function HeroIllustration() {
   const reduced = useReducedMotion();
-  if (reduced) return null;
 
   return (
     <div
       aria-hidden="true"
       role="presentation"
-      style={{ position: "absolute", inset: 0, zIndex: 7, pointerEvents: "none", overflow: "hidden" }}
+      style={{ position: "relative", width: "100%", overflow: "visible" }}
     >
       <style>{`
         @keyframes astronautFloat {
@@ -353,43 +352,43 @@ export function AstronautFloat() {
           0%,100% { opacity:1; }
           50%      { opacity:0.15; }
         }
-
-        /* Hide astronaut on tablet/mobile — phone shows in stacked layout without astronaut */
-        @media (max-width: 1023px) {
-          .spaceman-astronaut { display: none !important; }
-        }
       `}</style>
 
-      {/* Orange atmospheric halo */}
-      <div
-        className="spaceman-halo"
-        style={{
+      {/* Orange atmospheric halo — behind everything */}
+      {!reduced && (
+        <div style={{
           position: "absolute",
-          right: -60, top: -30,
-          width: 500, height: 580,
-          background: "radial-gradient(ellipse at center, rgba(255,157,92,0.18) 0%, transparent 62%)",
-          filter: "blur(50px)",
+          right: "-20%", top: "-10%",
+          width: "80%", height: "80%",
+          background: "radial-gradient(ellipse at center, rgba(255,157,92,0.20) 0%, transparent 65%)",
+          filter: "blur(40px)",
           borderRadius: "50%",
           zIndex: 0,
           pointerEvents: "none",
-        }}
-      />
+        }} />
+      )}
 
-      {/* Astronaut — floats upper-right, IN FRONT of phone panel */}
-      <div
-        className="spaceman-astronaut"
-        style={{
+      {/* Phone panel — z:1 */}
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <PhoneAnimation />
+      </div>
+
+      {/* Astronaut — z:2, in front of phone, proportionally sized/positioned */}
+      {!reduced && (
+        <div style={{
           position: "absolute",
-          right: 60, top: 30,
-          width: 200, height: 340,
-          zIndex: 1,
-          opacity: 0.90,
+          right: "-16%",
+          top: -30,
+          width: "58%",
+          zIndex: 2,
+          opacity: 0.92,
           animation: "astronautFloat 3.6s ease-in-out infinite",
           willChange: "transform",
-        }}
-      >
-        <AstronautSVG />
-      </div>
+          pointerEvents: "none",
+        }}>
+          <AstronautSVG />
+        </div>
+      )}
     </div>
   );
 }

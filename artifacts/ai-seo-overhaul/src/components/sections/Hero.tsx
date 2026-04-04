@@ -1,6 +1,6 @@
 import { useInView } from "@/hooks/use-in-view";
 import { useCountUp } from "@/hooks/use-count-up";
-import { StarsAnimation, AstronautFloat, PhoneAnimation } from "@/components/SpacemanAnimation";
+import { StarsAnimation, HeroIllustration } from "@/components/SpacemanAnimation";
 
 export function Hero() {
   const { ref, isInView } = useInView();
@@ -14,11 +14,10 @@ export function Hero() {
   return (
     <section id="top" className="pt-[92px] pb-[82px] overflow-hidden relative">
       <StarsAnimation />
-      <AstronautFloat />
 
       <div className="shell">
 
-        {/* Two-column hero: copy left, phone right */}
+        {/* Two-column hero: copy left, illustration right */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-[48px] lg:gap-[72px] items-start">
 
           {/* LEFT — hero copy */}
@@ -47,13 +46,13 @@ export function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — animated phone; visible at md+ centered (tablet) or in right column (lg+) */}
+          {/* RIGHT — phone + astronaut illustration, visible at all breakpoints */}
           <div
-            className={`hidden md:flex items-start justify-center lg:justify-start relative z-[5] reveal ${isInView ? "is-visible" : ""}`}
+            className={`flex items-start justify-center lg:justify-start relative z-[5] reveal ${isInView ? "is-visible" : ""}`}
             style={{ transitionDelay: "120ms" }}
           >
-            <div style={{ width: "100%", maxWidth: "clamp(260px, 40vw, 340px)" }} className="lg:max-w-none">
-              <PhoneAnimation />
+            <div style={{ width: "100%", maxWidth: "clamp(200px, 60vw, 340px)" }} className="lg:max-w-none">
+              <HeroIllustration />
             </div>
           </div>
         </div>
