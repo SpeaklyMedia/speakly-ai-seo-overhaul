@@ -48,10 +48,23 @@ function FreeAssessmentCard() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setErrors({});
     setSubmitting(true);
-    console.log("WidgetOffers free assessment:", form);
-    await new Promise((res) => setTimeout(res, 900));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const response = await fetch("/api/assess", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({})) as { error?: string };
+        setErrors({ email: data.error ?? "Submission failed. Please try again." });
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setErrors({ email: "Network error. Please check your connection and try again." });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (

@@ -3,11 +3,13 @@ import Stripe from "stripe";
 interface CheckoutRequest {
   method?: string;
   body: { planSlug?: string };
+  headers: Record<string, string | string[] | undefined>;
 }
 
 interface CheckoutResponse {
   status(code: number): CheckoutResponse;
   json(data: unknown): CheckoutResponse;
+  setHeader(name: string, value: string): void;
 }
 
 const PRICE_IDS: Record<string, string> = {
@@ -15,12 +17,48 @@ const PRICE_IDS: Record<string, string> = {
   "visibility-overhaul": "price_1TIHS5EHagIjCpKAITYXikae",
 };
 
+const ALLOWED_ORIGINS = [
+  /^https:\/\/(www\.)?speaklymedia\.com$/,
+  /^https:\/\/[a-z0-9-]+\.vercel\.app$/,
+  /^http:\/\/localhost(:\d+)?$/,
+];
+
+function isAllowedOrigin(origin: string | undefined): boolean {
+  if (!origin) return true;
+  return ALLOWED_ORIGINS.some((re) => re.test(origin));
+}
+
+function getOrigin(headers: CheckoutRequest["headers"]): string | undefined {
+  const raw = headers["origin"];
+  return Array.isArray(raw) ? raw[0] : raw;
+}
+
 export default async function handler(
   req: CheckoutRequest,
   res: CheckoutResponse,
 ): Promise<CheckoutResponse> {
+  const origin = getOrigin(req.headers);
+
+  if (req.method === "OPTIONS") {
+    if (isAllowedOrigin(origin)) {
+      res.setHeader("Access-Control-Allow-Origin", origin ?? "*");
+    }
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.setHeader("Access-Control-Max-Age", "86400");
+    return res.status(204).json(null);
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  if (!isAllowedOrigin(origin)) {
+    return res.status(403).json({ error: "Origin not allowed" });
+  }
+
+  if (origin) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
   }
 
   const { planSlug } = req.body;
@@ -53,6 +91,7 @@ export default async function handler(
       mode: "payment",
       success_url: `${siteUrl}?payment=success`,
       cancel_url: `${siteUrl}#next-step`,
+      metadata: { planSlug },
     });
 
     return res.json({ url: session.url });

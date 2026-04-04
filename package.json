@@ -10,11 +10,13 @@
   },
   "private": true,
   "devDependencies": {
+    "@types/node": "catalog:",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2"
   },
   "dependencies": {
     "@replit/connectors-sdk": "^0.3.0",
+    "resend": "^6.10.0",
     "stripe": "20.0.0",
     "stripe-replit-sync": "1.0.0"
   }

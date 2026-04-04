@@ -126,10 +126,15 @@ Connected via Replit's native Stripe integration (sandbox). `stripe-replit-sync`
 - **Competitor Scan & AI-SEO Visibility Readiness Kit** — $350 one-time (`price_1TIHS5EHagIjCpKA4W8ff42R`)
 - **Visibility Overhaul** — $950 one-time (`price_1TIHS5EHagIjCpKAITYXikae`)
 
-### API endpoints
+### API endpoints (local Express — `artifacts/api-server`)
 - `GET /api/products-with-prices` — returns all active products with their prices from `stripe` schema
 - `POST /api/checkout` — accepts `{ planSlug }` (`"competitor-scan"` or `"visibility-overhaul"`); resolves the price and constructs success/cancel URLs server-side from `REPLIT_DOMAINS`; returns `{ url }` pointing to a Stripe Checkout session
 - `POST /api/stripe/webhook` — Stripe webhook handler (registered before `express.json()`)
+
+### API endpoints (Vercel serverless — `api/` at repo root)
+- `POST /api/checkout` — maps `{ planSlug }` to hardcoded price IDs; verifies CORS origin; includes `planSlug` in Stripe session metadata; returns `{ url }`
+- `POST /api/webhook` — receives Stripe `checkout.session.completed` events; verifies signature with `STRIPE_WEBHOOK_SECRET`; sends payment notification email via Resend. Uses `export const config = { api: { bodyParser: false } }` so raw body is available for signature verification.
+- `POST /api/assess` — receives free assessment form submissions `{ name, email, website }`; validates inputs; sends lead notification email via Resend; returns `{ ok: true }`
 
 ### Key files
 - `artifacts/api-server/src/stripeClient.ts` — Stripe client using Replit connectors (never cached)
@@ -158,8 +163,11 @@ Production URL: `https://speakly-ai-seo-overhaul.vercel.app`
 - `DEPLOY.md` (repo root) — step-by-step Vercel setup guide with required env vars and iframe snippet
 
 ### Vercel env vars required
-- `STRIPE_SECRET_KEY` — Stripe secret key
+- `STRIPE_SECRET_KEY` — Stripe secret key (`sk_live_...` or `sk_test_...`)
 - `SITE_URL` — full URL of the deployed site (e.g. `https://speakly-ai-seo-overhaul.vercel.app`)
+- `STRIPE_WEBHOOK_SECRET` — Stripe webhook signing secret (`whsec_...`); obtained after registering `/api/webhook` as a Stripe webhook endpoint
+- `RESEND_API_KEY` — Resend API key for sending email notifications (free at resend.com)
+- `NOTIFY_EMAIL` — email address that receives payment confirmations and free assessment leads
 
 ### Deploying
 Deployments are triggered via the Vercel API using the `VERCEL_TOKEN` secret:
@@ -193,11 +201,8 @@ The SSH deploy key for pushing to `SpeaklyMedia/speakly-ai-seo-overhaul` is stor
 
 Old deploy keys accumulate on the repo; they can be cleaned up via the GitHub repo settings.
 
-### Free Assessment form (WidgetOffers) does not submit to a backend
-The form logs to `console.log` only — no actual email/CRM submission. A real backend endpoint (Formspree, Webhook, or custom) needs to be wired up before production use.
-
 ### Stripe Checkout (`/api/checkout`) uses hardcoded price IDs
-`api/checkout.ts` (Vercel serverless) maps `planSlug` to hardcoded Stripe price IDs. If prices are changed in Stripe, the file must be updated manually.
+`api/checkout.ts` (Vercel serverless) maps `planSlug` to hardcoded Stripe price IDs. If prices are changed in Stripe, the file must be updated manually. See `DEPLOY.md` for instructions on regenerating live-mode price IDs.
 
 ### `NextStep.tsx` and `WidgetOffers.tsx` are not shared
 The pricing/checkout card logic is duplicated between the main landing page (`NextStep.tsx`) and the widget (`WidgetOffers.tsx`). If checkout UX changes (error handling, button states, etc.), both files need updating.
@@ -207,3 +212,6 @@ The Express API server (`/api/checkout`, `/api/products-with-prices`) is used on
 
 ### Widget `target="_parent"` navigation only works when embedded in an iframe
 All CTA links in both widgets use `target="_parent"`. When accessed directly in a browser tab, `_parent` is equivalent to `_self`, so navigation works — but the behavior differs from the intended embedded experience.
+
+### Stripe webhook and assessment emails require manual Vercel env var setup
+`api/webhook.ts` and `api/assess.ts` are deployed but will silently skip email delivery if `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, or `NOTIFY_EMAIL` are not set in Vercel. See `DEPLOY.md` for full setup instructions.
