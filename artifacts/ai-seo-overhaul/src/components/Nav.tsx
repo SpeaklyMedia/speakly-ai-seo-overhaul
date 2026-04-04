@@ -54,7 +54,7 @@ export function Nav() {
             );
           })}
         </nav>
-        <a className="inline-flex items-center justify-center gap-[10px] min-h-[50px] px-[20px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer w-full md:w-auto text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]" href="#next-step" data-testid="button-nav-cta">
+        <a className="inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer w-full md:w-auto text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]" href="#next-step" data-testid="button-nav-cta">
           Request assessment
         </a>
       </div>
