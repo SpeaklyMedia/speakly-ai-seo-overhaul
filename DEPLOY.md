@@ -8,8 +8,8 @@ configures the build to produce the AI-SEO landing page SPA and a serverless
 
 ## One-time Vercel setup
 
-1. Push this repo to GitHub.
-2. Import the project in [vercel.com/new](https://vercel.com/new) by selecting the GitHub repo.
+1. Repo is live at **https://github.com/SpeaklyMedia/speakly-ai-seo-overhaul**.
+2. Import the project in [vercel.com/new](https://vercel.com/new) by selecting that GitHub repo.
 3. **Framework preset**: Other (leave as-is — `vercel.json` handles everything).
 4. Vercel will detect `vercel.json` automatically. No additional build settings needed.
 
