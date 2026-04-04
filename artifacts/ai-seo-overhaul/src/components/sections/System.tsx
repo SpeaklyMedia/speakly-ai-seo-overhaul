@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useInView } from "@/hooks/use-in-view";
 import aiSeoHub from "@assets/300ADAF0-C994-41B2-8324-1C87A6EC9BA4_1775246793841.png";
 import spaceOrangeBg from "@assets/IMG_0231_1775246914295.png";
+
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return reduced;
+}
 
 const phases = [
   {
@@ -37,6 +49,7 @@ function PhaseConnector() {
 
 export function System() {
   const { ref, isInView } = useInView();
+  const reduced = useReducedMotion();
 
   return (
     <section id="system" className="py-[100px] relative scroll-mt-[86px] overflow-hidden">
@@ -159,7 +172,7 @@ export function System() {
               alt=""
               width={380}
               height={380}
-              style={{ display: "block", mixBlendMode: "screen", animation: "astronautFloat 5.5s ease-in-out infinite" }}
+              style={{ display: "block", mixBlendMode: "screen", animation: reduced ? "none" : "astronautFloat 5.5s ease-in-out infinite" }}
             />
           </div>
         </div>
@@ -171,7 +184,7 @@ export function System() {
             alt=""
             width={220}
             height={220}
-            style={{ display: "block", mixBlendMode: "screen", animation: "astronautFloat 5.5s ease-in-out infinite" }}
+            style={{ display: "block", mixBlendMode: "screen", animation: reduced ? "none" : "astronautFloat 5.5s ease-in-out infinite" }}
           />
         </div>
 

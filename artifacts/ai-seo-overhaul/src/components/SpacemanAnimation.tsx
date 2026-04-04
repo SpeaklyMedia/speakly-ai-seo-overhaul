@@ -380,6 +380,23 @@ export function HeroIllustration() {
           0%,100% { opacity:1; }
           50%      { opacity:0.15; }
         }
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes astronautFloat {
+            0%,100% { transform:none; }
+          }
+          @keyframes astronautBody {
+            0%,100% { transform:none; }
+          }
+          @keyframes astronautHead {
+            0%,100% { transform:rotate(-9deg); }
+          }
+          @keyframes astronautThumb {
+            0%,100% { transform:none; }
+          }
+          @keyframes helmetLight {
+            0%,100% { opacity:1; }
+          }
+        }
       `}</style>
 
       {/* Orange atmospheric halo — behind everything */}
