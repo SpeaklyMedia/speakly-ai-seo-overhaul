@@ -34,13 +34,15 @@ export default async function handler(
     return res.status(500).json({ error: "Stripe secret key not configured" });
   }
 
-  const siteUrl =
+  const rawSiteUrl =
     process.env.SITE_URL ??
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null);
 
-  if (!siteUrl) {
+  if (!rawSiteUrl) {
     return res.status(500).json({ error: "Site URL not configured" });
   }
+
+  const siteUrl = rawSiteUrl.replace(/\/$/, "");
 
   try {
     const stripe = new Stripe(secretKey, { apiVersion: "2025-11-17.clover" });
