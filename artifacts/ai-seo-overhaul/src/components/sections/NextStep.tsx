@@ -209,9 +209,11 @@ function FreeAssessmentCard({
                 disabled={submitting}
                 className="w-full min-h-[46px] mt-[4px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
                 style={{
-                  background: submitting ? "rgba(120,199,255,0.12)" : "rgba(120,199,255,0.08)",
-                  color: "var(--ink)",
-                  border: "1px solid rgba(120,199,255,0.28)",
+                  background: submitting
+                    ? "linear-gradient(135deg, rgba(111,226,207,0.7), rgba(120,199,255,0.7))"
+                    : "linear-gradient(135deg, #6fe2cf, #78c7ff)",
+                  color: "#04101c",
+                  border: "none",
                 }}
               >
                 {submitting ? (
@@ -450,7 +452,7 @@ export function NextStep() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] mb-[48px] pt-[28px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] mb-[48px] pt-[28px]">
               <FreeAssessmentCard
                 title="Free Assessment"
                 description="A no-cost snapshot of where you stand in AI-driven search today — and where your biggest gaps are."

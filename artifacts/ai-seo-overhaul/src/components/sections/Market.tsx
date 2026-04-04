@@ -223,15 +223,15 @@ export function Market() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="market" className="py-[100px] relative scroll-mt-[86px] section-market-bg">
+    <section id="market" className="py-[100px] relative scroll-mt-[86px] section-market-bg overflow-x-hidden">
       <div className="shell">
 
         {/* Section header with ghost numeral */}
         <div className="relative mb-[44px]">
           {/* Ghost "60" behind heading */}
-          <div className="absolute left-[-10px] top-[-60px] pointer-events-none select-none" aria-hidden="true">
+          <div className="absolute left-[-10px] top-[-60px] pointer-events-none select-none overflow-hidden" aria-hidden="true">
             <span style={{
-              fontSize: "clamp(9rem, 26vw, 20rem)",
+              fontSize: "clamp(7rem, 20vw, 20rem)",
               fontWeight: 800,
               color: "#78c7ff",
               opacity: 0.028,
