@@ -197,7 +197,7 @@ function CheckoutCard({ title, price, description, features, badge, highlight, s
 
   const cardStyle = highlight
     ? {
-        background: "rgba(111,226,207,0.06)",
+        background: "rgba(111,226,207,0.08)",
         border: "1.5px solid rgba(111,226,207,0.35)",
         boxShadow: "0 4px 24px rgba(111,226,207,0.12), 0 2px 8px rgba(30,60,100,0.06)",
       }
