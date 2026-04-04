@@ -29,6 +29,8 @@ async function buildAll() {
     // - use path traversal to read files (e.g. @google-cloud/secret-manager loads sibling .proto files)
     external: [
       "*.node",
+      "stripe-replit-sync",
+      "pg-node-migrations",
       "sharp",
       "better-sqlite3",
       "sqlite3",

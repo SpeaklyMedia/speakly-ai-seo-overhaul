@@ -40,22 +40,16 @@ function validateForm(form: FormState): FormErrors {
   return errors;
 }
 
-function PricingCard({
+function FreeAssessmentCard({
   title,
-  price,
   description,
   features,
-  badge,
-  highlight,
   submitLabel,
   emailSubject,
 }: {
   title: string;
-  price: string | null;
   description: string;
   features: string[];
-  badge?: string;
-  highlight?: boolean;
   submitLabel: string;
   emailSubject: string;
 }) {
@@ -86,98 +80,45 @@ function PricingCard({
     setSubmitted(true);
   }
 
-  const borderColor = highlight ? "rgba(120,199,255,0.40)" : "rgba(120,199,255,0.15)";
-  const cardBg = highlight
-    ? "radial-gradient(ellipse 90% 60% at 50% 0%, rgba(120,199,255,0.18), transparent 55%), linear-gradient(180deg, rgba(13,34,58,0.98), rgba(8,20,36,0.98))"
-    : "linear-gradient(180deg, rgba(10,24,40,0.96), rgba(7,18,30,0.96))";
-
   return (
     <div
       className="relative flex flex-col rounded-[22px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)]"
       style={{
-        background: cardBg,
-        border: `${highlight ? "1.5px" : "1px"} solid ${borderColor}`,
-        boxShadow: highlight
-          ? "0 0 0 1px rgba(120,199,255,0.10), 0 24px 60px rgba(2,7,16,0.45)"
-          : "0 10px 30px rgba(0,0,0,0.22)",
+        background: "linear-gradient(180deg, rgba(10,24,40,0.96), rgba(7,18,30,0.96))",
+        border: "1px solid rgba(120,199,255,0.15)",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.22)",
       }}
     >
-      {/* Top accent line */}
       <div
         className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[22px]"
         style={{
-          background: highlight
-            ? "linear-gradient(90deg, transparent, #78c7ff 40%, #6fe2cf 70%, transparent)"
-            : "linear-gradient(90deg, transparent, rgba(120,199,255,0.25) 50%, transparent)",
+          background: "linear-gradient(90deg, transparent, rgba(120,199,255,0.25) 50%, transparent)",
         }}
         aria-hidden="true"
       />
-
-      {/* Badge */}
-      {badge && (
-        <div className="absolute top-[-14px] left-[50%] -translate-x-1/2 z-10">
-          <span
-            className="inline-flex items-center gap-[5px] px-[14px] py-[5px] rounded-full text-[0.72rem] font-bold tracking-[0.10em] uppercase whitespace-nowrap"
-            style={{
-              background: "linear-gradient(135deg, #6fe2cf, #78c7ff)",
-              color: "#04101c",
-            }}
-          >
-            ★ {badge}
-          </span>
-        </div>
-      )}
-
       <div className="p-[28px] flex flex-col flex-1">
-        {/* Header */}
         <div className="mb-[20px]">
           <p className="text-[0.72rem] tracking-[0.16em] uppercase text-teal/70 mb-[8px]">Speakly AI-SEO</p>
-          <h3
-            className="mb-[8px] leading-[1.18]"
-            style={{ fontSize: "clamp(1rem, 1.8vw, 1.14rem)", fontWeight: 800 }}
-          >
+          <h3 className="mb-[8px] leading-[1.18]" style={{ fontSize: "clamp(1rem, 1.8vw, 1.14rem)", fontWeight: 800 }}>
             {title}
           </h3>
           <div className="flex items-baseline gap-[6px] mb-[12px]">
-            {price ? (
-              <>
-                <span
-                  className="text-[2rem] font-extrabold tracking-[-0.04em]"
-                  style={{ color: highlight ? "#78c7ff" : "var(--ink)" }}
-                >
-                  {price}
-                </span>
-                <span className="text-[0.8rem] text-ink-soft">one-time</span>
-              </>
-            ) : (
-              <span className="text-[1.15rem] font-bold text-teal">Free</span>
-            )}
+            <span className="text-[1.15rem] font-bold text-teal">Free</span>
           </div>
           <p className="text-[0.85rem] text-ink-muted leading-[1.56]">{description}</p>
         </div>
-
-        {/* Features */}
         <ul className="list-none p-0 grid gap-[8px] mb-[24px]">
           {features.map((f) => (
-            <li
-              key={f}
-              className="relative pl-[20px] text-[0.84rem] text-ink-muted"
-              style={{ lineHeight: 1.5 }}
-            >
+            <li key={f} className="relative pl-[20px] text-[0.84rem] text-ink-muted" style={{ lineHeight: 1.5 }}>
               <span
                 className="absolute left-0 top-[0.52em] w-[7px] h-[7px] rounded-full"
-                style={{
-                  background: "linear-gradient(135deg, #6fe2cf, #78c7ff)",
-                  display: "block",
-                }}
+                style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "block" }}
                 aria-hidden="true"
               />
               {f}
             </li>
           ))}
         </ul>
-
-        {/* Form or success — always visible, no toggle */}
         <div className="mt-auto">
           {submitted ? (
             <div
@@ -205,13 +146,10 @@ function PricingCard({
                 </svg>
               </div>
               <p className="text-[0.92rem] font-semibold text-teal mb-[4px]">We'll be in touch!</p>
-              <p className="text-[0.78rem] text-ink-muted">
-                Expect a reply within 1 business day.
-              </p>
+              <p className="text-[0.78rem] text-ink-muted">Expect a reply within 1 business day.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="grid gap-[10px]" noValidate>
-              {/* Name */}
               <div>
                 <label className="sr-only" htmlFor={`name-${idSlug}`}>Your name</label>
                 <input
@@ -225,17 +163,11 @@ function PricingCard({
                   className="w-full px-[14px] py-[10px] rounded-[11px] text-[0.88rem] text-ink outline-none transition-all duration-200 placeholder:text-ink-soft/50 disabled:opacity-60"
                   style={{
                     background: "rgba(8,20,36,0.80)",
-                    border: errors.name
-                      ? "1px solid rgba(255,100,100,0.65)"
-                      : "1px solid rgba(120,199,255,0.20)",
+                    border: errors.name ? "1px solid rgba(255,100,100,0.65)" : "1px solid rgba(120,199,255,0.20)",
                   }}
                 />
-                {errors.name && (
-                  <p className="mt-[4px] text-[0.71rem] text-[#ff8a8a]">{errors.name}</p>
-                )}
+                {errors.name && <p className="mt-[4px] text-[0.71rem] text-[#ff8a8a]">{errors.name}</p>}
               </div>
-
-              {/* Email */}
               <div>
                 <label className="sr-only" htmlFor={`email-${idSlug}`}>Email address</label>
                 <input
@@ -249,17 +181,11 @@ function PricingCard({
                   className="w-full px-[14px] py-[10px] rounded-[11px] text-[0.88rem] text-ink outline-none transition-all duration-200 placeholder:text-ink-soft/50 disabled:opacity-60"
                   style={{
                     background: "rgba(8,20,36,0.80)",
-                    border: errors.email
-                      ? "1px solid rgba(255,100,100,0.65)"
-                      : "1px solid rgba(120,199,255,0.20)",
+                    border: errors.email ? "1px solid rgba(255,100,100,0.65)" : "1px solid rgba(120,199,255,0.20)",
                   }}
                 />
-                {errors.email && (
-                  <p className="mt-[4px] text-[0.71rem] text-[#ff8a8a]">{errors.email}</p>
-                )}
+                {errors.email && <p className="mt-[4px] text-[0.71rem] text-[#ff8a8a]">{errors.email}</p>}
               </div>
-
-              {/* Website */}
               <div>
                 <label className="sr-only" htmlFor={`website-${idSlug}`}>Website URL</label>
                 <input
@@ -273,57 +199,30 @@ function PricingCard({
                   className="w-full px-[14px] py-[10px] rounded-[11px] text-[0.88rem] text-ink outline-none transition-all duration-200 placeholder:text-ink-soft/50 disabled:opacity-60"
                   style={{
                     background: "rgba(8,20,36,0.80)",
-                    border: errors.website
-                      ? "1px solid rgba(255,100,100,0.65)"
-                      : "1px solid rgba(120,199,255,0.20)",
+                    border: errors.website ? "1px solid rgba(255,100,100,0.65)" : "1px solid rgba(120,199,255,0.20)",
                   }}
                 />
-                {errors.website && (
-                  <p className="mt-[4px] text-[0.71rem] text-[#ff8a8a]">{errors.website}</p>
-                )}
+                {errors.website && <p className="mt-[4px] text-[0.71rem] text-[#ff8a8a]">{errors.website}</p>}
               </div>
-
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={submitting}
                 className="w-full min-h-[46px] mt-[4px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
-                style={
-                  highlight
-                    ? {
-                        background: submitting
-                          ? "linear-gradient(135deg, rgba(111,226,207,0.7), rgba(120,199,255,0.7))"
-                          : "linear-gradient(135deg, #6fe2cf, #78c7ff)",
-                        color: "#04101c",
-                        border: "none",
-                      }
-                    : {
-                        background: submitting
-                          ? "rgba(120,199,255,0.12)"
-                          : "rgba(120,199,255,0.08)",
-                        color: "var(--ink)",
-                        border: "1px solid rgba(120,199,255,0.28)",
-                      }
-                }
+                style={{
+                  background: submitting ? "rgba(120,199,255,0.12)" : "rgba(120,199,255,0.08)",
+                  color: "var(--ink)",
+                  border: "1px solid rgba(120,199,255,0.28)",
+                }}
               >
                 {submitting ? (
                   <>
-                    <svg
-                      className="animate-spin"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      aria-hidden="true"
-                    >
+                    <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeOpacity="0.25" />
                       <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
                     </svg>
                     Sending…
                   </>
-                ) : (
-                  submitLabel
-                )}
+                ) : submitLabel}
               </button>
             </form>
           )}
@@ -333,58 +232,166 @@ function PricingCard({
   );
 }
 
+interface CheckoutResponse {
+  url?: string;
+  error?: string;
+}
+
+function CheckoutCard({
+  title,
+  price,
+  description,
+  features,
+  badge,
+  highlight,
+  submitLabel,
+  planSlug,
+}: {
+  title: string;
+  price: string;
+  description: string;
+  features: string[];
+  badge?: string;
+  highlight?: boolean;
+  submitLabel: string;
+  planSlug: string;
+}) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleCheckout() {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ planSlug }),
+      });
+
+      const data = (await response.json()) as CheckoutResponse;
+      if (!response.ok || !data.url) {
+        throw new Error(data.error ?? "Failed to start checkout");
+      }
+      window.open(data.url, "_blank", "noopener,noreferrer");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const borderColor = highlight ? "rgba(120,199,255,0.40)" : "rgba(120,199,255,0.15)";
+  const cardBg = highlight
+    ? "radial-gradient(ellipse 90% 60% at 50% 0%, rgba(120,199,255,0.18), transparent 55%), linear-gradient(180deg, rgba(13,34,58,0.98), rgba(8,20,36,0.98))"
+    : "linear-gradient(180deg, rgba(10,24,40,0.96), rgba(7,18,30,0.96))";
+
+  return (
+    <div
+      className="relative flex flex-col rounded-[22px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)]"
+      style={{
+        background: cardBg,
+        border: `${highlight ? "1.5px" : "1px"} solid ${borderColor}`,
+        boxShadow: highlight
+          ? "0 0 0 1px rgba(120,199,255,0.10), 0 24px 60px rgba(2,7,16,0.45)"
+          : "0 10px 30px rgba(0,0,0,0.22)",
+      }}
+    >
+      <div
+        className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[22px]"
+        style={{
+          background: highlight
+            ? "linear-gradient(90deg, transparent, #78c7ff 40%, #6fe2cf 70%, transparent)"
+            : "linear-gradient(90deg, transparent, rgba(120,199,255,0.25) 50%, transparent)",
+        }}
+        aria-hidden="true"
+      />
+      {badge && (
+        <div className="absolute top-[-14px] left-[50%] -translate-x-1/2 z-10">
+          <span
+            className="inline-flex items-center gap-[5px] px-[14px] py-[5px] rounded-full text-[0.72rem] font-bold tracking-[0.10em] uppercase whitespace-nowrap"
+            style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", color: "#04101c" }}
+          >
+            ★ {badge}
+          </span>
+        </div>
+      )}
+      <div className="p-[28px] flex flex-col flex-1">
+        <div className="mb-[20px]">
+          <p className="text-[0.72rem] tracking-[0.16em] uppercase text-teal/70 mb-[8px]">Speakly AI-SEO</p>
+          <h3
+            className="mb-[8px] leading-[1.18]"
+            style={{ fontSize: "clamp(1rem, 1.8vw, 1.14rem)", fontWeight: 800 }}
+          >
+            {title}
+          </h3>
+          <div className="flex items-baseline gap-[6px] mb-[12px]">
+            <span
+              className="text-[2rem] font-extrabold tracking-[-0.04em]"
+              style={{ color: highlight ? "#78c7ff" : "var(--ink)" }}
+            >
+              {price}
+            </span>
+            <span className="text-[0.8rem] text-ink-soft">one-time</span>
+          </div>
+          <p className="text-[0.85rem] text-ink-muted leading-[1.56]">{description}</p>
+        </div>
+        <ul className="list-none p-0 grid gap-[8px] mb-[24px]">
+          {features.map((f) => (
+            <li key={f} className="relative pl-[20px] text-[0.84rem] text-ink-muted" style={{ lineHeight: 1.5 }}>
+              <span
+                className="absolute left-0 top-[0.52em] w-[7px] h-[7px] rounded-full"
+                style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "block" }}
+                aria-hidden="true"
+              />
+              {f}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto grid gap-[8px]">
+          <button
+            type="button"
+            onClick={handleCheckout}
+            disabled={loading}
+            className="w-full min-h-[46px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
+            style={
+              highlight
+                ? {
+                    background: loading
+                      ? "linear-gradient(135deg, rgba(111,226,207,0.7), rgba(120,199,255,0.7))"
+                      : "linear-gradient(135deg, #6fe2cf, #78c7ff)",
+                    color: "#04101c",
+                    border: "none",
+                  }
+                : {
+                    background: loading ? "rgba(120,199,255,0.12)" : "rgba(120,199,255,0.08)",
+                    color: "var(--ink)",
+                    border: "1px solid rgba(120,199,255,0.28)",
+                  }
+            }
+          >
+            {loading ? (
+              <>
+                <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeOpacity="0.25" />
+                  <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                </svg>
+                Opening checkout…
+              </>
+            ) : submitLabel}
+          </button>
+          {error && (
+            <p className="text-center text-[0.75rem] text-[#ff8a8a] px-[4px]">{error}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function NextStep() {
   const { ref, isInView } = useInView();
-
-  const cards = [
-    {
-      title: "Free Assessment",
-      price: null,
-      description:
-        "A no-cost snapshot of where you stand in AI-driven search today — and where your biggest gaps are.",
-      features: [
-        "AI visibility snapshot",
-        "Competitor comparison",
-        "Source-of-truth gap review",
-        "Tailored roadmap overview",
-      ],
-      submitLabel: "Get my free assessment",
-      emailSubject: "Free AI-Search Readiness Assessment",
-      highlight: false,
-    },
-    {
-      title: "Competitor Scan & AI-SEO Visibility Readiness Kit",
-      price: "$350",
-      description:
-        "A deep competitive intelligence report showing how your rivals are surfaced by AI — and how to close the gap.",
-      features: [
-        "Full AI-citation audit for 3–5 competitors",
-        "Structured content gap analysis",
-        "Answer-layer positioning report",
-        "Prioritized opportunity matrix",
-      ],
-      submitLabel: "Get started — $350",
-      emailSubject: "Competitor Scan & AI-SEO Visibility Readiness Kit — $350",
-      highlight: false,
-    },
-    {
-      title: "Visibility Overhaul",
-      price: "$950",
-      description:
-        "The complete Phase 0–2 system: source-of-truth content, schema, structured data, and a content engine built to fuel AI recommendations.",
-      features: [
-        "Everything in the Competitor Scan",
-        "Source-of-truth content architecture",
-        "Schema & structured data implementation",
-        "AI-ready content templates",
-        "Ongoing content engine setup",
-      ],
-      badge: "Most popular",
-      submitLabel: "Begin overhaul — $950",
-      emailSubject: "AI-SEO Visibility Overhaul — $950",
-      highlight: true,
-    },
-  ];
 
   return (
     <section id="next-step" className="py-[100px] relative scroll-mt-[86px] section-nextstep-bg">
@@ -399,7 +406,6 @@ export function NextStep() {
             boxShadow: "0 32px 100px rgba(2,7,16,0.55), inset 0 1px 0 rgba(111,226,207,0.06)",
           }}
         >
-          {/* Top accent line */}
           <div
             className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[28px]"
             style={{
@@ -408,8 +414,6 @@ export function NextStep() {
             }}
             aria-hidden="true"
           />
-
-          {/* Ambient bloom */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -418,8 +422,6 @@ export function NextStep() {
             }}
             aria-hidden="true"
           />
-
-          {/* Chip shield decoration */}
           <div
             className="hidden md:block absolute bottom-0 right-[48px] pointer-events-none overflow-hidden rounded-t-[22px]"
             aria-hidden="true"
@@ -435,7 +437,6 @@ export function NextStep() {
           </div>
 
           <div className="relative z-10">
-            {/* Section intro */}
             <div className={`mb-[42px] max-w-[720px] reveal-left ${isInView ? "is-visible" : ""}`}>
               <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[14px]">
                 Next step
@@ -449,14 +450,50 @@ export function NextStep() {
               </p>
             </div>
 
-            {/* Pricing cards — pt-[28px] gives clearance for "Most popular" badge */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] mb-[48px] pt-[28px]">
-              {cards.map((card) => (
-                <PricingCard key={card.title} {...card} />
-              ))}
+              <FreeAssessmentCard
+                title="Free Assessment"
+                description="A no-cost snapshot of where you stand in AI-driven search today — and where your biggest gaps are."
+                features={[
+                  "AI visibility snapshot",
+                  "Competitor comparison",
+                  "Source-of-truth gap review",
+                  "Tailored roadmap overview",
+                ]}
+                submitLabel="Get my free assessment"
+                emailSubject="Free AI-Search Readiness Assessment"
+              />
+              <CheckoutCard
+                title="Competitor Scan & AI-SEO Visibility Readiness Kit"
+                price="$350"
+                description="A deep competitive intelligence report showing how your rivals are surfaced by AI — and how to close the gap."
+                features={[
+                  "Full AI-citation audit for 3–5 competitors",
+                  "Structured content gap analysis",
+                  "Answer-layer positioning report",
+                  "Prioritized opportunity matrix",
+                ]}
+                submitLabel="Get started — $350"
+                planSlug="competitor-scan"
+              />
+              <CheckoutCard
+                title="Visibility Overhaul"
+                price="$950"
+                description="The complete Phase 0–2 system: source-of-truth content, schema, structured data, and a content engine built to fuel AI recommendations."
+                features={[
+                  "Everything in the Competitor Scan",
+                  "Source-of-truth content architecture",
+                  "Schema & structured data implementation",
+                  "AI-ready content templates",
+                  "Ongoing content engine setup",
+                ]}
+                badge="Most popular"
+                highlight={true}
+                submitLabel="Begin overhaul — $950"
+                planSlug="visibility-overhaul"
+              />
             </div>
 
-            {/* Best-fit + sources */}
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-[28px]">
               <aside className="p-[28px] rounded-[24px] bg-[#0a1828]/80 border border-[#7db0e7]/15">
                 <h3 className="mb-[16px] text-[1rem]">Best-fit prospects</h3>
