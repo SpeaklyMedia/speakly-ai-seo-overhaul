@@ -101,9 +101,9 @@
   --orange: #ff9d5c;
   --gold: #f5c86f;
   --pink: #d18cff;
-  --ink: #dbe8f7;
-  --ink-muted: rgba(219, 232, 247, 0.76);
-  --ink-soft: rgba(219, 232, 247, 0.58);
+  --ink: #ffffff;
+  --ink-muted: rgba(255, 255, 255, 0.88);
+  --ink-soft: rgba(255, 255, 255, 0.70);
   --panel: rgba(12, 27, 45, 0.72);
   --panel-strong: rgba(10, 24, 40, 0.92);
   --panel-soft: rgba(9, 22, 36, 0.56);
