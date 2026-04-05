@@ -121,11 +121,11 @@ function FreeAssessmentCard({
           <div className="flex items-baseline gap-[6px] mb-[12px]">
             <span className="text-[1.15rem] font-bold text-teal">Free</span>
           </div>
-          <p className="text-[0.85rem] text-ink-muted leading-[1.56]">{description}</p>
+          <p className="text-[0.85rem] text-ink-muted leading-[1.56]" style={{ color: "rgba(255,255,255,0.88)" }}>{description}</p>
         </div>
         <ul className="list-none p-0 grid gap-[8px] mb-[24px]">
           {features.map((f) => (
-            <li key={f} className="relative pl-[20px] text-[0.84rem] text-ink-muted" style={{ lineHeight: 1.5 }}>
+            <li key={f} className="relative pl-[20px] text-[0.84rem] text-ink-muted" style={{ lineHeight: 1.5, color: "rgba(255,255,255,0.88)" }}>
               <span
                 className="absolute left-0 top-[0.52em] w-[7px] h-[7px] rounded-full"
                 style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "block" }}
@@ -162,7 +162,7 @@ function FreeAssessmentCard({
                 </svg>
               </div>
               <p className="text-[0.92rem] font-semibold text-teal mb-[4px]">We'll be in touch!</p>
-              <p className="text-[0.78rem] text-ink-muted mb-[12px]">Expect a reply within 1 business day.</p>
+              <p className="text-[0.78rem] text-ink-muted mb-[12px]" style={{ color: "rgba(255,255,255,0.88)" }}>Expect a reply within 1 business day.</p>
               {zoomUrl && (
                 <a
                   href={zoomUrl}
@@ -367,13 +367,13 @@ function CheckoutCard({
             >
               {price}
             </span>
-            <span className="text-[0.8rem] text-ink-soft">one-time</span>
+            <span className="text-[0.8rem] text-ink-soft" style={{ color: "rgba(255,255,255,0.70)" }}>one-time</span>
           </div>
-          <p className="text-[0.85rem] text-ink-muted leading-[1.56]">{description}</p>
+          <p className="text-[0.85rem] text-ink-muted leading-[1.56]" style={{ color: "rgba(255,255,255,0.88)" }}>{description}</p>
         </div>
         <ul className="list-none p-0 grid gap-[8px] mb-[24px]">
           {features.map((f) => (
-            <li key={f} className="relative pl-[20px] text-[0.84rem] text-ink-muted" style={{ lineHeight: 1.5 }}>
+            <li key={f} className="relative pl-[20px] text-[0.84rem] text-ink-muted" style={{ lineHeight: 1.5, color: "rgba(255,255,255,0.88)" }}>
               <span
                 className="absolute left-0 top-[0.52em] w-[7px] h-[7px] rounded-full"
                 style={{ background: "linear-gradient(135deg, #6fe2cf, #78c7ff)", display: "block" }}
@@ -475,7 +475,7 @@ export function NextStep() {
               <h2 className="max-w-[18ch] mb-[16px]">
                 Choose the right starting point for your visibility.
               </h2>
-              <p className="text-[clamp(1.05rem,1.7vw,1.2rem)] text-ink-muted max-w-[62ch]">
+              <p className="text-[clamp(1.05rem,1.7vw,1.2rem)] text-ink-muted max-w-[62ch]" style={{ color: "rgba(255,255,255,0.88)" }}>
                 Start with a free assessment, go deeper with competitive intelligence, or commit to
                 the full system. All paths include a conversation before anything starts.
               </p>
@@ -540,7 +540,7 @@ export function NextStep() {
                     <li
                       key={item}
                       className="relative pl-[22px] text-ink-muted text-[0.9rem]"
-                      style={{ lineHeight: 1.5 }}
+                      style={{ lineHeight: 1.5, color: "rgba(255,255,255,0.88)" }}
                     >
                       <span
                         className="absolute left-0 top-[0.6em] w-[6px] h-[6px] rounded-full"
@@ -554,8 +554,8 @@ export function NextStep() {
               </aside>
 
               <aside className="p-[28px] rounded-[24px] bg-[#0a1828]/80 border border-[#7db0e7]/15">
-                <p className="mb-[10px] text-[0.9rem] font-medium text-ink-soft">Sources used</p>
-                <ul className="list-none p-0 grid gap-[8px] text-[0.8rem] text-ink-muted">
+                <p className="mb-[10px] text-[0.9rem] font-medium text-ink-soft" style={{ color: "rgba(255,255,255,0.70)" }}>Sources used</p>
+                <ul className="list-none p-0 grid gap-[8px] text-[0.8rem] text-ink-muted" style={{ color: "rgba(255,255,255,0.88)" }}>
                   <li>1. Bain &amp; Company — consumer reliance on AI search results (Feb 2025)</li>
                   <li>2. Pew Research Center — AI summaries reduce clicks (Jul 2025)</li>
                   <li>3. SparkToro / Datos — search happens everywhere (Mar 2026)</li>
@@ -583,7 +583,7 @@ export function NextStep() {
                 }}
                 aria-hidden="true"
               />
-              <span className="text-[0.72rem] tracking-[0.16em] uppercase text-ink-soft">
+              <span className="text-[0.72rem] tracking-[0.16em] uppercase text-ink-soft" style={{ color: "rgba(255,255,255,0.70)" }}>
                 Speakly Media
               </span>
             </div>

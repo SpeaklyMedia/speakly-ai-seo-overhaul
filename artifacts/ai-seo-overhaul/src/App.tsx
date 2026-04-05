@@ -13,6 +13,8 @@ function StarfieldBackground() {
     const root = document.documentElement;
     root.style.setProperty("--starfield-landscape", `url("${starfieldLandscape}")`);
     root.style.setProperty("--starfield-portrait", `url("${starfieldPortrait}")`);
+    root.style.setProperty("--ink-muted", "rgba(255, 255, 255, 0.88)");
+    root.style.setProperty("--ink-soft", "rgba(255, 255, 255, 0.70)");
   }, []);
 
   return null;
