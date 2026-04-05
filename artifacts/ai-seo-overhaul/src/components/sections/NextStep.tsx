@@ -57,6 +57,7 @@ function FreeAssessmentCard({
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [zoomUrl, setZoomUrl] = useState<string | null>(null);
 
   const idSlug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
@@ -74,10 +75,25 @@ function FreeAssessmentCard({
     }
     setErrors({});
     setSubmitting(true);
-    console.log("NextStep form submission:", { tier: title, emailSubject, ...form });
-    await new Promise((res) => setTimeout(res, 900));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const response = await fetch("/api/assess", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: form.name, email: form.email, website: form.website }),
+      });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({})) as { error?: string };
+        setErrors({ email: data.error ?? "Submission failed. Please try again." });
+        return;
+      }
+      const data = await response.json().catch(() => ({})) as { ok?: boolean; zoomUrl?: string };
+      setZoomUrl(data.zoomUrl ?? null);
+      setSubmitted(true);
+    } catch {
+      setErrors({ email: "Network error. Please check your connection and try again." });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -146,7 +162,22 @@ function FreeAssessmentCard({
                 </svg>
               </div>
               <p className="text-[0.92rem] font-semibold text-teal mb-[4px]">We'll be in touch!</p>
-              <p className="text-[0.78rem] text-ink-muted">Expect a reply within 1 business day.</p>
+              <p className="text-[0.78rem] text-ink-muted mb-[12px]">Expect a reply within 1 business day.</p>
+              {zoomUrl && (
+                <a
+                  href={zoomUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-[6px] min-h-[40px] px-[20px] rounded-full font-bold text-[0.82rem] transition-all duration-200"
+                  style={{
+                    background: "linear-gradient(135deg, #6fe2cf, #78c7ff)",
+                    color: "#04101c",
+                    border: "none",
+                  }}
+                >
+                  Book your assessment call →
+                </a>
+              )}
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="grid gap-[10px]" noValidate>
