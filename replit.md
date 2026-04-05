@@ -130,12 +130,12 @@ Connected via Replit's native Stripe integration (sandbox). `stripe-replit-sync`
 - `GET /api/products-with-prices` — returns all active products with their prices from `stripe` schema
 - `POST /api/checkout` — accepts `{ planSlug }` (`"competitor-scan"` or `"visibility-overhaul"`); resolves the price and constructs success/cancel URLs server-side from `REPLIT_DOMAINS`; returns `{ url }` pointing to a Stripe Checkout session
 - `POST /api/stripe/webhook` — Stripe webhook handler (registered before `express.json()`)
-- `POST /api/assess` — mirrors Vercel assess handler; validates form data, sends lead confirmation + admin notification HTML emails via Resend; returns `{ success: true, zoomUrl }`. Also queues 24h + 48h follow-up emails via setTimeout (acceptable on this always-running Express server; would need a durable queue on serverless)
+- `POST /api/assess` — mirrors Vercel assess handler; validates form data, sends lead confirmation + admin notification HTML emails via Resend; returns `{ ok: true, zoomUrl }`. Also queues 24h + 48h follow-up emails via setTimeout (acceptable on this always-running Express server; would need a durable queue on serverless)
 
 ### API endpoints (Vercel serverless — `api/` at repo root)
 - `POST /api/checkout` — maps `{ planSlug }` to hardcoded price IDs; verifies CORS origin; includes `planSlug` in Stripe session metadata; returns `{ url }`
 - `POST /api/webhook` — receives Stripe `checkout.session.completed` events; verifies signature with `STRIPE_WEBHOOK_SECRET`; sends payment notification email via Resend. Uses `export const config = { api: { bodyParser: false } }` so raw body is available for signature verification.
-- `POST /api/assess` — receives free assessment form submissions `{ name, email, website }`; validates inputs; logs lead as structured JSON; sends confirmation email to lead (with Zoom booking link) and admin notification email to `NOTIFY_EMAIL`; returns `{ success: true, zoomUrl }`. No follow-up scheduling — serverless functions terminate after returning
+- `POST /api/assess` — receives free assessment form submissions `{ name, email, website }`; validates inputs; logs lead as structured JSON; sends confirmation email to lead (with Zoom booking link) and admin notification email to `NOTIFY_EMAIL`; returns `{ ok: true, zoomUrl }`. No follow-up scheduling — serverless functions terminate after returning
 
 ### Key files
 - `artifacts/api-server/src/stripeClient.ts` — Stripe client using Replit connectors (never cached)
