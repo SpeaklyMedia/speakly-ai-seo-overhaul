@@ -60,7 +60,7 @@ function FreeAssessmentCard() {
         setErrors({ email: data.error ?? "Submission failed. Please try again." });
         return;
       }
-      const data = await response.json().catch(() => ({})) as { zoomUrl?: string };
+      const data = await response.json().catch(() => ({})) as { ok?: boolean; zoomUrl?: string };
       setZoomUrl(data.zoomUrl ?? null);
       setSubmitted(true);
     } catch {

@@ -43,7 +43,7 @@ router.post("/assess", async (req, res) => {
   const notifyEmail = process.env.NOTIFY_EMAIL;
 
   if (!resendKey || !notifyEmail) {
-    return res.status(200).json({ success: true, zoomUrl });
+    return res.status(200).json({ ok: true, zoomUrl });
   }
 
   const resend = new Resend(resendKey);
@@ -116,7 +116,7 @@ router.post("/assess", async (req, res) => {
     }
   }, 48 * 60 * 60 * 1000);
 
-  return res.status(200).json({ success: true, zoomUrl });
+  return res.status(200).json({ ok: true, zoomUrl });
 });
 
 // Stub endpoint: mark a lead as booked so follow-ups are suppressed.

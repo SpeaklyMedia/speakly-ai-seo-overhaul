@@ -90,7 +90,7 @@ export default async function handler(
   const notifyEmail = process.env.NOTIFY_EMAIL;
 
   if (!resendKey || !notifyEmail) {
-    return res.status(200).json({ success: true, zoomUrl });
+    return res.status(200).json({ ok: true, zoomUrl });
   }
 
   const resend = new Resend(resendKey);
@@ -119,5 +119,5 @@ export default async function handler(
     console.error("Failed to send admin notification email:", err);
   }
 
-  return res.status(200).json({ success: true, zoomUrl });
+  return res.status(200).json({ ok: true, zoomUrl });
 }
