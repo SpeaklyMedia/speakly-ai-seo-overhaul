@@ -529,3 +529,9 @@
     0%, 100% { transform: none; }
   }
 }
+
+/* ── Permanent brightness: force all muted/soft text to full-brightness white ── */
+.text-ink-muted,
+[class*="text-ink-muted"] { color: rgba(255, 255, 255, 0.88) !important; }
+.text-ink-soft,
+[class*="text-ink-soft"]  { color: rgba(255, 255, 255, 0.70) !important; }
