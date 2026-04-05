@@ -246,7 +246,7 @@ export function System() {
             href="#next-step"
             className="inline-flex items-center gap-[8px] px-[22px] py-[12px] rounded-full text-[0.9rem] tracking-[0.04em] btn-section-cta"
           >
-            Choose where to start
+            See your options
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M5 12H19M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
