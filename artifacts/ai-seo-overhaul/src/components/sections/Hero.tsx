@@ -103,7 +103,7 @@ export function Hero() {
               <div className="p-[26px] rounded-[28px] bg-[radial-gradient(circle_at_50%_0%,rgba(120,199,255,0.18),transparent_55%),linear-gradient(180deg,rgba(11,28,46,0.94),rgba(7,18,30,0.94))] border border-[#78c7ff]/20 shadow-[0_24px_70px_rgba(0,0,0,0.35)] relative overflow-hidden glass-card">
                 <div className="absolute w-[220px] h-[220px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.12),transparent_70%)] pointer-events-none -bottom-[40%] -right-[10%]" />
                 <b className="block text-[0.82rem] uppercase tracking-[0.16em] text-blue mb-[14px]">Core idea</b>
-                <strong className="block text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.03] mb-[14px]">Your website = your single source of truth</strong>
+                <strong className="block text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.03] mb-[14px]" style={{ color: "rgba(255,255,255,1)" }}>Your website = your single source of truth</strong>
                 <p className="m-0 mb-[16px] max-w-[38ch] text-[clamp(1rem,1.5vw,1.08rem)]" style={{ color: "rgba(255,255,255,0.88)" }}>When the source is clear, AI answers, future pages, campaigns, and sales assets all become more consistent, more discoverable, and easier to trust.</p>
                 <div className="inline-flex items-center gap-[10px] px-[14px] py-[10px] rounded-[16px] bg-white/5 border border-[#ff9d5c]/20 text-[0.92rem]" style={{ color: "rgba(255,255,255,0.88)" }}>This is the fuel tank for the future content engine.</div>
               </div>
@@ -111,23 +111,23 @@ export function Hero() {
               {/* Mini cards 2×2 + brand trust */}
               <div className="grid grid-cols-2 gap-[14px] content-start">
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
-                  <strong className="block text-[0.94rem] mb-[8px]">AI answers</strong>
+                  <strong className="block text-[0.94rem] mb-[8px]" style={{ color: "rgba(255,255,255,1)" }}>AI answers</strong>
                   <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Google AI Overviews, AI Mode, ChatGPT, Perplexity, maps, assistants.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
-                  <strong className="block text-[0.94rem] mb-[8px]">Core pages</strong>
+                  <strong className="block text-[0.94rem] mb-[8px]" style={{ color: "rgba(255,255,255,1)" }}>Core pages</strong>
                   <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Service pages, audience routes, location pages, and proof pages get sharper.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
-                  <strong className="block text-[0.94rem] mb-[8px]">Content engine</strong>
+                  <strong className="block text-[0.94rem] mb-[8px]" style={{ color: "rgba(255,255,255,1)" }}>Content engine</strong>
                   <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>FAQs, articles, supporting pages, and proof assets expand from a stronger base.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
-                  <strong className="block text-[0.94rem] mb-[8px]">Campaigns</strong>
+                  <strong className="block text-[0.94rem] mb-[8px]" style={{ color: "rgba(255,255,255,1)" }}>Campaigns</strong>
                   <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Ads, landing pages, email, and sales enablement pull from the same clarified story.</span>
                 </div>
                 <div className="col-span-2 p-[18px] rounded-md border border-[#78c7ff]/20 bg-gradient-to-r from-[#78c7ff]/10 to-[#6fe2cf]/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
-                  <strong className="block text-[0.94rem] mb-[8px]">Brand trust</strong>
+                  <strong className="block text-[0.94rem] mb-[8px]" style={{ color: "rgba(255,255,255,1)" }}>Brand trust</strong>
                   <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Consistency, proof, and conversion clarity improve because the business story is no longer fragmented.</span>
                 </div>
               </div>

@@ -11,28 +11,38 @@ export function useInView<T extends HTMLElement = HTMLDivElement>(options: Inter
     const currentRef = ref.current;
     if (!currentRef) return;
 
-    // If the element is already above the current viewport (page loaded at a
-    // hash anchor below this element), mark it visible immediately so reveal
-    // animations don't leave it at opacity:0 when the user scrolls up to it.
-    if (currentRef.getBoundingClientRect().bottom <= 0) {
-      setIsInView(true);
-      return;
-    }
+    // Wait one rAF so the browser's hash-anchor scroll has settled, then
+    // check if the element is already above the viewport. If it is (i.e. the
+    // page loaded at a hash anchor below this element), mark it visible
+    // immediately without registering the observer — prevents opacity:0 lock
+    // when the user scrolls up from a hash link.
+    const raf = requestAnimationFrame(() => {
+      if (!ref.current) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
+      if (ref.current.getBoundingClientRect().bottom <= 0) {
         setIsInView(true);
-        observer.unobserve(currentRef);
+        return;
       }
-    }, {
-      threshold: 0.1,
-      ...options
+
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.unobserve(ref.current!);
+        }
+      }, {
+        threshold: 0.1,
+        ...options
+      });
+
+      observer.observe(ref.current);
+
+      // Store cleanup on the raf callback's closure
+      (currentRef as any).__io_cleanup = () => observer.unobserve(ref.current!);
     });
 
-    observer.observe(currentRef);
-
     return () => {
-      observer.unobserve(currentRef);
+      cancelAnimationFrame(raf);
+      (currentRef as any).__io_cleanup?.();
     };
   }, []);
 
