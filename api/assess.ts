@@ -1,8 +1,6 @@
 import { Resend } from "resend";
 import {
   buildConfirmationEmail,
-  buildFollowUp24Email,
-  buildFollowUp48Email,
   buildAdminEmail,
 } from "./_assessEmailTemplates";
 
@@ -120,46 +118,6 @@ export default async function handler(
   } catch (err: unknown) {
     console.error("Failed to send admin notification email:", err);
   }
-
-  // Note: setTimeout is not durable in serverless environments. These follow-up sends
-  // will only fire if the Vercel function instance stays alive (unlikely for 24-48h).
-  // For reliable follow-ups in Vercel, migrate to a durable queue (e.g. Resend Broadcasts,
-  // Vercel Cron, or a third-party scheduler). On the always-running Express server
-  // (artifacts/api-server), setTimeout is acceptable for low volume.
-
-  // 24-hour follow-up
-  setTimeout(async () => {
-    try {
-      const r = new Resend(resendKey);
-      await r.emails.send({
-        from: "Speakly Notifications <notifications@speaklymedia.com>",
-        to: cleanEmail,
-        replyTo: notifyEmail,
-        subject: "Still thinking it over? Here's your link.",
-        html: buildFollowUp24Email(cleanName, zoomUrl),
-      });
-      console.log(JSON.stringify({ event: "followup_24h_sent", email: cleanEmail }));
-    } catch (err: unknown) {
-      console.error("Failed to send 24h follow-up email:", err);
-    }
-  }, 24 * 60 * 60 * 1000);
-
-  // 48-hour follow-up
-  setTimeout(async () => {
-    try {
-      const r = new Resend(resendKey);
-      await r.emails.send({
-        from: "Speakly Notifications <notifications@speaklymedia.com>",
-        to: cleanEmail,
-        replyTo: notifyEmail,
-        subject: "Last chance to grab your spot.",
-        html: buildFollowUp48Email(cleanName, zoomUrl),
-      });
-      console.log(JSON.stringify({ event: "followup_48h_sent", email: cleanEmail }));
-    } catch (err: unknown) {
-      console.error("Failed to send 48h follow-up email:", err);
-    }
-  }, 48 * 60 * 60 * 1000);
 
   return res.status(200).json({ success: true, zoomUrl });
 }
