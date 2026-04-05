@@ -294,11 +294,20 @@
   isolation: isolate;
 }
 
-/* Desktop hover: dim unfocused siblings with filter (fast 200ms) */
-@media (hover: hover) {
+/* Base transition for non-card children (e.g. System phase connectors) */
+.glass-card-group > :not(.glass-card) {
+  transition: opacity 200ms ease;
+}
+
+/* Desktop hover: dim unfocused siblings — only at sm+ (multi-column layouts) */
+@media (hover: hover) and (min-width: 640px) {
   .glass-card-group:has(.glass-card:hover) .glass-card:not(:hover) {
-    filter: brightness(0.55) saturate(0.70);
+    filter: brightness(0.70) saturate(0.82);
     transform: scale(0.99);
+  }
+  /* Dim non-card siblings (e.g. System PhaseConnector arrows) */
+  .glass-card-group:has(.glass-card:hover) > :not(.glass-card) {
+    opacity: 0.38;
   }
 }
 
@@ -318,13 +327,18 @@
   --color-ink-soft:  var(--ink-soft);
 }
 
-/* Mobile sibling dimming when one card has .is-focused */
-.glass-card-group:has(.glass-card.is-focused) .glass-card:not(.is-focused) {
-  filter: brightness(0.55) saturate(0.70);
-  transform: scale(0.99);
+/* Mobile sibling dimming — only at sm+ (avoids vertical single-column stacks) */
+@media (min-width: 640px) {
+  .glass-card-group:has(.glass-card.is-focused) .glass-card:not(.is-focused) {
+    filter: brightness(0.70) saturate(0.82);
+    transform: scale(0.99);
+  }
+  .glass-card-group:has(.glass-card.is-focused) > :not(.glass-card) {
+    opacity: 0.38;
+  }
 }
 
-/* Reduced motion: drop transforms but keep the filter dimming */
+/* Reduced motion: drop transforms but preserve filter dimming */
 @media (prefers-reduced-motion: reduce) {
   .glass-card-group:has(.glass-card:hover) .glass-card:not(:hover),
   .glass-card-group:has(.glass-card.is-focused) .glass-card:not(.is-focused) {
@@ -348,6 +362,24 @@
 }
 .btn-ghost:hover {
   transform: translateY(-2px);
+}
+
+/* ── Section CTA pills (Problem / System / Proof footers) ── */
+.btn-section-cta {
+  color: var(--color-ink-soft);
+  border: 1px solid rgba(120, 199, 255, 0.22);
+  background: rgba(120, 199, 255, 0.04);
+  transition:
+    transform 300ms cubic-bezier(.16,.84,.44,1),
+    border-color 200ms ease,
+    background-color 200ms ease,
+    color 200ms ease;
+}
+.btn-section-cta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(120, 199, 255, 0.52);
+  background: rgba(120, 199, 255, 0.11);
+  color: var(--color-ink);
 }
 
 /* ── Section-specific ambient gradients ─────────────────── */

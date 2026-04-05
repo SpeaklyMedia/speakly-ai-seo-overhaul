@@ -231,8 +231,7 @@ export function Proof() {
         <div className="mt-[36px] text-center">
           <a
             href="#next-step"
-            className="inline-flex items-center gap-[8px] px-[22px] py-[12px] rounded-full text-[0.9rem] text-ink-soft tracking-[0.04em] btn-ghost"
-            style={{ border: "1px solid rgba(120,199,255,0.20)", background: "rgba(120,199,255,0.04)" }}
+            className="inline-flex items-center gap-[8px] px-[22px] py-[12px] rounded-full text-[0.9rem] tracking-[0.04em] btn-section-cta"
           >
             Get similar results
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">

@@ -17,6 +17,8 @@ export function useCardFocus(): void {
       for (const card of cards) {
         const rect = card.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > window.innerHeight) continue;
+        // Skip cards whose reveal animation hasn't completed yet
+        if (card.classList.contains("reveal") && !card.classList.contains("is-visible")) continue;
         const dist = Math.abs(rect.top - targetY);
         if (dist < minDist) {
           minDist = dist;
