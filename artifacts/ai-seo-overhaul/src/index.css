@@ -275,6 +275,7 @@
 }
 .glass-card:hover {
   transform: translateY(-4px) scale(1.02);
+  filter: brightness(1.14);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.07),
     0 24px 56px rgba(0,0,0,0.30),
@@ -299,10 +300,10 @@
   transition: opacity 200ms ease;
 }
 
-/* Desktop hover: dim unfocused siblings — only at sm+ (multi-column layouts) */
+/* Desktop hover: keep siblings at full brightness — only at sm+ (multi-column layouts) */
 @media (hover: hover) and (min-width: 640px) {
   .glass-card-group:has(.glass-card:hover) .glass-card:not(:hover) {
-    filter: brightness(0.70) saturate(0.82);
+    filter: brightness(1.0);
     transform: scale(0.99);
   }
   /* Dim phase connectors (e.g. System PhaseConnector arrows) */
@@ -314,6 +315,7 @@
 /* Touch/mobile: .is-focused mirrors the hover state */
 .glass-card.is-focused {
   transform: translateY(-4px) scale(1.02);
+  filter: brightness(1.14);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.07),
     0 24px 56px rgba(0,0,0,0.30),
@@ -327,10 +329,10 @@
   --color-ink-soft:  var(--ink-soft);
 }
 
-/* Mobile sibling dimming — only at sm+ (avoids vertical single-column stacks) */
+/* Mobile sibling — keep siblings at full brightness */
 @media (min-width: 640px) {
   .glass-card-group:has(.glass-card.is-focused) .glass-card:not(.is-focused) {
-    filter: brightness(0.70) saturate(0.82);
+    filter: brightness(1.0);
     transform: scale(0.99);
   }
   .glass-card-group:has(.glass-card.is-focused) .phase-connector {
@@ -385,6 +387,7 @@
 }
 .btn-section-cta:hover {
   transform: translateY(-2px);
+  filter: brightness(1.08);
   border-color: rgba(120, 199, 255, 0.52);
   background: rgba(120, 199, 255, 0.11);
   color: var(--color-ink);
