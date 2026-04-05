@@ -78,21 +78,21 @@ export function Hero() {
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--gold)" }}>
                   {count80}%
                 </strong>
-                <small className="block text-ink-muted text-[0.78rem] leading-[1.5]">of search users rely on AI summaries at least 40% of the time.<sup>1</sup></small>
+                <small className="block text-[0.78rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>of search users rely on AI summaries at least 40% of the time.<sup>1</sup></small>
               </div>
               <div className="p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--orange)" }}>
                   {count60}%
                 </strong>
-                <small className="block text-ink-muted text-[0.78rem] leading-[1.5]">of searches now end without the user progressing to another destination.<sup>1</sup></small>
+                <small className="block text-[0.78rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>of searches now end without the user progressing to another destination.<sup>1</sup></small>
               </div>
               <div className="p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]">
                   <span style={{ color: "var(--orange)" }}>{count8}%</span>
-                  <span className="text-ink-soft/60 text-[0.75em] mx-[0.25em]">vs</span>
+                  <span className="text-[0.75em] mx-[0.25em]" style={{ color: "rgba(255,255,255,0.45)" }}>vs</span>
                   <span style={{ color: "var(--teal)" }}>{count15}%</span>
                 </strong>
-                <small className="block text-ink-muted text-[0.78rem] leading-[1.5]">Traditional-result click rate when AI summaries appear vs. when they don't.<sup>2</sup></small>
+                <small className="block text-[0.78rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Traditional-result click rate when AI summaries appear vs. when they don't.<sup>2</sup></small>
               </div>
             </div>
 
@@ -104,31 +104,31 @@ export function Hero() {
                 <div className="absolute w-[220px] h-[220px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.12),transparent_70%)] pointer-events-none -bottom-[40%] -right-[10%]" />
                 <b className="block text-[0.82rem] uppercase tracking-[0.16em] text-blue mb-[14px]">Core idea</b>
                 <strong className="block text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.03] mb-[14px]">Your website = your single source of truth</strong>
-                <p className="m-0 mb-[16px] max-w-[38ch] text-ink-muted text-[clamp(1rem,1.5vw,1.08rem)]">When the source is clear, AI answers, future pages, campaigns, and sales assets all become more consistent, more discoverable, and easier to trust.</p>
-                <div className="inline-flex items-center gap-[10px] px-[14px] py-[10px] rounded-[16px] bg-white/5 border border-[#ff9d5c]/20 text-ink-muted text-[0.92rem]">This is the fuel tank for the future content engine.</div>
+                <p className="m-0 mb-[16px] max-w-[38ch] text-[clamp(1rem,1.5vw,1.08rem)]" style={{ color: "rgba(255,255,255,0.88)" }}>When the source is clear, AI answers, future pages, campaigns, and sales assets all become more consistent, more discoverable, and easier to trust.</p>
+                <div className="inline-flex items-center gap-[10px] px-[14px] py-[10px] rounded-[16px] bg-white/5 border border-[#ff9d5c]/20 text-[0.92rem]" style={{ color: "rgba(255,255,255,0.88)" }}>This is the fuel tank for the future content engine.</div>
               </div>
 
               {/* Mini cards 2×2 + brand trust */}
               <div className="grid grid-cols-2 gap-[14px] content-start">
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">AI answers</strong>
-                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">Google AI Overviews, AI Mode, ChatGPT, Perplexity, maps, assistants.</span>
+                  <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Google AI Overviews, AI Mode, ChatGPT, Perplexity, maps, assistants.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">Core pages</strong>
-                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">Service pages, audience routes, location pages, and proof pages get sharper.</span>
+                  <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Service pages, audience routes, location pages, and proof pages get sharper.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">Content engine</strong>
-                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">FAQs, articles, supporting pages, and proof assets expand from a stronger base.</span>
+                  <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>FAQs, articles, supporting pages, and proof assets expand from a stronger base.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">Campaigns</strong>
-                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">Ads, landing pages, email, and sales enablement pull from the same clarified story.</span>
+                  <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Ads, landing pages, email, and sales enablement pull from the same clarified story.</span>
                 </div>
                 <div className="col-span-2 p-[18px] rounded-md border border-[#78c7ff]/20 bg-gradient-to-r from-[#78c7ff]/10 to-[#6fe2cf]/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">Brand trust</strong>
-                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">Consistency, proof, and conversion clarity improve because the business story is no longer fragmented.</span>
+                  <span className="block text-[0.83rem] leading-[1.5]" style={{ color: "rgba(255,255,255,0.88)" }}>Consistency, proof, and conversion clarity improve because the business story is no longer fragmented.</span>
                 </div>
               </div>
             </div>
@@ -136,7 +136,7 @@ export function Hero() {
             {/* Footer note */}
             <div className="p-[18px_20px] grid gap-[10px] rounded-[20px] bg-[#07121e]/85 border border-[#ff9d5c]/20 glass-card">
               <strong className="text-[0.8rem] uppercase tracking-[0.16em] text-orange">Not more random content</strong>
-              <span className="text-ink-muted text-[0.9rem]">This is a website-first visibility system for the answer era — not a pile of disconnected SEO tasks.</span>
+              <span className="text-[0.9rem]" style={{ color: "rgba(255,255,255,0.88)" }}>This is a website-first visibility system for the answer era — not a pile of disconnected SEO tasks.</span>
             </div>
           </div>
         </div>
