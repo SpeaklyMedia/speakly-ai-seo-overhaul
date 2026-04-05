@@ -35,9 +35,13 @@ export function useCardFocus(): void {
 
     updateFocus();
     window.addEventListener("scroll", updateFocus, { passive: true });
+    window.addEventListener("resize", updateFocus, { passive: true });
+    window.addEventListener("orientationchange", updateFocus, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", updateFocus);
+      window.removeEventListener("resize", updateFocus);
+      window.removeEventListener("orientationchange", updateFocus);
       active?.classList.remove("is-focused");
     };
   }, []);

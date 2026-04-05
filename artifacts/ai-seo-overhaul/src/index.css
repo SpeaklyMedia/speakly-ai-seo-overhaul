@@ -338,7 +338,7 @@
   }
 }
 
-/* Reduced motion: drop all transforms */
+/* Reduced motion: drop all transforms and transitions */
 @media (prefers-reduced-motion: reduce) {
   .glass-card:hover,
   .glass-card.is-focused {
@@ -347,6 +347,10 @@
   .glass-card-group:has(.glass-card:hover) .glass-card:not(:hover),
   .glass-card-group:has(.glass-card.is-focused) .glass-card:not(.is-focused) {
     transform: none !important;
+  }
+  /* Also suppress connector opacity transitions */
+  .glass-card-group > :not(.glass-card) {
+    transition: none !important;
   }
 }
 
