@@ -5,23 +5,27 @@ export function useCardFocus(): void {
     /* ── Mouse hover (runs on ALL environments) ───────────────────
        Document-level mouseover/mouseout delegation — works inside
        canvas iframes regardless of (hover:none) media query.      */
-    function onOver(e: MouseEvent) {
-      const card = (e.target as Element | null)?.closest?.(".glass-card");
+    function onOver(e: Event) {
+      const target = (e as MouseEvent).target as Element | null;
+      const card = target?.closest?.(".glass-card");
       if (card && !card.classList.contains("is-focused")) {
         card.classList.add("is-focused");
       }
     }
 
-    function onOut(e: MouseEvent) {
-      const card = (e.target as Element | null)?.closest?.(".glass-card");
+    function onOut(e: Event) {
+      const me = e as MouseEvent;
+      const card = (me.target as Element | null)?.closest?.(".glass-card");
       if (!card) return;
-      if (!card.contains(e.relatedTarget as Node | null)) {
+      if (!card.contains(me.relatedTarget as Node | null)) {
         card.classList.remove("is-focused");
       }
     }
 
     document.addEventListener("mouseover", onOver);
     document.addEventListener("mouseout", onOut);
+    document.addEventListener("pointerover", onOver);
+    document.addEventListener("pointerout", onOut);
 
     /* ── Scroll-based touch focus (coarse-pointer touch devices only) */
     let scrollActive: Element | null = null;
@@ -59,6 +63,8 @@ export function useCardFocus(): void {
     return () => {
       document.removeEventListener("mouseover", onOver);
       document.removeEventListener("mouseout", onOut);
+      document.removeEventListener("pointerover", onOver);
+      document.removeEventListener("pointerout", onOut);
       if (scrollFn) {
         window.removeEventListener("scroll", scrollFn);
         window.removeEventListener("resize", scrollFn);
