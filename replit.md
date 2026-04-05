@@ -130,12 +130,12 @@ Connected via Replit's native Stripe integration (sandbox). `stripe-replit-sync`
 - `GET /api/products-with-prices` — returns all active products with their prices from `stripe` schema
 - `POST /api/checkout` — accepts `{ planSlug }` (`"competitor-scan"` or `"visibility-overhaul"`); resolves the price and constructs success/cancel URLs server-side from `REPLIT_DOMAINS`; returns `{ url }` pointing to a Stripe Checkout session
 - `POST /api/stripe/webhook` — Stripe webhook handler (registered before `express.json()`)
-- `POST /api/assess` — mirrors Vercel assess handler; validates form data, sends lead confirmation + admin notification HTML emails via Resend, queues 24h + 48h follow-up emails via setTimeout; returns `{ success: true, zoomUrl }`
+- `POST /api/assess` — mirrors Vercel assess handler; validates form data, sends lead confirmation + admin notification HTML emails via Resend; returns `{ success: true, zoomUrl }`. Also queues 24h + 48h follow-up emails via setTimeout (acceptable on this always-running Express server; would need a durable queue on serverless)
 
 ### API endpoints (Vercel serverless — `api/` at repo root)
 - `POST /api/checkout` — maps `{ planSlug }` to hardcoded price IDs; verifies CORS origin; includes `planSlug` in Stripe session metadata; returns `{ url }`
 - `POST /api/webhook` — receives Stripe `checkout.session.completed` events; verifies signature with `STRIPE_WEBHOOK_SECRET`; sends payment notification email via Resend. Uses `export const config = { api: { bodyParser: false } }` so raw body is available for signature verification.
-- `POST /api/assess` — receives free assessment form submissions `{ name, email, website }`; validates inputs; sends confirmation email to lead (with Zoom booking link + 5-day deadline), admin notification email (HTML, with lead data + sequence confirmation), and queues 24h + 48h follow-up emails via setTimeout; returns `{ success: true, zoomUrl }`
+- `POST /api/assess` — receives free assessment form submissions `{ name, email, website }`; validates inputs; logs lead as structured JSON; sends confirmation email to lead (with Zoom booking link) and admin notification email to `NOTIFY_EMAIL`; returns `{ success: true, zoomUrl }`. No follow-up scheduling — serverless functions terminate after returning
 
 ### Key files
 - `artifacts/api-server/src/stripeClient.ts` — Stripe client using Replit connectors (never cached)
@@ -186,24 +186,20 @@ curl -X POST "https://api.vercel.com/v13/deployments?teamId=team_Fk5OMn1ovpKqUNQ
 
 ## Known Issues & Limitations
 
-### GitHub SSH deploy key must be re-created each session
-The SSH deploy key for pushing to `SpeaklyMedia/speakly-ai-seo-overhaul` is stored at `/tmp/deploy_key_new` and **does not persist between Replit sessions**. At the start of any session that requires a `git push`:
+### Pushing to GitHub uses HTTPS + OAuth token each session
+The GitHub remote is configured as SSH (`git@github.com:SpeaklyMedia/...`) but SSH host keys are not persisted. Push via HTTPS using the GitHub integration token:
 
-1. Generate a new key: `ssh-keygen -t ed25519 -C "replit-deploy" -f /tmp/deploy_key_new -N ""`
-2. Get GitHub token from the GitHub connector (via `code_execution`):
-   ```js
-   const conns = await listConnections('github');
-   const token = conns[0].settings.access_token;
-   ```
-3. Add the public key to the repo via GitHub API:
-   ```bash
-   curl -X POST https://api.github.com/repos/SpeaklyMedia/speakly-ai-seo-overhaul/keys \
-     -H "Authorization: token $GH_TOKEN" \
-     -d '{"title":"replit-deploy-...","key":"<pubkey>","read_only":false}'
-   ```
-4. Configure SSH: write `~/.ssh/config` with `IdentityFile /tmp/deploy_key_new` and `ssh-keyscan github.com >> ~/.ssh/known_hosts`
+```js
+// In code_execution sandbox:
+const conns = await listConnections('github');
+const token = conns[0].settings.access_token;
+const { execSync } = await import('child_process');
+execSync(`git remote set-url origin https://oauth2:${token}@github.com/SpeaklyMedia/speakly-ai-seo-overhaul.git`);
+execSync('git push origin main');
+execSync('git remote set-url origin git@github.com:SpeaklyMedia/speakly-ai-seo-overhaul.git');
+```
 
-Old deploy keys accumulate on the repo; they can be cleaned up via the GitHub repo settings.
+The remote is reset to SSH after pushing so the token is not stored in git config.
 
 ### Stripe Checkout (`/api/checkout`) uses hardcoded price IDs
 `api/checkout.ts` (Vercel serverless) maps `planSlug` to hardcoded Stripe price IDs. If prices are changed in Stripe, the file must be updated manually. See `DEPLOY.md` for instructions on regenerating live-mode price IDs.
