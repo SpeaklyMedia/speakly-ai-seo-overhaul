@@ -2,16 +2,36 @@ import { useEffect } from "react";
 
 export function useCardFocus(): void {
   useEffect(() => {
-    const noHover = window.matchMedia("(hover: none)");
+    /* ── Mouse hover (runs on ALL environments) ───────────────────
+       Document-level mouseover/mouseout delegation — works inside
+       canvas iframes regardless of (hover:none) media query.      */
+    function onOver(e: MouseEvent) {
+      const card = (e.target as Element | null)?.closest?.(".glass-card");
+      if (card && !card.classList.contains("is-focused")) {
+        card.classList.add("is-focused");
+      }
+    }
 
-    if (noHover.matches) {
-      /* ── Touch / no-hover: scroll-based closest-card focus ── */
-      let active: Element | null = null;
+    function onOut(e: MouseEvent) {
+      const card = (e.target as Element | null)?.closest?.(".glass-card");
+      if (!card) return;
+      if (!card.contains(e.relatedTarget as Node | null)) {
+        card.classList.remove("is-focused");
+      }
+    }
 
-      function updateFocus() {
+    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseout", onOut);
+
+    /* ── Scroll-based touch focus (coarse-pointer touch devices only) */
+    let scrollActive: Element | null = null;
+    let scrollFn: (() => void) | null = null;
+
+    const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)");
+    if (isTouch.matches) {
+      scrollFn = () => {
         const targetY = window.innerHeight * 0.35;
         const cards = Array.from(document.querySelectorAll(".glass-card"));
-
         let closest: Element | null = null;
         let minDist = Infinity;
 
@@ -21,64 +41,29 @@ export function useCardFocus(): void {
           if (rect.width === 0 && rect.height === 0) continue;
           if (card.classList.contains("reveal") && !card.classList.contains("is-visible")) continue;
           const dist = Math.abs(rect.top - targetY);
-          if (dist < minDist) {
-            minDist = dist;
-            closest = card;
-          }
+          if (dist < minDist) { minDist = dist; closest = card; }
         }
 
-        if (closest !== active) {
-          active?.classList.remove("is-focused");
+        if (closest !== scrollActive) {
+          scrollActive?.classList.remove("is-focused");
           closest?.classList.add("is-focused");
-          active = closest;
+          scrollActive = closest;
         }
-      }
-
-      updateFocus();
-      window.addEventListener("scroll", updateFocus, { passive: true });
-      window.addEventListener("resize", updateFocus, { passive: true });
-      window.addEventListener("orientationchange", updateFocus, { passive: true });
-
-      return () => {
-        window.removeEventListener("scroll", updateFocus);
-        window.removeEventListener("resize", updateFocus);
-        window.removeEventListener("orientationchange", updateFocus);
-        active?.classList.remove("is-focused");
       };
-    } else {
-      /* ── Desktop: JS mouseenter/mouseleave on every .glass-card ──
-         Bypasses CSS :hover so hover brightening works in all
-         preview/iframe contexts (canvas previews, embedded frames). */
-      let removeListeners: (() => void) | null = null;
 
-      function attachListeners() {
-        const cards = Array.from(document.querySelectorAll<Element>(".glass-card"));
-
-        const handlers = cards.map((card) => {
-          function onEnter() { card.classList.add("is-focused"); }
-          function onLeave() { card.classList.remove("is-focused"); }
-          card.addEventListener("mouseenter", onEnter);
-          card.addEventListener("mouseleave", onLeave);
-          return { card, onEnter, onLeave };
-        });
-
-        return () => {
-          handlers.forEach(({ card, onEnter, onLeave }) => {
-            card.removeEventListener("mouseenter", onEnter);
-            card.removeEventListener("mouseleave", onLeave);
-            card.classList.remove("is-focused");
-          });
-        };
-      }
-
-      const timer = setTimeout(() => {
-        removeListeners = attachListeners();
-      }, 80);
-
-      return () => {
-        clearTimeout(timer);
-        removeListeners?.();
-      };
+      scrollFn();
+      window.addEventListener("scroll", scrollFn, { passive: true });
+      window.addEventListener("resize", scrollFn, { passive: true });
     }
+
+    return () => {
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
+      if (scrollFn) {
+        window.removeEventListener("scroll", scrollFn);
+        window.removeEventListener("resize", scrollFn);
+        scrollActive?.classList.remove("is-focused");
+      }
+    };
   }, []);
 }
