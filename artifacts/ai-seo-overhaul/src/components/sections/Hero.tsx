@@ -78,13 +78,13 @@ export function Hero() {
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--gold)" }}>
                   {count80}%
                 </strong>
-                <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">of search users rely on AI summaries at least 40% of the time.<sup>1</sup></small>
+                <small className="block text-ink-muted text-[0.78rem] leading-[1.5]">of search users rely on AI summaries at least 40% of the time.<sup>1</sup></small>
               </div>
               <div className="p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--orange)" }}>
                   {count60}%
                 </strong>
-                <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">of searches now end without the user progressing to another destination.<sup>1</sup></small>
+                <small className="block text-ink-muted text-[0.78rem] leading-[1.5]">of searches now end without the user progressing to another destination.<sup>1</sup></small>
               </div>
               <div className="p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]">
@@ -92,7 +92,7 @@ export function Hero() {
                   <span className="text-ink-soft/60 text-[0.75em] mx-[0.25em]">vs</span>
                   <span style={{ color: "var(--teal)" }}>{count15}%</span>
                 </strong>
-                <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">Traditional-result click rate when AI summaries appear vs. when they don't.<sup>2</sup></small>
+                <small className="block text-ink-muted text-[0.78rem] leading-[1.5]">Traditional-result click rate when AI summaries appear vs. when they don't.<sup>2</sup></small>
               </div>
             </div>
 
@@ -112,23 +112,23 @@ export function Hero() {
               <div className="grid grid-cols-2 gap-[14px] content-start">
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">AI answers</strong>
-                  <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Google AI Overviews, AI Mode, ChatGPT, Perplexity, maps, assistants.</span>
+                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">Google AI Overviews, AI Mode, ChatGPT, Perplexity, maps, assistants.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">Core pages</strong>
-                  <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Service pages, audience routes, location pages, and proof pages get sharper.</span>
+                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">Service pages, audience routes, location pages, and proof pages get sharper.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">Content engine</strong>
-                  <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">FAQs, articles, supporting pages, and proof assets expand from a stronger base.</span>
+                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">FAQs, articles, supporting pages, and proof assets expand from a stronger base.</span>
                 </div>
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">Campaigns</strong>
-                  <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Ads, landing pages, email, and sales enablement pull from the same clarified story.</span>
+                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">Ads, landing pages, email, and sales enablement pull from the same clarified story.</span>
                 </div>
                 <div className="col-span-2 p-[18px] rounded-md border border-[#78c7ff]/20 bg-gradient-to-r from-[#78c7ff]/10 to-[#6fe2cf]/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">Brand trust</strong>
-                  <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Consistency, proof, and conversion clarity improve because the business story is no longer fragmented.</span>
+                  <span className="block text-ink-muted text-[0.83rem] leading-[1.5]">Consistency, proof, and conversion clarity improve because the business story is no longer fragmented.</span>
                 </div>
               </div>
             </div>
