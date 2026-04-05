@@ -464,7 +464,7 @@ export function NextStep() {
             aria-hidden="true"
             draggable="false"
             className="hidden md:block absolute pointer-events-none object-contain"
-            style={{ width: 200, opacity: 0.15, bottom: -20, right: -20, filter: "brightness(0.9) saturate(0.7)" }}
+            style={{ width: 200, opacity: 0.28, bottom: 24, right: 24 }}
           />
 
           <div className="relative z-10">

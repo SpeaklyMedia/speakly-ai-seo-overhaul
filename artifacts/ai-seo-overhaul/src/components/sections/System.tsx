@@ -2,7 +2,6 @@ import React from "react";
 import { useInView } from "@/hooks/use-in-view";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import aiSeoHub from "@assets/300ADAF0-C994-41B2-8324-1C87A6EC9BA4_1775246793841.png";
-import commanderRobots from "@assets/5DD9B575-51E7-4818-8DBD-DCA15B5A1DE1_1775208085481.png";
 import spaceOrangeBg from "@assets/IMG_0231_1775246914295.png";
 
 const phases = [
@@ -156,24 +155,15 @@ export function System() {
               Speakly's customer-facing process mirrors the operator system without exposing proprietary mechanics. The structure is simple: diagnose, align, then compound.
             </p>
           </div>
-          {/* Commander + robots photo — atmospheric accent, desktop only */}
-          <img
-            src={commanderRobots}
-            alt=""
-            aria-hidden="true"
-            draggable="false"
-            className="absolute hidden lg:block pointer-events-none object-contain"
-            style={{ width: 340, opacity: 0.60, top: -50, right: -20, filter: "brightness(0.88) saturate(0.8)" }}
-          />
         </div>
 
-        {/* Mobile/small-tablet: AI-SEO hub image below heading, hidden on desktop */}
-        <div className="hidden min-[480px]:flex md:hidden justify-center mb-[28px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.65 }}>
+        {/* AI-SEO hub — shown on mobile/tablet and desktop, centered illustration */}
+        <div className="flex justify-center mb-[28px] pointer-events-none" aria-hidden="true" style={{ opacity: 0.72 }}>
           <img
             src={aiSeoHub}
             alt=""
-            width={220}
-            height={220}
+            width={240}
+            height={240}
             style={{ display: "block", mixBlendMode: "screen", animation: reduced ? "none" : "astronautFloat 5.5s ease-in-out infinite" }}
           />
         </div>

@@ -2,7 +2,6 @@ import { useRef, useState, useEffect } from "react";
 import { useInView } from "@/hooks/use-in-view";
 import ssotBg from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_2_1775246793840.png";
 import ssotFg from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_1775246793840.png";
-import wrenchIllustration from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_1775208085482.png";
 
 function useFullBleedParallax(speeds: [number, number]) {
   const ref = useRef<HTMLDivElement>(null);
@@ -85,9 +84,9 @@ export function SourceOfTruth() {
             width: "100%",
             height: "124%",
             objectFit: "cover",
-            objectPosition: "center 25%",
+            objectPosition: "50% 20%",
             transform: `translateY(${offsets[1]}px)`,
-            opacity: 0.72,
+            opacity: 0.88,
           }}
         />
       </div>
@@ -99,7 +98,7 @@ export function SourceOfTruth() {
           position: "absolute",
           inset: 0,
           zIndex: 2,
-          background: "linear-gradient(110deg, rgba(4,16,28,0.72) 0%, rgba(4,16,28,0.52) 45%, rgba(4,16,28,0.28) 100%)",
+          background: "linear-gradient(110deg, rgba(4,16,28,0.65) 0%, rgba(4,16,28,0.40) 45%, rgba(4,16,28,0.15) 100%)",
           pointerEvents: "none",
         }}
       />
@@ -132,15 +131,6 @@ export function SourceOfTruth() {
             </p>
           </div>
 
-          {/* Glowing wrench photo — atmospheric accent, desktop only */}
-          <img
-            src={wrenchIllustration}
-            alt=""
-            aria-hidden="true"
-            draggable="false"
-            className="absolute right-[20px] hidden lg:block pointer-events-none object-contain"
-            style={{ width: 210, opacity: 0.55, top: -30, filter: "brightness(0.9) saturate(0.85)" }}
-          />
         </div>
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[minmax(300px,1fr)_minmax(0,1.3fr)] gap-[22px] items-stretch">

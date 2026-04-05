@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useInView } from "@/hooks/use-in-view";
 import { useCountUp } from "@/hooks/use-count-up";
-import trustShield from "@assets/DC19AE64-B399-4413-977D-2E6606D1715C_1775208085482.png";
 
 function TrustShieldIllustration({ size = 300 }: { size?: number }) {
   const Person = ({ cx, cy }: { cx: number; cy: number }) => (
@@ -86,15 +85,10 @@ export function Proof() {
               These proof points show the kind of visibility and clarity gains this work is built to create — across wellness, food, beverage, professional services, and home services categories.
             </p>
           </div>
-          {/* Trust shield network photo — atmospheric accent, desktop only */}
-          <img
-            src={trustShield}
-            alt=""
-            aria-hidden="true"
-            draggable="false"
-            className="absolute right-0 top-0 hidden lg:block pointer-events-none object-contain"
-            style={{ width: 210, opacity: 0.25, top: -10, filter: "brightness(0.85) saturate(0.75)" }}
-          />
+          {/* TrustShield illustration — desktop only accent, right of heading */}
+          <div className="absolute right-0 top-[-10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.35 }}>
+            <TrustShieldIllustration size={200} />
+          </div>
         </div>
 
         {/* Tablet-only: TrustShield illustration between heading and cards */}

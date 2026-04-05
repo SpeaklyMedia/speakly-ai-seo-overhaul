@@ -1,6 +1,5 @@
 import { useInView } from "@/hooks/use-in-view";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import aiHeadIcon from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_1775246793840.png";
 
 function MarketIllustration({ width = 300, reduced = false }: { width?: number; reduced?: boolean }) {
   return (
@@ -249,20 +248,6 @@ export function Market() {
             </p>
           </div>
 
-          {/* AI brain head photo — atmospheric accent, desktop only */}
-          <img
-            src={aiHeadIcon}
-            alt=""
-            aria-hidden="true"
-            draggable="false"
-            className="absolute right-0 top-0 hidden lg:block pointer-events-none object-contain"
-            style={{ width: 240, opacity: 0.28, top: -10, filter: "brightness(0.9) saturate(0.8)" }}
-          />
-          <div className="absolute right-[258px] top-[10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
-            <div style={{ width: 80, height: 80, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
-              <img src={aiHeadIcon} alt="" width={80} height={80} style={{ display: "block", objectFit: "contain" }} />
-            </div>
-          </div>
         </div>
 
         {/* Hero stat card — "60%" takes the spotlight with connectivity elements */}
