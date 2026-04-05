@@ -28,3 +28,8 @@ timeoutMs = 20000
 
 [nix]
 channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+ZOOM_BOOKING_URL = "https://zoom.us/booking/your-booking-link-here"

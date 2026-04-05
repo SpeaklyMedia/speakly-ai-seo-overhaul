@@ -130,11 +130,12 @@ Connected via Replit's native Stripe integration (sandbox). `stripe-replit-sync`
 - `GET /api/products-with-prices` — returns all active products with their prices from `stripe` schema
 - `POST /api/checkout` — accepts `{ planSlug }` (`"competitor-scan"` or `"visibility-overhaul"`); resolves the price and constructs success/cancel URLs server-side from `REPLIT_DOMAINS`; returns `{ url }` pointing to a Stripe Checkout session
 - `POST /api/stripe/webhook` — Stripe webhook handler (registered before `express.json()`)
+- `POST /api/assess` — mirrors Vercel assess handler; validates form data, sends lead confirmation + admin notification HTML emails via Resend, queues 24h + 48h follow-up emails via setTimeout; returns `{ success: true, zoomUrl }`
 
 ### API endpoints (Vercel serverless — `api/` at repo root)
 - `POST /api/checkout` — maps `{ planSlug }` to hardcoded price IDs; verifies CORS origin; includes `planSlug` in Stripe session metadata; returns `{ url }`
 - `POST /api/webhook` — receives Stripe `checkout.session.completed` events; verifies signature with `STRIPE_WEBHOOK_SECRET`; sends payment notification email via Resend. Uses `export const config = { api: { bodyParser: false } }` so raw body is available for signature verification.
-- `POST /api/assess` — receives free assessment form submissions `{ name, email, website }`; validates inputs; sends lead notification email via Resend; returns `{ ok: true }`
+- `POST /api/assess` — receives free assessment form submissions `{ name, email, website }`; validates inputs; sends confirmation email to lead (with Zoom booking link + 5-day deadline), admin notification email (HTML, with lead data + sequence confirmation), and queues 24h + 48h follow-up emails via setTimeout; returns `{ success: true, zoomUrl }`
 
 ### Key files
 - `artifacts/api-server/src/stripeClient.ts` — Stripe client using Replit connectors (never cached)
@@ -170,6 +171,7 @@ Production URL: `https://speakly-ai-seo-overhaul.vercel.app`
 - `STRIPE_WEBHOOK_SECRET` — Stripe webhook signing secret (`whsec_...`); obtained after registering `/api/webhook` as a Stripe webhook endpoint
 - `RESEND_API_KEY` — Resend API key for sending email notifications (free at resend.com)
 - `NOTIFY_EMAIL` — email address that receives payment confirmations and free assessment leads
+- `ZOOM_BOOKING_URL` — Zoom Scheduler or booking page link (placeholder: `https://zoom.us/booking/your-booking-link-here`); the owner provides the real link post-build
 
 ### Deploying
 Deployments are triggered via the Vercel API using the `VERCEL_TOKEN` secret:

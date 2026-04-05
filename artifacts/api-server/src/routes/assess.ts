@@ -1,71 +1,22 @@
+import { Router, type IRouter } from "express";
 import { Resend } from "resend";
 import {
   buildConfirmationEmail,
   buildFollowUp24Email,
   buildFollowUp48Email,
   buildAdminEmail,
-} from "./_assessEmailTemplates";
+} from "../lib/assessEmailTemplates";
 
-interface AssessRequest {
-  method?: string;
-  body: { name?: string; email?: string; website?: string };
-  headers: Record<string, string | string[] | undefined>;
-}
+const router: IRouter = Router();
 
-interface AssessResponse {
-  status(code: number): AssessResponse;
-  json(data: unknown): AssessResponse;
-  setHeader(name: string, value: string): void;
-  end(): void;
-}
+// In-memory set of lead emails that have booked (placeholder — a real implementation
+// would use a durable store keyed by a booking webhook from Zoom or a UUID token).
+// This allows follow-up sends to be conditionally skipped once booking is confirmed.
+const bookedLeads = new Set<string>();
 
-const isProduction = process.env.VERCEL_ENV === "production";
-
-const ALLOWED_ORIGINS: RegExp[] = [
-  /^https:\/\/([a-z0-9-]+\.)*speaklymedia\.com$/,
-  /^https:\/\/[a-z0-9-]+\.vercel\.app$/,
-  ...(!isProduction ? [/^http:\/\/localhost(:\d+)?$/] : []),
-];
-
-function isAllowedOrigin(origin: string | undefined): boolean {
-  if (!origin) return true;
-  return ALLOWED_ORIGINS.some((re) => re.test(origin));
-}
-
-function getOrigin(headers: AssessRequest["headers"]): string | undefined {
-  const raw = headers["origin"];
-  return Array.isArray(raw) ? raw[0] : raw;
-}
-
-export default async function handler(
-  req: AssessRequest,
-  res: AssessResponse,
-): Promise<AssessResponse> {
-  const origin = getOrigin(req.headers);
-
-  if (req.method === "OPTIONS") {
-    if (isAllowedOrigin(origin)) {
-      res.setHeader("Access-Control-Allow-Origin", origin ?? "*");
-    }
-    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    res.setHeader("Access-Control-Max-Age", "86400");
-    return res.status(204).json(null);
-  }
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
-  if (!isAllowedOrigin(origin)) {
-    return res.status(403).json({ error: "Origin not allowed" });
-  }
-
-  if (origin) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
-
-  const { name, email, website } = req.body ?? {};
+router.post("/assess", async (req, res) => {
+  const body = req.body as { name?: string; email?: string; website?: string };
+  const { name, email, website } = body ?? {};
 
   if (!name?.trim()) return res.status(400).json({ error: "Name is required" });
   if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
@@ -105,7 +56,7 @@ export default async function handler(
       subject: "Your free AI-SEO assessment is queued — schedule your call",
       html: buildConfirmationEmail(cleanName, zoomUrl),
     });
-  } catch (err: unknown) {
+  } catch (err) {
     console.error("Failed to send confirmation email to lead:", err);
   }
 
@@ -117,18 +68,18 @@ export default async function handler(
       subject: "New Free Assessment Request",
       html: buildAdminEmail(cleanName, cleanEmail, cleanWebsite),
     });
-  } catch (err: unknown) {
+  } catch (err) {
     console.error("Failed to send admin notification email:", err);
   }
 
-  // Note: setTimeout is not durable in serverless environments. These follow-up sends
-  // will only fire if the Vercel function instance stays alive (unlikely for 24-48h).
-  // For reliable follow-ups in Vercel, migrate to a durable queue (e.g. Resend Broadcasts,
-  // Vercel Cron, or a third-party scheduler). On the always-running Express server
-  // (artifacts/api-server), setTimeout is acceptable for low volume.
-
-  // 24-hour follow-up
+  // 24-hour follow-up. Only sends if lead has not yet booked.
+  // Note: setTimeout is acceptable for low volume on this always-running Express server.
+  // Migrate to a queue/cron for scale or if serverless deployment is ever used.
   setTimeout(async () => {
+    if (bookedLeads.has(cleanEmail)) {
+      console.log(JSON.stringify({ event: "followup_24h_skipped_booked", email: cleanEmail }));
+      return;
+    }
     try {
       const r = new Resend(resendKey);
       await r.emails.send({
@@ -139,13 +90,17 @@ export default async function handler(
         html: buildFollowUp24Email(cleanName, zoomUrl),
       });
       console.log(JSON.stringify({ event: "followup_24h_sent", email: cleanEmail }));
-    } catch (err: unknown) {
+    } catch (err) {
       console.error("Failed to send 24h follow-up email:", err);
     }
   }, 24 * 60 * 60 * 1000);
 
-  // 48-hour follow-up
+  // 48-hour follow-up. Only sends if lead has not yet booked.
   setTimeout(async () => {
+    if (bookedLeads.has(cleanEmail)) {
+      console.log(JSON.stringify({ event: "followup_48h_skipped_booked", email: cleanEmail }));
+      return;
+    }
     try {
       const r = new Resend(resendKey);
       await r.emails.send({
@@ -156,10 +111,22 @@ export default async function handler(
         html: buildFollowUp48Email(cleanName, zoomUrl),
       });
       console.log(JSON.stringify({ event: "followup_48h_sent", email: cleanEmail }));
-    } catch (err: unknown) {
+    } catch (err) {
       console.error("Failed to send 48h follow-up email:", err);
     }
   }, 48 * 60 * 60 * 1000);
 
   return res.status(200).json({ success: true, zoomUrl });
-}
+});
+
+// Stub endpoint: mark a lead as booked so follow-ups are suppressed.
+// In production, call this from a Zoom webhook or booking confirmation callback.
+router.post("/assess/booked", (req, res) => {
+  const body = req.body as { email?: string };
+  if (!body.email?.trim()) return res.status(400).json({ error: "Email required" });
+  bookedLeads.add(body.email.trim().toLowerCase());
+  console.log(JSON.stringify({ event: "lead_marked_booked", email: body.email.trim() }));
+  return res.status(200).json({ ok: true });
+});
+
+export default router;

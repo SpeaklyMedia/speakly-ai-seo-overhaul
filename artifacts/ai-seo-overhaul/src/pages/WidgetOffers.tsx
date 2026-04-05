@@ -36,6 +36,7 @@ function FreeAssessmentCard() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [zoomUrl, setZoomUrl] = useState<string | null>(null);
 
   function handleChange(field: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -59,6 +60,8 @@ function FreeAssessmentCard() {
         setErrors({ email: data.error ?? "Submission failed. Please try again." });
         return;
       }
+      const data = await response.json().catch(() => ({})) as { zoomUrl?: string };
+      setZoomUrl(data.zoomUrl ?? null);
       setSubmitted(true);
     } catch {
       setErrors({ email: "Network error. Please check your connection and try again." });
@@ -109,19 +112,47 @@ function FreeAssessmentCard() {
         <div className="mt-auto">
           {submitted ? (
             <div
-              className="flex flex-col items-center text-center py-[18px] px-[10px] rounded-[14px]"
+              className="flex flex-col rounded-[14px] overflow-hidden"
               style={{ background: "rgba(111,226,207,0.08)", border: "1px solid rgba(111,226,207,0.28)" }}
             >
-              <div
-                className="w-[42px] h-[42px] rounded-full mb-[10px] flex items-center justify-center"
-                style={{ background: "rgba(111,226,207,0.15)", border: "1px solid rgba(111,226,207,0.35)" }}
-              >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <polyline points="3.5,10 8,14.5 16.5,5.5" stroke="#1a9e8e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+              <div className="flex flex-col items-center text-center pt-[18px] pb-[14px] px-[14px]">
+                <div
+                  className="w-[38px] h-[38px] rounded-full mb-[9px] flex items-center justify-center"
+                  style={{ background: "rgba(111,226,207,0.18)", border: "1px solid rgba(111,226,207,0.35)" }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <polyline points="3.5,10 8,14.5 16.5,5.5" stroke="#1a9e8e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <p className="text-[0.88rem] font-bold mb-[3px]" style={{ color: "#0f1923" }}>Your assessment is queued</p>
+                <p className="text-[0.75rem] leading-[1.5]" style={{ color: "#5a6a7e" }}>
+                  Grab a time while spots are open this week.
+                </p>
               </div>
-              <p className="text-[0.9rem] font-semibold mb-[3px]" style={{ color: "#1a9e8e" }}>We'll be in touch!</p>
-              <p className="text-[0.77rem]" style={{ color: "#5a6a7e" }}>Expect a reply within 1 business day.</p>
+              {zoomUrl && (
+                <div className="px-[14px] pb-[16px]">
+                  <a
+                    href={zoomUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-[7px] w-full min-h-[42px] rounded-full font-bold text-[0.84rem] tracking-[0.01em] transition-all duration-200"
+                    style={{
+                      background: "linear-gradient(135deg, #6fe2cf, #78c7ff)",
+                      color: "#04101c",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="2" y="7" width="15" height="11" rx="2" stroke="currentColor" strokeWidth="2" />
+                      <path d="M17 10l5-3v10l-5-3V10z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+                    </svg>
+                    Schedule your call — spots available
+                  </a>
+                  <p className="text-center text-[0.68rem] mt-[8px]" style={{ color: "#8a9ab0" }}>
+                    A confirmation email is on its way to you.
+                  </p>
+                </div>
+              )}
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="grid gap-[9px]" noValidate>
