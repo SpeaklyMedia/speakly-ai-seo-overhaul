@@ -184,6 +184,33 @@ curl -X POST "https://api.vercel.com/v13/deployments?teamId=team_Fk5OMn1ovpKqUNQ
 
 ---
 
+## UI / Visual System Notes
+
+### Glass-card hover system (canonical state — Tasks #35 & #36)
+- **Desktop (fine pointer)**: pure CSS `:hover` — no JS involvement
+- **Touch tablet ≥640px**: JS scroll listener writes `is-focused` class + sibling `data-dim`; `useCardFocus` fresh-frame `activeRowDist` with 40px deadband and same-row early-exit prevents oscillation
+- **Touch phone <640px**: `is-focused` lift only (no sibling dimming)
+- **Canvas preview**: treated as desktop (fine-pointer host)
+- Hook lives at `artifacts/ai-seo-overhaul/src/hooks/useCardFocus.ts`
+
+### Button hover system
+- `.btn-cta` and `.btn-ghost` classes in `index.css` provide `translateY(-2px)` + `brightness(1.08)` on hover
+- `.btn-section-cta` adds border/background color transitions on top
+- Applied to: Hero CTAs, NextStep package buttons
+
+### Wrench illustration — "Why Speakly" (Solution section)
+- PNG at `public/wrench-illustration.png`, served at `/ai-seo-overhaul/wrench-illustration.png`
+- Opacity: `0.20`, `mix-blend-mode: screen` (reads as texture, not focal point)
+- Positioned `top: "-30%"` to sit near the section eyebrow/h2
+- Parallax via `useParallax(0.15)` — drifts at 15% of scroll speed
+- 8 `WRENCH_PARTICLES` with orange/amber glow + `wParticleFloat` keyframe animation
+- All lives in `Solution.tsx`; background layer at `z-index: 0`, content at `z-10`
+
+### Inline style pattern for guaranteed color
+All text elements needing guaranteed color inside glass-cards must use `style={{ color: "rgba(255,255,255,N)" }}`. The CSS variable chain (`--ink-muted` etc.) is unreliable inside glass-card stacking contexts.
+
+---
+
 ## Known Issues & Limitations
 
 ### Pushing to GitHub uses HTTPS + OAuth token each session
@@ -200,6 +227,12 @@ execSync('git remote set-url origin git@github.com:SpeaklyMedia/speakly-ai-seo-o
 ```
 
 The remote is reset to SSH after pushing so the token is not stored in git config.
+
+### `VERCEL_TOKEN` expires — manual redeploy needed
+The `VERCEL_TOKEN` secret stored in Replit may expire or be rotated. When it does, the Vercel API returns `{"error":{"invalidToken":true}}`. To fix:
+1. Go to [vercel.com/account/tokens](https://vercel.com/account/tokens) and create a new token.
+2. Update `VERCEL_TOKEN` in Replit Secrets.
+3. Alternatively, push to GitHub and let the Vercel GitHub integration auto-deploy (if connected).
 
 ### Stripe Checkout (`/api/checkout`) uses hardcoded price IDs
 `api/checkout.ts` (Vercel serverless) maps `planSlug` to hardcoded Stripe price IDs. If prices are changed in Stripe, the file must be updated manually. See `DEPLOY.md` for instructions on regenerating live-mode price IDs.
