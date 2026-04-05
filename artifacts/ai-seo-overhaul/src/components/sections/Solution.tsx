@@ -1,4 +1,5 @@
 import { useInView } from "@/hooks/use-in-view";
+import { useParallax } from "@/hooks/use-parallax";
 import spaceshipIcon from "@assets/8F8B77A1-1E0D-4616-A3E6-42759D6AF3F2_1775255124092.png";
 import aiBrainHead from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_1775255124092.png";
 import astronautChat from "@assets/B360D418-5C13-49A9-B3D5-E5B625E203B2_1775255124092.png";
@@ -138,9 +139,21 @@ function BrandGrid({ inView }: { inView: boolean }) {
   );
 }
 
+const WRENCH_PARTICLES = [
+  { top: "10%",  right: "40%", w: 5, delay: 0,    color: "rgba(255,157,92,0.92)" },
+  { top: "26%",  right: "22%", w: 3, delay: 0.8,  color: "rgba(245,200,111,0.82)" },
+  { top: "44%",  right: "45%", w: 4, delay: 1.5,  color: "rgba(255,157,92,0.78)" },
+  { top: "16%",  right: "12%", w: 3, delay: 1.1,  color: "rgba(245,200,111,0.72)" },
+  { top: "56%",  right: "30%", w: 6, delay: 0.4,  color: "rgba(255,157,92,0.68)" },
+  { top: "32%",  right: "8%",  w: 4, delay: 1.9,  color: "rgba(255,157,92,0.80)" },
+  { top: "68%",  right: "38%", w: 3, delay: 0.6,  color: "rgba(245,200,111,0.65)" },
+  { top: "6%",   right: "18%", w: 4, delay: 2.2,  color: "rgba(255,157,92,0.70)" },
+];
+
 export function Solution() {
   const { ref: mobileRef, isInView: mobileInView } = useInView();
   const { ref: desktopRef, isInView: desktopInView } = useInView();
+  const { ref: wrenchRef, offset: wrenchOffset } = useParallax(0.15);
 
   return (
     <section id="solution" className="py-[100px] relative scroll-mt-[86px] overflow-hidden">
@@ -267,38 +280,78 @@ export function Solution() {
         </div>
 
         {/* Why Speakly — full width on all breakpoints */}
-        <div className={`mt-[48px] relative overflow-hidden reveal ${(mobileInView || desktopInView) ? "is-visible" : ""}`} style={{ transitionDelay: "420ms" }}>
-          {/* Neon wrench illustration — blended so only the cyan glow shows through */}
-          <img
-            src="/ai-seo-overhaul/wrench-illustration.png"
-            alt=""
+        <div className={`mt-[48px] relative reveal ${(mobileInView || desktopInView) ? "is-visible" : ""}`} style={{ transitionDelay: "420ms" }}>
+
+          {/* Keyframes for floating particles */}
+          <style>{`
+            @keyframes wParticleFloat {
+              0%, 100% { transform: translateY(0px) scale(1);   opacity: 0.72; }
+              50%       { transform: translateY(-18px) scale(1.15); opacity: 1;    }
+            }
+          `}</style>
+
+          {/* ── Parallax background layer ─────────────────────── */}
+          <div
+            ref={wrenchRef}
             aria-hidden="true"
             style={{
               position: "absolute",
-              top: "50%",
-              right: "-6%",
-              transform: "translateY(-54%) rotate(-4deg)",
-              width: "480px",
-              opacity: 0.55,
-              mixBlendMode: "screen",
+              inset: 0,
+              zIndex: 0,
               pointerEvents: "none",
-              userSelect: "none",
+              transform: `translateY(${wrenchOffset}px)`,
             }}
-          />
-          <div className="relative z-10">
-          <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">Why Speakly</div>
-          <h2 className="mb-[24px]">The positioning advantage</h2>
-          <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch] mb-[30px]">
-            Most agencies treat AI search like a bolt-on. Speakly positions it as a website system, a visibility system, and a content system at the same time. The result is stronger clarity, better reuse, and a more durable growth asset.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[14px]">
-            {["Clarity over clever", "Proof over promises", "Systems over one-off posts"].map((standard) => (
-              <div key={standard} className="p-[18px_20px] rounded-[18px] bg-gradient-to-r from-[#6fe2cf]/10 to-[#78c7ff]/5 border border-[#6fe2cf]/15 text-ink-muted font-medium flex items-center justify-center text-center">
-                {standard}
-              </div>
+          >
+            {/* Neon wrench — dimmed so it reads as texture, not focal point */}
+            <img
+              src="/ai-seo-overhaul/wrench-illustration.png"
+              alt=""
+              style={{
+                position: "absolute",
+                top: "-30%",
+                right: "-4%",
+                width: "440px",
+                opacity: 0.20,
+                mixBlendMode: "screen",
+                pointerEvents: "none",
+                userSelect: "none",
+              }}
+            />
+
+            {/* Orange glowing particles floating around the wrench */}
+            {WRENCH_PARTICLES.map(({ top, right, w, delay, color }, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  top,
+                  right,
+                  width: w,
+                  height: w,
+                  borderRadius: "50%",
+                  background: color,
+                  boxShadow: `0 0 ${w * 5}px ${w * 2.5}px ${color}`,
+                  animation: `wParticleFloat ${3.4 + delay * 0.7}s ease-in-out ${delay}s infinite`,
+                }}
+              />
             ))}
           </div>
-          </div>{/* end relative z-10 */}
+
+          {/* ── Content — truly in front ────────────────────── */}
+          <div className="relative z-10">
+            <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">Why Speakly</div>
+            <h2 className="mb-[24px]">The positioning advantage</h2>
+            <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch] mb-[30px]">
+              Most agencies treat AI search like a bolt-on. Speakly positions it as a website system, a visibility system, and a content system at the same time. The result is stronger clarity, better reuse, and a more durable growth asset.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[14px]">
+              {["Clarity over clever", "Proof over promises", "Systems over one-off posts"].map((standard) => (
+                <div key={standard} className="p-[18px_20px] rounded-[18px] bg-gradient-to-r from-[#6fe2cf]/10 to-[#78c7ff]/5 border border-[#6fe2cf]/15 text-ink-muted font-medium flex items-center justify-center text-center">
+                  {standard}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
