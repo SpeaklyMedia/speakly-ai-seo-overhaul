@@ -4,9 +4,9 @@ import { getUncachableStripeClient } from '../stripeClient';
 
 const router: IRouter = Router();
 
-const PLAN_PRODUCT_NAMES: Record<string, string> = {
-  'competitor-scan': 'Competitor Scan & AI-SEO Visibility Readiness Kit',
-  'visibility-overhaul': 'Visibility Overhaul',
+const PRICE_IDS: Record<string, string> = {
+  'competitor-scan': 'price_1TIHS5EHagIjCpKA4W8ff42R',
+  'visibility-overhaul': 'price_1TIHS5EHagIjCpKAITYXikae',
 };
 
 router.post('/checkout', async (req, res) => {
@@ -14,7 +14,7 @@ router.post('/checkout', async (req, res) => {
     const body = req.body as { planSlug?: string };
     const { planSlug } = body;
 
-    if (!planSlug || !(planSlug in PLAN_PRODUCT_NAMES)) {
+    if (!planSlug || !(planSlug in PRICE_IDS)) {
       return res.status(400).json({ error: 'Invalid plan slug' });
     }
 
@@ -27,19 +27,16 @@ router.post('/checkout', async (req, res) => {
     const successUrl = `${frontendBase}?payment=success`;
     const cancelUrl = `${frontendBase}#next-step`;
 
-    const productName = PLAN_PRODUCT_NAMES[planSlug];
-    const price = await storage.getPriceByProductName(productName);
-    if (!price) {
-      return res.status(404).json({ error: 'Product not found or no active price available' });
-    }
+    const priceId = PRICE_IDS[planSlug];
 
     const stripe = await getUncachableStripeClient();
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: [{ price: price.id, quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       mode: 'payment',
       success_url: successUrl,
       cancel_url: cancelUrl,
+      metadata: { planSlug },
     });
 
     return res.json({ url: session.url });
