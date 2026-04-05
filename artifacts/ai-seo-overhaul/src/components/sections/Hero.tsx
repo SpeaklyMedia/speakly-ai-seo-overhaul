@@ -23,11 +23,11 @@ export function Hero() {
 
           {/* LEFT — hero copy */}
           <div ref={ref} className={`relative z-10 reveal ${isInView ? "is-visible" : ""}`}>
-            <span className="inline-flex items-center gap-[10px] px-[14px] py-[10px] rounded-full border border-[#7db0e7]/25 bg-[#081624]/50 text-ink-muted text-[0.84rem] tracking-[0.14em] uppercase backdrop-blur-[12px] mb-6 before:content-[''] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-teal before:to-blue before:shadow-[0_0_14px_rgba(111,226,207,0.6)]">
+            <span className="inline-flex items-center gap-[10px] px-[14px] py-[10px] rounded-full border border-[#7db0e7]/25 bg-[#081624]/50 text-ink-muted text-[0.84rem] tracking-[0.14em] uppercase backdrop-blur-[12px] mb-6 before:content-[''] before:w-[8px] before:h-[8px] before:rounded-full before:bg-gradient-to-br before:from-teal before:to-blue before:shadow-[0_0_14px_rgba(111,226,207,0.6)]" style={{ color: "rgba(255,255,255,0.88)" }}>
               AI-SEO Overhaul
             </span>
             <h1>Turn your website into the source AI recommends.</h1>
-            <p className="text-[clamp(1.08rem,1.8vw,1.2rem)] text-ink-muted max-w-[52ch] mb-[30px]">
+            <p className="text-[clamp(1.08rem,1.8vw,1.2rem)] text-ink-muted max-w-[52ch] mb-[30px]" style={{ color: "rgba(255,255,255,0.88)" }}>
               AI-generated answers are reshaping discovery. Speakly's AI-SEO Overhaul transforms your website into a clear, trusted, answer-ready foundation that improves visibility now and fuels smarter future content later.
             </p>
             <div className="flex flex-wrap gap-[14px] mb-[24px]">
@@ -40,7 +40,7 @@ export function Hero() {
             </div>
             <div className="flex flex-wrap gap-[10px] mt-[14px] glass-card" aria-label="Speakly principles">
               {["Clarity over clever", "Proof over promises", "Systems over one-off posts"].map((principle) => (
-                <span key={principle} className="inline-flex items-center gap-[8px] px-[14px] py-[10px] rounded-full bg-[#091624]/50 border border-[#7db0e7]/15 text-ink-muted text-[0.9rem]">
+                <span key={principle} className="inline-flex items-center gap-[8px] px-[14px] py-[10px] rounded-full bg-[#091624]/50 border border-[#7db0e7]/15 text-ink-muted text-[0.9rem]" style={{ color: "rgba(255,255,255,0.88)" }}>
                   {principle}
                 </span>
               ))}
