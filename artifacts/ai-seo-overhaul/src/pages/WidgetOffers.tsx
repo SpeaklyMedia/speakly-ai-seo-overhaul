@@ -360,6 +360,7 @@ export function WidgetOffers() {
               color: "#0f1923",
               lineHeight: 1.08,
               margin: "0 0 14px",
+              textAlign: "center",
             }}
           >
             Choose the right starting point for your visibility.
