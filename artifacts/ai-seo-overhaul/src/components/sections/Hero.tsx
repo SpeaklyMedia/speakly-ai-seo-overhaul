@@ -38,7 +38,7 @@ export function Hero() {
                 See how it works
               </a>
             </div>
-            <div className="flex flex-wrap gap-[10px] mt-[14px]" aria-label="Speakly principles">
+            <div className="flex flex-wrap gap-[10px] mt-[14px] glass-card" aria-label="Speakly principles">
               {["Clarity over clever", "Proof over promises", "Systems over one-off posts"].map((principle) => (
                 <span key={principle} className="inline-flex items-center gap-[8px] px-[14px] py-[10px] rounded-full bg-[#091624]/50 border border-[#7db0e7]/15 text-ink-muted text-[0.9rem]">
                   {principle}

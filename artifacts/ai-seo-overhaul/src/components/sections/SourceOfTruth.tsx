@@ -123,7 +123,7 @@ export function SourceOfTruth() {
             style={{ background: "radial-gradient(ellipse 70% 80% at 30% 50%, rgba(245,200,111,0.07), rgba(111,226,207,0.05) 50%, transparent 75%)", filter: "blur(24px)" }}
           />
 
-          <div ref={inViewRef} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
+          <div ref={inViewRef} className={`relative z-10 max-w-[620px] reveal-left glass-card ${isInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The core idea</div>
             <h2>Your website becomes the single source of truth.</h2>
             <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">

@@ -468,7 +468,7 @@ export function NextStep() {
           />
 
           <div className="relative z-10">
-            <div className={`mb-[42px] max-w-[720px] reveal-left ${isInView ? "is-visible" : ""}`}>
+            <div className={`mb-[42px] max-w-[720px] reveal-left glass-card ${isInView ? "is-visible" : ""}`}>
               <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[14px]">
                 Next step
               </div>

@@ -78,7 +78,7 @@ export function Proof() {
     <section id="proof" className="py-[100px] relative scroll-mt-[86px] section-proof-bg">
       <div className="shell">
         <div className="relative mb-[32px]">
-          <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
+          <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left glass-card ${isInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">Selected proof</div>
             <h2>Real work. Real visibility movement.</h2>
             <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">

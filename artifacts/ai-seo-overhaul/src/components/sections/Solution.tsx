@@ -200,7 +200,7 @@ export function Solution() {
           <div ref={mobileRef} className="mb-[28px] pointer-events-none" aria-hidden="true" style={{ maxWidth: 280, margin: "0 auto 28px" }}>
             <BrandGrid inView={mobileInView} />
           </div>
-          <div className={`mb-[32px] reveal-left ${mobileInView ? "is-visible" : ""}`}>
+          <div className={`mb-[32px] reveal-left glass-card ${mobileInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
             <h2>What the overhaul is designed to do</h2>
             <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
@@ -239,7 +239,7 @@ export function Solution() {
           {/* Right column: heading + 2-col card grid */}
           <div>
             <div className="relative mb-[32px]">
-              <div className={`relative z-10 max-w-[620px] reveal-left ${desktopInView ? "is-visible" : ""}`}>
+              <div className={`relative z-10 max-w-[620px] reveal-left glass-card ${desktopInView ? "is-visible" : ""}`}>
                 <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
                 <h2>What the overhaul is designed to do</h2>
                 <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">

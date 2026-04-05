@@ -148,7 +148,7 @@ export function System() {
 
       <div className="shell" style={{ position: "relative", zIndex: 3 }}>
         <div className="relative mb-[44px]">
-          <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
+          <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left glass-card ${isInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">How it works</div>
             <h2>A three-phase engagement built for momentum</h2>
             <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">

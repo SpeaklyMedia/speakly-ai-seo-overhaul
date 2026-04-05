@@ -240,7 +240,7 @@ export function Market() {
             }}>60</span>
           </div>
 
-          <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left ${isInView ? "is-visible" : ""}`}>
+          <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left glass-card ${isInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">The market</div>
             <h2>Search is no longer just a list of links. It is an answer layer.</h2>
             <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
