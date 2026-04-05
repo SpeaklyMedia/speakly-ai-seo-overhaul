@@ -12,12 +12,14 @@ export function useCardFocus(): void {
        2. Group them into rows: cards whose rect.top values are within ±20 px
           of each other belong to the same row.
        3. Find the row whose representative top is closest to the 35 vh target.
-       4. If the currently-focused card is already in that row → no-op.
+       4. If ANY currently-focused card is already in that row → no-op
+          (entire row is already active).
        5. If a different row would win, apply a 40 px deadband: only switch
           when the new row is at least 40 px closer than the CURRENT distance
           from the active row to the target (computed fresh this frame).
           This prevents oscillation at row boundaries.
-       6. On a switch, pick the DOM-first card in the new row.
+       6. On a switch, add is-focused to EVERY card in the winning row so the
+          whole row activates simultaneously.
 
        Media query: (hover: none) and (pointer: coarse)
          - matches: touch phones, touch tablets (Android, iOS)
@@ -26,7 +28,8 @@ export function useCardFocus(): void {
     const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)");
     if (!isTouch.matches) return;
 
-    let scrollActive: Element | null = null;
+    // Track all cards in the currently-focused row (not just one).
+    let scrollActive: Element[] = [];
 
     const DEADBAND = 40; // px — minimum improvement before switching rows
     const ROW_TOLERANCE = 20; // px — cards within this vertical range = same row
@@ -50,6 +53,14 @@ export function useCardFocus(): void {
       return rows;
     }
 
+    /** Remove is-focused from every element in the active set and clear it. */
+    function clearActive() {
+      for (const el of scrollActive) {
+        el.classList.remove("is-focused");
+      }
+      scrollActive = [];
+    }
+
     const scrollFn = () => {
       const targetY = window.innerHeight * 0.35;
 
@@ -67,10 +78,7 @@ export function useCardFocus(): void {
       }
 
       if (entries.length === 0) {
-        if (scrollActive) {
-          scrollActive.classList.remove("is-focused");
-          scrollActive = null;
-        }
+        clearActive();
         return;
       }
 
@@ -89,39 +97,39 @@ export function useCardFocus(): void {
 
       if (!bestRow) return;
 
-      // If the active card is already in the winning row → stable, no change.
+      // If ANY currently-focused card is in the winning row → entire row is
+      // already active, nothing to do.
       const activeIsInBestRow =
-        scrollActive !== null &&
-        bestRow.some(([card]) => card === scrollActive);
+        scrollActive.length > 0 &&
+        bestRow.some(([card]) => scrollActive.includes(card));
 
       if (activeIsInBestRow) return;
 
-      // Different row (or no active card yet).
+      // Different row (or no active row yet).
       // Compute the CURRENT distance of the active row — fresh this frame —
       // so the deadband comparison is never stale.
       let activeRowDist = Infinity;
-      if (scrollActive) {
+      if (scrollActive.length > 0) {
         for (const row of rows) {
-          if (row.some(([card]) => card === scrollActive)) {
+          if (row.some(([card]) => scrollActive.includes(card))) {
             activeRowDist = Math.abs(row[0][1].top - targetY);
             break;
           }
         }
-        // If scrollActive isn't visible any more, activeRowDist stays Infinity
-        // and we'll switch immediately to the best visible row.
+        // If scrollActive cards are no longer visible, activeRowDist stays
+        // Infinity and we switch immediately to the best visible row.
       }
 
       // Apply hysteresis deadband — only switch when the new row is
       // meaningfully closer than the current active row (or there is no
       // active row yet, in which case activeRowDist is Infinity).
-      if (scrollActive && bestDist >= activeRowDist - DEADBAND) return;
+      if (scrollActive.length > 0 && bestDist >= activeRowDist - DEADBAND) return;
 
-      // Switch to the winning row: DOM-first card.
-      const newActive = bestRow[0][0];
-      if (newActive !== scrollActive) {
-        scrollActive?.classList.remove("is-focused");
-        newActive.classList.add("is-focused");
-        scrollActive = newActive;
+      // Switch to the winning row: activate EVERY card in it simultaneously.
+      clearActive();
+      scrollActive = bestRow.map(([card]) => card);
+      for (const el of scrollActive) {
+        el.classList.add("is-focused");
       }
     };
 
@@ -136,7 +144,7 @@ export function useCardFocus(): void {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", scrollFn);
       window.removeEventListener("resize", scrollFn);
-      scrollActive?.classList.remove("is-focused");
+      clearActive();
     };
   }, []);
 }
