@@ -8,27 +8,31 @@ export function useInView<T extends HTMLElement = HTMLDivElement>(options: Inter
   const ref = useRef<T | null>(null);
 
   useEffect(() => {
+    const currentRef = ref.current;
+    if (!currentRef) return;
+
+    // If the element is already above the current viewport (page loaded at a
+    // hash anchor below this element), mark it visible immediately so reveal
+    // animations don't leave it at opacity:0 when the user scrolls up to it.
+    if (currentRef.getBoundingClientRect().bottom <= 0) {
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsInView(true);
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
+        observer.unobserve(currentRef);
       }
     }, {
       threshold: 0.1,
       ...options
     });
 
-    const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
+    observer.observe(currentRef);
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      observer.unobserve(currentRef);
     };
   }, []);
 
