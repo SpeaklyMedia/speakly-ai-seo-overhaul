@@ -249,10 +249,15 @@ export function Market() {
             </p>
           </div>
 
-          {/* AI neural-network illustration — shown from tablet */}
-          <div className={`absolute right-0 top-0 hidden sm:block pointer-events-none reveal-right ${isInView ? "is-visible" : ""}`} aria-hidden="true" style={{ opacity: 0.78 }}>
-            <MarketIllustration reduced={reduced} />
-          </div>
+          {/* AI brain head photo — atmospheric accent, desktop only */}
+          <img
+            src={aiHeadIcon}
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+            className="absolute right-0 top-0 hidden lg:block pointer-events-none object-contain"
+            style={{ width: 240, opacity: 0.28, top: -10, filter: "brightness(0.9) saturate(0.8)" }}
+          />
           <div className="absolute right-[258px] top-[10px] hidden lg:block pointer-events-none" aria-hidden="true" style={{ opacity: 0.50 }}>
             <div style={{ width: 80, height: 80, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
               <img src={aiHeadIcon} alt="" width={80} height={80} style={{ display: "block", objectFit: "contain" }} />

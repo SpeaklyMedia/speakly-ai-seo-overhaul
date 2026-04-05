@@ -457,19 +457,15 @@ export function NextStep() {
             }}
             aria-hidden="true"
           />
-          <div
-            className="hidden md:block absolute bottom-0 right-[48px] pointer-events-none overflow-hidden rounded-t-[22px]"
+          {/* Secure chip illustration — bottom-right corner, clips to overflow-hidden */}
+          <img
+            src={chipShield}
+            alt=""
             aria-hidden="true"
-            style={{
-              background: "linear-gradient(to top, rgba(7,18,30,0.97) 0%, rgba(10,24,40,0.80) 100%)",
-              border: "1px solid rgba(120,199,255,0.12)",
-              borderBottom: "none",
-              backdropFilter: "blur(14px)",
-              padding: "18px 18px 0",
-            }}
-          >
-            <img src={chipShield} alt="" width={200} height={200} style={{ display: "block", opacity: 0.84 }} />
-          </div>
+            draggable="false"
+            className="hidden md:block absolute pointer-events-none object-contain"
+            style={{ width: 200, opacity: 0.15, bottom: -20, right: -20, filter: "brightness(0.9) saturate(0.7)" }}
+          />
 
           <div className="relative z-10">
             <div className={`mb-[42px] max-w-[720px] reveal-left ${isInView ? "is-visible" : ""}`}>

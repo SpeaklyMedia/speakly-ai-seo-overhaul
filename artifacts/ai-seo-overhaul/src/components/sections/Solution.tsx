@@ -1,5 +1,6 @@
 import { useInView } from "@/hooks/use-in-view";
 import spaceshipIcon from "@assets/8F8B77A1-1E0D-4616-A3E6-42759D6AF3F2_1775255124092.png";
+import wavingAstronaut from "@assets/68A9849C-780D-48EE-8FB8-EEF91E8CFDD4_1775208085481.png";
 import aiBrainHead from "@assets/FC0BFFD3-D5CB-47F7-A959-30E0EBA3A1AE_1775255124092.png";
 import astronautChat from "@assets/B360D418-5C13-49A9-B3D5-E5B625E203B2_1775255124092.png";
 import magnetIcon from "@assets/B8D35E42-BF1A-4E3C-AA9D-9556E2C80BD2_1775255124092.png";
@@ -238,12 +239,23 @@ export function Solution() {
 
           {/* Right column: heading + 2-col card grid */}
           <div>
-            <div className={`mb-[32px] reveal-left ${desktopInView ? "is-visible" : ""}`}>
-              <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
-              <h2>What the overhaul is designed to do</h2>
-              <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
-                A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
-              </p>
+            <div className="relative mb-[32px]">
+              <div className={`relative z-10 max-w-[620px] reveal-left ${desktopInView ? "is-visible" : ""}`}>
+                <div className="text-[0.8rem] tracking-[0.16em] uppercase text-teal mb-[16px]">The solution</div>
+                <h2>What the overhaul is designed to do</h2>
+                <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch]">
+                  A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
+                </p>
+              </div>
+              {/* Waving astronaut photo — atmospheric accent */}
+              <img
+                src={wavingAstronaut}
+                alt=""
+                aria-hidden="true"
+                draggable="false"
+                className="absolute right-0 pointer-events-none object-contain"
+                style={{ width: 180, opacity: 0.5, top: -40, filter: "brightness(0.9)", mixBlendMode: "screen" }}
+              />
             </div>
 
             {/* 2-col card grid within right column */}

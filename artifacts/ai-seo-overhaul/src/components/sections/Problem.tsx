@@ -1,5 +1,6 @@
 import { useInView } from "@/hooks/use-in-view";
 import { useParallax } from "@/hooks/use-parallax";
+import robotTrio from "@assets/35890126-CF9C-4B54-8FC2-1E47A1AC2FB0_1775208085481.png";
 
 function WireframeGrid() {
   const { ref, offset } = useParallax(0.06);
@@ -160,10 +161,15 @@ export function Problem() {
             </p>
           </div>
 
-          {/* Desktop illustration */}
-          <div className={`absolute right-0 top-0 hidden md:block pointer-events-none reveal-right ${isInView ? "is-visible" : ""}`} aria-hidden="true" style={{ opacity: 0.65 }}>
-            <ProblemIllustration size={340} />
-          </div>
+          {/* Robot trio photo — atmospheric accent, desktop only */}
+          <img
+            src={robotTrio}
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+            className="absolute right-0 top-0 hidden lg:block pointer-events-none"
+            style={{ width: 310, height: 220, objectFit: "cover", objectPosition: "left center", opacity: 0.22, filter: "brightness(0.8) saturate(0.7)" }}
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px] glass-card-group">
@@ -193,11 +199,6 @@ export function Problem() {
             <h3 className="mb-[18px] font-extrabold tracking-[-0.03em] leading-[1.04]">No governed source model</h3>
             <p className="m-0 text-ink-muted text-[clamp(1rem,1.5vw,1.08rem)]">Future blog posts, landing pages, ad copy, and sales materials get created from scratch instead of from a single trusted foundation.</p>
           </article>
-        </div>
-
-        {/* Mobile-only: robots illustration — replaces the removed faint watermark */}
-        <div className="md:hidden mt-[32px] flex justify-center pointer-events-none" aria-hidden="true" style={{ opacity: 0.65 }}>
-          <ProblemIllustration size={240} />
         </div>
 
         {/* Warning banner */}

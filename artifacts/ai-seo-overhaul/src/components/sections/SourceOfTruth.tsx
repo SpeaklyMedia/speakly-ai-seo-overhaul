@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useInView } from "@/hooks/use-in-view";
 import ssotBg from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_2_1775246793840.png";
 import ssotFg from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_1775246793840.png";
+import wrenchIllustration from "@assets/9A82FBF2-5FBA-43CA-882D-CF0156AC44A9_1775208085482.png";
 
 function useFullBleedParallax(speeds: [number, number]) {
   const ref = useRef<HTMLDivElement>(null);
@@ -130,6 +131,16 @@ export function SourceOfTruth() {
               Once your website is structured as the clearest version of your business, it starts fueling every other asset you create. Future service pages, FAQs, articles, campaigns, and sales materials become faster to produce and more consistent because the source is already clear.
             </p>
           </div>
+
+          {/* Glowing wrench photo — atmospheric accent, desktop only */}
+          <img
+            src={wrenchIllustration}
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+            className="absolute right-[20px] hidden lg:block pointer-events-none object-contain"
+            style={{ width: 210, opacity: 0.55, top: -30, filter: "brightness(0.9) saturate(0.85)" }}
+          />
         </div>
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[minmax(300px,1fr)_minmax(0,1.3fr)] gap-[22px] items-stretch">

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useInView } from "@/hooks/use-in-view";
 import { useCountUp } from "@/hooks/use-count-up";
-import astronautSpeech from "@assets/B360D418-5C13-49A9-B3D5-E5B625E203B2_1775246793840.png";
-import magnetIcon from "@assets/B8D35E42-BF1A-4E3C-AA9D-9556E2C80BD2_1775246793840.png";
+import trustShield from "@assets/DC19AE64-B399-4413-977D-2E6606D1715C_1775208085482.png";
 
 function TrustShieldIllustration({ size = 300 }: { size?: number }) {
   const Person = ({ cx, cy }: { cx: number; cy: number }) => (
@@ -87,17 +86,15 @@ export function Proof() {
               These proof points show the kind of visibility and clarity gains this work is built to create — across wellness, food, beverage, professional services, and home services categories.
             </p>
           </div>
-          {/* Accent icons — desktop only, in section header area */}
-          <div className="absolute right-0 top-0 hidden lg:flex gap-[10px] pointer-events-none" aria-hidden="true">
-            <div style={{ opacity: 0.44 }}>
-              <div style={{ width: 76, height: 76, borderRadius: 18, background: "rgba(7,18,30,0.88)", border: "1px solid rgba(120,199,255,0.15)", backdropFilter: "blur(8px)", overflow: "hidden" }}>
-                <img src={astronautSpeech} alt="" width={76} height={76} style={{ display: "block", objectFit: "contain" }} />
-              </div>
-            </div>
-            <div style={{ opacity: 0.28 }}>
-              <img src={magnetIcon} alt="" width={72} height={72} style={{ display: "block", objectFit: "contain", mixBlendMode: "screen" }} />
-            </div>
-          </div>
+          {/* Trust shield network photo — atmospheric accent, desktop only */}
+          <img
+            src={trustShield}
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+            className="absolute right-0 top-0 hidden lg:block pointer-events-none object-contain"
+            style={{ width: 210, opacity: 0.25, top: -10, filter: "brightness(0.85) saturate(0.75)" }}
+          />
         </div>
 
         {/* Tablet-only: TrustShield illustration between heading and cards */}
