@@ -74,19 +74,19 @@ export function Hero() {
 
             {/* Stat row */}
             <div ref={statRef} className="grid grid-cols-1 sm:grid-cols-3 gap-[14px]">
-              <div className="p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
+              <div className={`p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${statsVisible ? "is-visible" : ""}`}>
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--gold)" }}>
                   {count80}%
                 </strong>
                 <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">of search users rely on AI summaries at least 40% of the time.<sup>1</sup></small>
               </div>
-              <div className="p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
+              <div className={`p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${statsVisible ? "is-visible" : ""}`} style={{ transitionDelay: "70ms" }}>
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--orange)" }}>
                   {count60}%
                 </strong>
                 <small className="block text-ink-soft text-[0.78rem] leading-[1.5]">of searches now end without the user progressing to another destination.<sup>1</sup></small>
               </div>
-              <div className="p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
+              <div className={`p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${statsVisible ? "is-visible" : ""}`} style={{ transitionDelay: "140ms" }}>
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]">
                   <span style={{ color: "var(--orange)" }}>{count8}%</span>
                   <span className="text-ink-soft/60 text-[0.75em] mx-[0.25em]">vs</span>
@@ -100,7 +100,7 @@ export function Hero() {
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-[16px]">
 
               {/* Core idea card */}
-              <div className="p-[26px] rounded-[28px] bg-[radial-gradient(circle_at_50%_0%,rgba(120,199,255,0.18),transparent_55%),linear-gradient(180deg,rgba(11,28,46,0.94),rgba(7,18,30,0.94))] border border-[#78c7ff]/20 shadow-[0_24px_70px_rgba(0,0,0,0.35)] relative overflow-hidden glass-card">
+              <div className={`p-[26px] rounded-[28px] bg-[radial-gradient(circle_at_50%_0%,rgba(120,199,255,0.18),transparent_55%),linear-gradient(180deg,rgba(11,28,46,0.94),rgba(7,18,30,0.94))] border border-[#78c7ff]/20 shadow-[0_24px_70px_rgba(0,0,0,0.35)] relative overflow-hidden glass-card reveal ${statsVisible ? "is-visible" : ""}`} style={{ transitionDelay: "210ms" }}>
                 <div className="absolute w-[220px] h-[220px] rounded-full bg-[radial-gradient(circle,rgba(120,199,255,0.12),transparent_70%)] pointer-events-none -bottom-[40%] -right-[10%]" />
                 <b className="block text-[0.82rem] uppercase tracking-[0.16em] text-blue mb-[14px]">Core idea</b>
                 <strong className="block text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.03] mb-[14px]">Your website = your single source of truth</strong>
@@ -110,23 +110,23 @@ export function Hero() {
 
               {/* Mini cards 2×2 + brand trust */}
               <div className="grid grid-cols-2 gap-[14px] content-start">
-                <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
+                <div className={`p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${statsVisible ? "is-visible" : ""}`} style={{ transitionDelay: "280ms" }}>
                   <strong className="block text-[0.94rem] mb-[8px]">AI answers</strong>
                   <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Google AI Overviews, AI Mode, ChatGPT, Perplexity, maps, assistants.</span>
                 </div>
-                <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
+                <div className={`p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${statsVisible ? "is-visible" : ""}`} style={{ transitionDelay: "340ms" }}>
                   <strong className="block text-[0.94rem] mb-[8px]">Core pages</strong>
                   <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Service pages, audience routes, location pages, and proof pages get sharper.</span>
                 </div>
-                <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
+                <div className={`p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${statsVisible ? "is-visible" : ""}`} style={{ transitionDelay: "400ms" }}>
                   <strong className="block text-[0.94rem] mb-[8px]">Content engine</strong>
                   <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">FAQs, articles, supporting pages, and proof assets expand from a stronger base.</span>
                 </div>
-                <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
+                <div className={`p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${statsVisible ? "is-visible" : ""}`} style={{ transitionDelay: "460ms" }}>
                   <strong className="block text-[0.94rem] mb-[8px]">Campaigns</strong>
                   <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Ads, landing pages, email, and sales enablement pull from the same clarified story.</span>
                 </div>
-                <div className="col-span-2 p-[18px] rounded-md border border-[#78c7ff]/20 bg-gradient-to-r from-[#78c7ff]/10 to-[#6fe2cf]/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
+                <div className={`col-span-2 p-[18px] rounded-md border border-[#78c7ff]/20 bg-gradient-to-r from-[#78c7ff]/10 to-[#6fe2cf]/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${statsVisible ? "is-visible" : ""}`} style={{ transitionDelay: "520ms" }}>
                   <strong className="block text-[0.94rem] mb-[8px]">Brand trust</strong>
                   <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Consistency, proof, and conversion clarity improve because the business story is no longer fragmented.</span>
                 </div>
