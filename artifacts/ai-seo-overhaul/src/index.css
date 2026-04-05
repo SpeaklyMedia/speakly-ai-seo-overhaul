@@ -272,8 +272,11 @@
     transform 300ms cubic-bezier(.16,.84,.44,1),
     box-shadow 300ms cubic-bezier(.16,.84,.44,1),
     filter 200ms cubic-bezier(.16,.84,.44,1);
-  /* Informational cards are not interactive — use default cursor.
-     Descendant <a> and <button> elements override this naturally. */
+}
+/* Informational (non-link) cards show default cursor.
+   Cards that ARE an <a> element (link-wrapped) retain pointer naturally.
+   Descendant <a> and <button> elements always override to pointer. */
+.glass-card:not(a) {
   cursor: default;
 }
 
