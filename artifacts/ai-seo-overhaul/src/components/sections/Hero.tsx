@@ -70,7 +70,7 @@ export function Hero() {
           <div className="absolute w-[280px] h-[280px] -right-[40px] -top-[30px] rounded-full blur-[16px] opacity-80 pointer-events-none bg-[radial-gradient(circle,rgba(120,199,255,0.42),transparent_70%)]" />
           <div className="absolute w-[260px] h-[260px] -left-[60px] -bottom-[40px] rounded-full blur-[16px] opacity-80 pointer-events-none bg-[radial-gradient(circle,rgba(255,157,92,0.28),transparent_70%)]" />
 
-          <div className="relative p-[18px] lg:p-[26px] grid gap-[18px]">
+          <div className="relative p-[18px] lg:p-[26px] grid gap-[18px] hero-panel">
 
             {/* Stat row */}
             <div ref={statRef} className="grid grid-cols-1 sm:grid-cols-3 gap-[14px]">

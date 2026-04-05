@@ -312,6 +312,12 @@
   }
 }
 
+/* Hero data panel — text is permanently at full brightness */
+.hero-panel {
+  --ink-muted: rgba(255, 255, 255, 0.88);
+  --ink-soft:  rgba(255, 255, 255, 0.72);
+}
+
 /* Touch/mobile: .is-focused mirrors the hover state */
 .glass-card.is-focused {
   transform: translateY(-4px) scale(1.02);
