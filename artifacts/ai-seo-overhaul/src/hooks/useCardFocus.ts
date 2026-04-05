@@ -7,82 +7,80 @@ export function useCardFocus(): void {
        This handler exists only for touch phones/tablets where :hover is
        unavailable.
 
-       The algorithm groups visible glass-cards into "rows" by approximate
-       rect.top similarity (cards within ±20 px share the same row). It then
-       finds the row whose top edge is closest to the 35 vh target, applies a
-       40 px hysteresis deadband so the active row only changes once the new
-       row is meaningfully closer — preventing oscillation at row boundaries.
-       Within the winning row the currently-active card is kept if it already
-       belongs to that row; otherwise the DOM-first card in the row is used.
+       Algorithm (row-aware, with hysteresis):
+       1. Collect all visible glass-cards with their current rects each frame.
+       2. Group them into rows: cards whose rect.top values are within ±20 px
+          of each other belong to the same row.
+       3. Find the row whose representative top is closest to the 35 vh target.
+       4. If the currently-focused card is already in that row → no-op.
+       5. If a different row would win, apply a 40 px deadband: only switch
+          when the new row is at least 40 px closer than the CURRENT distance
+          from the active row to the target (computed fresh this frame).
+          This prevents oscillation at row boundaries.
+       6. On a switch, pick the DOM-first card in the new row.
 
        Media query: (hover: none) and (pointer: coarse)
          - matches: touch phones, touch tablets (Android, iOS)
-         - does NOT match: desktop browsers, canvas iframes (always fine-pointer)
-         - does NOT match: stylus/pen devices (pointer: fine even on tablets)  */
+         - does NOT match: desktop browsers, canvas iframes (fine-pointer)    */
 
     const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)");
     if (!isTouch.matches) return;
 
     let scrollActive: Element | null = null;
-    // Distance from the 35vh target to the currently-active row's representative top.
-    // Initialise to Infinity so the first scroll always picks a row.
-    let activeRowDist = Infinity;
 
-    /** Group an array of [element, rect] pairs into rows by approximate rect.top. */
+    const DEADBAND = 40; // px — minimum improvement before switching rows
+    const ROW_TOLERANCE = 20; // px — cards within this vertical range = same row
+
+    /** Group [element, rect] pairs into rows by approximate rect.top. */
     function groupIntoRows(
       entries: Array<[Element, DOMRect]>
     ): Array<Array<[Element, DOMRect]>> {
       const rows: Array<Array<[Element, DOMRect]>> = [];
-
       for (const entry of entries) {
         const top = entry[1].top;
-        // Find an existing row whose representative top is within ±20 px.
-        const existingRow = rows.find(
-          (row) => Math.abs(row[0][1].top - top) <= 20
+        const existing = rows.find(
+          (row) => Math.abs(row[0][1].top - top) <= ROW_TOLERANCE
         );
-        if (existingRow) {
-          existingRow.push(entry);
+        if (existing) {
+          existing.push(entry);
         } else {
           rows.push([entry]);
         }
       }
-
       return rows;
     }
-
-    const DEADBAND = 40; // px — minimum improvement before switching active row
 
     const scrollFn = () => {
       const targetY = window.innerHeight * 0.35;
 
-      // Collect all visible, non-hidden glass-cards with their current rects.
+      // Collect all visible, non-hidden glass-cards with fresh rects.
       const entries: Array<[Element, DOMRect]> = [];
       for (const card of document.querySelectorAll(".glass-card")) {
         const rect = card.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > window.innerHeight) continue;
         if (rect.width === 0 && rect.height === 0) continue;
-        if (card.classList.contains("reveal") && !card.classList.contains("is-visible")) continue;
+        if (
+          card.classList.contains("reveal") &&
+          !card.classList.contains("is-visible")
+        ) continue;
         entries.push([card, rect]);
       }
 
       if (entries.length === 0) {
-        // Nothing visible — clear focus
         if (scrollActive) {
           scrollActive.classList.remove("is-focused");
           scrollActive = null;
-          activeRowDist = Infinity;
         }
         return;
       }
 
-      // Group into rows, then find the row closest to the target.
       const rows = groupIntoRows(entries);
 
+      // Find the row closest to the 35 vh target.
       let bestRow: Array<[Element, DOMRect]> | null = null;
       let bestDist = Infinity;
       for (const row of rows) {
-        const rowTop = row[0][1].top; // representative top for the row
-        const dist = Math.abs(rowTop - targetY);
+        const dist = Math.abs(row[0][1].top - targetY);
         if (dist < bestDist) {
           bestDist = dist;
           bestRow = row;
@@ -91,35 +89,40 @@ export function useCardFocus(): void {
 
       if (!bestRow) return;
 
-      // Apply hysteresis: only switch active row if the winning row is at least
-      // DEADBAND px closer than the currently-active row's distance.
-      const shouldSwitch = bestDist < activeRowDist - DEADBAND;
+      // If the active card is already in the winning row → stable, no change.
+      const activeIsInBestRow =
+        scrollActive !== null &&
+        bestRow.some(([card]) => card === scrollActive);
 
-      if (!shouldSwitch && scrollActive) {
-        // Keep the current active card — no switch needed.
-        return;
+      if (activeIsInBestRow) return;
+
+      // Different row (or no active card yet).
+      // Compute the CURRENT distance of the active row — fresh this frame —
+      // so the deadband comparison is never stale.
+      let activeRowDist = Infinity;
+      if (scrollActive) {
+        for (const row of rows) {
+          if (row.some(([card]) => card === scrollActive)) {
+            activeRowDist = Math.abs(row[0][1].top - targetY);
+            break;
+          }
+        }
+        // If scrollActive isn't visible any more, activeRowDist stays Infinity
+        // and we'll switch immediately to the best visible row.
       }
 
-      // Determine the card to focus within the winning row.
-      // Prefer keeping the currently-active card if it lives in that row.
-      let newActive: Element | null = null;
-      if (
-        scrollActive &&
-        bestRow.some(([card]) => card === scrollActive)
-      ) {
-        newActive = scrollActive; // already in the winning row — keep it
-      } else {
-        newActive = bestRow[0][0]; // fall back to DOM-first in the row
-      }
+      // Apply hysteresis deadband — only switch when the new row is
+      // meaningfully closer than the current active row (or there is no
+      // active row yet, in which case activeRowDist is Infinity).
+      if (scrollActive && bestDist >= activeRowDist - DEADBAND) return;
 
+      // Switch to the winning row: DOM-first card.
+      const newActive = bestRow[0][0];
       if (newActive !== scrollActive) {
         scrollActive?.classList.remove("is-focused");
         newActive.classList.add("is-focused");
         scrollActive = newActive;
       }
-
-      // Update the tracked distance for the now-active row.
-      activeRowDist = bestDist;
     };
 
     // Defer initial run by one rAF so the page-load scroll position (hash
