@@ -70,6 +70,17 @@ export function Nav() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const XL_BREAKPOINT = 1280;
+    function handleResize() {
+      if (window.innerWidth >= XL_BREAKPOINT && menuOpen) {
+        setMenuOpen(false);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [menuOpen]);
+
   function closeMenu() {
     setMenuOpen(false);
   }
@@ -179,7 +190,7 @@ export function Nav() {
       {/* Mobile menu — xl+ hidden */}
       {menuOpen && (
         <div
-          className="xl:hidden sticky top-[76px] z-40 w-full border-b border-white/10"
+          className="xl:hidden mobile-menu-enter sticky top-[76px] z-40 w-full border-b border-white/10"
           style={{
             background: "rgba(5,16,27,0.97)",
             backdropFilter: "blur(14px)",
