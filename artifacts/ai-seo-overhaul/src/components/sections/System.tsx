@@ -27,7 +27,7 @@ const phases = [
 
 function PhaseConnector() {
   return (
-    <div className="hidden md:flex items-center justify-center shrink-0 w-[36px]" aria-hidden="true">
+    <div className="phase-connector hidden md:flex items-center justify-center shrink-0 w-[36px]" aria-hidden="true">
       <svg width="36" height="22" viewBox="0 0 36 22" fill="none">
         <line x1="0" y1="11" x2="19" y2="11" stroke="#78c7ff" strokeWidth="1.4" strokeOpacity="0.35" strokeDasharray="4 3" />
         <path d="M21 5 L30 11 L21 17" stroke="#78c7ff" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.40" />

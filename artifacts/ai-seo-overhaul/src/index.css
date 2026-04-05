@@ -294,8 +294,8 @@
   isolation: isolate;
 }
 
-/* Base transition for non-card children (e.g. System phase connectors) */
-.glass-card-group > :not(.glass-card) {
+/* Base transition for phase connector elements */
+.glass-card-group .phase-connector {
   transition: opacity 200ms ease;
 }
 
@@ -305,8 +305,8 @@
     filter: brightness(0.70) saturate(0.82);
     transform: scale(0.99);
   }
-  /* Dim non-card siblings (e.g. System PhaseConnector arrows) */
-  .glass-card-group:has(.glass-card:hover) > :not(.glass-card) {
+  /* Dim phase connectors (e.g. System PhaseConnector arrows) */
+  .glass-card-group:has(.glass-card:hover) .phase-connector {
     opacity: 0.38;
   }
 }
@@ -333,7 +333,7 @@
     filter: brightness(0.70) saturate(0.82);
     transform: scale(0.99);
   }
-  .glass-card-group:has(.glass-card.is-focused) > :not(.glass-card) {
+  .glass-card-group:has(.glass-card.is-focused) .phase-connector {
     opacity: 0.38;
   }
 }
@@ -348,8 +348,8 @@
   .glass-card-group:has(.glass-card.is-focused) .glass-card:not(.is-focused) {
     transform: none !important;
   }
-  /* Also suppress connector opacity transitions */
-  .glass-card-group > :not(.glass-card) {
+  /* Also suppress phase connector opacity transitions */
+  .glass-card-group .phase-connector {
     transition: none !important;
   }
 }
