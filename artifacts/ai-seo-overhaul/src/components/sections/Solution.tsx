@@ -267,7 +267,25 @@ export function Solution() {
         </div>
 
         {/* Why Speakly — full width on all breakpoints */}
-        <div className={`mt-[48px] reveal ${(mobileInView || desktopInView) ? "is-visible" : ""}`} style={{ transitionDelay: "420ms" }}>
+        <div className={`mt-[48px] relative overflow-hidden reveal ${(mobileInView || desktopInView) ? "is-visible" : ""}`} style={{ transitionDelay: "420ms" }}>
+          {/* Neon wrench illustration — blended so only the cyan glow shows through */}
+          <img
+            src="/ai-seo-overhaul/wrench-illustration.png"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "50%",
+              right: "-6%",
+              transform: "translateY(-54%) rotate(-4deg)",
+              width: "480px",
+              opacity: 0.55,
+              mixBlendMode: "screen",
+              pointerEvents: "none",
+              userSelect: "none",
+            }}
+          />
+          <div className="relative z-10">
           <div className="text-[0.8rem] tracking-[0.16em] uppercase text-blue mb-[16px]">Why Speakly</div>
           <h2 className="mb-[24px]">The positioning advantage</h2>
           <p className="text-[clamp(1.08rem,1.8vw,1.25rem)] text-ink-muted max-w-[62ch] mb-[30px]">
@@ -280,6 +298,7 @@ export function Solution() {
               </div>
             ))}
           </div>
+          </div>{/* end relative z-10 */}
         </div>
       </div>
     </section>
