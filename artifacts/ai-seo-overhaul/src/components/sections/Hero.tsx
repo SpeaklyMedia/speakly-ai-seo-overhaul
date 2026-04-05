@@ -67,8 +67,8 @@ export function Hero() {
 
         {/* Data panel — full width below the 2-col row */}
         <div className={`relative mt-[52px] rounded-xl border border-[#7db0e7]/15 bg-[radial-gradient(circle_at_50%_0%,rgba(120,199,255,0.14),transparent_40%),linear-gradient(180deg,rgba(13,32,52,0.92),rgba(8,19,33,0.92))] shadow-[0_24px_80px_rgba(2,7,16,0.45)] overflow-hidden reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "70ms" }} aria-label="AI-SEO core visual">
-          <div className="absolute w-[280px] h-[280px] -right-[40px] -top-[30px] rounded-full blur-[16px] opacity-80 pointer-events-none bg-[radial-gradient(circle,rgba(120,199,255,0.42),transparent_70%)]" />
-          <div className="absolute w-[260px] h-[260px] -left-[60px] -bottom-[40px] rounded-full blur-[16px] opacity-80 pointer-events-none bg-[radial-gradient(circle,rgba(255,157,92,0.28),transparent_70%)]" />
+          <div className="absolute w-[320px] h-[320px] -right-[60px] -top-[60px] rounded-full pointer-events-none bg-[radial-gradient(circle,rgba(120,199,255,0.12),transparent_70%)]" />
+          <div className="absolute w-[280px] h-[280px] -left-[60px] -bottom-[40px] rounded-full pointer-events-none bg-[radial-gradient(circle,rgba(255,157,92,0.09),transparent_70%)]" />
 
           <div className="relative p-[18px] lg:p-[26px] grid gap-[18px] hero-panel">
 
