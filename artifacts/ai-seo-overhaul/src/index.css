@@ -359,19 +359,23 @@
 /* ── Button hover system (independent of glass-card) ────── */
 .btn-cta {
   transition: transform 300ms cubic-bezier(.16,.84,.44,1),
-              box-shadow 300ms cubic-bezier(.16,.84,.44,1);
+              box-shadow 300ms cubic-bezier(.16,.84,.44,1),
+              filter 200ms ease;
 }
 .btn-cta:hover {
   transform: translateY(-2px);
+  filter: brightness(1.08);
 }
 .btn-ghost {
   transition: transform 300ms cubic-bezier(.16,.84,.44,1),
               box-shadow 300ms cubic-bezier(.16,.84,.44,1),
               background-color 200ms ease,
-              border-color 200ms ease;
+              border-color 200ms ease,
+              filter 200ms ease;
 }
 .btn-ghost:hover {
   transform: translateY(-2px);
+  filter: brightness(1.08);
 }
 
 /* ── Section CTA pills (Problem / System / Proof footers) ── */
@@ -381,6 +385,7 @@
   background: rgba(120, 199, 255, 0.04);
   transition:
     transform 300ms cubic-bezier(.16,.84,.44,1),
+    filter 200ms ease,
     border-color 200ms ease,
     background-color 200ms ease,
     color 200ms ease;
