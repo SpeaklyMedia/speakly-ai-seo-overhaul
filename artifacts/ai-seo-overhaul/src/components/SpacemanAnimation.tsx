@@ -268,7 +268,7 @@ export function StarsAnimation() {
           radial-gradient(ellipse 140% 55% at 62% 0%, rgba(14,42,84,0.74) 0%, transparent 55%),
           radial-gradient(ellipse 70% 40% at 18% 100%, rgba(8,24,50,0.50) 0%, transparent 50%),
           radial-gradient(ellipse 50% 30% at 85% 60%, rgba(255,157,92,0.08) 0%, transparent 50%),
-          linear-gradient(180deg, rgba(4,10,20,0.78) 0%, rgba(7,18,34,0.12) 45%, rgba(4,10,20,0.78) 100%)
+          linear-gradient(180deg, rgba(4,10,20,0.78) 0%, rgba(7,18,34,0.12) 45%, transparent 100%)
         `,
         pointerEvents: "none",
       }}/>

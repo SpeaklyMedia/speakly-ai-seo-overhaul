@@ -151,7 +151,7 @@ export function Problem() {
 
       <div className="shell relative z-10">
 
-        <div className="relative mb-[44px]">
+        <div className="relative mb-[44px] grid grid-cols-1 md:grid-cols-[1fr_auto] gap-[32px] items-center">
           <div ref={ref} className={`relative z-10 max-w-[620px] reveal-left glass-card ${isInView ? "is-visible" : ""}`}>
             <div className="text-[0.8rem] tracking-[0.16em] uppercase text-orange mb-[16px]">The problem</div>
             <h2>Most websites were built to be browsed. They were not built to be understood.</h2>
@@ -160,6 +160,9 @@ export function Problem() {
             </p>
           </div>
 
+          <div className={`hidden md:flex items-center justify-center reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "80ms" }}>
+            <ProblemIllustration size={260} />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px] glass-card-group">

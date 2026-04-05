@@ -31,10 +31,10 @@ export function Hero() {
               AI-generated answers are reshaping discovery. Speakly's AI-SEO Overhaul transforms your website into a clear, trusted, answer-ready foundation that improves visibility now and fuels smarter future content later.
             </p>
             <div className="flex flex-wrap gap-[14px] mb-[24px]">
-              <a className="w-full sm:w-auto inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border border-transparent cursor-pointer text-[#04101c] bg-gradient-to-br from-teal to-blue shadow-[0_12px_30px_rgba(70,170,214,0.28)] hover:-translate-y-[2px]" href="#next-step" data-testid="button-hero-primary">
+              <a className="btn-cta w-full sm:w-auto inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border border-transparent cursor-pointer text-[#04101c] bg-gradient-to-br from-teal to-blue shadow-[0_12px_30px_rgba(70,170,214,0.28)]" href="#next-step" data-testid="button-hero-primary">
                 Get a free assessment
               </a>
-              <a className="w-full sm:w-auto inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer text-ink bg-white/5 border-[#7db0e7]/20 hover:-translate-y-[2px]" href="#solution" data-testid="button-hero-secondary">
+              <a className="btn-ghost w-full sm:w-auto inline-flex items-center justify-center gap-[10px] min-h-[44px] px-[24px] rounded-full font-bold tracking-[0.01em] transition-all duration-300 border cursor-pointer text-ink bg-white/5 border-[#7db0e7]/20" href="#solution" data-testid="button-hero-secondary">
                 See how it works
               </a>
             </div>

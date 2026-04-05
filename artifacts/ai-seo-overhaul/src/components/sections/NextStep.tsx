@@ -168,7 +168,7 @@ function FreeAssessmentCard({
                   href={zoomUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-[6px] min-h-[40px] px-[20px] rounded-full font-bold text-[0.82rem] transition-all duration-200"
+                  className="btn-cta inline-flex items-center justify-center gap-[6px] min-h-[40px] px-[20px] rounded-full font-bold text-[0.82rem] transition-all duration-200"
                   style={{
                     background: "linear-gradient(135deg, #6fe2cf, #78c7ff)",
                     color: "#04101c",
@@ -238,7 +238,7 @@ function FreeAssessmentCard({
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full min-h-[44px] mt-[4px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
+                className="btn-cta w-full min-h-[44px] mt-[4px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
                 style={{
                   background: submitting
                     ? "linear-gradient(135deg, rgba(111,226,207,0.7), rgba(120,199,255,0.7))"
@@ -388,7 +388,7 @@ function CheckoutCard({
             type="button"
             onClick={handleCheckout}
             disabled={loading}
-            className="w-full min-h-[44px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
+            className="btn-cta w-full min-h-[44px] rounded-full font-bold text-[0.88rem] tracking-[0.01em] transition-all duration-200 flex items-center justify-center gap-[8px] disabled:opacity-70"
             style={
               highlight
                 ? {
