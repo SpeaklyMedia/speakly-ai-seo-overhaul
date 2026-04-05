@@ -4,6 +4,7 @@ import { Nav } from "./components/Nav";
 import { Home } from "./pages/Home";
 import { WidgetHome } from "./pages/WidgetHome";
 import { WidgetOffers } from "./pages/WidgetOffers";
+import { useCardFocus } from "./hooks/useCardFocus";
 import starfieldLandscape from "@assets/IMG_0228_1775246914295.png";
 import starfieldPortrait from "@assets/IMG_0231_1775246914295.png";
 
@@ -69,6 +70,7 @@ function PaymentSuccessBanner({ onClose }: { onClose: () => void }) {
 
 function MainApp() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  useCardFocus();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

@@ -270,7 +270,8 @@
   transition:
     opacity 480ms cubic-bezier(.16,.84,.44,1),
     transform 300ms cubic-bezier(.16,.84,.44,1),
-    box-shadow 300ms cubic-bezier(.16,.84,.44,1);
+    box-shadow 300ms cubic-bezier(.16,.84,.44,1),
+    filter 200ms cubic-bezier(.16,.84,.44,1);
 }
 .glass-card:hover {
   transform: translateY(-4px) scale(1.02);
@@ -286,6 +287,49 @@
 .glass-card:hover a {
   --color-ink-muted: var(--ink-muted);
   --color-ink-soft:  var(--ink-soft);
+}
+
+/* ── Glass card group — sibling dimming system ──────────── */
+.glass-card-group {
+  isolation: isolate;
+}
+
+/* Desktop hover: dim unfocused siblings with filter (fast 200ms) */
+@media (hover: hover) {
+  .glass-card-group:has(.glass-card:hover) .glass-card:not(:hover) {
+    filter: brightness(0.55) saturate(0.70);
+    transform: scale(0.99);
+  }
+}
+
+/* Touch/mobile: .is-focused mirrors the hover state */
+.glass-card.is-focused {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 24px 56px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(120,199,255,0.14);
+  --color-ink-muted: rgba(255, 255, 255, 0.92);
+  --color-ink-soft:  rgba(255, 255, 255, 0.72);
+}
+.glass-card.is-focused button,
+.glass-card.is-focused a {
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-soft:  var(--ink-soft);
+}
+
+/* Mobile sibling dimming when one card has .is-focused */
+.glass-card-group:has(.glass-card.is-focused) .glass-card:not(.is-focused) {
+  filter: brightness(0.55) saturate(0.70);
+  transform: scale(0.99);
+}
+
+/* Reduced motion: drop transforms but keep the filter dimming */
+@media (prefers-reduced-motion: reduce) {
+  .glass-card-group:has(.glass-card:hover) .glass-card:not(:hover),
+  .glass-card-group:has(.glass-card.is-focused) .glass-card:not(.is-focused) {
+    transform: none !important;
+  }
 }
 
 /* ── Button hover system (independent of glass-card) ────── */

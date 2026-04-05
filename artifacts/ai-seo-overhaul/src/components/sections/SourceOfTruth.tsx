@@ -146,7 +146,7 @@ export function SourceOfTruth() {
             </div>
           </article>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] content-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] content-start glass-card-group">
             {[
               {
                 title: "AI answers and recommendation flows",

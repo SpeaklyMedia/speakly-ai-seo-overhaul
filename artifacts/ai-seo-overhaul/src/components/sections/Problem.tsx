@@ -166,7 +166,7 @@ export function Problem() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[18px] glass-card-group">
           <article className={`p-[24px] relative overflow-hidden bg-panel border-l-[3px] border border-[#ff9d5c]/30 border-l-[#ff9d5c]/60 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`}>
             <div className="absolute w-[180px] h-[180px] rounded-full bg-[radial-gradient(circle,rgba(255,157,92,0.10),transparent_70%)] pointer-events-none translate-y-[50%] -bottom-[20%] -right-[20%]"></div>
             <div className="w-[46px] h-[46px] rounded-[14px] inline-grid place-items-center mb-[18px] bg-[#ff9d5c]/10 border border-[#ff9d5c]/20 text-orange" aria-hidden="true">
@@ -211,6 +211,19 @@ export function Problem() {
               If AI cannot clearly understand what you do, who you serve, why you are credible, and what makes you different, it cannot confidently recommend you.
             </p>
           </div>
+        </div>
+
+        <div className="mt-[36px] text-center">
+          <a
+            href="#next-step"
+            className="inline-flex items-center gap-[8px] px-[22px] py-[12px] rounded-full text-[0.9rem] text-ink-soft tracking-[0.04em] btn-ghost"
+            style={{ border: "1px solid rgba(120,199,255,0.20)", background: "rgba(120,199,255,0.04)" }}
+          >
+            See what's possible
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>

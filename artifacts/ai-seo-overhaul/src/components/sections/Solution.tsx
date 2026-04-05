@@ -207,7 +207,7 @@ export function Solution() {
               A strategic, human-reviewed overhaul that turns your website into an answer-ready visibility system. The goal is not just better rankings — it is stronger machine understanding, clearer trust, and a website foundation that powers smarter future content.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px] mb-[40px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px] mb-[40px] glass-card-group">
             {overhauls.map(({ icon, title, body }, i) => (
               <article
                 key={title}
@@ -247,7 +247,7 @@ export function Solution() {
             </div>
 
             {/* 2-col card grid within right column */}
-            <div className="grid grid-cols-2 gap-[18px]">
+            <div className="grid grid-cols-2 gap-[18px] glass-card-group">
               {overhauls.map(({ icon, title, body }, i) => (
                 <article
                   key={title}

@@ -178,7 +178,7 @@ export function System() {
         </div>
 
         {/* Desktop: flex with connector arrows */}
-        <div className="hidden md:flex items-stretch gap-0">
+        <div className="hidden md:flex items-stretch gap-0 glass-card-group">
           {phases.map((phase, i) => (
             <React.Fragment key={phase.num}>
               <article
@@ -211,7 +211,7 @@ export function System() {
         </div>
 
         {/* Mobile: standard stack */}
-        <div className="md:hidden grid gap-[18px]">
+        <div className="md:hidden grid gap-[18px] glass-card-group">
           {phases.map((phase, i) => (
             <article
               key={phase.num}
@@ -239,6 +239,19 @@ export function System() {
               </ul>
             </article>
           ))}
+        </div>
+
+        <div className="mt-[36px] text-center">
+          <a
+            href="#next-step"
+            className="inline-flex items-center gap-[8px] px-[22px] py-[12px] rounded-full text-[0.9rem] text-ink-soft tracking-[0.04em] btn-ghost"
+            style={{ border: "1px solid rgba(120,199,255,0.20)", background: "rgba(120,199,255,0.04)" }}
+          >
+            Choose where to start
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>

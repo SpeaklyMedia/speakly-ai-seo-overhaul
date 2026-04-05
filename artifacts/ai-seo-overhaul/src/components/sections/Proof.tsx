@@ -175,7 +175,7 @@ export function Proof() {
         </article>
 
         {/* Supporting proof cards — 2-col grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[18px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[18px] glass-card-group">
 
           {/* Local restaurant */}
           <article className={`p-[24px] relative overflow-hidden bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: '70ms' }}>
@@ -226,6 +226,19 @@ export function Proof() {
           <p className="text-[0.76rem] text-ink-soft/60 leading-[1.6]">
             Results may vary. Outcomes depend on starting conditions, category competitiveness, existing site architecture, and execution consistency. These proof points represent illustrative visibility movement, not guaranteed outcomes.
           </p>
+        </div>
+
+        <div className="mt-[36px] text-center">
+          <a
+            href="#next-step"
+            className="inline-flex items-center gap-[8px] px-[22px] py-[12px] rounded-full text-[0.9rem] text-ink-soft tracking-[0.04em] btn-ghost"
+            style={{ border: "1px solid rgba(120,199,255,0.20)", background: "rgba(120,199,255,0.04)" }}
+          >
+            Get similar results
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>

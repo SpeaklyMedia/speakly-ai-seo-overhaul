@@ -485,7 +485,7 @@ export function NextStep() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] mb-[48px] pt-[28px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] mb-[48px] pt-[28px] glass-card-group">
               <div className="pt-[14px] flex flex-col">
               <FreeAssessmentCard
                 title="Free Assessment"
