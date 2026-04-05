@@ -192,7 +192,7 @@ export function Problem() {
         </div>
 
         {/* Warning banner */}
-        <div className={`mt-[24px] p-[24px_28px] rounded-[18px] relative overflow-hidden bg-[rgba(18,8,4,0.85)] border border-[#ff9d5c]/30 shadow-[0_0_40px_rgba(255,157,92,0.08),inset_0_1px_0_rgba(255,157,92,0.06)] backdrop-blur-[14px] reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "210ms" }}>
+        <div className={`mt-[24px] p-[24px_28px] rounded-[18px] relative overflow-hidden bg-[rgba(18,8,4,0.85)] border border-[#ff9d5c]/30 shadow-[0_0_40px_rgba(255,157,92,0.08),inset_0_1px_0_rgba(255,157,92,0.06)] backdrop-blur-[14px] glass-card reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "210ms" }}>
           <div className="absolute inset-0 rounded-[18px] bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(255,157,92,0.08),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start gap-[16px]">
             <div className="shrink-0 w-[36px] h-[36px] rounded-full bg-[#ff9d5c]/15 border border-[#ff9d5c]/30 inline-grid place-items-center mt-[2px]" aria-hidden="true">
