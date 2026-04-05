@@ -160,8 +160,8 @@ export function Problem() {
             </p>
           </div>
 
-          <div className={`hidden md:flex items-center justify-center reveal ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "80ms" }}>
-            <ProblemIllustration size={260} />
+          <div className={`flex items-center justify-center reveal-right ${isInView ? "is-visible" : ""}`} style={{ transitionDelay: "80ms" }}>
+            <ProblemIllustration size={240} />
           </div>
         </div>
 
