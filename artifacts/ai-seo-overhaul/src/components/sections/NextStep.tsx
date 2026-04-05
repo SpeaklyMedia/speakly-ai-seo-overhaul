@@ -593,7 +593,7 @@ export function NextStep() {
               aria-hidden="true"
             />
           </div>
-          <p className="text-[0.76rem] tracking-[0.10em] text-ink-soft/50 uppercase">
+          <p className="text-[0.76rem] tracking-[0.10em] text-ink-soft/50 uppercase" style={{ color: "rgba(255,255,255,0.35)" }}>
             AI-SEO Overhaul · speaklymedia.com
           </p>
         </div>
