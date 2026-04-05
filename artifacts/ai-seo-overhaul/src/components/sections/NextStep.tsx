@@ -98,7 +98,7 @@ function FreeAssessmentCard({
 
   return (
     <div
-      className="relative flex flex-col rounded-[22px] overflow-hidden h-full transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)]"
+      className="relative flex flex-col rounded-[22px] overflow-hidden h-full glass-card"
       style={{
         background: "linear-gradient(180deg, rgba(10,24,40,0.96), rgba(7,18,30,0.96))",
         border: "1px solid rgba(120,199,255,0.15)",
@@ -333,7 +333,7 @@ function CheckoutCard({
         </div>
       )}
       <div
-        className="relative flex flex-col rounded-[22px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(120,199,255,0.22),0_28px_64px_rgba(2,7,16,0.48)] h-full"
+        className="relative flex flex-col rounded-[22px] overflow-hidden h-full glass-card"
         style={{
           background: cardBg,
           border: `${highlight ? "1.5px" : "1px"} solid ${borderColor}`,
