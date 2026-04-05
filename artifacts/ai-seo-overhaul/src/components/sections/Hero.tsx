@@ -73,7 +73,7 @@ export function Hero() {
           <div className="relative p-[18px] lg:p-[26px] grid gap-[18px]">
 
             {/* Stat row */}
-            <div ref={statRef} className="grid grid-cols-1 sm:grid-cols-3 gap-[14px] glass-card-group">
+            <div ref={statRef} className="grid grid-cols-1 sm:grid-cols-3 gap-[14px]">
               <div className="p-[18px] min-h-[110px] bg-panel border border-[#7db0e7]/15 rounded-md shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                 <strong className="block text-[clamp(1.44rem,2.6vw,2.25rem)] leading-none mb-[10px] tracking-[-0.04em]" style={{ color: "var(--gold)" }}>
                   {count80}%
@@ -109,7 +109,7 @@ export function Hero() {
               </div>
 
               {/* Mini cards 2×2 + brand trust */}
-              <div className="grid grid-cols-2 gap-[14px] content-start glass-card-group">
+              <div className="grid grid-cols-2 gap-[14px] content-start">
                 <div className="p-[18px] min-h-[120px] bg-[#091726]/80 rounded-md border border-[#7db0e7]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-[14px] glass-card">
                   <strong className="block text-[0.94rem] mb-[8px]">AI answers</strong>
                   <span className="block text-ink-soft text-[0.83rem] leading-[1.5]">Google AI Overviews, AI Mode, ChatGPT, Perplexity, maps, assistants.</span>
