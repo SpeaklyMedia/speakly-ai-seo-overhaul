@@ -304,7 +304,7 @@ export function Solution() {
           >
             {/* Neon wrench — dimmed so it reads as texture, not focal point */}
             <img
-              src="/ai-seo-overhaul/wrench-illustration.webp"
+              src={`${import.meta.env.BASE_URL}wrench-illustration.webp`}
               alt=""
               style={{
                 position: "absolute",
